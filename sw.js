@@ -1,10 +1,11 @@
-const CACHE_NAME = "memento-vivere-booking-v3";
+const CACHE_NAME = "memento-vivere-booking-v4";
 
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
-  "./manifest.webmanifest?v=3",
-  "./icons/icon-192.png?v=3"
+  "./manifest.webmanifest?v=4",
+  "./icon-192.png?v=4",
+  "./icon-512.png?v=4"
 ];
 
 self.addEventListener("install", event => {
