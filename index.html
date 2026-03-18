@@ -1194,25 +1194,23 @@
     }
 
     function renderSummary(data) {
-      const s = computeSummary(data);
+  const s = computeSummary(data);
 
-      const cards = [
-        { title: "Overall Revenue", value: peso(s.totalRevenue), cls: "blue" },
-        { title: "Overall Expenses", value: peso(s.totalExpense), cls: "red" },
-        { title: "Overall Net", value: peso(s.net), cls: "green" },
-        { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
-        { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
-        { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
-      ];
+  const cards = [
+    { title: "Overall Net", value: peso(s.net), cls: "green" },
+    { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+    { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+    { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
+  ];
 
-      els.summaryCards.innerHTML = cards.map(card => `
-        <div class="summary-box ${card.cls}">
-          <h3>${card.title}</h3>
-          <div class="sub-label">${card.title.includes("Overall") ? "Filtered" : "Net"}</div>
-          <div class="value">${card.value}</div>
-        </div>
-      `).join("");
-    }
+  els.summaryCards.innerHTML = cards.map(card => `
+    <div class="summary-box ${card.cls}">
+      <h3>${card.title}</h3>
+      <div class="sub-label">Net</div>
+      <div class="value">${card.value}</div>
+    </div>
+  `).join("");
+}
 
     function getUnitTagClass(unit) {
       if (unit === "Studio One-1123" || unit === "Studio Two-1122") return "tag-bc";
