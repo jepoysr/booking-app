@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memento Vivere Booking Manager</title>
+
+  <meta name="theme-color" content="#f8faf8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Booking Manager" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      transition: all 0.15s ease;
+    }
+
+    :root {
+      --bg: #f8faf8;
+      --panel: #ffffff;
+      --border: #e7ece8;
+      --text: #2f3a33;
+      --muted: #7a877f;
+
+      --danger-1: #efc2c2;
+      --danger-2: #df9f9f;
+
+      --green-1: #bfe3c7;
+      --green-2: #91cba0;
+
+      --blue-1: #c9ddf7;
+      --blue-2: #9fc0eb;
+
+      --purple-1: #ddd2f4;
+      --purple-2: #bfa9e8;
+
+      --orange-1: #f7dcc2;
+      --orange-2: #efbe92;
+
+      --gray-1: #dbe2df;
+      --gray-2: #b8c2bc;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      min-width: 0;
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    input, select, textarea {
+      background: #fdfefd;
+      color: var(--text);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #9fc0eb;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(159,192,235,0.18);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+      color: #26415f;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(0.97);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #f5f7f6, #e9eeeb);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #eef2ef, #dde5e0);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, var(--danger-1), var(--danger-2));
+      color: #6a2b2b;
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.97);
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, var(--green-1), var(--green-2));
+      color: #244631;
+    }
+
+    .btn-green:hover {
+      filter: brightness(0.97);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button-row button {
+      width: auto;
+      min-width: 140px;
+    }
+
+    .summary-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .summary-box {
+      border-radius: 16px;
+      padding: 16px;
+      color: #2b352f;
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+
+    .summary-box h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0.9;
+      color: inherit;
+    }
+
+    .summary-box .value {
+      font-size: 26px;
+      font-weight: 700;
+      color: inherit;
+      word-break: break-word;
+    }
+
+    .blue {
+      background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+      color: #234263;
+    }
+
+    .red {
+      background: linear-gradient(135deg, var(--danger-1), var(--danger-2));
+      color: #6f2f2f;
+    }
+
+    .green {
+      background: linear-gradient(135deg, var(--green-1), var(--green-2));
+      color: #244631;
+    }
+
+    .purple {
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+      color: #4a3a6d;
+    }
+
+    .orange {
+      background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
+      color: #724621;
+    }
+
+    .gray {
+      background: linear-gradient(135deg, var(--gray-1), var(--gray-2));
+      color: #34403a;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .records-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #f1f5f2;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    th {
+      background: #f8faf8;
+      font-size: 13px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: #fbfcfb;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tag-revenue {
+      background: #eaf5ee;
+      color: #2d5a3f;
+    }
+
+    .tag-expense {
+      background: #fdeeee;
+      color: #7b3b3b;
+    }
+
+    .tag-bc {
+      background: #e8f0fb;
+      color: #3b5f8b;
+    }
+
+    .tag-casa {
+      background: #f0ebfb;
+      color: #6a4f96;
+    }
+
+    .tag-new {
+      background: #fff4ea;
+      color: #8a5a2e;
+    }
+
+    .tag-exported {
+      background: #eaf7ee;
+      color: #356347;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .action-group button {
+      width: auto;
+      min-width: 70px;
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .disabled-look {
+      background: #f6f8f7;
+      color: #a2ada6;
+    }
+
+    @media (max-width: 1100px) {
+      .filters-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+  .app {
+    padding: 14px;
+  }
+
+  .top-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-grid,
+  .filters-grid,
+  .summary-section {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .records-header {
+    align-items: stretch;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .button-row button {
+    width: auto;
+    min-width: 120px;
+    flex: 1 1 calc(50% - 8px);
+  }
+
+  h1 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .summary-box .value {
+    font-size: 22px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 900px;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2f3a33;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.toast.show {
+  opacity: 1;
+}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Memento Vivere Booking Manager</h1>
+
+    <div class="top-grid">
+      <div class="panel">
+        <h2 id="formTitle">Add Record</h2>
+        <div class="form-grid">
+          <div>
+            <label>Date</label>
+            <input type="date" id="date" />
+          </div>
+
+          <div>
+            <label>Type</label>
+            <select id="type">
+              <option value="Revenue">Revenue</option>
+              <option value="Expense">Expense</option>
+            </select>
+          </div>
+
+          <div>
+            <label id="unitLabel">Property</label>
+            <select id="unit">
+              <option value="Studio One-1123">Bachelor’s Crib 1</option>
+              <option value="Studio Two-1122">Bachelor’s Crib 2</option>
+              <option value="Casa Tres16">Casa Tres16</option>
+            </select>
+          </div>
+
+          <div id="nightsField">
+            <label>No. of Nights</label>
+            <input type="number" id="nights" min="1" step="1" placeholder="Number of nights" />
+          </div>
+
+<div id="expenseTypeField">
+            <label>Expense Type</label>
+            <select id="category">
+              <option value="">Select expense type</option>
+              <option value="Assoc. Dues / Water bill">Assoc. Dues / Water bill</option>
+              <option value="Utilities - Internet">Utilities - Internet</option>
+              <option value="Utilities - Electricity">Utilities - Electricity</option>
+              <option value="Supplies - Potable Water">Supplies - Potable Water</option>
+              <option value="Supplies - Towels Linens">Supplies - Towels Linens</option>
+              <option value="Supplies - Unit Supplies">Supplies - Unit Supplies</option>
+              <option value="Supplies - Hardware">Supplies - Hardware</option>
+              <option value="Supplies - Cleaning">Supplies - Cleaning</option>
+              <option value="Services - Cleaner Fee">Services - Cleaner Fee</option>
+              <option value="Services - Maintenance">Services - Maintenance</option>
+              <option value="Business Permit Fee">Business Permit Fee</option>
+              <option value="Services - Laundry">Services - Laundry</option>
+              <option value="Taxes (BIR/RPT)">Taxes (BIR/RPT)</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          <div id="vendorField">
+            <label id="vendorLabel">Guest Name</label>
+            <input type="text" id="vendor" placeholder="Enter guest name" />
+          </div>
+
+          <div>
+            <label>Amount</label>
+            <input type="number" id="amount" step="0.01" placeholder="0.00" />
+          </div>
+
+          <div id="platformField">
+            <label>Platform</label>
+            <select id="platform">
+              <option value="">Select platform</option>
+              <option value="Airbnb">Airbnb</option>
+              <option value="Agoda">Agoda</option>
+              <option value="Booking.com">Booking.com</option>
+              <option value="Direct">Direct</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          <div id="declaredField">
+            <label>Declared?</label>
+            <select id="declared">
+              <option value="">Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div id="invoiceField">
+            <label>Inv. No.</label>
+            <input type="text" id="invoiceNumber" placeholder="Invoice number" />
+          </div>
+
+          <div class="full" id="noteField">
+            <label>Note</label>
+            <textarea id="note" placeholder="Optional note"></textarea>
+          </div>
+
+          <div class="full">
+            <div class="button-row">
+              <button class="btn-primary" id="saveBtn">Save Record</button>
+              <button class="btn-secondary" id="clearBtn" type="button">Clear Form</button>
+              <button class="btn-danger" id="cancelEditBtn" type="button" style="display:none;">Cancel Edit</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer-note">Autosaves immediately after add, edit, delete, and export marking.</div>
+      </div>
+
+      <div class="panel">
+        <h2>Summary</h2>
+        <div class="summary-section" id="summaryCards"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Filters</h2>
+      <div class="filters-grid">
+        <div>
+          <label>Search</label>
+          <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
+        </div>
+
+        <div>
+          <label>Filter Type</label>
+          <select id="filterType">
+            <option value="">All</option>
+            <option value="Revenue">Revenue</option>
+            <option value="Expense">Expense</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Filter Unit</label>
+          <select id="filterUnit">
+            <option value="">All</option>
+            <option value="Studio One-1123">Bachelor’s Crib 1</option>
+            <option value="Studio Two-1122">Bachelor’s Crib 2</option>
+            <option value="Casa Tres16">Casa Tres16</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Year</label>
+          <select id="filterYear">
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Month</label>
+          <select id="filterMonth">
+            <option value="">All</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="records-header">
+        <h2 style="margin:0;">Records</h2>
+        <div class="button-row">
+          <button class="btn-green" id="exportRevenueBtn" type="button">Revenue CSV</button>
+          <button class="btn-green" id="exportExpenseBtn" type="button">Expense CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Unit</th>
+              <th>Nights</th>
+              <th>Guest / Vendor</th>
+              <th>Amount</th>
+              <th>Platform</th>
+              <th>Declared?</th>
+              <th>Inv. No.</th>
+              <th>Note</th>       
+              <th>Export Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="recordsTableBody"></tbody>
+        </table>
+      </div>
+      <div class="footer-note" id="recordCount"></div>
+    </div>
+  </div>
+
+  <script>
+function showToast() {
+  const t = document.getElementById("toast");
+  t.classList.add("show");
+
+  setTimeout(() => {
+    t.classList.remove("show");
+  }, 1200);
+}
+    const STORAGE_KEY = "memento_vivere_booking_manager_v2";
+
+    const UNIT_OPTIONS = [
+      { value: "Studio One-1123", label: "Bachelor’s Crib 1" },
+      { value: "Studio Two-1122", label: "Bachelor’s Crib 2" },
+      { value: "Casa Tres16", label: "Casa Tres16" }
+    ];
+
+    let records = [];
+    let editingId = null;
+
+    const els = {
+      date: document.getElementById("date"),
+      type: document.getElementById("type"),
+      unit: document.getElementById("unit"),
+      unitLabel: document.getElementById("unitLabel"),
+      nights: document.getElementById("nights"),
+      vendor: document.getElementById("vendor"),
+      vendorLabel: document.getElementById("vendorLabel"),
+      platform: document.getElementById("platform"),
+      declared: document.getElementById("declared"),
+      invoiceNumber: document.getElementById("invoiceNumber"),
+      category: document.getElementById("category"),
+      amount: document.getElementById("amount"),
+      note: document.getElementById("note"),
+
+      nightsField: document.getElementById("nightsField"),
+      vendorField: document.getElementById("vendorField"),
+      platformField: document.getElementById("platformField"),
+      declaredField: document.getElementById("declaredField"),
+      invoiceField: document.getElementById("invoiceField"),
+      expenseTypeField: document.getElementById("expenseTypeField"),
+      noteField: document.getElementById("noteField"),
+
+      saveBtn: document.getElementById("saveBtn"),
+      clearBtn: document.getElementById("clearBtn"),
+      cancelEditBtn: document.getElementById("cancelEditBtn"),
+      formTitle: document.getElementById("formTitle"),
+
+      search: document.getElementById("search"),
+      filterType: document.getElementById("filterType"),
+      filterUnit: document.getElementById("filterUnit"),
+      filterYear: document.getElementById("filterYear"),
+      filterMonth: document.getElementById("filterMonth"),
+      resetFiltersBtn: document.getElementById("resetFiltersBtn"),
+
+      summaryCards: document.getElementById("summaryCards"),
+      recordsTableBody: document.getElementById("recordsTableBody"),
+      recordCount: document.getElementById("recordCount"),
+
+      exportRevenueBtn: document.getElementById("exportRevenueBtn"),
+      exportExpenseBtn: document.getElementById("exportExpenseBtn")
+    };
+
+    function peso(value) {
+      return new Intl.NumberFormat("en-PH", {
+        style: "currency",
+        currency: "PHP"
+      }).format(Number(value || 0));
+    }
+
+    function safeText(value) {
+      return (value ?? "").toString().trim();
+    }
+
+    function formatDateDDMmmYY(dateStr) {
+      if (!dateStr) return "";
+      const d = new Date(dateStr);
+      if (isNaN(d)) return dateStr;
+
+      const day = String(d.getDate()).padStart(2, "0");
+      const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const mon = months[d.getMonth()];
+      const year = String(d.getFullYear()).slice(-2);
+
+      return `${day}${mon}${year}`;
+    }
+
+    function saveToStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    }
+
+    function loadFromStorage() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        records = raw ? JSON.parse(raw) : [];
+      } catch (err) {
+        records = [];
+      }
+    }
+
+    function generateId() {
+      return Date.now().toString() + Math.random().toString(16).slice(2);
+    }
+
+    function getUnitLabel(value) {
+      return UNIT_OPTIONS.find(u => u.value === value)?.label || value;
+    }
+
+    function getQuarter(dateStr) {
+      if (!dateStr) return "";
+      const month = new Date(dateStr).getMonth() + 1;
+      if (month >= 1 && month <= 3) return "Q1";
+      if (month >= 4 && month <= 6) return "Q2";
+      if (month >= 7 && month <= 9) return "Q3";
+      if (month >= 10 && month <= 12) return "Q4";
+      return "";
+    }
+
+    function updateTypeFields() {
+      const isRevenue = els.type.value === "Revenue";
+
+      els.unitLabel.textContent = isRevenue ? "Property" : "Unit";
+      els.vendorLabel.textContent = isRevenue ? "Guest Name" : "Vendor";
+
+      els.nightsField.classList.toggle("hidden", !isRevenue);
+      els.platformField.classList.toggle("hidden", !isRevenue);
+      els.declaredField.classList.toggle("hidden", !isRevenue);
+      els.invoiceField.classList.toggle("hidden", !isRevenue);
+
+      els.expenseTypeField.classList.toggle("hidden", isRevenue);
+      els.noteField.classList.toggle("hidden", isRevenue);
+
+      if (isRevenue) {
+        els.vendor.placeholder = "Enter guest name";
+        els.category.value = "";
+        els.note.value = "";
+      } else {
+        els.vendor.placeholder = "Enter vendor";
+        els.nights.value = "";
+        els.platform.value = "";
+        els.declared.value = "";
+        els.invoiceNumber.value = "";
+      }
+
+      updateInvoiceState();
+    }
+
+    function updateInvoiceState() {
+      const isRevenue = els.type.value === "Revenue";
+      const needsInvoice = isRevenue && els.declared.value === "Yes";
+
+      if (!needsInvoice) {
+        els.invoiceNumber.value = "";
+        els.invoiceNumber.disabled = true;
+        els.invoiceNumber.classList.add("disabled-look");
+      } else {
+        els.invoiceNumber.disabled = false;
+        els.invoiceNumber.classList.remove("disabled-look");
+      }
+    }
+
+    function getFormData() {
+      const isRevenue = els.type.value === "Revenue";
+
+      return {
+        date: els.date.value,
+        type: els.type.value,
+        unit: els.unit.value,
+        nights: isRevenue ? Number(els.nights.value || 0) : "",
+        vendor: safeText(els.vendor.value),
+        platform: isRevenue ? safeText(els.platform.value) : "",
+        declared: isRevenue ? safeText(els.declared.value) : "",
+        invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
+        category: !isRevenue ? safeText(els.category.value) : "",
+        amount: Number(els.amount.value),
+        note: !isRevenue ? safeText(els.note.value) : "",
+        exportedRevenue: false,
+        exportedExpense: false,
+        createdAt: new Date().toISOString()
+      };
+    }
+
+    function validateForm(data) {
+      if (!data.date) {
+        alert("Please select a date.");
+        return false;
+      }
+
+      if (!data.unit) {
+        alert("Please select a unit.");
+        return false;
+      }
+
+      if (!data.amount || data.amount <= 0) {
+        alert("Please enter a valid amount.");
+        return false;
+      }
+
+      if (data.type === "Revenue") {
+        if (!data.nights || data.nights <= 0) {
+          alert("Please enter no. of nights.");
+          return false;
+        }
+        if (!data.vendor) {
+          alert("Please enter guest name.");
+          return false;
+        }
+        if (!data.platform) {
+          alert("Please select platform.");
+          return false;
+        }
+        if (!data.declared) {
+          alert("Please select Declared?.");
+          return false;
+        }
+        if (data.declared === "Yes" && !data.invoiceNumber) {
+          alert("Inv. No. is required when Declared? is Yes.");
+          return false;
+        }
+      }
+
+      if (data.type === "Expense") {
+        if (!data.category) {
+          alert("Please select expense type.");
+          return false;
+        }
+        if (!data.vendor) {
+          alert("Please enter vendor.");
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function clearForm() {
+      els.date.value = new Date().toISOString().slice(0, 10);
+      els.type.value = "Revenue";
+      els.unit.value = "Studio One-1123";
+      els.nights.value = "";
+      els.vendor.value = "";
+      els.platform.value = "";
+      els.declared.value = "";
+      els.invoiceNumber.value = "";
+      els.category.value = "";
+      els.amount.value = "";
+      els.note.value = "";
+      editingId = null;
+      els.formTitle.textContent = "Add Record";
+      els.saveBtn.textContent = "Save Record";
+      els.cancelEditBtn.style.display = "none";
+      updateTypeFields();
+    }
+
+    function startEdit(id) {
+      const rec = records.find(r => r.id === id);
+      if (!rec) return;
+
+      editingId = id;
+      els.date.value = rec.date || "";
+      els.type.value = rec.type || "Revenue";
+      els.unit.value = rec.unit || "Studio One-1123";
+      els.nights.value = rec.nights || "";
+      els.vendor.value = rec.vendor || "";
+      els.platform.value = rec.platform || "";
+      els.declared.value = rec.declared || "";
+      els.invoiceNumber.value = rec.invoiceNumber || "";
+      els.category.value = rec.category || "";
+      els.amount.value = rec.amount || "";
+      els.note.value = rec.note || "";
+
+      els.formTitle.textContent = "Edit Record";
+      els.saveBtn.textContent = "Update Record";
+      els.cancelEditBtn.style.display = "inline-block";
+
+      updateTypeFields();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function deleteRecord(id) {
+      const rec = records.find(r => r.id === id);
+      if (!rec) return;
+
+      const ok = confirm(`Delete this record?\n\n${formatDateDDMmmYY(rec.date)} | ${rec.type} | ${getUnitLabel(rec.unit)} | ${peso(rec.amount)}`);
+      if (!ok) return;
+
+      records = records.filter(r => r.id !== id);
+      saveToStorage();
+      refreshYearFilter();
+      render();
+showToast();
+    }
+
+    function handleSave() {
+      const data = getFormData();
+      if (!validateForm(data)) return;
+
+      if (editingId) {
+        records = records.map(r => {
+          if (r.id !== editingId) return r;
+          return {
+            ...r,
+            ...data,
+            exportedRevenue: false,
+            exportedExpense: false
+          };
+        });
+      } else {
+        records.unshift({
+          id: generateId(),
+          ...data
+        });
+      }
+
+     saveToStorage();
+clearForm();
+refreshYearFilter();
+render();
+showToast();
+    }
+
+    function getFilteredRecords() {
+      const search = safeText(els.search.value).toLowerCase();
+      const filterType = els.filterType.value;
+      const filterUnit = els.filterUnit.value;
+      const filterYear = els.filterYear.value;
+      const filterMonth = els.filterMonth.value;
+
+      return [...records]
+        .filter(r => {
+          const textBlob = [
+            r.date,
+            formatDateDDMmmYY(r.date),
+            r.type,
+            r.unit,
+            getUnitLabel(r.unit),
+            r.nights,
+            r.vendor,
+            r.platform,
+            r.declared,
+            r.invoiceNumber,
+            r.category,
+            r.note,
+            String(r.amount),
+            r.exportedRevenue ? "revenue exported" : "revenue new",
+            r.exportedExpense ? "expense exported" : "expense new"
+          ].join(" ").toLowerCase();
+
+          const year = r.date ? new Date(r.date).getFullYear().toString() : "";
+          const month = r.date ? (new Date(r.date).getMonth() + 1).toString() : "";
+
+          return (
+            (!search || textBlob.includes(search)) &&
+            (!filterType || r.type === filterType) &&
+            (!filterUnit || r.unit === filterUnit) &&
+            (!filterYear || year === filterYear) &&
+            (!filterMonth || month === filterMonth)
+          );
+        })
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    function computeSummary(data) {
+      const totalRevenue = data
+        .filter(r => r.type === "Revenue")
+        .reduce((sum, r) => sum + Number(r.amount || 0), 0);
+
+      const totalExpense = data
+        .filter(r => r.type === "Expense")
+        .reduce((sum, r) => sum + Number(r.amount || 0), 0);
+
+      const net = totalRevenue - totalExpense;
+
+      const units = ["Studio One-1123", "Studio Two-1122", "Casa Tres16"];
+      const byUnit = {};
+
+      units.forEach(unit => {
+        const unitRows = data.filter(r => r.unit === unit);
+        const rev = unitRows
+          .filter(r => r.type === "Revenue")
+          .reduce((sum, r) => sum + Number(r.amount || 0), 0);
+        const exp = unitRows
+          .filter(r => r.type === "Expense")
+          .reduce((sum, r) => sum + Number(r.amount || 0), 0);
+
+        byUnit[unit] = {
+          revenue: rev,
+          expense: exp,
+          net: rev - exp
+        };
+      });
+
+      return {
+        totalRevenue,
+        totalExpense,
+        net,
+        byUnit
+      };
+    }
+
+    function renderSummary(data) {
+      const s = computeSummary(data);
+
+      const cards = [
+        { title: "Filtered Revenue", value: peso(s.totalRevenue), cls: "blue" },
+        { title: "Filtered Expenses", value: peso(s.totalExpense), cls: "red" },
+        { title: "Filtered Net Profit", value: peso(s.net), cls: "green" },
+        { title: "Bachelor’s Crib 1 Net", value: peso(s.byUnit["Studio One-1123"].net), cls: "purple" },
+        { title: "Bachelor’s Crib 2 Net", value: peso(s.byUnit["Studio Two-1122"].net), cls: "orange" },
+        { title: "Casa Tres16 Net", value: peso(s.byUnit["Casa Tres16"].net), cls: "gray" }
+      ];
+
+      els.summaryCards.innerHTML = cards.map(card => `
+        <div class="summary-box ${card.cls}">
+          <h3>${card.title}</h3>
+          <div class="value">${card.value}</div>
+        </div>
+      `).join("");
+    }
+
+    function getUnitTagClass(unit) {
+      if (unit === "Studio One-1123" || unit === "Studio Two-1122") return "tag-bc";
+      return "tag-casa";
+    }
+
+    function getExportStatusHtml(record) {
+      if (record.type === "Revenue") {
+        return record.exportedRevenue
+          ? `<span class="tag tag-exported">Revenue: Exported</span>`
+          : `<span class="tag tag-new">Revenue: New</span>`;
+      }
+
+      return record.exportedExpense
+        ? `<span class="tag tag-exported">Expense: Exported</span>`
+        : `<span class="tag tag-new">Expense: New</span>`;
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderTable(data) {
+      if (!data.length) {
+        els.recordsTableBody.innerHTML = `
+          <tr>
+            <td colspan="12" style="text-align:center; padding:24px;">No records found.</td>
+          </tr>
+        `;
+        els.recordCount.textContent = "0 record shown";
+        return;
+      }
+
+      els.recordsTableBody.innerHTML = data.map(r => `
+        <tr>
+          <td>${escapeHtml(formatDateDDMmmYY(r.date))}</td>
+          <td><span class="tag ${r.type === "Revenue" ? "tag-revenue" : "tag-expense"}">${escapeHtml(r.type)}</span></td>
+          <td><span class="tag ${getUnitTagClass(r.unit)}">${escapeHtml(getUnitLabel(r.unit))}</span></td>
+          <td>${escapeHtml(r.nights || "")}</td>
+          <td>
+  ${escapeHtml(r.vendor || "")}
+  ${r.type === "Expense" && r.category ? 
+    `<div style="font-size:11px; color:#7a877f; margin-top:2px;">
+      ${escapeHtml(r.category)}
+    </div>` 
+    : ""}
+</td>
+<td><strong>${peso(r.amount)}</strong></td>
+<td>${escapeHtml(r.platform || "")}</td>
+<td>${escapeHtml(r.declared || "")}</td>
+<td>${escapeHtml(r.invoiceNumber || "")}</td>
+<td>${escapeHtml(r.note || "")}</td>
+          <td>${getExportStatusHtml(r)}</td>
+          <td>
+            <div class="action-group">
+              <button class="btn-secondary" onclick="startEdit('${r.id}')">Edit</button>
+              <button class="btn-danger" onclick="deleteRecord('${r.id}')">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+
+      const word = data.length === 1 ? "record" : "records";
+      els.recordCount.textContent = `${data.length} ${word} shown`;
+    }
+
+    function render() {
+      const filtered = getFilteredRecords();
+      renderSummary(filtered);
+      renderTable(filtered);
+    }
+
+    function refreshYearFilter() {
+      const years = [...new Set(
+        records
+          .map(r => r.date ? new Date(r.date).getFullYear().toString() : null)
+          .filter(Boolean)
+      )].sort((a, b) => b - a);
+
+      const current = els.filterYear.value;
+      els.filterYear.innerHTML = `<option value="">All</option>` +
+        years.map(y => `<option value="${y}">${y}</option>`).join("");
+
+      if (years.includes(current)) {
+        els.filterYear.value = current;
+      }
+    }
+
+    function escapeCSV(value) {
+      if (value === null || value === undefined) return "";
+      const str = String(value);
+      if (str.includes('"') || str.includes(",") || str.includes("\n")) {
+        return `"${str.replace(/"/g, '""')}"`;
+      }
+      return str;
+    }
+
+    function exportToCSV(rows, filename) {
+      if (!rows.length) {
+        alert("No new data to export.");
+        return false;
+      }
+
+      const headers = Object.keys(rows[0]);
+      const csvRows = [
+        headers.join(","),
+        ...rows.map(row => headers.map(h => escapeCSV(row[h])).join(","))
+      ];
+
+      const csvContent = "\uFEFF" + csvRows.join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(url);
+      return true;
+    }
+
+    function exportRevenueCSV() {
+      const pendingRevenue = records.filter(r => r.type === "Revenue" && !r.exportedRevenue);
+
+      const revenueRows = pendingRevenue.map(r => ({
+        Property: r.unit,
+        Date: formatDateDDMmmYY(r.date),
+        "No. of Nights": r.nights || "",
+        "Guest Name": r.vendor || "",
+        Amount: r.amount,
+        Platform: r.platform || "",
+        "Declared?": r.declared || "",
+        "Inv. No.": r.invoiceNumber || "",
+        Qtr: getQuarter(r.date)
+      }));
+
+      const success = exportToCSV(revenueRows, "revenue.csv");
+      if (!success) return;
+
+      const ids = new Set(pendingRevenue.map(r => r.id));
+      records = records.map(r => ids.has(r.id) ? { ...r, exportedRevenue: true } : r);
+
+      saveToStorage();
+      render();
+    }
+
+    function exportExpenseCSV() {
+      const pendingExpense = records.filter(r => r.type === "Expense" && !r.exportedExpense);
+
+      const expenseRows = pendingExpense.map(r => ({
+        Unit: r.unit,
+        "Date of Expense": formatDateDDMmmYY(r.date),
+        "Expense Type": r.category || "",
+        Vendor: r.vendor || "",
+        Amount: r.amount,
+        Note: r.note || ""
+      }));
+
+      const success = exportToCSV(expenseRows, "expense.csv");
+      if (!success) return;
+
+      const ids = new Set(pendingExpense.map(r => r.id));
+      records = records.map(r => ids.has(r.id) ? { ...r, exportedExpense: true } : r);
+
+      saveToStorage();
+      render();
+    }
+
+    els.type.addEventListener("change", updateTypeFields);
+    els.declared.addEventListener("change", updateInvoiceState);
+
+    els.saveBtn.addEventListener("click", handleSave);
+    els.clearBtn.addEventListener("click", clearForm);
+    els.cancelEditBtn.addEventListener("click", clearForm);
+
+    els.search.addEventListener("input", render);
+    els.filterType.addEventListener("change", render);
+    els.filterUnit.addEventListener("change", render);
+    els.filterYear.addEventListener("change", render);
+    els.filterMonth.addEventListener("change", render);
+
+    els.resetFiltersBtn.addEventListener("click", () => {
+      els.search.value = "";
+      els.filterType.value = "";
+      els.filterUnit.value = "";
+      els.filterYear.value = "";
+      els.filterMonth.value = "";
+      render();
+    });
+
+    els.exportRevenueBtn.addEventListener("click", exportRevenueCSV);
+    els.exportExpenseBtn.addEventListener("click", exportExpenseCSV);
+
+    loadFromStorage();
+    refreshYearFilter();
+    clearForm();
+    render();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(err => {
+      console.log("Service worker registration failed:", err);
+    });
+  });
+}
+    window.startEdit = startEdit;
+    window.deleteRecord = deleteRecord;
+  </script>
+<div id="toast" class="toast">Saved</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "Memento Vivere Booking Manager",
+  "short_name": "Booking",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8faf8",
+  "theme_color": "#f8faf8",
+  "icons": []
+}
