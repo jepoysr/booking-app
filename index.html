@@ -207,7 +207,7 @@
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
       min-width: 0;
     }
@@ -223,6 +223,7 @@
       flex-direction: column;
       gap: 6px;
       min-width: 0;
+      width: 100%;
     }
 
     label {
@@ -256,6 +257,22 @@
       background: #ffffff;
       border-color: #cbd5e1;
       box-shadow: 0 0 0 2px rgba(0,0,0,0.03);
+    }
+
+    input[type="date"] {
+      appearance: none;
+      -webkit-appearance: none;
+      min-height: 52px;
+      line-height: normal;
+      text-align: left;
+    }
+
+    input[type="date"]::-webkit-date-and-time-value {
+      text-align: left;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      opacity: 1;
     }
 
     textarea {
@@ -325,7 +342,7 @@
 
     .summary-section {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
       min-width: 0;
     }
@@ -371,9 +388,22 @@
 
     .filters-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
+      width: 100%;
       min-width: 0;
+    }
+
+    .filters-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .filters-grid input,
+    .filters-grid select,
+    .filters-grid button {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .records-header {
@@ -502,19 +532,23 @@
 
       .top-grid,
       .summary-section,
-      .filters-grid,
       .form-grid {
         grid-template-columns: 1fr !important;
       }
 
-      .form-grid .full,
-      .filters-grid .full {
-        grid-column: span 1 !important;
+      .filters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       }
 
       .filters-grid > div,
       .form-grid > div {
         min-width: 0;
+        width: 100%;
+      }
+
+      .form-grid .full,
+      .filters-grid .full {
+        grid-column: 1 / -1 !important;
       }
 
       .panel {
@@ -570,6 +604,39 @@
       .table-wrap {
         margin: 0 -4px;
       }
+
+      th,
+      td {
+        padding: 9px 8px;
+        font-size: 12px;
+      }
+
+      .tag {
+        padding: 3px 8px;
+        font-size: 11px;
+      }
+
+      .action-group {
+        gap: 6px;
+      }
+
+      .action-group button {
+        min-width: 56px;
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+
+      table {
+        min-width: 760px;
+      }
+
+      input[type="date"],
+      select,
+      input[type="number"],
+      input[type="text"],
+      textarea {
+        min-height: 52px;
+      }
     }
   </style>
 </head>
@@ -592,7 +659,7 @@
         <div class="form-grid">
           <div>
             <label>Date</label>
-            <input type="date" id="date" />
+            <input type="date" id="date" lang="en-CA" />
           </div>
 
           <div>
@@ -614,7 +681,21 @@
 
           <div id="nightsField">
             <label>No. of Nights</label>
-            <input type="number" id="nights" min="1" step="1" placeholder="Number of nights" />
+            <select id="nights">
+              <option value="">Select nights</option>
+              <option value="1">1 night</option>
+              <option value="2">2 nights</option>
+              <option value="3">3 nights</option>
+              <option value="4">4 nights</option>
+              <option value="5">5 nights</option>
+              <option value="6">6 nights</option>
+              <option value="7">7 nights</option>
+              <option value="8">8 nights</option>
+              <option value="9">9 nights</option>
+              <option value="10">10 nights</option>
+              <option value="11">11 nights</option>
+              <option value="12">12 nights</option>
+            </select>
           </div>
 
           <div id="expenseTypeField">
@@ -796,7 +877,6 @@
       const t = document.getElementById("toast");
       t.textContent = message;
       t.classList.add("show");
-
       setTimeout(() => {
         t.classList.remove("show");
       }, 1200);
@@ -1194,23 +1274,23 @@
     }
 
     function renderSummary(data) {
-  const s = computeSummary(data);
+      const s = computeSummary(data);
 
-  const cards = [
-    { title: "Overall Net", value: peso(s.net), cls: "green" },
-    { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
-    { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
-    { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
-  ];
+      const cards = [
+        { title: "Overall Net", value: peso(s.net), cls: "green" },
+        { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+        { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+        { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
+      ];
 
-  els.summaryCards.innerHTML = cards.map(card => `
-    <div class="summary-box ${card.cls}">
-      <h3>${card.title}</h3>
-      <div class="sub-label">Net</div>
-      <div class="value">${card.value}</div>
-    </div>
-  `).join("");
-}
+      els.summaryCards.innerHTML = cards.map(card => `
+        <div class="summary-box ${card.cls}">
+          <h3>${card.title}</h3>
+          <div class="sub-label">Net</div>
+          <div class="value">${card.value}</div>
+        </div>
+      `).join("");
+    }
 
     function getUnitTagClass(unit) {
       if (unit === "Studio One-1123" || unit === "Studio Two-1122") return "tag-bc";
@@ -1257,11 +1337,7 @@
           <td>${escapeHtml(r.nights || "")}</td>
           <td>
             ${escapeHtml(r.vendor || "")}
-            ${r.type === "Expense" && r.category ?
-              `<div style="font-size:11px; color:#7a877f; margin-top:2px;">
-                ${escapeHtml(r.category)}
-              </div>`
-              : ""}
+            ${r.type === "Expense" && r.category ? `<div style="font-size:11px; color:#7a877f; margin-top:2px;">${escapeHtml(r.category)}</div>` : ""}
           </td>
           <td><strong>${peso(r.amount)}</strong></td>
           <td>${escapeHtml(r.platform || "")}</td>
