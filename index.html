@@ -341,43 +341,61 @@
     }
 
     .summary-section {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      min-width: 0;
-    }
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
 
     .summary-box {
-      border-radius: 18px;
-      padding: 18px;
-      color: #2b352f;
-      border: 1px solid rgba(255,255,255,0.38);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 22px rgba(0,0,0,0.05);
-      min-width: 0;
-    }
+  border-radius: 10px;
+  padding: 8px 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  color: #2b352f;
+  border: 1px solid rgba(255,255,255,0.38);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.045);
+}
+
+.summary-box:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.06);
+}
 
     .summary-box h3 {
-      margin: 0 0 6px;
-      font-size: 13px;
-      font-weight: 700;
-      opacity: 0.9;
-      color: inherit;
-    }
+  margin: 0 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.9;
+  color: inherit;
+}
 
-    .sub-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: rgba(0,0,0,0.5);
-      margin-top: 6px;
-    }
+.sub-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.48);
+  margin-top: 2px;
+}
 
-    .summary-box .value {
-      font-size: 22px;
-      font-weight: 700;
-      margin-top: 2px;
-      color: inherit;
-      word-break: break-word;
-    }
+.summary-box .value {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 1px;
+  color: inherit;
+  word-break: break-word;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.summary-net {
+  font-size: 9px;
+  opacity: 0.55;
+  font-weight: 600;
+}
 
     .blue { background: linear-gradient(135deg, var(--blue-1), var(--blue-2)); color: #234263; }
     .red { background: linear-gradient(135deg, var(--danger-1), var(--danger-2)); color: #6f2f2f; }
@@ -473,23 +491,37 @@
 
     .tag-revenue { background: #eaf5ee; color: #2d5a3f; }
     .tag-expense { background: #fdeeee; color: #7b3b3b; }
-    .tag-bc { background: #e8f0fb; color: #3b5f8b; }
-    .tag-casa { background: #f0ebfb; color: #6a4f96; }
+    .tag-bc1 {
+  background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+  color: #4a3a6d;
+}
+
+.tag-bc2 {
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
+  color: #724621;
+}
+
+.tag-casa {
+  background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+  color: #234263;
+}
     .tag-new { background: #fff4ea; color: #8a5a2e; }
     .tag-exported { background: #eaf7ee; color: #356347; }
 
     .action-group {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
 
     .action-group button {
-      width: auto;
-      min-width: 70px;
-      padding: 8px 10px;
-      font-size: 12px;
-    }
+  width: auto;
+  min-width: 0;
+  padding: 4px 6px;
+  font-size: 10px;
+  white-space: nowrap;
+}
 
     .footer-note {
       margin-top: 10px;
@@ -597,9 +629,17 @@
         font-size: 16px;
       }
 
-      .summary-box .value {
-        font-size: 20px;
-      }
+      .summary-section {
+  gap: 10px;
+}
+
+.summary-box {
+  padding: 12px;
+}
+
+.summary-box .value {
+  font-size: 17px;
+}
 
       .table-wrap {
         margin: 0 -4px;
@@ -607,13 +647,18 @@
 
       th,
       td {
-        padding: 9px 8px;
-        font-size: 12px;
+        padding: 7px 6px;
+        font-size: 11px;
+        line-height: 1.2;
+      }
+
+      td {
+        vertical-align: middle;
       }
 
       .tag {
-        padding: 3px 8px;
-        font-size: 11px;
+        padding: 2px 6px;
+        font-size: 10px;
       }
 
       .action-group {
@@ -621,9 +666,9 @@
       }
 
       .action-group button {
-        min-width: 56px;
-        padding: 6px 8px;
-        font-size: 11px;
+        min-width: 48px;
+        padding: 5px 6px;
+        font-size: 10px;
       }
 
       table {
@@ -637,7 +682,20 @@
       textarea {
         min-height: 52px;
       }
+
+.action-group {
+  flex-wrap: nowrap !important;
+}
+
+td:last-child {
+  min-width: 90px;
+}
+
+.action-group button {
+  flex: 0 0 auto;
+}
     }
+
   </style>
 </head>
 <body>
@@ -957,7 +1015,7 @@
       const mon = months[d.getMonth()];
       const year = String(d.getFullYear()).slice(-2);
 
-      return `${day}${mon}${year}`;
+      return `${day}-${mon}-${year}`;
     }
 
     function saveToStorage() {
@@ -1003,12 +1061,11 @@
       els.invoiceField.classList.toggle("hidden", !isRevenue);
 
       els.expenseTypeField.classList.toggle("hidden", isRevenue);
-      els.noteField.classList.toggle("hidden", isRevenue);
+      els.noteField.classList.remove("hidden");
 
       if (isRevenue) {
         els.vendor.placeholder = "Enter guest name";
         els.category.value = "";
-        els.note.value = "";
       } else {
         els.vendor.placeholder = "Enter vendor";
         els.nights.value = "";
@@ -1048,7 +1105,7 @@
         invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
         category: !isRevenue ? safeText(els.category.value) : "",
         amount: Number(els.amount.value),
-        note: !isRevenue ? safeText(els.note.value) : "",
+        note: safeText(els.note.value),
         exportedRevenue: false,
         exportedExpense: false,
         createdAt: new Date().toISOString()
@@ -1277,25 +1334,28 @@
       const s = computeSummary(data);
 
       const cards = [
-        { title: "Overall Net", value: peso(s.net), cls: "green" },
-        { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
-        { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
-        { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
-      ];
+  { title: "Overall Net", value: peso(s.net), cls: "gray" },
+  { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+  { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+  { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "blue" }
+];
 
       els.summaryCards.innerHTML = cards.map(card => `
         <div class="summary-box ${card.cls}">
-          <h3>${card.title}</h3>
-          <div class="sub-label">Net</div>
+          <div class="summary-header">
+            <h3>${card.title}</h3>
+            ${card.title !== "Overall Net" ? '<span class="summary-net">Net</span>' : ''}
+          </div>
           <div class="value">${card.value}</div>
         </div>
       `).join("");
     }
 
     function getUnitTagClass(unit) {
-      if (unit === "Studio One-1123" || unit === "Studio Two-1122") return "tag-bc";
-      return "tag-casa";
-    }
+  if (unit === "Studio One-1123") return "tag-bc1";
+  if (unit === "Studio Two-1122") return "tag-bc2";
+  return "tag-casa";
+}
 
     function getExportStatusHtml(record) {
       if (record.type === "Revenue") {
@@ -1428,6 +1488,7 @@
         Platform: r.platform || "",
         "Declared?": r.declared || "",
         "Inv. No.": r.invoiceNumber || "",
+        Note: r.note || "",
         Qtr: getQuarter(r.date)
       }));
 
