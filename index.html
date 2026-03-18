@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Booking Manager" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest?v=3" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
 
   <style>
     * {
@@ -54,6 +54,7 @@
       max-width: 1400px;
       margin: 0 auto;
       padding: 24px;
+      min-width: 0;
     }
 
     h1 {
@@ -76,6 +77,7 @@
       border: 1px solid rgba(255,255,255,0.7);
       box-shadow: 0 10px 24px rgba(31, 41, 35, 0.05);
       backdrop-filter: blur(10px);
+      min-width: 0;
     }
 
     .hero-copy {
@@ -127,6 +129,7 @@
       font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
+      min-width: 0;
     }
 
     .status-dot {
@@ -138,13 +141,13 @@
       flex: 0 0 auto;
     }
 
-
     .top-grid {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 18px;
       margin-bottom: 18px;
       align-items: start;
+      min-width: 0;
     }
 
     .panel {
@@ -199,17 +202,27 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       border: 1px solid rgba(0,0,0,0.04);
       margin-bottom: 16px;
+      min-width: 0;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
+      min-width: 0;
     }
 
     .form-grid .full,
     .filters-grid .full {
       grid-column: 1 / -1;
+    }
+
+    .form-grid > div,
+    .filters-grid > div {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
     }
 
     label {
@@ -222,6 +235,8 @@
 
     input, select, textarea, button {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       padding: 12px 14px;
       border-radius: 12px;
       border: 1px solid var(--border);
@@ -300,6 +315,7 @@
       gap: 12px;
       margin-top: 10px;
       flex-wrap: wrap;
+      min-width: 0;
     }
 
     .button-row button {
@@ -311,6 +327,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
+      min-width: 0;
     }
 
     .summary-box {
@@ -319,6 +336,7 @@
       color: #2b352f;
       border: 1px solid rgba(255,255,255,0.38);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 22px rgba(0,0,0,0.05);
+      min-width: 0;
     }
 
     .summary-box h3 {
@@ -355,12 +373,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
-    }
-
-    .filters-grid > div {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      min-width: 0;
     }
 
     .records-header {
@@ -372,12 +385,14 @@
       margin-bottom: 14px;
       padding-bottom: 12px;
       border-bottom: 1px solid #edf2ee;
+      min-width: 0;
     }
 
     .table-wrap {
       width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      min-width: 0;
     }
 
     table {
@@ -473,6 +488,7 @@
       font-size: 13px;
       opacity: 0;
       transition: 0.25s;
+      z-index: 9999;
     }
 
     .toast.show {
@@ -494,6 +510,11 @@
       .form-grid .full,
       .filters-grid .full {
         grid-column: span 1 !important;
+      }
+
+      .filters-grid > div,
+      .form-grid > div {
+        min-width: 0;
       }
 
       .panel {
@@ -533,6 +554,21 @@
       h1 {
         font-size: 22px;
         line-height: 1.15;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        font-size: 16px;
+      }
+
+      .summary-box .value {
+        font-size: 20px;
+      }
+
+      .table-wrap {
+        margin: 0 -4px;
       }
     }
   </style>
@@ -581,7 +617,7 @@
             <input type="number" id="nights" min="1" step="1" placeholder="Number of nights" />
           </div>
 
-<div id="expenseTypeField">
+          <div id="expenseTypeField">
             <label>Expense Type</label>
             <select id="category">
               <option value="">Select expense type</option>
@@ -663,60 +699,60 @@
     <div class="panel">
       <h2>Filters</h2>
       <div class="filters-grid">
-  <div class="full">
-    <label>Search</label>
-    <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
-  </div>
+        <div class="full">
+          <label>Search</label>
+          <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
+        </div>
 
-  <div>
-    <label>Filter Type</label>
-    <select id="filterType">
-      <option value="">All</option>
-      <option value="Revenue">Revenue</option>
-      <option value="Expense">Expense</option>
-    </select>
-  </div>
+        <div>
+          <label>Filter Type</label>
+          <select id="filterType">
+            <option value="">All</option>
+            <option value="Revenue">Revenue</option>
+            <option value="Expense">Expense</option>
+          </select>
+        </div>
 
-  <div>
-    <label>Filter Unit</label>
-    <select id="filterUnit">
-      <option value="">All</option>
-      <option value="Studio One-1123">Bachelor’s Crib 1</option>
-      <option value="Studio Two-1122">Bachelor’s Crib 2</option>
-      <option value="Casa Tres16">Casa Tres16</option>
-    </select>
-  </div>
+        <div>
+          <label>Filter Unit</label>
+          <select id="filterUnit">
+            <option value="">All</option>
+            <option value="Studio One-1123">Bachelor’s Crib 1</option>
+            <option value="Studio Two-1122">Bachelor’s Crib 2</option>
+            <option value="Casa Tres16">Casa Tres16</option>
+          </select>
+        </div>
 
-  <div>
-    <label>Year</label>
-    <select id="filterYear">
-      <option value="">All</option>
-    </select>
-  </div>
+        <div>
+          <label>Year</label>
+          <select id="filterYear">
+            <option value="">All</option>
+          </select>
+        </div>
 
-  <div>
-    <label>Month</label>
-    <select id="filterMonth">
-      <option value="">All</option>
-      <option value="1">January</option>
-      <option value="2">February</option>
-      <option value="3">March</option>
-      <option value="4">April</option>
-      <option value="5">May</option>
-      <option value="6">June</option>
-      <option value="7">July</option>
-      <option value="8">August</option>
-      <option value="9">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select>
-  </div>
+        <div>
+          <label>Month</label>
+          <select id="filterMonth">
+            <option value="">All</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
 
-  <div class="full">
-    <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
-  </div>
-</div>
+        <div class="full">
+          <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
+        </div>
+      </div>
     </div>
 
     <div class="panel">
@@ -741,7 +777,7 @@
               <th>Platform</th>
               <th>Declared?</th>
               <th>Inv. No.</th>
-              <th>Note</th>       
+              <th>Note</th>
               <th>Export Status</th>
               <th>Actions</th>
             </tr>
@@ -753,15 +789,19 @@
     </div>
   </div>
 
-  <script>
-function showToast() {
-  const t = document.getElementById("toast");
-  t.classList.add("show");
+  <div id="toast" class="toast">Saved</div>
 
-  setTimeout(() => {
-    t.classList.remove("show");
-  }, 1200);
-}
+  <script>
+    function showToast(message = "Saved") {
+      const t = document.getElementById("toast");
+      t.textContent = message;
+      t.classList.add("show");
+
+      setTimeout(() => {
+        t.classList.remove("show");
+      }, 1200);
+    }
+
     const STORAGE_KEY = "memento_vivere_booking_manager_v2";
 
     const UNIT_OPTIONS = [
@@ -1043,7 +1083,7 @@ function showToast() {
       saveToStorage();
       refreshYearFilter();
       render();
-showToast();
+      showToast("Deleted");
     }
 
     function handleSave() {
@@ -1067,11 +1107,11 @@ showToast();
         });
       }
 
-     saveToStorage();
-clearForm();
-refreshYearFilter();
-render();
-showToast();
+      saveToStorage();
+      clearForm();
+      refreshYearFilter();
+      render();
+      showToast("Saved");
     }
 
     function getFilteredRecords() {
@@ -1157,21 +1197,24 @@ showToast();
       const s = computeSummary(data);
 
       const cards = [
-  { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
-  { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
-  { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
-];
+        { title: "Overall Revenue", value: peso(s.totalRevenue), cls: "blue" },
+        { title: "Overall Expenses", value: peso(s.totalExpense), cls: "red" },
+        { title: "Overall Net", value: peso(s.net), cls: "green" },
+        { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+        { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+        { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
+      ];
 
       els.summaryCards.innerHTML = cards.map(card => `
-  <div class="summary-box ${card.cls}">
-    <h3>${card.title}</h3>
-    <div class="sub-label">Net</div>
-    <div class="value">${card.value}</div>
-  </div>
-`).join("");
-}
+        <div class="summary-box ${card.cls}">
+          <h3>${card.title}</h3>
+          <div class="sub-label">${card.title.includes("Overall") ? "Filtered" : "Net"}</div>
+          <div class="value">${card.value}</div>
+        </div>
+      `).join("");
+    }
 
-function getUnitTagClass(unit) {
+    function getUnitTagClass(unit) {
       if (unit === "Studio One-1123" || unit === "Studio Two-1122") return "tag-bc";
       return "tag-casa";
     }
@@ -1215,18 +1258,18 @@ function getUnitTagClass(unit) {
           <td><span class="tag ${getUnitTagClass(r.unit)}">${escapeHtml(getUnitLabel(r.unit))}</span></td>
           <td>${escapeHtml(r.nights || "")}</td>
           <td>
-  ${escapeHtml(r.vendor || "")}
-  ${r.type === "Expense" && r.category ? 
-    `<div style="font-size:11px; color:#7a877f; margin-top:2px;">
-      ${escapeHtml(r.category)}
-    </div>` 
-    : ""}
-</td>
-<td><strong>${peso(r.amount)}</strong></td>
-<td>${escapeHtml(r.platform || "")}</td>
-<td>${escapeHtml(r.declared || "")}</td>
-<td>${escapeHtml(r.invoiceNumber || "")}</td>
-<td>${escapeHtml(r.note || "")}</td>
+            ${escapeHtml(r.vendor || "")}
+            ${r.type === "Expense" && r.category ?
+              `<div style="font-size:11px; color:#7a877f; margin-top:2px;">
+                ${escapeHtml(r.category)}
+              </div>`
+              : ""}
+          </td>
+          <td><strong>${peso(r.amount)}</strong></td>
+          <td>${escapeHtml(r.platform || "")}</td>
+          <td>${escapeHtml(r.declared || "")}</td>
+          <td>${escapeHtml(r.invoiceNumber || "")}</td>
+          <td>${escapeHtml(r.note || "")}</td>
           <td>${getExportStatusHtml(r)}</td>
           <td>
             <div class="action-group">
@@ -1322,6 +1365,7 @@ function getUnitTagClass(unit) {
 
       saveToStorage();
       render();
+      showToast("Revenue exported");
     }
 
     function exportExpenseCSV() {
@@ -1344,6 +1388,7 @@ function getUnitTagClass(unit) {
 
       saveToStorage();
       render();
+      showToast("Expense exported");
     }
 
     els.type.addEventListener("change", updateTypeFields);
@@ -1376,16 +1421,16 @@ function getUnitTagClass(unit) {
     clearForm();
     render();
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(err => {
-      console.log("Service worker registration failed:", err);
-    });
-  });
-}
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js?v=3").catch(err => {
+          console.log("Service worker registration failed:", err);
+        });
+      });
+    }
+
     window.startEdit = startEdit;
     window.deleteRecord = deleteRecord;
   </script>
-<div id="toast" class="toast">Saved</div>
 </body>
 </html>
