@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memento Vivere Booking Manager</title>
+  <title>Booking Manager</title>
 
   <meta name="theme-color" content="#f8faf8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -15,13 +15,12 @@
   <style>
     * {
       box-sizing: border-box;
-      transition: all 0.15s ease;
     }
 
     :root {
-      --bg: #f8faf8;
+      --bg: #f3f6f3;
       --panel: #ffffff;
-      --border: #e7ece8;
+      --border: #dfe5df;
       --text: #2f3a33;
       --muted: #7a877f;
 
@@ -46,8 +45,8 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(to bottom, #e4ebe4, #f3f6f3);
       color: var(--text);
     }
 
@@ -58,11 +57,10 @@
     }
 
     h1 {
-      margin: 0 0 20px;
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: var(--text);
+      margin: 0 0 16px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #2f3e34;
     }
 
     .top-grid {
@@ -74,19 +72,34 @@
     }
 
     .panel {
-      background: var(--panel);
+      background: #ffffff;
       border-radius: 20px;
-      padding: 22px;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      padding: 24px;
+      border: 1px solid #dfe5df;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.08);
       min-width: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.10);
     }
 
     .panel h2 {
-      margin: 0 0 14px;
-      font-size: 18px;
+      margin: 0 0 12px;
+      font-size: 15px;
       font-weight: 600;
-      color: var(--text);
+      color: #2f3e34;
+    }
+
+    .card, .form-section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.04);
+      margin-bottom: 16px;
     }
 
     .form-grid {
@@ -95,16 +108,17 @@
       gap: 16px;
     }
 
-    .form-grid .full {
+    .form-grid .full,
+    .filters-grid .full {
       grid-column: 1 / -1;
     }
 
     label {
-      display: block;
       font-size: 13px;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-weight: 500;
+      font-weight: 600;
+      color: #4b5a52;
+      margin-bottom: 4px;
+      display: block;
     }
 
     input, select, textarea, button {
@@ -117,15 +131,17 @@
     }
 
     input, select, textarea {
-      background: #fdfefd;
-      color: var(--text);
+      background: #f3f4f6;
+      color: #2f3e34;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
 
     input:focus, select:focus, textarea:focus {
       outline: none;
-      border-color: #9fc0eb;
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(159,192,235,0.18);
+      border-color: #cbd5e1;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.03);
     }
 
     textarea {
@@ -134,27 +150,35 @@
     }
 
     button {
+      appearance: none;
       cursor: pointer;
       font-weight: 600;
       border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
-      color: #26415f;
+      background: linear-gradient(135deg, #cfdcd2, #bdd0c2);
+      color: #2f3e34;
     }
 
     .btn-primary:hover {
-      filter: brightness(0.97);
+      background: linear-gradient(135deg, #c3d3c7, #b0c5b6);
     }
 
     .btn-secondary {
-      background: linear-gradient(135deg, #f5f7f6, #e9eeeb);
-      color: var(--text);
+      background: linear-gradient(135deg, #ecefed, #dfe5e1);
+      color: #374151;
     }
 
     .btn-secondary:hover {
-      background: linear-gradient(135deg, #eef2ef, #dde5e0);
+      background: linear-gradient(135deg, #e2e7e3, #d5ddd8);
     }
 
     .btn-danger {
@@ -162,7 +186,8 @@
       color: #6a2b2b;
     }
 
-    .btn-danger:hover {
+    .btn-danger:hover,
+    .btn-green:hover {
       filter: brightness(0.97);
     }
 
@@ -171,13 +196,10 @@
       color: #244631;
     }
 
-    .btn-green:hover {
-      filter: brightness(0.97);
-    }
-
     .button-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
 
@@ -194,7 +216,7 @@
 
     .summary-box {
       border-radius: 16px;
-      padding: 16px;
+      padding: 18px;
       color: #2b352f;
       border: 1px solid rgba(255,255,255,0.35);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
@@ -208,48 +230,38 @@
       color: inherit;
     }
 
+    .sub-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.5);
+      margin-top: 6px;
+    }
+
     .summary-box .value {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 700;
+      margin-top: 2px;
       color: inherit;
       word-break: break-word;
     }
 
-    .blue {
-      background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
-      color: #234263;
-    }
-
-    .red {
-      background: linear-gradient(135deg, var(--danger-1), var(--danger-2));
-      color: #6f2f2f;
-    }
-
-    .green {
-      background: linear-gradient(135deg, var(--green-1), var(--green-2));
-      color: #244631;
-    }
-
-    .purple {
-      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
-      color: #4a3a6d;
-    }
-
-    .orange {
-      background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
-      color: #724621;
-    }
-
-    .gray {
-      background: linear-gradient(135deg, var(--gray-1), var(--gray-2));
-      color: #34403a;
-    }
+    .blue { background: linear-gradient(135deg, var(--blue-1), var(--blue-2)); color: #234263; }
+    .red { background: linear-gradient(135deg, var(--danger-1), var(--danger-2)); color: #6f2f2f; }
+    .green { background: linear-gradient(135deg, var(--green-1), var(--green-2)); color: #244631; }
+    .purple { background: linear-gradient(135deg, var(--purple-1), var(--purple-2)); color: #4a3a6d; }
+    .orange { background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); color: #724621; }
+    .gray { background: linear-gradient(135deg, var(--gray-1), var(--gray-2)); color: #34403a; }
 
     .filters-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
-      margin-bottom: 16px;
+    }
+
+    .filters-grid > div {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .records-header {
@@ -262,12 +274,14 @@
     }
 
     .table-wrap {
+      width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
+      min-width: 900px;
       border-collapse: collapse;
       background: white;
       border-radius: 16px;
@@ -306,35 +320,12 @@
       white-space: nowrap;
     }
 
-    .tag-revenue {
-      background: #eaf5ee;
-      color: #2d5a3f;
-    }
-
-    .tag-expense {
-      background: #fdeeee;
-      color: #7b3b3b;
-    }
-
-    .tag-bc {
-      background: #e8f0fb;
-      color: #3b5f8b;
-    }
-
-    .tag-casa {
-      background: #f0ebfb;
-      color: #6a4f96;
-    }
-
-    .tag-new {
-      background: #fff4ea;
-      color: #8a5a2e;
-    }
-
-    .tag-exported {
-      background: #eaf7ee;
-      color: #356347;
-    }
+    .tag-revenue { background: #eaf5ee; color: #2d5a3f; }
+    .tag-expense { background: #fdeeee; color: #7b3b3b; }
+    .tag-bc { background: #e8f0fb; color: #3b5f8b; }
+    .tag-casa { background: #f0ebfb; color: #6a4f96; }
+    .tag-new { background: #fff4ea; color: #8a5a2e; }
+    .tag-exported { background: #eaf7ee; color: #356347; }
 
     .action-group {
       display: flex;
@@ -364,92 +355,78 @@
       color: #a2ada6;
     }
 
-    @media (max-width: 1100px) {
-      .filters-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2f3a33;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      opacity: 0;
+      transition: 0.25s;
     }
 
-    @media (max-width: 700px) {
-  .app {
-    padding: 14px;
-  }
+    .toast.show {
+      opacity: 1;
+    }
 
-  .top-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
+    @media (max-width: 768px) {
+      .app {
+        padding: 14px;
+      }
 
-  .form-grid,
-  .filters-grid,
-  .summary-section {
-    grid-template-columns: 1fr;
-  }
+      .top-grid,
+      .summary-section,
+      .filters-grid,
+      .form-grid {
+        grid-template-columns: 1fr !important;
+      }
 
-  .panel {
-    padding: 16px;
-  }
+      .form-grid .full,
+      .filters-grid .full {
+        grid-column: span 1 !important;
+      }
 
-  .records-header {
-    align-items: stretch;
-  }
+      .panel {
+        padding: 18px;
+        border-radius: 18px;
+      }
 
-  .button-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+      .button-row {
+        flex-direction: column;
+        gap: 10px;
+      }
 
-  .button-row button {
-    width: auto;
-    min-width: 120px;
-    flex: 1 1 calc(50% - 8px);
-  }
+      .button-row button,
+      .btn-primary,
+      .btn-secondary,
+      .btn-danger,
+      .btn-green {
+        width: 100%;
+        min-width: 0 !important;
+      }
 
-  h1 {
-    font-size: 26px;
-    line-height: 1.15;
-  }
+      .records-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-  .summary-box .value {
-    font-size: 22px;
-  }
-
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  table {
-    min-width: 900px;
-  }
-}
-
-.toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #2f3a33;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 13px;
-  opacity: 0;
-  transition: 0.25s;
-}
-
-.toast.show {
-  opacity: 1;
-}
+      h1 {
+        font-size: 22px;
+        line-height: 1.15;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="app">
-    <h1>Memento Vivere Booking Manager</h1>
+    <h1>Booking Manager</h1>
 
     <div class="top-grid">
-      <div class="panel">
+      <div class="panel card">
         <h2 id="formTitle">Add Record</h2>
         <div class="form-grid">
           <div>
@@ -561,60 +538,60 @@
     <div class="panel">
       <h2>Filters</h2>
       <div class="filters-grid">
-        <div>
-          <label>Search</label>
-          <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
-        </div>
+  <div class="full">
+    <label>Search</label>
+    <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
+  </div>
 
-        <div>
-          <label>Filter Type</label>
-          <select id="filterType">
-            <option value="">All</option>
-            <option value="Revenue">Revenue</option>
-            <option value="Expense">Expense</option>
-          </select>
-        </div>
+  <div>
+    <label>Filter Type</label>
+    <select id="filterType">
+      <option value="">All</option>
+      <option value="Revenue">Revenue</option>
+      <option value="Expense">Expense</option>
+    </select>
+  </div>
 
-        <div>
-          <label>Filter Unit</label>
-          <select id="filterUnit">
-            <option value="">All</option>
-            <option value="Studio One-1123">Bachelor’s Crib 1</option>
-            <option value="Studio Two-1122">Bachelor’s Crib 2</option>
-            <option value="Casa Tres16">Casa Tres16</option>
-          </select>
-        </div>
+  <div>
+    <label>Filter Unit</label>
+    <select id="filterUnit">
+      <option value="">All</option>
+      <option value="Studio One-1123">Bachelor’s Crib 1</option>
+      <option value="Studio Two-1122">Bachelor’s Crib 2</option>
+      <option value="Casa Tres16">Casa Tres16</option>
+    </select>
+  </div>
 
-        <div>
-          <label>Year</label>
-          <select id="filterYear">
-            <option value="">All</option>
-          </select>
-        </div>
+  <div>
+    <label>Year</label>
+    <select id="filterYear">
+      <option value="">All</option>
+    </select>
+  </div>
 
-        <div>
-          <label>Month</label>
-          <select id="filterMonth">
-            <option value="">All</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-        </div>
-      </div>
+  <div>
+    <label>Month</label>
+    <select id="filterMonth">
+      <option value="">All</option>
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+  </div>
 
-      <div class="button-row">
-        <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
-      </div>
+  <div class="full">
+    <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
+  </div>
+</div>
     </div>
 
     <div class="panel">
@@ -1055,23 +1032,21 @@ showToast();
       const s = computeSummary(data);
 
       const cards = [
-        { title: "Filtered Revenue", value: peso(s.totalRevenue), cls: "blue" },
-        { title: "Filtered Expenses", value: peso(s.totalExpense), cls: "red" },
-        { title: "Filtered Net Profit", value: peso(s.net), cls: "green" },
-        { title: "Bachelor’s Crib 1 Net", value: peso(s.byUnit["Studio One-1123"].net), cls: "purple" },
-        { title: "Bachelor’s Crib 2 Net", value: peso(s.byUnit["Studio Two-1122"].net), cls: "orange" },
-        { title: "Casa Tres16 Net", value: peso(s.byUnit["Casa Tres16"].net), cls: "gray" }
-      ];
+  { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+  { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+  { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "gray" }
+];
 
       els.summaryCards.innerHTML = cards.map(card => `
-        <div class="summary-box ${card.cls}">
-          <h3>${card.title}</h3>
-          <div class="value">${card.value}</div>
-        </div>
-      `).join("");
-    }
+  <div class="summary-box ${card.cls}">
+    <h3>${card.title}</h3>
+    <div class="sub-label">Net</div>
+    <div class="value">${card.value}</div>
+  </div>
+`).join("");
+}
 
-    function getUnitTagClass(unit) {
+function getUnitTagClass(unit) {
       if (unit === "Studio One-1123" || unit === "Studio Two-1122") return "tag-bc";
       return "tag-casa";
     }
