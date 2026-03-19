@@ -6,13 +6,11 @@
   <title>Booking Manager</title>
 
   <meta name="theme-color" content="#f8faf8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Booking Manager" />
-  <link rel="manifest" href="manifest.webmanifest?v=3" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#121212">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Booking Manager" />
+<link rel="manifest" href="manifest.webmanifest?v=3" />
+<link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
 
   <style>
     * {
@@ -209,7 +207,7 @@
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
       min-width: 0;
     }
@@ -227,6 +225,42 @@
       min-width: 0;
       width: 100%;
     }
+
+    .field-row,
+    .form-row {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      min-width: 0;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+    }
+
+    .field-row > div,
+    .form-row > div {
+      min-width: 0;
+      width: 100%;
+      flex: 1 1 0;
+    }
+
+    #revenueInvoiceNoteRow,
+    #expenseAmountNoteRow {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      align-items: start;
+    }
+
+    #revenueInvoiceNoteRow > div,
+    #expenseAmountNoteRow > div {
+      width: auto !important;
+      min-width: 0 !important;
+      flex: initial !important;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
 
     label {
       font-size: 13px;
@@ -429,15 +463,61 @@
     .records-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: stretch;
       gap: 12px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       margin-bottom: 14px;
       padding-bottom: 12px;
       border-bottom: 1px solid #edf2ee;
       min-width: 0;
     }
 
+    .records-header-left {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .export-meta-inline {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #7a877f;
+      line-height: 1.35;
+    }
+
+    .export-actions-side {
+      display: grid;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      flex: 0 0 112px;
+      align-self: stretch;
+    }
+
+    .btn-export {
+      background: #e9ecef;
+      color: #111827;
+      border: 1px solid #d6d9dd;
+      border-radius: 9px;
+      padding: 4px 8px;
+      font-size: 9.5px;
+      line-height: 1.05;
+      white-space: nowrap;
+      width: 100%;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .btn-export:hover {
+      background: #dde2e7;
+      filter: none;
+    }
+
+    .btn-export:active {
+      background: #d8dde3;
+    }
+
+    
     .table-wrap {
       width: 100%;
       overflow-x: auto;
@@ -447,7 +527,7 @@
 
     table {
       width: 100%;
-      min-width: 900px;
+      min-width: 1040px;
       border-collapse: separate;
       border-spacing: 0;
       background: white;
@@ -456,7 +536,7 @@
     }
 
     th, td {
-      padding: 12px;
+      padding: 14px 12px;
       border-bottom: 1px solid #f1f5f2;
       text-align: left;
       vertical-align: top;
@@ -480,6 +560,29 @@
 
     tbody tr:last-child td {
       border-bottom: none;
+    }
+
+    thead th:first-child,
+    tbody td:first-child {
+      min-width: 120px;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      padding-right: 16px;
+    }
+
+    thead th:nth-child(3),
+    tbody td:nth-child(3) {
+      min-width: 140px;
+    }
+
+    thead th:nth-child(5),
+    tbody td:nth-child(5) {
+      min-width: 148px;
+    }
+
+    thead th:nth-child(10),
+    tbody td:nth-child(10) {
+      min-width: 150px;
     }
 
     .tag {
@@ -559,15 +662,126 @@
       opacity: 1;
     }
 
+    .app-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(32, 39, 34, 0.38);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 10000;
+    }
+
+    .app-modal-backdrop.show {
+      display: flex;
+    }
+
+    .app-modal {
+      width: min(100%, 360px);
+      background: #ffffff;
+      border: 1px solid rgba(223,229,223,0.95);
+      border-radius: 18px;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.18);
+      padding: 18px;
+    }
+
+    .app-modal-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2f3e34;
+    }
+
+    .app-modal-message {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.45;
+      color: #4b5a52;
+      white-space: pre-line;
+    }
+
+    .app-modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .app-modal-actions button {
+      flex: 1;
+      width: auto;
+    }
+
+
+    .records-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .records-title-row h2 {
+      margin: 0 !important;
+    }
+
+    .import-link {
+      font-size: 12px;
+      color: #8a948e;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .import-link:hover {
+      color: #66726c;
+    }
+
+    #csvFileInput {
+      display: none;
+    }
+
+    .note-field {
+      resize: none;
+      height: 52px;
+      min-height: 52px !important;
+      max-height: 52px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.35;
+    }
+
+    .note-cell {
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+
+    .note-cell:hover {
+      color: #4b5a52;
+    }
+
+    .app-modal-message.scrollable {
+      max-height: 45vh;
+      overflow-y: auto;
+    }
+
     @media (max-width: 768px) {
       .app {
         padding: 14px;
       }
 
+
       .top-grid,
-      .summary-section,
       .form-grid {
         grid-template-columns: 1fr !important;
+      }
+
+      .summary-section {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px;
       }
 
       .filters-grid {
@@ -585,6 +799,20 @@
         grid-column: 1 / -1 !important;
       }
 
+      .field-row,
+      .form-row {
+        display: flex !important;
+        gap: 10px;
+        flex-wrap: nowrap;
+      }
+
+      #revenueInvoiceNoteRow,
+      #expenseAmountNoteRow {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+
       .panel {
         padding: 18px;
         border-radius: 18px;
@@ -598,50 +826,75 @@
       .button-row button,
       .btn-primary,
       .btn-secondary,
-      .btn-danger,
-      .btn-green {
-        width: 100%;
-        min-width: 0 !important;
+      .btn-danger {
+       width: auto;
       }
 
       .records-header {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
         align-items: stretch;
+        gap: 12px;
+        flex-wrap: nowrap;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #edf2ee;
+        min-width: 0;
       }
 
-      .app-hero {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 16px;
+      .records-header-left {
+        min-width: 0;
+        flex: 1 1 auto;
       }
 
-      .hero-status {
-        align-self: flex-start;
+      .export-meta-inline {
+        margin-top: 6px;
+        font-size: 11px;
+        color: #7a877f;
+        line-height: 1.35;
       }
 
-      h1 {
-        font-size: 22px;
-        line-height: 1.15;
+      .export-actions-side {
+        display: grid;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+        flex: 0 0 112px;
+        align-self: stretch;
       }
 
-      input,
-      select,
-      textarea,
-      button {
-        font-size: 16px;
+      .export-actions-side .btn-export {
+        width: 100%;
+        min-width: 0;
+        padding: 4px 8px;
+        font-size: 9.5px;
+        line-height: 1.05;
+        white-space: nowrap;
+        height: 100%;
+        min-height: 0;
       }
 
-      .summary-section {
-  gap: 10px;
-}
+      .btn-export {
+        background: #e9ecef;
+        color: #111827;
+        border: 1px solid #d6d9dd;
+        border-radius: 9px;
+        padding: 4px 6px;
+        font-size: 9.5px;
+        line-height: 1.05;
+        white-space: nowrap;
+        width: 100%;
+        min-width: 0;
+        cursor: pointer;
+      }
 
-.summary-box {
-  padding: 12px;
-}
+      .btn-export:hover {
+        background: #dde2e7;
+        filter: none;
+      }
 
-.summary-box .value {
-  font-size: 17px;
-}
+      .btn-export:active {
+        background: #d8dde3;
+      }
 
       .table-wrap {
         margin: 0 -4px;
@@ -649,9 +902,9 @@
 
       th,
       td {
-        padding: 7px 6px;
-        font-size: 11px;
-        line-height: 1.2;
+        padding: 12px 12px;
+        font-size: 12px;
+        line-height: 1.4;
       }
 
       td {
@@ -665,16 +918,18 @@
 
       .action-group {
         gap: 6px;
+        flex-wrap: nowrap !important;
       }
 
       .action-group button {
         min-width: 48px;
         padding: 5px 6px;
         font-size: 10px;
+        flex: 0 0 auto;
       }
 
       table {
-        min-width: 760px;
+        min-width: 980px;
       }
 
       input[type="date"],
@@ -685,20 +940,37 @@
         min-height: 52px;
       }
 
-.action-group {
-  flex-wrap: nowrap !important;
-}
-
-td:last-child {
-  min-width: 90px;
-}
-
-.action-group button {
-  flex: 0 0 auto;
-}
+      td:last-child {
+        min-width: 90px;
+      }
     }
 
-  </style>
+  
+#invoiceNumber, #invoice {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+}
+
+
+.vendor-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.vendor-chip {
+  font-size: 11px;
+  line-height: 1;
+  padding: 6px 8px;
+  background: #eef2f0;
+  border: 1px solid #d9dfdc;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+}
+
+</style>
 </head>
 <body>
   <div class="app">
@@ -706,7 +978,7 @@ td:last-child {
       <div class="hero-copy">
         <div class="app-chip">Smart Ledger</div>
         <h1>Booking Manager</h1>
-        <p class="app-subtitle">Fast entry, cleaner summary, export-ready records.</p>
+        <p class="app-subtitle">Fast entry, export-ready records</p>
       </div>
       <div class="hero-status">
         <span class="status-dot"></span>Local autosave on
@@ -782,11 +1054,26 @@ td:last-child {
           <div id="vendorField">
             <label id="vendorLabel">Guest Name</label>
             <input type="text" id="vendor" placeholder="Enter guest name" />
+            <div id="vendorSuggestions" class="vendor-suggestions"></div>
           </div>
 
-          <div>
+          <div id="revenueAmountRow" class="full"></div>
+
+          <div id="expenseAmountNoteRow" class="field-row full hidden"></div>
+
+          <div id="amountField">
             <label>Amount</label>
             <input type="number" id="amount" step="0.01" placeholder="0.00" />
+          </div>
+
+          <div id="invoiceField">
+            <label>Inv. No.</label>
+            <input type="text" id="invoiceNumber" placeholder="Invoice number" />
+          </div>
+
+          <div id="noteField">
+            <label>Note</label>
+            <textarea id="note" class="note-field" placeholder="Optional note"></textarea>
           </div>
 
           <div id="platformField">
@@ -810,19 +1097,11 @@ td:last-child {
             </select>
           </div>
 
-          <div id="invoiceField">
-            <label>Inv. No.</label>
-            <input type="text" id="invoiceNumber" placeholder="Invoice number" />
-          </div>
-
-          <div class="full" id="noteField">
-            <label>Note</label>
-            <textarea id="note" placeholder="Optional note"></textarea>
-          </div>
+          <div id="revenueInvoiceNoteRow" class="field-row full"></div>
 
           <div class="full">
             <div class="button-row">
-              <button class="btn-primary" id="saveBtn">Save Record</button>
+              <button class="btn-primary" id="saveBtn" type="button">Save Record</button>
               <button class="btn-secondary" id="clearBtn" type="button">Clear Form</button>
               <button class="btn-danger" id="cancelEditBtn" type="button" style="display:none;">Cancel Edit</button>
             </div>
@@ -841,23 +1120,20 @@ td:last-child {
       <h2>Filters</h2>
       <div class="filters-grid">
         <div class="full">
-          <label>Search</label>
           <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
         </div>
 
         <div>
-          <label>Filter Type</label>
           <select id="filterType">
-            <option value="">All</option>
+            <option value="" selected>Type</option>
             <option value="Revenue">Revenue</option>
             <option value="Expense">Expense</option>
           </select>
         </div>
 
         <div>
-          <label>Filter Unit</label>
           <select id="filterUnit">
-            <option value="">All</option>
+            <option value="" selected>Property</option>
             <option value="Studio One-1123">Bachelor’s Crib 1</option>
             <option value="Studio Two-1122">Bachelor’s Crib 2</option>
             <option value="Casa Tres16">Casa Tres16</option>
@@ -865,16 +1141,14 @@ td:last-child {
         </div>
 
         <div>
-          <label>Year</label>
           <select id="filterYear">
-            <option value="">All</option>
+            <option value="" selected>Year</option>
           </select>
         </div>
 
         <div>
-          <label>Month</label>
           <select id="filterMonth">
-            <option value="">All</option>
+            <option value="" selected>Month</option>
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
@@ -893,15 +1167,23 @@ td:last-child {
         <div class="full">
           <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
         </div>
+</div>
       </div>
     </div>
 
     <div class="panel">
       <div class="records-header">
-        <h2 style="margin:0;">Records</h2>
-        <div class="button-row">
-          <button class="btn-green" id="exportRevenueBtn" type="button">Revenue CSV</button>
-          <button class="btn-green" id="exportExpenseBtn" type="button">Expense CSV</button>
+        <div class="records-header-left">
+          <div class="records-title-row"><h2 style="margin:0;">Records</h2><span id="importCSVBtn" class="import-link">Import</span><input type="file" id="csvFileInput" accept=".csv" /></div>
+          <div class="export-meta-inline">
+            <div id="revenueExportMeta">Rev. last exported: —</div>
+            <div id="expenseExportMeta">Exp. last exported: —</div>
+          </div>
+        </div>
+
+        <div class="export-actions-side">
+          <button class="btn-export" id="exportRevenueBtn" type="button">Revenue CSV</button>
+          <button class="btn-export" id="exportExpenseBtn" type="button">Expense CSV</button>
         </div>
       </div>
 
@@ -926,7 +1208,19 @@ td:last-child {
           <tbody id="recordsTableBody"></tbody>
         </table>
       </div>
+
       <div class="footer-note" id="recordCount"></div>
+    </div>
+
+
+  <div id="appModalBackdrop" class="app-modal-backdrop" aria-hidden="true">
+    <div class="app-modal" role="dialog" aria-modal="true" aria-labelledby="appModalTitle">
+      <div id="appModalTitle" class="app-modal-title">Notice</div>
+      <div id="appModalMessage" class="app-modal-message"></div>
+      <div class="app-modal-actions">
+        <button id="appModalCancel" class="btn-secondary" type="button">Cancel</button>
+        <button id="appModalOk" class="btn-primary" type="button">OK</button>
+      </div>
     </div>
   </div>
 
@@ -968,6 +1262,11 @@ td:last-child {
       amount: document.getElementById("amount"),
       note: document.getElementById("note"),
 
+      revenueAmountRow: document.getElementById("revenueAmountRow"),
+      revenueInvoiceNoteRow: document.getElementById("revenueInvoiceNoteRow"),
+      expenseAmountNoteRow: document.getElementById("expenseAmountNoteRow"),
+      amountField: document.getElementById("amountField"),
+
       nightsField: document.getElementById("nightsField"),
       vendorField: document.getElementById("vendorField"),
       platformField: document.getElementById("platformField"),
@@ -993,7 +1292,12 @@ td:last-child {
       recordCount: document.getElementById("recordCount"),
 
       exportRevenueBtn: document.getElementById("exportRevenueBtn"),
-      exportExpenseBtn: document.getElementById("exportExpenseBtn")
+      exportExpenseBtn: document.getElementById("exportExpenseBtn"),
+      appModalBackdrop: document.getElementById("appModalBackdrop"),
+      appModalTitle: document.getElementById("appModalTitle"),
+      appModalMessage: document.getElementById("appModalMessage"),
+      appModalOk: document.getElementById("appModalOk"),
+      appModalCancel: document.getElementById("appModalCancel")
     };
 
     function peso(value) {
@@ -1018,6 +1322,42 @@ td:last-child {
       const year = String(d.getFullYear()).slice(-2);
 
       return `${day}-${mon}-${year}`;
+    }
+
+    function openModal(title, message, withCancel = false) {
+      return new Promise(resolve => {
+        els.appModalTitle.textContent = title;
+        els.appModalMessage.textContent = message;
+        els.appModalMessage.classList.remove("scrollable");
+        els.appModalCancel.style.display = withCancel ? "inline-flex" : "none";
+        els.appModalBackdrop.classList.add("show");
+        els.appModalBackdrop.setAttribute("aria-hidden", "false");
+
+        const cleanup = (result) => {
+          els.appModalBackdrop.classList.remove("show");
+          els.appModalBackdrop.setAttribute("aria-hidden", "true");
+          els.appModalOk.onclick = null;
+          els.appModalCancel.onclick = null;
+          els.appModalBackdrop.onclick = null;
+          resolve(result);
+        };
+
+        els.appModalOk.onclick = () => cleanup(true);
+        els.appModalCancel.onclick = () => cleanup(false);
+        els.appModalBackdrop.onclick = (event) => {
+          if (event.target === els.appModalBackdrop && withCancel) {
+            cleanup(false);
+          }
+        };
+      });
+    }
+
+    function showAlert(message, title = "Notice") {
+      return openModal(title, message, false);
+    }
+
+    function showConfirm(message, title = "Confirm") {
+      return openModal(title, message, true);
     }
 
     function saveToStorage() {
@@ -1052,6 +1392,16 @@ td:last-child {
     }
 
     function updateTypeFields() {
+  const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
+  if (invoiceEl) {
+    invoiceEl.disabled = false;
+    invoiceEl.readOnly = false;
+    invoiceEl.removeAttribute("disabled");
+    invoiceEl.removeAttribute("readonly");
+    invoiceEl.style.pointerEvents = "auto";
+    invoiceEl.style.opacity = "1";
+  }
+
       const isRevenue = els.type.value === "Revenue";
 
       els.unitLabel.textContent = isRevenue ? "Property" : "Unit";
@@ -1060,20 +1410,37 @@ td:last-child {
       els.nightsField.classList.toggle("hidden", !isRevenue);
       els.platformField.classList.toggle("hidden", !isRevenue);
       els.declaredField.classList.toggle("hidden", !isRevenue);
-      els.invoiceField.classList.toggle("hidden", !isRevenue);
-
       els.expenseTypeField.classList.toggle("hidden", isRevenue);
-      els.noteField.classList.remove("hidden");
 
       if (isRevenue) {
         els.vendor.placeholder = "Enter guest name";
         els.category.value = "";
+
+        els.revenueAmountRow.classList.remove("hidden");
+        els.revenueInvoiceNoteRow.classList.remove("hidden");
+        els.expenseAmountNoteRow.classList.add("hidden");
+
+        els.revenueAmountRow.innerHTML = "";
+        els.revenueInvoiceNoteRow.innerHTML = "";
+        els.revenueAmountRow.appendChild(els.amountField);
+        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
+        els.revenueInvoiceNoteRow.appendChild(els.noteField);
       } else {
         els.vendor.placeholder = "Enter vendor";
         els.nights.value = "";
         els.platform.value = "";
         els.declared.value = "";
         els.invoiceNumber.value = "";
+
+        els.revenueAmountRow.classList.add("hidden");
+        els.revenueInvoiceNoteRow.classList.add("hidden");
+        els.expenseAmountNoteRow.classList.remove("hidden");
+
+        els.expenseAmountNoteRow.innerHTML = "";
+        els.expenseAmountNoteRow.appendChild(els.amountField);
+        els.expenseAmountNoteRow.appendChild(els.noteField);
+        els.revenueInvoiceNoteRow.innerHTML = "";
+        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
       }
 
       updateInvoiceState();
@@ -1094,77 +1461,41 @@ td:last-child {
     }
 
     function getFormData() {
-      const isRevenue = els.type.value === "Revenue";
+  const isRevenue = els.type.value === "Revenue";
 
-      return {
-        date: els.date.value,
-        type: els.type.value,
-        unit: els.unit.value,
-        nights: isRevenue ? Number(els.nights.value || 0) : "",
-        vendor: safeText(els.vendor.value),
-        platform: isRevenue ? safeText(els.platform.value) : "",
-        declared: isRevenue ? safeText(els.declared.value) : "",
-        invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
-        category: !isRevenue ? safeText(els.category.value) : "",
-        amount: Number(els.amount.value),
-        note: safeText(els.note.value),
-        exportedRevenue: false,
-        exportedExpense: false,
-        createdAt: new Date().toISOString()
-      };
-    }
-
-    function validateForm(data) {
-      if (!data.date) {
-        alert("Please select a date.");
-        return false;
-      }
-
-      if (!data.unit) {
-        alert("Please select a unit.");
-        return false;
-      }
-
-      if (!data.amount || data.amount <= 0) {
-        alert("Please enter a valid amount.");
-        return false;
-      }
+  return {
+    date: els.date.value,
+    type: els.type.value,
+    unit: els.unit.value,
+    nights: isRevenue ? Number(els.nights.value || 0) : "",
+    vendor: safeText(els.vendor.value),
+    platform: isRevenue ? safeText(els.platform.value) : "",
+    declared: isRevenue ? safeText(els.declared.value) : "",
+    invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
+    category: !isRevenue ? safeText(els.category.value) : "",
+    amount: Number(els.amount.value),
+    note: safeText(els.note.value)
+  };
+}
+    function getValidationMessage(data) {
+      if (!data.date) return "Please select a date.";
+      if (!data.unit) return "Please select a unit.";
+      if (!data.amount || data.amount <= 0) return "Please enter a valid amount.";
 
       if (data.type === "Revenue") {
-        if (!data.nights || data.nights <= 0) {
-          alert("Please enter no. of nights.");
-          return false;
-        }
-        if (!data.vendor) {
-          alert("Please enter guest name.");
-          return false;
-        }
-        if (!data.platform) {
-          alert("Please select platform.");
-          return false;
-        }
-        if (!data.declared) {
-          alert("Please select Declared?.");
-          return false;
-        }
-        if (data.declared === "Yes" && !data.invoiceNumber) {
-          alert("Inv. No. is required when Declared? is Yes.");
-          return false;
-        }
+        if (!data.nights || data.nights <= 0) return "Please enter no. of nights.";
+        if (!data.vendor) return "Please enter guest name.";
+        if (!data.platform) return "Please select platform.";
+        if (!data.declared) return "Please select Declared?.";
+        if (data.declared === "Yes" && !data.invoiceNumber) return "Inv. No. is required when Declared? is Yes.";
       }
 
       if (data.type === "Expense") {
-        if (!data.category) {
-          alert("Please select expense type.");
-          return false;
-        }
-        if (!data.vendor) {
-          alert("Please enter vendor.");
-          return false;
-        }
+        if (!data.category) return "Please select expense type.";
+        if (!data.vendor) return "Please enter vendor.";
       }
 
-      return true;
+      return "";
     }
 
     function clearForm() {
@@ -1211,47 +1542,67 @@ td:last-child {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function deleteRecord(id) {
-      const rec = records.find(r => r.id === id);
-      if (!rec) return;
+    async function deleteRecord(id) {
+  const record = records.find(r => r.id === id);
+  if (!record) return;
 
-      const ok = confirm(`Delete this record?\n\n${formatDateDDMmmYY(rec.date)} | ${rec.type} | ${getUnitLabel(rec.unit)} | ${peso(rec.amount)}`);
-      if (!ok) return;
+  const ok = await showConfirm("Delete this record?", "Delete Record");
+  if (!ok) return;
 
-      records = records.filter(r => r.id !== id);
-      saveToStorage();
-      refreshYearFilter();
-      render();
-      showToast("Deleted");
-    }
+  records = records.filter(r => r.id !== id);
 
-    function handleSave() {
-      const data = getFormData();
-      if (!validateForm(data)) return;
+  if (record.type === "Revenue") {
+    markRevenueExportDirty();
+  } else {
+    markExpenseExportDirty();
+  }
 
-      if (editingId) {
-        records = records.map(r => {
-          if (r.id !== editingId) return r;
-          return {
-            ...r,
-            ...data,
-            exportedRevenue: false,
-            exportedExpense: false
-          };
-        });
-      } else {
-        records.unshift({
-          id: generateId(),
-          ...data
-        });
-      }
+  saveToStorage();
+  refreshYearFilter();
+  render();
 
-      saveToStorage();
-      clearForm();
-      refreshYearFilter();
-      render();
-      showToast("Saved");
-    }
+  if (editingId === id) {
+    clearForm();
+  }
+
+  showToast("Record deleted");
+}
+
+    async function handleSave() {
+  const data = getFormData();
+  const validationMessage = getValidationMessage(data);
+  if (validationMessage) {
+    await showAlert(validationMessage, "Missing Information");
+    return;
+  }
+
+  if (editingId) {
+    records = records.map(r => {
+      if (r.id !== editingId) return r;
+      return {
+        ...r,
+        ...data
+      };
+    });
+  } else {
+    records.unshift({
+      id: generateId(),
+      ...data
+    });
+  }
+
+  if (data.type === "Revenue") {
+    markRevenueExportDirty();
+  } else {
+    markExpenseExportDirty();
+  }
+
+  saveToStorage();
+  clearForm();
+  refreshYearFilter();
+  render();
+  showToast("Saved");
+}
 
     function getFilteredRecords() {
       const search = safeText(els.search.value).toLowerCase();
@@ -1405,7 +1756,7 @@ td:last-child {
           <td>${escapeHtml(r.platform || "")}</td>
           <td>${escapeHtml(r.declared || "")}</td>
           <td>${escapeHtml(r.invoiceNumber || "")}</td>
-          <td>${escapeHtml(r.note || "")}</td>
+          <td class="note-cell" data-note="${escapeHtml(r.note || "")}" onclick="showFullNote(this.dataset.note)">${escapeHtml(r.note || "")}</td>
           <td>${getExportStatusHtml(r)}</td>
           <td>
             <div class="action-group">
@@ -1434,7 +1785,7 @@ td:last-child {
       )].sort((a, b) => b - a);
 
       const current = els.filterYear.value;
-      els.filterYear.innerHTML = `<option value="">All</option>` +
+      els.filterYear.innerHTML = `<option value="">Year</option>` +
         years.map(y => `<option value="${y}">${y}</option>`).join("");
 
       if (years.includes(current)) {
@@ -1453,7 +1804,7 @@ td:last-child {
 
     function exportToCSV(rows, filename) {
       if (!rows.length) {
-        alert("No new data to export.");
+        showAlert("No new data to export.", "Nothing to Export");
         return false;
       }
 
@@ -1479,61 +1830,70 @@ td:last-child {
     }
 
     function exportRevenueCSV() {
-      const pendingRevenue = records.filter(r => r.type === "Revenue" && !r.exportedRevenue);
+  const pendingRevenue = records.filter(r => r.type === "Revenue" && !r.exportedRevenue);
 
-      const revenueRows = pendingRevenue.map(r => ({
-        Property: r.unit,
-        Date: formatDateDDMmmYY(r.date),
-        "No. of Nights": r.nights || "",
-        "Guest Name": r.vendor || "",
-        Amount: r.amount,
-        Platform: r.platform || "",
-        "Declared?": r.declared || "",
-        "Inv. No.": r.invoiceNumber || "",
-        Note: r.note || "",
-        Qtr: getQuarter(r.date)
-      }));
+  const revenueRows = pendingRevenue.map(r => ({
+    Unit: getUnitLabel(r.unit),
+    "Date of Stay": formatDateDDMmmYY(r.date),
+    Nights: r.nights || "",
+    "Guest Name": r.vendor || "",
+    Amount: r.amount,
+    Platform: r.platform || "",
+    Declared: r.declared || "",
+    "Invoice No.": r.invoiceNumber || "",
+    Note: r.note || ""
+  }));
 
-      const success = exportToCSV(revenueRows, "revenue.csv");
-      if (!success) return;
+  const success = exportToCSV(revenueRows, "revenue.csv");
+  if (!success) return;
 
-      const ids = new Set(pendingRevenue.map(r => r.id));
-      records = records.map(r => ids.has(r.id) ? { ...r, exportedRevenue: true } : r);
+  const ids = new Set(pendingRevenue.map(r => r.id));
+  records = records.map(r => ids.has(r.id) ? { ...r, exportedRevenue: true } : r);
 
-      saveToStorage();
-      render();
-      showToast("Revenue exported");
-    }
+  localStorage.setItem("lastExportRevenue", new Date().toISOString());
+  localStorage.setItem("revenueExportDirty", "false");
 
-    function exportExpenseCSV() {
-      const pendingExpense = records.filter(r => r.type === "Expense" && !r.exportedExpense);
+  saveToStorage();
+  render();
+  updateExportMeta();
+  showToast("Revenue exported");
+}
 
-      const expenseRows = pendingExpense.map(r => ({
-        Unit: r.unit,
-        "Date of Expense": formatDateDDMmmYY(r.date),
-        "Expense Type": r.category || "",
-        Vendor: r.vendor || "",
-        Amount: r.amount,
-        Note: r.note || ""
-      }));
+function exportExpenseCSV() {
+  const pendingExpense = records.filter(r => r.type === "Expense" && !r.exportedExpense);
 
-      const success = exportToCSV(expenseRows, "expense.csv");
-      if (!success) return;
+  const expenseRows = pendingExpense.map(r => ({
+    Unit: getUnitLabel(r.unit),
+    "Date of Expense": formatDateDDMmmYY(r.date),
+    "Expense Type": r.category || "",
+    Vendor: r.vendor || "",
+    Amount: r.amount,
+    Note: r.note || ""
+  }));
 
-      const ids = new Set(pendingExpense.map(r => r.id));
-      records = records.map(r => ids.has(r.id) ? { ...r, exportedExpense: true } : r);
+  const success = exportToCSV(expenseRows, "expense.csv");
+  if (!success) return;
 
-      saveToStorage();
-      render();
-      showToast("Expense exported");
-    }
+  const ids = new Set(pendingExpense.map(r => r.id));
+  records = records.map(r => ids.has(r.id) ? { ...r, exportedExpense: true } : r);
+
+  localStorage.setItem("lastExportExpense", new Date().toISOString());
+  localStorage.setItem("expenseExportDirty", "false");
+
+  saveToStorage();
+  render();
+  updateExportMeta();
+  showToast("Expense exported");
+}
 
     els.type.addEventListener("change", updateTypeFields);
     els.declared.addEventListener("change", updateInvoiceState);
 
-    els.saveBtn.addEventListener("click", handleSave);
+    els.saveBtn.addEventListener("click", async (e) => { e.preventDefault(); e.stopPropagation(); await handleSave(); });
     els.clearBtn.addEventListener("click", clearForm);
     els.cancelEditBtn.addEventListener("click", clearForm);
+    els.exportRevenueBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.confirmExportRevenue(); });
+    els.exportExpenseBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.confirmExportExpense(); });
 
     els.search.addEventListener("input", render);
     els.filterType.addEventListener("change", render);
@@ -1550,13 +1910,252 @@ td:last-child {
       render();
     });
 
-    els.exportRevenueBtn.addEventListener("click", exportRevenueCSV);
-    els.exportExpenseBtn.addEventListener("click", exportExpenseCSV);
+window.confirmExportExpense = async function confirmExportExpense() {
+  const ok = await showConfirm(`Export Expense CSV now?
+
+Make sure all expense records are final.`, "Export Expense");
+  if (ok) exportExpenseCSV();
+};
+
+window.confirmExportRevenue = async function confirmExportRevenue() {
+  const ok = await showConfirm(`Export Revenue CSV now?
+
+Make sure all booking statuses are final.`, "Export Revenue");
+  if (ok) exportRevenueCSV();
+};
+
+function formatExportTime(value) {
+  if (!value) return "—";
+
+  const d = new Date(value);
+  return d.toLocaleString("en-PH", {
+    month: "short",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
+function updateExportMeta() {
+  const expense = localStorage.getItem("lastExportExpense");
+  const revenue = localStorage.getItem("lastExportRevenue");
+  const expenseDirty = localStorage.getItem("expenseExportDirty") === "true";
+  const revenueDirty = localStorage.getItem("revenueExportDirty") === "true";
+
+  const expenseEl = document.getElementById("expenseExportMeta");
+  const revenueEl = document.getElementById("revenueExportMeta");
+
+  if (expenseEl) {
+    expenseEl.textContent = expenseDirty
+      ? "Exp. last exported: Outdated"
+      : "Exp. last exported: " + formatExportTime(expense);
+  }
+
+  if (revenueEl) {
+    revenueEl.textContent = revenueDirty
+      ? "Rev. last exported: Outdated"
+      : "Rev. last exported: " + formatExportTime(revenue);
+  }
+}
+
+function markExpenseExportDirty() {
+  localStorage.setItem("expenseExportDirty", "true");
+  updateExportMeta();
+}
+
+function markRevenueExportDirty() {
+  localStorage.setItem("revenueExportDirty", "true");
+  updateExportMeta();
+}
+
+
+
+function showFullNote(noteText) {
+  const clean = (noteText || "").toString().trim();
+  if (!clean) return;
+  showAlert(clean, "Full Note");
+  setTimeout(() => {
+    els.appModalMessage.classList.add("scrollable");
+  }, 0);
+}
+
+document.getElementById("importCSVBtn").addEventListener("click", () => {
+  document.getElementById("csvFileInput").click();
+});
+
+document.getElementById("csvFileInput").addEventListener("change", async (event) => {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const ok = await showConfirm("Import this CSV and add the records?", "Import CSV");
+  if (!ok) {
+    event.target.value = "";
+    return;
+  }
+
+  try {
+    const text = await file.text();
+    const rows = parseCSV(text);
+    if (!rows.length) {
+      await showAlert("The selected CSV is empty.", "Import CSV");
+      event.target.value = "";
+      return;
+    }
+
+    const headers = rows[0].map(h => h.trim());
+    const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
+    let importedCount = 0;
+
+    dataRows.forEach(row => {
+      const item = importRowToRecord(headers, row);
+      if (item) {
+        records.unshift(item);
+        importedCount += 1;
+      }
+    });
+
+    if (!importedCount) {
+      showAlert("No compatible rows were found in this CSV.", "Import CSV");
+      event.target.value = "";
+      return;
+    }
+
+    saveToStorage();
+    refreshYearFilter();
+    render();
+    showToast(`Imported ${importedCount}`);
+  } catch (error) {
+    console.error(error);
+    await showAlert("Unable to import this CSV.", "Import CSV");
+  } finally {
+    event.target.value = "";
+  }
+});
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cell = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        cell += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === "," && !inQuotes) {
+      row.push(cell);
+      cell = "";
+    } else if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (char === "\r" && next === "\n") i += 1;
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = "";
+    } else {
+      cell += char;
+    }
+  }
+
+  if (cell.length || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+function parseImportDate(value) {
+  const raw = safeText(value);
+  if (!raw) return "";
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+
+  const short = raw.match(/^(\d{2})-([A-Za-z]{3})-(\d{2})$/);
+  if (short) {
+    const months = {jan:"01",feb:"02",mar:"03",apr:"04",may:"05",jun:"06",jul:"07",aug:"08",sep:"09",oct:"10",nov:"11",dec:"12"};
+    const dd = short[1];
+    const mm = months[short[2].toLowerCase()];
+    const yy = Number(short[3]);
+    const yyyy = yy >= 70 ? `19${short[3]}` : `20${short[3]}`;
+    if (mm) return `${yyyy}-${mm}-${dd}`;
+  }
+
+  const parsed = new Date(raw);
+  if (!isNaN(parsed)) return parsed.toISOString().slice(0, 10);
+
+  return "";
+}
+
+function importRowToRecord(headers, row) {
+  const map = {};
+  headers.forEach((header, index) => {
+    map[header] = row[index] ?? "";
+  });
+
+  const normalizedHeaders = headers.map(h => h.toLowerCase());
+
+  const isRevenue = normalizedHeaders.includes("date of stay");
+  const isExpense = normalizedHeaders.includes("date of expense");
+
+  if (!isRevenue && !isExpense) return null;
+
+  const unitLabel = safeText(map["Unit"]);
+  const unit = UNIT_OPTIONS.find(option => option.label === unitLabel)?.value || unitLabel;
+  if (!unit) return null;
+
+  const date = parseImportDate(isRevenue ? map["Date of Stay"] : map["Date of Expense"]);
+  const amount = Number((map["Amount"] || "").toString().replace(/,/g, ""));
+  if (!date || !amount) return null;
+
+  if (isRevenue) {
+    return {
+      id: generateId(),
+      date,
+      type: "Revenue",
+      unit,
+      nights: Number(map["Nights"] || 0),
+      vendor: safeText(map["Guest Name"]),
+      platform: safeText(map["Platform"]),
+      declared: safeText(map["Declared"]),
+      invoiceNumber: safeText(map["Invoice No."]),
+      category: "",
+      amount,
+      note: safeText(map["Note"]),
+      exportedRevenue: true,
+      exportedExpense: false
+    };
+  }
+
+  return {
+    id: generateId(),
+    date,
+    type: "Expense",
+    unit,
+    nights: "",
+    vendor: safeText(map["Vendor"]),
+    platform: "",
+    declared: "",
+    invoiceNumber: "",
+    category: safeText(map["Expense Type"]),
+    amount,
+    note: safeText(map["Note"]),
+    exportedRevenue: false,
+    exportedExpense: true
+  };
+}
 
     loadFromStorage();
-    refreshYearFilter();
-    clearForm();
-    render();
+refreshYearFilter();
+clearForm();
+render();
+updateExportMeta();
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
@@ -1568,6 +2167,82 @@ td:last-child {
 
     window.startEdit = startEdit;
     window.deleteRecord = deleteRecord;
-  </script>
+  
+(function(){
+  function forceInvoiceActive(){
+    const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
+    if (!invoiceEl) return;
+    invoiceEl.disabled = false;
+    invoiceEl.readOnly = false;
+    invoiceEl.removeAttribute("disabled");
+    invoiceEl.removeAttribute("readonly");
+    invoiceEl.style.pointerEvents = "auto";
+    invoiceEl.style.opacity = "1";
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    forceInvoiceActive();
+    const typeEl = document.getElementById("type");
+    if (typeEl) {
+      typeEl.addEventListener("change", function(){
+        setTimeout(forceInvoiceActive, 0);
+      });
+    }
+  });
+
+  window.forceInvoiceActive = forceInvoiceActive;
+})();
+
+
+const vendorMap = {
+  "Assoc. Dues / Water bill": ["Condo Corp.", "Admin"],
+  "Real Property Tax": ["Government", "BIR"],
+  "Services - Cleaner Fee": ["Arnold", "Albert", "Jarry"],
+  "Services - Laundry": ["D' Laundry Spot"],
+  "Supplies - Hardware": ["Wilcon", "Robinson's Appliance"],
+  "Utilities - Electricity": ["MERALCO"],
+  "Utilities - Internet": ["Smart", "Globe", "Dito", "PLDT"]
+};
+
+function updateVendorSuggestions() {
+  const typeEl = document.getElementById("type");
+  const categoryEl = document.getElementById("category");
+  const vendorEl = document.getElementById("vendor");
+  const container = document.getElementById("vendorSuggestions");
+
+  if (!container || !vendorEl || !typeEl || !categoryEl) return;
+
+  container.innerHTML = "";
+
+  if (typeEl.value !== "Expense") {
+  container.innerHTML = "";
+  return;
+}
+
+  const options = vendorMap[categoryEl.value] || [];
+  options.forEach(v => {
+    const chip = document.createElement("span");
+    chip.className = "vendor-chip";
+    chip.textContent = v;
+    chip.addEventListener("click", () => {
+      vendorEl.value = v;
+      vendorEl.dispatchEvent(new Event("input", { bubbles: true }));
+      vendorEl.focus();
+    });
+    container.appendChild(chip);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const typeEl = document.getElementById("type");
+  const categoryEl = document.getElementById("category");
+
+  if (typeEl) typeEl.addEventListener("change", updateVendorSuggestions);
+  if (categoryEl) categoryEl.addEventListener("change", updateVendorSuggestions);
+
+  updateVendorSuggestions();
+});
+
+</script>
 </body>
 </html>
