@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  
   <title>Booking Manager</title>
 
   <meta name="theme-color" content="#f8faf8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Booking Manager" />
   <link rel="manifest" href="manifest.webmanifest?v=3" />
   <link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
@@ -44,20 +44,27 @@
       --gray-2: #b8c2bc;
     }
 
-    body {
+    html {
   margin: 0;
+  min-height: 100%;
+  background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
   padding-top: env(safe-area-inset-top);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%) !important;
+  background: transparent;
   color: var(--text);
 }
 
     .app {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 24px;
-      min-width: 0;
-    }
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  min-width: 0;
+}
 
     h1 {
       margin: 0 0 4px;
