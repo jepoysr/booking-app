@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Booking Manager</title>
 
   <meta name="theme-color" content="#f8faf8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Booking Manager" />
-  <link rel="manifest" href="manifest.webmanifest?v=3" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Booking Manager" />
+<link rel="manifest" href="manifest.webmanifest?v=3" />
+<link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
 
   <style>
     * {
@@ -44,18 +44,18 @@
     }
 
     body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
-  color: var(--text);
-}
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(to bottom, #e4ebe4, #f3f6f3);
+      color: var(--text);
+    }
 
     .app {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 24px;
-  min-width: 0;
-}
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+      min-width: 0;
+    }
 
     h1 {
       margin: 0 0 4px;
@@ -66,19 +66,19 @@
     }
 
     .app-hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin: 0 0 18px;
-  padding: 18px 20px;
-  border-radius: 22px;
-  background: linear-gradient(180deg, #e1e7ee 0%, #f2f5f9 100%);
-  border: 1px solid rgba(255,255,255,0.7);
-  box-shadow: 0 10px 24px rgba(31, 41, 35, 0.05);
-  backdrop-filter: blur(10px);
-  min-width: 0;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin: 0 0 18px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.52));
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 10px 24px rgba(31, 41, 35, 0.05);
+      backdrop-filter: blur(10px);
+      min-width: 0;
+    }
 
     .hero-copy {
       min-width: 0;
@@ -261,6 +261,7 @@
       gap: 6px;
     }
 
+
     label {
       font-size: 13px;
       font-weight: 600;
@@ -376,61 +377,61 @@
     }
 
     .summary-section {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      min-width: 0;
-    }
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
 
     .summary-box {
-      border-radius: 10px;
-      padding: 8px 10px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      color: #2b352f;
-      border: 1px solid rgba(255,255,255,0.38);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.045);
-    }
+  border-radius: 10px;
+  padding: 8px 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  color: #2b352f;
+  border: 1px solid rgba(255,255,255,0.38);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 18px rgba(0,0,0,0.045);
+}
 
-    .summary-box:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.06);
-    }
+.summary-box:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.06);
+}
 
     .summary-box h3 {
-      margin: 0 0 4px;
-      font-size: 10px;
-      font-weight: 700;
-      opacity: 0.9;
-      color: inherit;
-    }
+  margin: 0 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.9;
+  color: inherit;
+}
 
-    .sub-label {
-      font-size: 10px;
-      font-weight: 600;
-      color: rgba(0,0,0,0.48);
-      margin-top: 2px;
-    }
+.sub-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.48);
+  margin-top: 2px;
+}
 
-    .summary-box .value {
-      font-size: 16px;
-      font-weight: 700;
-      margin-top: 1px;
-      color: inherit;
-      word-break: break-word;
-    }
+.summary-box .value {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 1px;
+  color: inherit;
+  word-break: break-word;
+}
 
-    .summary-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2px;
-    }
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
 
-    .summary-net {
-      font-size: 9px;
-      opacity: 0.55;
-      font-weight: 600;
-    }
+.summary-net {
+  font-size: 9px;
+  opacity: 0.55;
+  font-weight: 600;
+}
 
     .blue { background: linear-gradient(135deg, var(--blue-1), var(--blue-2)); color: #234263; }
     .red { background: linear-gradient(135deg, var(--danger-1), var(--danger-2)); color: #6f2f2f; }
@@ -516,6 +517,7 @@
       background: #d8dde3;
     }
 
+    
     .table-wrap {
       width: 100%;
       overflow-x: auto;
@@ -594,39 +596,37 @@
 
     .tag-revenue { background: #eaf5ee; color: #2d5a3f; }
     .tag-expense { background: #fdeeee; color: #7b3b3b; }
-
     .tag-bc1 {
-      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
-      color: #4a3a6d;
-    }
+  background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+  color: #4a3a6d;
+}
 
-    .tag-bc2 {
-      background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
-      color: #724621;
-    }
+.tag-bc2 {
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-2));
+  color: #724621;
+}
 
-    .tag-casa {
-      background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
-      color: #234263;
-    }
-
+.tag-casa {
+  background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+  color: #234263;
+}
     .tag-new { background: #fff4ea; color: #8a5a2e; }
     .tag-exported { background: #eaf7ee; color: #356347; }
 
     .action-group {
-      display: flex;
-      gap: 6px;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
 
     .action-group button {
-      width: auto;
-      min-width: 0;
-      padding: 4px 6px;
-      font-size: 10px;
-      white-space: nowrap;
-    }
+  width: auto;
+  min-width: 0;
+  padding: 4px 6px;
+  font-size: 10px;
+  white-space: nowrap;
+}
 
     .footer-note {
       margin-top: 10px;
@@ -712,6 +712,7 @@
       width: auto;
     }
 
+
     .records-title-row {
       display: flex;
       align-items: center;
@@ -772,6 +773,7 @@
         padding: 14px;
       }
 
+
       .top-grid,
       .form-grid {
         grid-template-columns: 1fr !important;
@@ -825,7 +827,7 @@
       .btn-primary,
       .btn-secondary,
       .btn-danger {
-        width: auto;
+       width: auto;
       }
 
       .records-header {
@@ -943,100 +945,29 @@
       }
     }
 
-    #invoiceNumber, #invoice {
-      pointer-events: auto !important;
-      opacity: 1 !important;
-    }
-
-    .vendor-suggestions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .vendor-chip {
-      font-size: 11px;
-      line-height: 1;
-      padding: 6px 8px;
-      background: #eef2f0;
-      border: 1px solid #d9dfdc;
-      border-radius: 999px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    
-
-    
-
-    
-
-    .filters-panel {
-      background: linear-gradient(180deg, #dbe3ea 0%, #e7edf2 100%) !important;
-      border: 1px solid rgba(255,255,255,0.65) !important;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
-    }
-
-    .input-panel {
-      background: linear-gradient(180deg, #eef2f6 0%, #f7f9fb 100%) !important;
-      border: 1px solid rgba(255,255,255,0.7) !important;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
-    }
-
-    .input-panel .form-grid > div > input,
-    .input-panel .form-grid > div > select,
-    .input-panel .form-grid > div > textarea {
-      background: #ffffff !important;
-    }
-
-    .filters-panel .filters-grid input,
-    .filters-panel .filters-grid select,
-    .filters-panel .filters-grid button {
-      background: rgba(255,255,255,0.88) !important;
-    }
-
-.panel.filters-panel {
-  background: linear-gradient(180deg, #cfd8e1 0%, #e2e8ef 100%) !important;
+  
+#invoiceNumber, #invoice {
+  pointer-events: auto !important;
+  opacity: 1 !important;
 }
 
-.filters-panel input,
-.filters-panel select {
-  background: rgba(255,255,255,0.75) !important;
-  border: 1px solid rgba(0,0,0,0.05) !important;
+
+.vendor-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
 }
 
-.filters-panel button {
-  background: rgba(255,255,255,0.6) !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-}
-
-.panel.filters-panel {
-  background: rgba(255,255,255,0.65) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.8) !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06) !important;
-}
-
-.panel.filters-panel input,
-.panel.filters-panel select {
-  background: #ffffff !important;
-}
-
-.panel.filters-panel button {
-  background: #f1f5f9 !important;
-}
-
-.top-grid {
-  margin-bottom: 18px !important;
-}
-
-.panel {
-  margin-bottom: 0 !important;
-}
-
-.panel.filters-panel {
-  margin-bottom: 18px !important;
+.vendor-chip {
+  font-size: 11px;
+  line-height: 1;
+  padding: 6px 8px;
+  background: #eef2f0;
+  border: 1px solid #d9dfdc;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
 }
 
 </style>
@@ -1055,7 +986,7 @@
     </div>
 
     <div class="top-grid">
-      <div class="panel card input-panel">
+      <div class="panel card">
         <h2 id="formTitle">Add Record</h2>
         <div class="form-grid">
           <div>
@@ -1185,7 +1116,7 @@
       </div>
     </div>
 
-    <div class="panel filters-panel">
+    <div class="panel">
       <h2>Filters</h2>
       <div class="filters-grid">
         <div class="full">
@@ -1236,20 +1167,17 @@
         <div class="full">
           <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
         </div>
+</div>
       </div>
     </div>
 
     <div class="panel">
       <div class="records-header">
         <div class="records-header-left">
-          <div class="records-title-row">
-            <h2 style="margin:0;">Records</h2>
-            <span id="importCSVBtn" class="import-link">Import</span>
-            <input type="file" id="csvFileInput" accept=".csv" />
-          </div>
+          <div class="records-title-row"><h2 style="margin:0;">Records</h2><span id="importCSVBtn" class="import-link">Import</span><input type="file" id="csvFileInput" accept=".csv" /></div>
           <div class="export-meta-inline">
-            <div id="revenueExportMeta">Rev. last exported: -</div>
-            <div id="expenseExportMeta">Exp. last exported: -</div>
+            <div id="revenueExportMeta">Rev. last exported: —</div>
+            <div id="expenseExportMeta">Exp. last exported: —</div>
           </div>
         </div>
 
@@ -1283,7 +1211,7 @@
 
       <div class="footer-note" id="recordCount"></div>
     </div>
-  </div>
+
 
   <div id="appModalBackdrop" class="app-modal-backdrop" aria-hidden="true">
     <div class="app-modal" role="dialog" aria-modal="true" aria-labelledby="appModalTitle">
@@ -1464,15 +1392,15 @@
     }
 
     function updateTypeFields() {
-      const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
-      if (invoiceEl) {
-        invoiceEl.disabled = false;
-        invoiceEl.readOnly = false;
-        invoiceEl.removeAttribute("disabled");
-        invoiceEl.removeAttribute("readonly");
-        invoiceEl.style.pointerEvents = "auto";
-        invoiceEl.style.opacity = "1";
-      }
+  const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
+  if (invoiceEl) {
+    invoiceEl.disabled = false;
+    invoiceEl.readOnly = false;
+    invoiceEl.removeAttribute("disabled");
+    invoiceEl.removeAttribute("readonly");
+    invoiceEl.style.pointerEvents = "auto";
+    invoiceEl.style.opacity = "1";
+  }
 
       const isRevenue = els.type.value === "Revenue";
 
@@ -1533,23 +1461,22 @@
     }
 
     function getFormData() {
-      const isRevenue = els.type.value === "Revenue";
+  const isRevenue = els.type.value === "Revenue";
 
-      return {
-        date: els.date.value,
-        type: els.type.value,
-        unit: els.unit.value,
-        nights: isRevenue ? Number(els.nights.value || 0) : "",
-        vendor: safeText(els.vendor.value),
-        platform: isRevenue ? safeText(els.platform.value) : "",
-        declared: isRevenue ? safeText(els.declared.value) : "",
-        invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
-        category: !isRevenue ? safeText(els.category.value) : "",
-        amount: Number(els.amount.value),
-        note: safeText(els.note.value)
-      };
-    }
-
+  return {
+    date: els.date.value,
+    type: els.type.value,
+    unit: els.unit.value,
+    nights: isRevenue ? Number(els.nights.value || 0) : "",
+    vendor: safeText(els.vendor.value),
+    platform: isRevenue ? safeText(els.platform.value) : "",
+    declared: isRevenue ? safeText(els.declared.value) : "",
+    invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
+    category: !isRevenue ? safeText(els.category.value) : "",
+    amount: Number(els.amount.value),
+    note: safeText(els.note.value)
+  };
+}
     function getValidationMessage(data) {
       if (!data.date) return "Please select a date.";
       if (!data.unit) return "Please select a unit.";
@@ -1616,66 +1543,66 @@
     }
 
     async function deleteRecord(id) {
-      const record = records.find(r => r.id === id);
-      if (!record) return;
+  const record = records.find(r => r.id === id);
+  if (!record) return;
 
-      const ok = await showConfirm("Delete this record?", "Delete Record");
-      if (!ok) return;
+  const ok = await showConfirm("Delete this record?", "Delete Record");
+  if (!ok) return;
 
-      records = records.filter(r => r.id !== id);
+  records = records.filter(r => r.id !== id);
 
-      if (record.type === "Revenue") {
-        markRevenueExportDirty();
-      } else {
-        markExpenseExportDirty();
-      }
+  if (record.type === "Revenue") {
+    markRevenueExportDirty();
+  } else {
+    markExpenseExportDirty();
+  }
 
-      saveToStorage();
-      refreshYearFilter();
-      render();
+  saveToStorage();
+  refreshYearFilter();
+  render();
 
-      if (editingId === id) {
-        clearForm();
-      }
+  if (editingId === id) {
+    clearForm();
+  }
 
-      showToast("Record deleted");
-    }
+  showToast("Record deleted");
+}
 
     async function handleSave() {
-      const data = getFormData();
-      const validationMessage = getValidationMessage(data);
-      if (validationMessage) {
-        await showAlert(validationMessage, "Missing Information");
-        return;
-      }
+  const data = getFormData();
+  const validationMessage = getValidationMessage(data);
+  if (validationMessage) {
+    await showAlert(validationMessage, "Missing Information");
+    return;
+  }
 
-      if (editingId) {
-        records = records.map(r => {
-          if (r.id !== editingId) return r;
-          return {
-            ...r,
-            ...data
-          };
-        });
-      } else {
-        records.unshift({
-          id: generateId(),
-          ...data
-        });
-      }
+  if (editingId) {
+    records = records.map(r => {
+      if (r.id !== editingId) return r;
+      return {
+        ...r,
+        ...data
+      };
+    });
+  } else {
+    records.unshift({
+      id: generateId(),
+      ...data
+    });
+  }
 
-      if (data.type === "Revenue") {
-        markRevenueExportDirty();
-      } else {
-        markExpenseExportDirty();
-      }
+  if (data.type === "Revenue") {
+    markRevenueExportDirty();
+  } else {
+    markExpenseExportDirty();
+  }
 
-      saveToStorage();
-      clearForm();
-      refreshYearFilter();
-      render();
-      showToast("Saved");
-    }
+  saveToStorage();
+  clearForm();
+  refreshYearFilter();
+  render();
+  showToast("Saved");
+}
 
     function getFilteredRecords() {
       const search = safeText(els.search.value).toLowerCase();
@@ -1760,11 +1687,11 @@
       const s = computeSummary(data);
 
       const cards = [
-        { title: "Overall Net", value: peso(s.net), cls: "gray" },
-        { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
-        { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
-        { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "blue" }
-      ];
+  { title: "Overall Net", value: peso(s.net), cls: "gray" },
+  { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+  { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+  { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "blue" }
+];
 
       els.summaryCards.innerHTML = cards.map(card => `
         <div class="summary-box ${card.cls}">
@@ -1778,10 +1705,10 @@
     }
 
     function getUnitTagClass(unit) {
-      if (unit === "Studio One-1123") return "tag-bc1";
-      if (unit === "Studio Two-1122") return "tag-bc2";
-      return "tag-casa";
-    }
+  if (unit === "Studio One-1123") return "tag-bc1";
+  if (unit === "Studio Two-1122") return "tag-bc2";
+  return "tag-casa";
+}
 
     function getExportStatusHtml(record) {
       if (record.type === "Revenue") {
@@ -1903,61 +1830,61 @@
     }
 
     function exportRevenueCSV() {
-      const pendingRevenue = records.filter(r => r.type === "Revenue" && !r.exportedRevenue);
+  const pendingRevenue = records.filter(r => r.type === "Revenue" && !r.exportedRevenue);
 
-      const revenueRows = pendingRevenue.map(r => ({
-        Unit: getUnitLabel(r.unit),
-        "Date of Stay": formatDateDDMmmYY(r.date),
-        Nights: r.nights || "",
-        "Guest Name": r.vendor || "",
-        Amount: r.amount,
-        Platform: r.platform || "",
-        Declared: r.declared || "",
-        "Invoice No.": r.invoiceNumber || "",
-        Note: r.note || ""
-      }));
+  const revenueRows = pendingRevenue.map(r => ({
+    Unit: getUnitLabel(r.unit),
+    "Date of Stay": formatDateDDMmmYY(r.date),
+    Nights: r.nights || "",
+    "Guest Name": r.vendor || "",
+    Amount: r.amount,
+    Platform: r.platform || "",
+    Declared: r.declared || "",
+    "Invoice No.": r.invoiceNumber || "",
+    Note: r.note || ""
+  }));
 
-      const success = exportToCSV(revenueRows, "revenue.csv");
-      if (!success) return;
+  const success = exportToCSV(revenueRows, "revenue.csv");
+  if (!success) return;
 
-      const ids = new Set(pendingRevenue.map(r => r.id));
-      records = records.map(r => ids.has(r.id) ? { ...r, exportedRevenue: true } : r);
+  const ids = new Set(pendingRevenue.map(r => r.id));
+  records = records.map(r => ids.has(r.id) ? { ...r, exportedRevenue: true } : r);
 
-      localStorage.setItem("lastExportRevenue", new Date().toISOString());
-      localStorage.setItem("revenueExportDirty", "false");
+  localStorage.setItem("lastExportRevenue", new Date().toISOString());
+  localStorage.setItem("revenueExportDirty", "false");
 
-      saveToStorage();
-      render();
-      updateExportMeta();
-      showToast("Revenue exported");
-    }
+  saveToStorage();
+  render();
+  updateExportMeta();
+  showToast("Revenue exported");
+}
 
-    function exportExpenseCSV() {
-      const pendingExpense = records.filter(r => r.type === "Expense" && !r.exportedExpense);
+function exportExpenseCSV() {
+  const pendingExpense = records.filter(r => r.type === "Expense" && !r.exportedExpense);
 
-      const expenseRows = pendingExpense.map(r => ({
-        Unit: getUnitLabel(r.unit),
-        "Date of Expense": formatDateDDMmmYY(r.date),
-        "Expense Type": r.category || "",
-        Vendor: r.vendor || "",
-        Amount: r.amount,
-        Note: r.note || ""
-      }));
+  const expenseRows = pendingExpense.map(r => ({
+    Unit: getUnitLabel(r.unit),
+    "Date of Expense": formatDateDDMmmYY(r.date),
+    "Expense Type": r.category || "",
+    Vendor: r.vendor || "",
+    Amount: r.amount,
+    Note: r.note || ""
+  }));
 
-      const success = exportToCSV(expenseRows, "expense.csv");
-      if (!success) return;
+  const success = exportToCSV(expenseRows, "expense.csv");
+  if (!success) return;
 
-      const ids = new Set(pendingExpense.map(r => r.id));
-      records = records.map(r => ids.has(r.id) ? { ...r, exportedExpense: true } : r);
+  const ids = new Set(pendingExpense.map(r => r.id));
+  records = records.map(r => ids.has(r.id) ? { ...r, exportedExpense: true } : r);
 
-      localStorage.setItem("lastExportExpense", new Date().toISOString());
-      localStorage.setItem("expenseExportDirty", "false");
+  localStorage.setItem("lastExportExpense", new Date().toISOString());
+  localStorage.setItem("expenseExportDirty", "false");
 
-      saveToStorage();
-      render();
-      updateExportMeta();
-      showToast("Expense exported");
-    }
+  saveToStorage();
+  render();
+  updateExportMeta();
+  showToast("Expense exported");
+}
 
     els.type.addEventListener("change", updateTypeFields);
     els.declared.addEventListener("change", updateInvoiceState);
@@ -1983,250 +1910,252 @@
       render();
     });
 
-    window.confirmExportExpense = async function confirmExportExpense() {
-      const ok = await showConfirm(`Export Expense CSV now?
+window.confirmExportExpense = async function confirmExportExpense() {
+  const ok = await showConfirm(`Export Expense CSV now?
 
 Make sure all expense records are final.`, "Export Expense");
-      if (ok) exportExpenseCSV();
-    };
+  if (ok) exportExpenseCSV();
+};
 
-    window.confirmExportRevenue = async function confirmExportRevenue() {
-      const ok = await showConfirm(`Export Revenue CSV now?
+window.confirmExportRevenue = async function confirmExportRevenue() {
+  const ok = await showConfirm(`Export Revenue CSV now?
 
 Make sure all booking statuses are final.`, "Export Revenue");
-      if (ok) exportRevenueCSV();
+  if (ok) exportRevenueCSV();
+};
+
+function formatExportTime(value) {
+  if (!value) return "—";
+
+  const d = new Date(value);
+  return d.toLocaleString("en-PH", {
+    month: "short",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
+function updateExportMeta() {
+  const expense = localStorage.getItem("lastExportExpense");
+  const revenue = localStorage.getItem("lastExportRevenue");
+  const expenseDirty = localStorage.getItem("expenseExportDirty") === "true";
+  const revenueDirty = localStorage.getItem("revenueExportDirty") === "true";
+
+  const expenseEl = document.getElementById("expenseExportMeta");
+  const revenueEl = document.getElementById("revenueExportMeta");
+
+  if (expenseEl) {
+    expenseEl.textContent = expenseDirty
+      ? "Exp. last exported: Outdated"
+      : "Exp. last exported: " + formatExportTime(expense);
+  }
+
+  if (revenueEl) {
+    revenueEl.textContent = revenueDirty
+      ? "Rev. last exported: Outdated"
+      : "Rev. last exported: " + formatExportTime(revenue);
+  }
+}
+
+function markExpenseExportDirty() {
+  localStorage.setItem("expenseExportDirty", "true");
+  updateExportMeta();
+}
+
+function markRevenueExportDirty() {
+  localStorage.setItem("revenueExportDirty", "true");
+  updateExportMeta();
+}
+
+
+
+function showFullNote(noteText) {
+  const clean = (noteText || "").toString().trim();
+  if (!clean) return;
+  showAlert(clean, "Full Note");
+  setTimeout(() => {
+    els.appModalMessage.classList.add("scrollable");
+  }, 0);
+}
+
+document.getElementById("importCSVBtn").addEventListener("click", () => {
+  document.getElementById("csvFileInput").click();
+});
+
+document.getElementById("csvFileInput").addEventListener("change", async (event) => {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const ok = await showConfirm("Import this CSV and add the records?", "Import CSV");
+  if (!ok) {
+    event.target.value = "";
+    return;
+  }
+
+  try {
+    const text = await file.text();
+    const rows = parseCSV(text);
+    if (!rows.length) {
+      await showAlert("The selected CSV is empty.", "Import CSV");
+      event.target.value = "";
+      return;
+    }
+
+    const headers = rows[0].map(h => h.trim());
+    const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
+    let importedCount = 0;
+
+    dataRows.forEach(row => {
+      const item = importRowToRecord(headers, row);
+      if (item) {
+        records.unshift(item);
+        importedCount += 1;
+      }
+    });
+
+    if (!importedCount) {
+      showAlert("No compatible rows were found in this CSV.", "Import CSV");
+      event.target.value = "";
+      return;
+    }
+
+    saveToStorage();
+    refreshYearFilter();
+    render();
+    showToast(`Imported ${importedCount}`);
+  } catch (error) {
+    console.error(error);
+    await showAlert("Unable to import this CSV.", "Import CSV");
+  } finally {
+    event.target.value = "";
+  }
+});
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cell = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        cell += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === "," && !inQuotes) {
+      row.push(cell);
+      cell = "";
+    } else if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (char === "\r" && next === "\n") i += 1;
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = "";
+    } else {
+      cell += char;
+    }
+  }
+
+  if (cell.length || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+function parseImportDate(value) {
+  const raw = safeText(value);
+  if (!raw) return "";
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+
+  const short = raw.match(/^(\d{2})-([A-Za-z]{3})-(\d{2})$/);
+  if (short) {
+    const months = {jan:"01",feb:"02",mar:"03",apr:"04",may:"05",jun:"06",jul:"07",aug:"08",sep:"09",oct:"10",nov:"11",dec:"12"};
+    const dd = short[1];
+    const mm = months[short[2].toLowerCase()];
+    const yy = Number(short[3]);
+    const yyyy = yy >= 70 ? `19${short[3]}` : `20${short[3]}`;
+    if (mm) return `${yyyy}-${mm}-${dd}`;
+  }
+
+  const parsed = new Date(raw);
+  if (!isNaN(parsed)) return parsed.toISOString().slice(0, 10);
+
+  return "";
+}
+
+function importRowToRecord(headers, row) {
+  const map = {};
+  headers.forEach((header, index) => {
+    map[header] = row[index] ?? "";
+  });
+
+  const normalizedHeaders = headers.map(h => h.toLowerCase());
+
+  const isRevenue = normalizedHeaders.includes("date of stay");
+  const isExpense = normalizedHeaders.includes("date of expense");
+
+  if (!isRevenue && !isExpense) return null;
+
+  const unitLabel = safeText(map["Unit"]);
+  const unit = UNIT_OPTIONS.find(option => option.label === unitLabel)?.value || unitLabel;
+  if (!unit) return null;
+
+  const date = parseImportDate(isRevenue ? map["Date of Stay"] : map["Date of Expense"]);
+  const amount = Number((map["Amount"] || "").toString().replace(/,/g, ""));
+  if (!date || !amount) return null;
+
+  if (isRevenue) {
+    return {
+      id: generateId(),
+      date,
+      type: "Revenue",
+      unit,
+      nights: Number(map["Nights"] || 0),
+      vendor: safeText(map["Guest Name"]),
+      platform: safeText(map["Platform"]),
+      declared: safeText(map["Declared"]),
+      invoiceNumber: safeText(map["Invoice No."]),
+      category: "",
+      amount,
+      note: safeText(map["Note"]),
+      exportedRevenue: true,
+      exportedExpense: false
     };
+  }
 
-    function formatExportTime(value) {
-      if (!value) return "-";
-
-      const d = new Date(value);
-      return d.toLocaleString("en-PH", {
-        month: "short",
-        day: "2-digit",
-        hour: "numeric",
-        minute: "2-digit"
-      });
-    }
-
-    function updateExportMeta() {
-      const expense = localStorage.getItem("lastExportExpense");
-      const revenue = localStorage.getItem("lastExportRevenue");
-      const expenseDirty = localStorage.getItem("expenseExportDirty") === "true";
-      const revenueDirty = localStorage.getItem("revenueExportDirty") === "true";
-
-      const expenseEl = document.getElementById("expenseExportMeta");
-      const revenueEl = document.getElementById("revenueExportMeta");
-
-      if (expenseEl) {
-        expenseEl.textContent = expenseDirty
-          ? "Exp. last exported: Outdated"
-          : "Exp. last exported: " + formatExportTime(expense);
-      }
-
-      if (revenueEl) {
-        revenueEl.textContent = revenueDirty
-          ? "Rev. last exported: Outdated"
-          : "Rev. last exported: " + formatExportTime(revenue);
-      }
-    }
-
-    function markExpenseExportDirty() {
-      localStorage.setItem("expenseExportDirty", "true");
-      updateExportMeta();
-    }
-
-    function markRevenueExportDirty() {
-      localStorage.setItem("revenueExportDirty", "true");
-      updateExportMeta();
-    }
-
-    function showFullNote(noteText) {
-      const clean = (noteText || "").toString().trim();
-      if (!clean) return;
-      showAlert(clean, "Full Note");
-      setTimeout(() => {
-        els.appModalMessage.classList.add("scrollable");
-      }, 0);
-    }
-
-    document.getElementById("importCSVBtn").addEventListener("click", () => {
-      document.getElementById("csvFileInput").click();
-    });
-
-    document.getElementById("csvFileInput").addEventListener("change", async (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-
-      const ok = await showConfirm("Import this CSV and add the records?", "Import CSV");
-      if (!ok) {
-        event.target.value = "";
-        return;
-      }
-
-      try {
-        const text = await file.text();
-        const rows = parseCSV(text);
-        if (!rows.length) {
-          await showAlert("The selected CSV is empty.", "Import CSV");
-          event.target.value = "";
-          return;
-        }
-
-        const headers = rows[0].map(h => h.trim());
-        const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
-        let importedCount = 0;
-
-        dataRows.forEach(row => {
-          const item = importRowToRecord(headers, row);
-          if (item) {
-            records.unshift(item);
-            importedCount += 1;
-          }
-        });
-
-        if (!importedCount) {
-          showAlert("No compatible rows were found in this CSV.", "Import CSV");
-          event.target.value = "";
-          return;
-        }
-
-        saveToStorage();
-        refreshYearFilter();
-        render();
-        showToast(`Imported ${importedCount}`);
-      } catch (error) {
-        console.error(error);
-        await showAlert("Unable to import this CSV.", "Import CSV");
-      } finally {
-        event.target.value = "";
-      }
-    });
-
-    function parseCSV(text) {
-      const rows = [];
-      let row = [];
-      let cell = "";
-      let inQuotes = false;
-
-      for (let i = 0; i < text.length; i += 1) {
-        const char = text[i];
-        const next = text[i + 1];
-
-        if (char === '"') {
-          if (inQuotes && next === '"') {
-            cell += '"';
-            i += 1;
-          } else {
-            inQuotes = !inQuotes;
-          }
-        } else if (char === "," && !inQuotes) {
-          row.push(cell);
-          cell = "";
-        } else if ((char === "\n" || char === "\r") && !inQuotes) {
-          if (char === "\r" && next === "\n") i += 1;
-          row.push(cell);
-          rows.push(row);
-          row = [];
-          cell = "";
-        } else {
-          cell += char;
-        }
-      }
-
-      if (cell.length || row.length) {
-        row.push(cell);
-        rows.push(row);
-      }
-
-      return rows;
-    }
-
-    function parseImportDate(value) {
-      const raw = safeText(value);
-      if (!raw) return "";
-
-      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
-
-      const short = raw.match(/^(\d{2})-([A-Za-z]{3})-(\d{2})$/);
-      if (short) {
-        const months = {jan:"01",feb:"02",mar:"03",apr:"04",may:"05",jun:"06",jul:"07",aug:"08",sep:"09",oct:"10",nov:"11",dec:"12"};
-        const dd = short[1];
-        const mm = months[short[2].toLowerCase()];
-        const yy = Number(short[3]);
-        const yyyy = yy >= 70 ? `19${short[3]}` : `20${short[3]}`;
-        if (mm) return `${yyyy}-${mm}-${dd}`;
-      }
-
-      const parsed = new Date(raw);
-      if (!isNaN(parsed)) return parsed.toISOString().slice(0, 10);
-
-      return "";
-    }
-
-    function importRowToRecord(headers, row) {
-      const map = {};
-      headers.forEach((header, index) => {
-        map[header] = row[index] ?? "";
-      });
-
-      const normalizedHeaders = headers.map(h => h.toLowerCase());
-
-      const isRevenue = normalizedHeaders.includes("date of stay");
-      const isExpense = normalizedHeaders.includes("date of expense");
-
-      if (!isRevenue && !isExpense) return null;
-
-      const unitLabel = safeText(map["Unit"]);
-      const unit = UNIT_OPTIONS.find(option => option.label === unitLabel)?.value || unitLabel;
-      if (!unit) return null;
-
-      const date = parseImportDate(isRevenue ? map["Date of Stay"] : map["Date of Expense"]);
-      const amount = Number((map["Amount"] || "").toString().replace(/,/g, ""));
-      if (!date || !amount) return null;
-
-      if (isRevenue) {
-        return {
-          id: generateId(),
-          date,
-          type: "Revenue",
-          unit,
-          nights: Number(map["Nights"] || 0),
-          vendor: safeText(map["Guest Name"]),
-          platform: safeText(map["Platform"]),
-          declared: safeText(map["Declared"]),
-          invoiceNumber: safeText(map["Invoice No."]),
-          category: "",
-          amount,
-          note: safeText(map["Note"]),
-          exportedRevenue: true,
-          exportedExpense: false
-        };
-      }
-
-      return {
-        id: generateId(),
-        date,
-        type: "Expense",
-        unit,
-        nights: "",
-        vendor: safeText(map["Vendor"]),
-        platform: "",
-        declared: "",
-        invoiceNumber: "",
-        category: safeText(map["Expense Type"]),
-        amount,
-        note: safeText(map["Note"]),
-        exportedRevenue: false,
-        exportedExpense: true
-      };
-    }
+  return {
+    id: generateId(),
+    date,
+    type: "Expense",
+    unit,
+    nights: "",
+    vendor: safeText(map["Vendor"]),
+    platform: "",
+    declared: "",
+    invoiceNumber: "",
+    category: safeText(map["Expense Type"]),
+    amount,
+    note: safeText(map["Note"]),
+    exportedRevenue: false,
+    exportedExpense: true
+  };
+}
 
     loadFromStorage();
-    refreshYearFilter();
-    clearForm();
-    render();
-    updateExportMeta();
+refreshYearFilter();
+clearForm();
+render();
+updateExportMeta();
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
@@ -2238,80 +2167,82 @@ Make sure all booking statuses are final.`, "Export Revenue");
 
     window.startEdit = startEdit;
     window.deleteRecord = deleteRecord;
+  
+(function(){
+  function forceInvoiceActive(){
+    const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
+    if (!invoiceEl) return;
+    invoiceEl.disabled = false;
+    invoiceEl.readOnly = false;
+    invoiceEl.removeAttribute("disabled");
+    invoiceEl.removeAttribute("readonly");
+    invoiceEl.style.pointerEvents = "auto";
+    invoiceEl.style.opacity = "1";
+  }
 
-    (function(){
-      function forceInvoiceActive(){
-        const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
-        if (!invoiceEl) return;
-        invoiceEl.disabled = false;
-        invoiceEl.readOnly = false;
-        invoiceEl.removeAttribute("disabled");
-        invoiceEl.removeAttribute("readonly");
-        invoiceEl.style.pointerEvents = "auto";
-        invoiceEl.style.opacity = "1";
-      }
-
-      document.addEventListener("DOMContentLoaded", function(){
-        forceInvoiceActive();
-        const typeEl = document.getElementById("type");
-        if (typeEl) {
-          typeEl.addEventListener("change", function(){
-            setTimeout(forceInvoiceActive, 0);
-          });
-        }
-      });
-
-      window.forceInvoiceActive = forceInvoiceActive;
-    })();
-
-    const vendorMap = {
-      "Assoc. Dues / Water bill": ["Condo Corp.", "Admin"],
-      "Real Property Tax": ["Government", "BIR"],
-      "Services - Cleaner Fee": ["Arnold", "Albert", "Jarry"],
-      "Services - Laundry": ["D' Laundry Spot"],
-      "Supplies - Hardware": ["Wilcon", "Robinson's Appliance"],
-      "Utilities - Electricity": ["MERALCO"],
-      "Utilities - Internet": ["Smart", "Globe", "Dito", "PLDT"]
-    };
-
-    function updateVendorSuggestions() {
-      const typeEl = document.getElementById("type");
-      const categoryEl = document.getElementById("category");
-      const vendorEl = document.getElementById("vendor");
-      const container = document.getElementById("vendorSuggestions");
-
-      if (!container || !vendorEl || !typeEl || !categoryEl) return;
-
-      container.innerHTML = "";
-
-      if (typeEl.value !== "Expense") {
-        container.innerHTML = "";
-        return;
-      }
-
-      const options = vendorMap[categoryEl.value] || [];
-      options.forEach(v => {
-        const chip = document.createElement("span");
-        chip.className = "vendor-chip";
-        chip.textContent = v;
-        chip.addEventListener("click", () => {
-          vendorEl.value = v;
-          vendorEl.dispatchEvent(new Event("input", { bubbles: true }));
-          vendorEl.focus();
-        });
-        container.appendChild(chip);
+  document.addEventListener("DOMContentLoaded", function(){
+    forceInvoiceActive();
+    const typeEl = document.getElementById("type");
+    if (typeEl) {
+      typeEl.addEventListener("change", function(){
+        setTimeout(forceInvoiceActive, 0);
       });
     }
+  });
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const typeEl = document.getElementById("type");
-      const categoryEl = document.getElementById("category");
+  window.forceInvoiceActive = forceInvoiceActive;
+})();
 
-      if (typeEl) typeEl.addEventListener("change", updateVendorSuggestions);
-      if (categoryEl) categoryEl.addEventListener("change", updateVendorSuggestions);
 
-      updateVendorSuggestions();
+const vendorMap = {
+  "Assoc. Dues / Water bill": ["Condo Corp.", "Admin"],
+  "Real Property Tax": ["Government", "BIR"],
+  "Services - Cleaner Fee": ["Arnold", "Albert", "Jarry"],
+  "Services - Laundry": ["D' Laundry Spot"],
+  "Supplies - Hardware": ["Wilcon", "Robinson's Appliance"],
+  "Utilities - Electricity": ["MERALCO"],
+  "Utilities - Internet": ["Smart", "Globe", "Dito", "PLDT"]
+};
+
+function updateVendorSuggestions() {
+  const typeEl = document.getElementById("type");
+  const categoryEl = document.getElementById("category");
+  const vendorEl = document.getElementById("vendor");
+  const container = document.getElementById("vendorSuggestions");
+
+  if (!container || !vendorEl || !typeEl || !categoryEl) return;
+
+  container.innerHTML = "";
+
+  if (typeEl.value !== "Expense") {
+  container.innerHTML = "";
+  return;
+}
+
+  const options = vendorMap[categoryEl.value] || [];
+  options.forEach(v => {
+    const chip = document.createElement("span");
+    chip.className = "vendor-chip";
+    chip.textContent = v;
+    chip.addEventListener("click", () => {
+      vendorEl.value = v;
+      vendorEl.dispatchEvent(new Event("input", { bubbles: true }));
+      vendorEl.focus();
     });
-  </script>
+    container.appendChild(chip);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const typeEl = document.getElementById("type");
+  const categoryEl = document.getElementById("category");
+
+  if (typeEl) typeEl.addEventListener("change", updateVendorSuggestions);
+  if (categoryEl) categoryEl.addEventListener("change", updateVendorSuggestions);
+
+  updateVendorSuggestions();
+});
+
+</script>
 </body>
 </html>
