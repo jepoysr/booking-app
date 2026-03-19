@@ -1083,8 +1083,29 @@
   margin-top: 0 !important;
 }
 
+
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: max(24px, calc((100vw - 1400px) / 2 + 24px));
+  right: max(24px, calc((100vw - 1400px) / 2 + 24px));
+  height: 24px;
+  background: linear-gradient(180deg, #e6efe9 0%, #f3f6f4 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+}
+
 </style>
-  </style>
 </head>
 <body>
   <div class="app">
