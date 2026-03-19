@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-<title>Booking Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Manager</title>
 
   <meta name="theme-color" content="#f8faf8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,11 +60,11 @@ body {
 }
 
     .app {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 24px;
-      min-width: 0;
-    }
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: calc(24px + env(safe-area-inset-top)) 24px 24px;
+  min-width: 0;
+}
 
     h1 {
       margin: 0 0 4px;
@@ -88,6 +89,9 @@ body {
       min-width: 0;
     }
 
+.app-hero {
+  background: linear-gradient(180deg, #d8e0e8 0%, #eef2f6 100%);
+}
     .hero-copy {
       min-width: 0;
     }
@@ -974,11 +978,23 @@ body {
       user-select: none;
     }
 
-    
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
-    
+    body {
+      background: #dfe3e8 !important;
+    }
 
-    
+    body {
+      background: linear-gradient(
+        180deg,
+        #cfd4da 0%,
+        #e5e7eb 100%
+      ) !important;
+    }
 
     .filters-panel {
       background: linear-gradient(180deg, #dbe3ea 0%, #e7edf2 100%) !important;
@@ -1048,20 +1064,14 @@ body {
 }
 
 
-.app-chip,
-.hero-status {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  background: rgba(255,255,255,0.92) !important;
-  border: 1px solid rgba(208,216,210,0.95) !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-}
 
-.app-chip::before,
-.status-dot {
-  flex: 0 0 auto;
-}
+
+
+
+
+
+
+
 
 </style>
 </head>
