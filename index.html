@@ -1052,6 +1052,24 @@
   margin-bottom: 18px !important;
 }
 
+.app-hero {
+  position: relative;
+  z-index: 1;
+}
+
+.app-hero::before {
+  content: "";
+  position: absolute;
+  top: -40px;   /* adjust this height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  z-index: -1;
+}
+
 </style>
   </style>
 </head>
