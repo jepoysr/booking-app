@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Booking Manager</title>
 
-  <meta name="theme-color" content="#f8faf8" />
+  <meta name="theme-color" content="#cfd4da" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Booking Manager" />
@@ -14,11 +14,13 @@
 
   <style>
     html {
-      margin: 0;
-      padding: 0;
-      background-color: #cfd4da;
-      background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
-    }
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
+  background-size: cover;
+  background-color: #cfd4da;
+}
 
     * {
       box-sizing: border-box;
@@ -52,11 +54,13 @@
 
     body {
   margin: 0;
+  padding: 0;
+  min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
+  background-size: cover;
   background-attachment: fixed;
   color: var(--text);
-  min-height: 100vh;
 }
 
     .app {
@@ -75,19 +79,19 @@
     }
 
     .app-hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin: 0 0 18px;
-      padding: 18px 20px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, #e6efe9 0%, #f3f6f4 100%);
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: 0 10px 24px rgba(31, 41, 35, 0.05);
-      backdrop-filter: blur(10px);
-      min-width: 0;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 0 0 18px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #e1e7ee 0%, #f2f5f9 100%);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 10px 24px rgba(31, 41, 35, 0.05);
+  backdrop-filter: blur(10px);
+  min-width: 0;
+}
 
     .hero-copy {
       min-width: 0;
@@ -975,23 +979,11 @@
       user-select: none;
     }
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-    }
+    
 
-    body {
-      background: #dfe3e8 !important;
-    }
+    
 
-    body {
-      background: linear-gradient(
-        180deg,
-        #cfd4da 0%,
-        #e5e7eb 100%
-      ) !important;
-    }
+    
 
     .filters-panel {
       background: linear-gradient(180deg, #dbe3ea 0%, #e7edf2 100%) !important;
@@ -1058,37 +1050,6 @@
 
 .panel.filters-panel {
   margin-bottom: 18px !important;
-}
-
-.app-hero {
-  position: relative;
-  z-index: 1;
-}
-
-.app-hero {
-  position: relative;
-  z-index: 1;
-  overflow: visible;
-}
-
-.app-hero::before {
-  content: "";
-  position: absolute;
-  top: -60px; /* adjust height */
-  left: 0;
-  right: 0;
-  height: 60px;
-
-  background: linear-gradient(180deg, #eef2f6 0%, #f7f9fb 100%);
-  z-index: -1;
-}
-
-.app {
-  padding-top: 0 !important;
-}
-
-.app-hero {
-  margin-top: 0 !important;
 }
 
 </style>
