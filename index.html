@@ -961,12 +961,6 @@
       opacity: 1 !important;
     }
 
-    .vendor-suggestions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
 
     .vendor-chip {
       font-size: 11px;
@@ -1052,6 +1046,639 @@
   margin-bottom: 18px !important;
 }
 
+.stay-block {
+  display: block !important;
+}
+
+.stay-dates-grid {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 120px;
+  grid-template-rows: auto auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.side-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #556158;
+}
+
+.date-field-wrap {
+  min-width: 0;
+}
+
+.date-field-wrap input {
+  width: 100%;
+  height: 64px;
+  border: 1px solid #d7ddd8;
+  border-radius: 18px;
+  padding: 0 18px;
+  font-size: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.nights-field {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  height: 142px;
+  border: 1px solid #d7ddd8;
+  border-radius: 18px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.nights-field-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b756e;
+}
+
+#noOfNights {
+  font-size: 22px;
+  font-weight: 700;
+  color: #5c665f;
+}
+
+input,
+textarea {
+  background-color: #ffffff !important;
+  border: 1px solid #d7ddd8 !important;
+  color: #37423b !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8a948d;
+}
+
+input[type="date"] {
+  background-color: #ffffff !important;
+}
+
+
+.expense-inline-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.expense-inline-row.expense-mode {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.expense-inline-row #expenseTypeField,
+.expense-inline-row #vendorField {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.expense-inline-row:not(.expense-mode) #vendorField {
+  grid-column: 1 / -1;
+}
+
+.expense-inline-row #expenseTypeField select,
+.expense-inline-row #vendorField input {
+  width: 100%;
+}
+
+.vendor-chips-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.vendor-chips-row.hidden,
+.vendor-chips-row:empty {
+  display: none !important;
+}
+
+#expenseAmountNoteRow {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+#expenseAmountNoteRow > div {
+  width: auto !important;
+  min-width: 0 !important;
+  flex: initial !important;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#expenseAmountNoteRow #noteField {
+  grid-column: 1 / -1;
+}
+
+#expenseTypeField select {
+  background: #ffffff !important;
+  border: 1px solid #d7ddd8 !important;
+  color: #37423b !important;
+}
+
+#amount {
+  text-align: right;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+      .app {
+        padding: calc(14px + env(safe-area-inset-top)) 14px 14px 14px;
+      }
+
+      .top-grid,
+      .form-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .summary-section {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px;
+      }
+
+      .filters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      .filters-grid > div,
+      .form-grid > div {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .form-grid .full,
+      .filters-grid .full {
+        grid-column: 1 / -1 !important;
+      }
+
+      .field-row,
+      .form-row {
+        display: flex !important;
+        gap: 10px;
+        flex-wrap: nowrap;
+      }
+
+      #revenueInvoiceNoteRow,
+      #expenseAmountNoteRow {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+
+      .panel {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .button-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .button-row button,
+      .btn-primary,
+      .btn-secondary,
+      .btn-danger {
+        width: auto;
+      }
+
+      .records-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 12px;
+        flex-wrap: nowrap;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #edf2ee;
+        min-width: 0;
+      }
+
+      .records-header-left {
+        min-width: 0;
+        flex: 1 1 auto;
+      }
+
+      .export-meta-inline {
+        margin-top: 6px;
+        font-size: 11px;
+        color: #7a877f;
+        line-height: 1.35;
+      }
+
+      .export-actions-side {
+        display: grid;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+        flex: 0 0 112px;
+        align-self: stretch;
+      }
+
+      .export-actions-side .btn-export {
+        width: 100%;
+        min-width: 0;
+        padding: 4px 8px;
+        font-size: 9.5px;
+        line-height: 1.05;
+        white-space: nowrap;
+        height: 100%;
+        min-height: 0;
+      }
+
+      .btn-export {
+        background: #e9ecef;
+        color: #111827;
+        border: 1px solid #d6d9dd;
+        border-radius: 9px;
+        padding: 4px 6px;
+        font-size: 9.5px;
+        line-height: 1.05;
+        white-space: nowrap;
+        width: 100%;
+        min-width: 0;
+        cursor: pointer;
+      }
+
+      .btn-export:hover {
+        background: #dde2e7;
+        filter: none;
+      }
+
+      .btn-export:active {
+        background: #d8dde3;
+      }
+
+      .table-wrap {
+        margin: 0 -4px;
+      }
+
+      th,
+      td {
+        padding: 12px 12px;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      td {
+        vertical-align: middle;
+      }
+
+      .tag {
+        padding: 2px 6px;
+        font-size: 10px;
+      }
+
+      .action-group {
+        gap: 6px;
+        flex-wrap: nowrap !important;
+      }
+
+      .action-group button {
+        min-width: 48px;
+        padding: 5px 6px;
+        font-size: 10px;
+        flex: 0 0 auto;
+      }
+
+      table {
+        min-width: 980px;
+      }
+
+      input[type="date"],
+      select,
+      input[type="number"],
+      input[type="text"],
+      textarea {
+        min-height: 52px;
+      }
+
+      td:last-child {
+        min-width: 90px;
+      }
+    }
+
+    #invoiceNumber, #invoice {
+      pointer-events: auto !important;
+      opacity: 1 !important;
+    }
+
+
+    .vendor-chip {
+      font-size: 11px;
+      line-height: 1;
+      padding: 6px 8px;
+      background: #eef2f0;
+      border: 1px solid #d9dfdc;
+      border-radius: 999px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    
+
+    
+
+    
+
+    .filters-panel {
+      background: linear-gradient(180deg, #dbe3ea 0%, #e7edf2 100%) !important;
+      border: 1px solid rgba(255,255,255,0.65) !important;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    .input-panel {
+      background: linear-gradient(180deg, #eef2f6 0%, #f7f9fb 100%) !important;
+      border: 1px solid rgba(255,255,255,0.7) !important;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    .input-panel .form-grid > div > input,
+    .input-panel .form-grid > div > select,
+    .input-panel .form-grid > div > textarea {
+      background: #ffffff !important;
+    }
+
+    .filters-panel .filters-grid input,
+    .filters-panel .filters-grid select,
+    .filters-panel .filters-grid button {
+      background: rgba(255,255,255,0.88) !important;
+    }
+
+.panel.filters-panel {
+  background: linear-gradient(180deg, #cfd8e1 0%, #e2e8ef 100%) !important;
+}
+
+.filters-panel input,
+.filters-panel select {
+  background: rgba(255,255,255,0.75) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.filters-panel button {
+  background: rgba(255,255,255,0.6) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+.panel.filters-panel {
+  background: rgba(255,255,255,0.65) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06) !important;
+}
+
+.panel.filters-panel input,
+.panel.filters-panel select {
+  background: #ffffff !important;
+}
+
+.panel.filters-panel button {
+  background: #f1f5f9 !important;
+}
+
+.top-grid {
+  margin-bottom: 18px !important;
+}
+
+.panel {
+  margin-bottom: 0 !important;
+}
+
+.panel.filters-panel {
+  margin-bottom: 18px !important;
+}
+
+.stay-block {
+  display: block !important;
+}
+
+.stay-dates-grid {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 120px;
+  grid-template-rows: auto auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.side-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #556158;
+}
+
+.date-field-wrap {
+  min-width: 0;
+}
+
+.date-field-wrap input {
+  width: 100%;
+  height: 64px;
+  border: 1px solid #d7ddd8;
+  border-radius: 18px;
+  padding: 0 18px;
+  font-size: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.nights-field {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  height: 142px;
+  border: 1px solid #d7ddd8;
+  border-radius: 18px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.nights-field-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b756e;
+}
+
+#noOfNights {
+  font-size: 22px;
+  font-weight: 700;
+  color: #5c665f;
+}
+
+input,
+textarea {
+  background-color: #ffffff !important;
+  border: 1px solid #d7ddd8 !important;
+  color: #37423b !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8a948d;
+}
+
+input[type="date"] {
+  background-color: #ffffff !important;
+}
+
+.expense-inline-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.expense-inline-row.expense-mode {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.expense-inline-row #expenseTypeField,
+.expense-inline-row #vendorField {
+  min-width: 0;
+  width: 100%;
+}
+
+.expense-inline-row #expenseTypeField select,
+.expense-inline-row #vendorField input {
+  width: 100%;
+}
+
+.vendor-chips-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.vendor-chips-row.hidden,
+.vendor-chips-row:empty {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .stay-dates-grid {
+    grid-template-columns: 78px minmax(0, 1fr) 96px;
+    gap: 10px;
+  }
+
+  .side-label {
+    font-size: 14px;
+  }
+
+  .date-field-wrap input {
+    height: 52px;
+    padding: 0 14px;
+    border-radius: 16px;
+    font-size: 15px;
+  }
+
+  .nights-field {
+    height: 114px;
+    border-radius: 16px;
+  }
+
+  .nights-field-label {
+    top: 9px;
+    left: 8px;
+    right: 8px;
+    font-size: 12px;
+  }
+
+  #noOfNights {
+    font-size: 20px;
+  }
+
+  .expense-inline-row.expense-mode {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+
+/* Strong expense layout enforcement */
+#expenseInlineRow {
+  grid-column: 1 / -1 !important;
+}
+
+#expenseInlineRow.expense-mode {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  align-items: start !important;
+}
+
+#expenseInlineRow.expense-mode #expenseTypeField,
+#expenseInlineRow.expense-mode #vendorField {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+#expenseInlineRow:not(.expense-mode) {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+#expenseInlineRow:not(.expense-mode) #vendorField {
+  grid-column: 1 / -1 !important;
+}
+
+#expenseAmountNoteRow:not(.hidden) {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  align-items: start !important;
+  grid-column: 1 / -1 !important;
+}
+
+#expenseAmountNoteRow:not(.hidden) > #invoiceField,
+#expenseAmountNoteRow:not(.hidden) > #amountField,
+#expenseAmountNoteRow:not(.hidden) > #noteField {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+#expenseAmountNoteRow:not(.hidden) > #noteField {
+  grid-column: 1 / -1 !important;
+}
+
 </style>
 </head>
 <body>
@@ -1071,9 +1698,23 @@
       <div class="panel card input-panel">
         <h2 id="formTitle">Add Record</h2>
         <div class="form-grid">
-          <div>
-            <label>Date</label>
-            <input type="date" id="date" lang="en-CA" />
+          <div id="nightsField" class="stay-block full">
+            <div class="stay-dates-grid">
+              <div class="side-label">Check-in</div>
+              <div class="date-field-wrap">
+                <input type="date" id="date" lang="en-CA" />
+              </div>
+
+              <div class="nights-field">
+                <span class="nights-field-label">No. of nights</span>
+                <span id="noOfNights">0</span>
+              </div>
+
+              <div class="side-label">Check-out</div>
+              <div class="date-field-wrap">
+                <input type="date" id="checkOutDate" lang="en-CA" />
+              </div>
+            </div>
           </div>
 
           <div>
@@ -1092,51 +1733,35 @@
               <option value="Casa Tres16">Casa Tres16</option>
             </select>
           </div>
+          <div class="expense-inline-row" id="expenseInlineRow">
 
-          <div id="nightsField">
-            <label>No. of Nights</label>
-            <select id="nights">
-              <option value="">Select nights</option>
-              <option value="1">1 night</option>
-              <option value="2">2 nights</option>
-              <option value="3">3 nights</option>
-              <option value="4">4 nights</option>
-              <option value="5">5 nights</option>
-              <option value="6">6 nights</option>
-              <option value="7">7 nights</option>
-              <option value="8">8 nights</option>
-              <option value="9">9 nights</option>
-              <option value="10">10 nights</option>
-              <option value="11">11 nights</option>
-              <option value="12">12 nights</option>
-            </select>
-          </div>
+            <div id="expenseTypeField">
+              <label>Expense Type</label>
+              <select id="category">
+                <option value="">Select expense type</option>
+                <option value="Assoc. Dues / Water bill">Assoc. Dues / Water bill</option>
+                <option value="Utilities - Internet">Utilities - Internet</option>
+                <option value="Utilities - Electricity">Utilities - Electricity</option>
+                <option value="Supplies - Potable Water">Supplies - Potable Water</option>
+                <option value="Supplies - Towels Linens">Supplies - Towels Linens</option>
+                <option value="Supplies - Unit Supplies">Supplies - Unit Supplies</option>
+                <option value="Supplies - Hardware">Supplies - Hardware</option>
+                <option value="Supplies - Cleaning">Supplies - Cleaning</option>
+                <option value="Services - Cleaner Fee">Services - Cleaner Fee</option>
+                <option value="Services - Maintenance">Services - Maintenance</option>
+                <option value="Business Permit Fee">Business Permit Fee</option>
+                <option value="Services - Laundry">Services - Laundry</option>
+                <option value="Taxes (BIR/RPT)">Taxes (BIR/RPT)</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
 
-          <div id="expenseTypeField">
-            <label>Expense Type</label>
-            <select id="category">
-              <option value="">Select expense type</option>
-              <option value="Assoc. Dues / Water bill">Assoc. Dues / Water bill</option>
-              <option value="Utilities - Internet">Utilities - Internet</option>
-              <option value="Utilities - Electricity">Utilities - Electricity</option>
-              <option value="Supplies - Potable Water">Supplies - Potable Water</option>
-              <option value="Supplies - Towels Linens">Supplies - Towels Linens</option>
-              <option value="Supplies - Unit Supplies">Supplies - Unit Supplies</option>
-              <option value="Supplies - Hardware">Supplies - Hardware</option>
-              <option value="Supplies - Cleaning">Supplies - Cleaning</option>
-              <option value="Services - Cleaner Fee">Services - Cleaner Fee</option>
-              <option value="Services - Maintenance">Services - Maintenance</option>
-              <option value="Business Permit Fee">Business Permit Fee</option>
-              <option value="Services - Laundry">Services - Laundry</option>
-              <option value="Taxes (BIR/RPT)">Taxes (BIR/RPT)</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
+            <div id="vendorField">
+              <label id="vendorLabel">Vendor</label>
+              <input type="text" id="vendor" placeholder="Enter vendor" />
+            </div>
 
-          <div id="vendorField">
-            <label id="vendorLabel">Guest Name</label>
-            <input type="text" id="vendor" placeholder="Enter guest name" />
-            <div id="vendorSuggestions" class="vendor-suggestions"></div>
+            <div id="vendorSuggestions" class="vendor-chips-row"></div>
           </div>
 
           <div id="revenueAmountRow" class="full"></div>
@@ -1334,10 +1959,11 @@
 
     const els = {
       date: document.getElementById("date"),
+      checkOutDate: document.getElementById("checkOutDate"),
       type: document.getElementById("type"),
       unit: document.getElementById("unit"),
       unitLabel: document.getElementById("unitLabel"),
-      nights: document.getElementById("nights"),
+      noOfNights: document.getElementById("noOfNights"),
       vendor: document.getElementById("vendor"),
       vendorLabel: document.getElementById("vendorLabel"),
       platform: document.getElementById("platform"),
@@ -1358,6 +1984,7 @@
       declaredField: document.getElementById("declaredField"),
       invoiceField: document.getElementById("invoiceField"),
       expenseTypeField: document.getElementById("expenseTypeField"),
+      expenseInlineRow: document.getElementById("expenseInlineRow"),
       noteField: document.getElementById("noteField"),
 
       saveBtn: document.getElementById("saveBtn"),
@@ -1476,6 +2103,29 @@
       return "";
     }
 
+    function calculateNights() {
+      const checkIn = els.date?.value;
+      const checkOut = els.checkOutDate?.value;
+
+      if (!checkIn || !checkOut) return 0;
+
+      const start = new Date(checkIn + "T00:00:00");
+      const end = new Date(checkOut + "T00:00:00");
+
+      if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return 0;
+
+      const diffDays = Math.round((end - start) / 86400000);
+      return diffDays > 0 ? diffDays : 0;
+    }
+
+    function updateNightsDisplay() {
+      const nights = calculateNights();
+      if (els.noOfNights) {
+        els.noOfNights.textContent = String(nights);
+      }
+      return nights;
+    }
+
     function updateTypeFields() {
       const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
       if (invoiceEl) {
@@ -1496,6 +2146,9 @@
       els.platformField.classList.toggle("hidden", !isRevenue);
       els.declaredField.classList.toggle("hidden", !isRevenue);
       els.expenseTypeField.classList.toggle("hidden", isRevenue);
+      if (els.expenseInlineRow) {
+        els.expenseInlineRow.classList.toggle("expense-mode", !isRevenue);
+      }
 
       if (isRevenue) {
         els.vendor.placeholder = "Enter guest name";
@@ -1512,7 +2165,7 @@
         els.revenueInvoiceNoteRow.appendChild(els.noteField);
       } else {
         els.vendor.placeholder = "Enter vendor";
-        els.nights.value = "";
+        if (els.noOfNights) els.noOfNights.textContent = "0";
         els.platform.value = "";
         els.declared.value = "";
         els.invoiceNumber.value = "";
@@ -1522,13 +2175,15 @@
         els.expenseAmountNoteRow.classList.remove("hidden");
 
         els.expenseAmountNoteRow.innerHTML = "";
+        els.expenseAmountNoteRow.appendChild(els.invoiceField);
         els.expenseAmountNoteRow.appendChild(els.amountField);
         els.expenseAmountNoteRow.appendChild(els.noteField);
         els.revenueInvoiceNoteRow.innerHTML = "";
-        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
       }
 
+      forceExpenseLayoutRefresh();
       updateInvoiceState();
+      updateVendorSuggestions();
     }
 
     function updateInvoiceState() {
@@ -1550,9 +2205,10 @@
 
       return {
         date: els.date.value,
+        checkOutDate: safeText(els.checkOutDate?.value),
         type: els.type.value,
         unit: els.unit.value,
-        nights: isRevenue ? Number(els.nights.value || 0) : "",
+        nights: isRevenue ? updateNightsDisplay() : "",
         vendor: safeText(els.vendor.value),
         platform: isRevenue ? safeText(els.platform.value) : "",
         declared: isRevenue ? safeText(els.declared.value) : "",
@@ -1586,9 +2242,10 @@
 
     function clearForm() {
       els.date.value = new Date().toISOString().slice(0, 10);
+      if (els.checkOutDate) els.checkOutDate.value = "";
       els.type.value = "Revenue";
       els.unit.value = "Studio One-1123";
-      els.nights.value = "";
+      if (els.noOfNights) els.noOfNights.textContent = "0";
       els.vendor.value = "";
       els.platform.value = "";
       els.declared.value = "";
@@ -1601,6 +2258,8 @@
       els.saveBtn.textContent = "Save Record";
       els.cancelEditBtn.style.display = "none";
       updateTypeFields();
+      forceExpenseLayoutRefresh();
+      updateNightsDisplay();
     }
 
     function startEdit(id) {
@@ -1609,9 +2268,20 @@
 
       editingId = id;
       els.date.value = rec.date || "";
+      if (els.checkOutDate) {
+        if (rec.checkOutDate) {
+          els.checkOutDate.value = rec.checkOutDate;
+        } else if (rec.date && Number(rec.nights) > 0) {
+          const derivedCheckOut = new Date(rec.date + "T00:00:00");
+          derivedCheckOut.setDate(derivedCheckOut.getDate() + Number(rec.nights));
+          els.checkOutDate.value = derivedCheckOut.toISOString().slice(0, 10);
+        } else {
+          els.checkOutDate.value = "";
+        }
+      }
       els.type.value = rec.type || "Revenue";
       els.unit.value = rec.unit || "Studio One-1123";
-      els.nights.value = rec.nights || "";
+      if (els.noOfNights) els.noOfNights.textContent = String(rec.nights || 0);
       els.vendor.value = rec.vendor || "";
       els.platform.value = rec.platform || "";
       els.declared.value = rec.declared || "";
@@ -1625,6 +2295,8 @@
       els.cancelEditBtn.style.display = "inline-block";
 
       updateTypeFields();
+      forceExpenseLayoutRefresh();
+      updateNightsDisplay();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -1972,6 +2644,8 @@
       showToast("Expense exported");
     }
 
+    els.date.addEventListener("change", updateNightsDisplay);
+    els.checkOutDate.addEventListener("change", updateNightsDisplay);
     els.type.addEventListener("change", updateTypeFields);
     els.declared.addEventListener("change", updateInvoiceState);
 
@@ -2235,6 +2909,19 @@ Make sure all booking statuses are final.`, "Export Revenue");
       };
     }
 
+    function forceExpenseLayoutRefresh() {
+      const isRevenue = els.type.value === "Revenue";
+      if (isRevenue) {
+        els.revenueAmountRow.appendChild(els.amountField);
+        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
+        els.revenueInvoiceNoteRow.appendChild(els.noteField);
+      } else {
+        els.expenseAmountNoteRow.appendChild(els.invoiceField);
+        els.expenseAmountNoteRow.appendChild(els.amountField);
+        els.expenseAmountNoteRow.appendChild(els.noteField);
+      }
+    }
+
     loadFromStorage();
     refreshYearFilter();
     clearForm();
@@ -2287,6 +2974,16 @@ Make sure all booking statuses are final.`, "Export Revenue");
       "Utilities - Internet": ["Smart", "Globe", "Dito", "PLDT"]
     };
 
+    function updateVendorSuggestionsVisibility() {
+      const typeEl = document.getElementById("type");
+      const vendorEl = document.getElementById("vendor");
+      const container = document.getElementById("vendorSuggestions");
+      if (!container || !vendorEl || !typeEl) return;
+
+      const shouldShow = typeEl.value === "Expense" && !vendorEl.value.trim() && container.childElementCount > 0;
+      container.classList.toggle("hidden", !shouldShow);
+    }
+
     function updateVendorSuggestions() {
       const typeEl = document.getElementById("type");
       const categoryEl = document.getElementById("category");
@@ -2298,7 +2995,7 @@ Make sure all booking statuses are final.`, "Export Revenue");
       container.innerHTML = "";
 
       if (typeEl.value !== "Expense") {
-        container.innerHTML = "";
+        updateVendorSuggestionsVisibility();
         return;
       }
 
@@ -2311,17 +3008,22 @@ Make sure all booking statuses are final.`, "Export Revenue");
           vendorEl.value = v;
           vendorEl.dispatchEvent(new Event("input", { bubbles: true }));
           vendorEl.focus();
+          updateVendorSuggestionsVisibility();
         });
         container.appendChild(chip);
       });
+
+      updateVendorSuggestionsVisibility();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       const typeEl = document.getElementById("type");
       const categoryEl = document.getElementById("category");
+      const vendorEl = document.getElementById("vendor");
 
       if (typeEl) typeEl.addEventListener("change", updateVendorSuggestions);
       if (categoryEl) categoryEl.addEventListener("change", updateVendorSuggestions);
+      if (vendorEl) vendorEl.addEventListener("input", updateVendorSuggestionsVisibility);
 
       updateVendorSuggestions();
     });
