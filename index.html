@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Booking Manager</title>
 
   <meta name="theme-color" content="#cfd4da" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -10,17 +8,17 @@
   <meta name="apple-mobile-web-app-title" content="Booking Manager" />
   <link rel="manifest" href="manifest.webmanifest?v=3" />
   <link rel="apple-touch-icon" href="icons/icon-192.png?v=3" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <style>
     html {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
-  background-size: cover;
-  background-color: #cfd4da;
-}
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
+      background-size: cover;
+      background-color: #cfd4da;
+    }
 
     * {
       box-sizing: border-box;
@@ -53,22 +51,22 @@
     }
 
     body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
-  background-size: cover;
-  background-attachment: fixed;
-  color: var(--text);
-}
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #cfd4da 0%, #e5e7eb 100%);
+      background-size: cover;
+      background-attachment: fixed;
+      color: var(--text);
+    }
 
     .app {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: calc(24px + env(safe-area-inset-top)) 24px 24px 24px;
-  min-width: 0;
-}
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: calc(24px + env(safe-area-inset-top)) 24px 24px 24px;
+      min-width: 0;
+    }
 
     h1 {
       margin: 0 0 4px;
@@ -86,9 +84,12 @@
   margin: 0 0 18px;
   padding: 18px 20px;
   border-radius: 22px;
-  background: linear-gradient(180deg, #e1e7ee 0%, #f2f5f9 100%);
+
+  background: linear-gradient(180deg, #d3e2f2 0%, #e9f1fa 100%);
+
   border: 1px solid rgba(255,255,255,0.7);
-  box-shadow: 0 10px 24px rgba(31, 41, 35, 0.05);
+  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.06);
+
   backdrop-filter: blur(10px);
   min-width: 0;
 }
@@ -158,7 +159,7 @@
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 18px;
-      margin-bottom: 18px;
+      margin-bottom: 18px !important;
       align-items: start;
       min-width: 0;
     }
@@ -173,6 +174,7 @@
       min-width: 0;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       overflow: hidden;
+      margin-bottom: 0 !important;
     }
 
     .panel::before {
@@ -190,14 +192,14 @@
     }
 
     .panel h2 {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 12px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #2f3e34;
-    }
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2f3e34;
+}
 
     .panel h2::before {
       content: "";
@@ -208,7 +210,8 @@
       flex: 0 0 auto;
     }
 
-    .card, .form-section {
+    .card,
+    .form-section {
       background: #ffffff;
       border-radius: 16px;
       padding: 16px;
@@ -256,24 +259,6 @@
       flex: 1 1 0;
     }
 
-    #revenueInvoiceNoteRow,
-    #expenseAmountNoteRow {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      align-items: start;
-    }
-
-    #revenueInvoiceNoteRow > div,
-    #expenseAmountNoteRow > div {
-      width: auto !important;
-      min-width: 0 !important;
-      flex: initial !important;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
     label {
       font-size: 13px;
       font-weight: 600;
@@ -282,7 +267,10 @@
       display: block;
     }
 
-    input, select, textarea, button {
+    input,
+    select,
+    textarea,
+    button {
       width: 100%;
       max-width: 100%;
       min-width: 0;
@@ -293,14 +281,18 @@
       font-family: inherit;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       background: #f3f4f6;
       color: #2f3e34;
       font-weight: 500;
       transition: all 0.2s ease;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus,
+    select:focus,
+    textarea:focus {
       outline: none;
       background: #ffffff;
       border-color: #cbd5e1;
@@ -313,6 +305,7 @@
       min-height: 52px;
       line-height: normal;
       text-align: left;
+      background-color: #ffffff !important;
     }
 
     input[type="date"]::-webkit-date-and-time-value {
@@ -460,10 +453,6 @@
       min-width: 0;
     }
 
-    .filters-grid .full {
-      grid-column: 1 / -1;
-    }
-
     .filters-grid input,
     .filters-grid select,
     .filters-grid button {
@@ -546,7 +535,8 @@
       overflow: hidden;
     }
 
-    th, td {
+    th,
+    td {
       padding: 14px 12px;
       border-bottom: 1px solid #f1f5f2;
       text-align: left;
@@ -780,6 +770,199 @@
       overflow-y: auto;
     }
 
+    .filters-panel {
+      background: rgba(255,255,255,0.65) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.8) !important;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06) !important;
+      margin-bottom: 18px !important;
+    }
+
+    .input-panel {
+      background: linear-gradient(180deg, #eef2f6 0%, #f7f9fb 100%) !important;
+      border: 1px solid rgba(255,255,255,0.7) !important;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    .panel.filters-panel input,
+    .panel.filters-panel select {
+      background: #ffffff !important;
+      border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+
+    .panel.filters-panel button {
+      background: #f1f5f9 !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+
+    .input-panel .form-grid > div > input,
+    .input-panel .form-grid > div > select,
+    .input-panel .form-grid > div > textarea {
+      background: #ffffff !important;
+    }
+
+    .stay-block {
+      display: block !important;
+    }
+
+    .stay-dates-grid {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr) 120px;
+      grid-template-rows: auto auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .side-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #556158;
+    }
+
+    .date-field-wrap {
+      min-width: 0;
+    }
+
+    .date-field-wrap input {
+      width: 100%;
+      height: 64px;
+      border: 1px solid #d7ddd8;
+      border-radius: 18px;
+      padding: 0 18px;
+      font-size: 16px;
+      background: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .nights-field {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      height: 142px;
+      border: 1px solid #d7ddd8;
+      border-radius: 18px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .nights-field-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b756e;
+    }
+
+    #noOfNights {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5c665f;
+    }
+
+    input,
+    textarea {
+      background-color: #ffffff !important;
+      border: 1px solid #d7ddd8 !important;
+      color: #37423b !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #8a948d;
+    }
+
+
+    #expenseTypeField,
+    #vendorField {
+      min-width: 0 !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+
+    #expenseTypeField select,
+    #vendorField input {
+      width: 100% !important;
+    }
+
+    .vendor-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .vendor-chips-row.hidden,
+    .vendor-chips-row:empty {
+      display: none !important;
+    }
+
+    .vendor-chip {
+      font-size: 11px;
+      line-height: 1;
+      padding: 6px 8px;
+      background: #eef2f0;
+      border: 1px solid #d9dfdc;
+      border-radius: 999px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #revenueAmountRow {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 14px !important;
+      align-items: start !important;
+    }
+
+    #revenueInvoiceNoteRow {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 14px !important;
+      align-items: start !important;
+    }
+
+    #expenseAmountNoteRow:not(.hidden) {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 14px !important;
+      align-items: start !important;
+      grid-column: 1 / -1 !important;
+    }
+
+    #revenueInvoiceNoteRow #noteField,
+    #expenseAmountNoteRow #noteField {
+      grid-column: 1 / -1 !important;
+    }
+
+    #expenseAmountNoteRow > #invoiceField,
+    #expenseAmountNoteRow > #amountField,
+    #expenseAmountNoteRow > #noteField,
+    #revenueAmountRow > div,
+    #revenueInvoiceNoteRow > div {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+
+    #amount {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    #invoiceNumber,
+    #invoice {
+      pointer-events: auto !important;
+      opacity: 1 !important;
+    }
+
     @media (max-width: 768px) {
       .app {
         padding: calc(14px + env(safe-area-inset-top)) 14px 14px 14px;
@@ -817,13 +1000,6 @@
         flex-wrap: nowrap;
       }
 
-      #revenueInvoiceNoteRow,
-      #expenseAmountNoteRow {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-      }
-
       .panel {
         padding: 18px;
         border-radius: 18px;
@@ -954,729 +1130,302 @@
       td:last-child {
         min-width: 90px;
       }
-    }
 
-    #invoiceNumber, #invoice {
-      pointer-events: auto !important;
-      opacity: 1 !important;
-    }
-
-
-    .vendor-chip {
-      font-size: 11px;
-      line-height: 1;
-      padding: 6px 8px;
-      background: #eef2f0;
-      border: 1px solid #d9dfdc;
-      border-radius: 999px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    
-
-    
-
-    
-
-    .filters-panel {
-      background: linear-gradient(180deg, #dbe3ea 0%, #e7edf2 100%) !important;
-      border: 1px solid rgba(255,255,255,0.65) !important;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
-    }
-
-    .input-panel {
-      background: linear-gradient(180deg, #eef2f6 0%, #f7f9fb 100%) !important;
-      border: 1px solid rgba(255,255,255,0.7) !important;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
-    }
-
-    .input-panel .form-grid > div > input,
-    .input-panel .form-grid > div > select,
-    .input-panel .form-grid > div > textarea {
-      background: #ffffff !important;
-    }
-
-    .filters-panel .filters-grid input,
-    .filters-panel .filters-grid select,
-    .filters-panel .filters-grid button {
-      background: rgba(255,255,255,0.88) !important;
-    }
-
-.panel.filters-panel {
-  background: linear-gradient(180deg, #cfd8e1 0%, #e2e8ef 100%) !important;
-}
-
-.filters-panel input,
-.filters-panel select {
-  background: rgba(255,255,255,0.75) !important;
-  border: 1px solid rgba(0,0,0,0.05) !important;
-}
-
-.filters-panel button {
-  background: rgba(255,255,255,0.6) !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-}
-
-.panel.filters-panel {
-  background: rgba(255,255,255,0.65) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.8) !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06) !important;
-}
-
-.panel.filters-panel input,
-.panel.filters-panel select {
-  background: #ffffff !important;
-}
-
-.panel.filters-panel button {
-  background: #f1f5f9 !important;
-}
-
-.top-grid {
-  margin-bottom: 18px !important;
-}
-
-.panel {
-  margin-bottom: 0 !important;
-}
-
-.panel.filters-panel {
-  margin-bottom: 18px !important;
-}
-
-.stay-block {
-  display: block !important;
-}
-
-.stay-dates-grid {
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr) 120px;
-  grid-template-rows: auto auto;
-  gap: 14px;
-  align-items: center;
-}
-
-.side-label {
-  font-size: 15px;
-  font-weight: 600;
-  color: #556158;
-}
-
-.date-field-wrap {
-  min-width: 0;
-}
-
-.date-field-wrap input {
-  width: 100%;
-  height: 64px;
-  border: 1px solid #d7ddd8;
-  border-radius: 18px;
-  padding: 0 18px;
-  font-size: 16px;
-  background: #ffffff;
-  box-sizing: border-box;
-}
-
-.nights-field {
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  height: 142px;
-  border: 1px solid #d7ddd8;
-  border-radius: 18px;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-}
-
-.nights-field-label {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: #6b756e;
-}
-
-#noOfNights {
-  font-size: 22px;
-  font-weight: 700;
-  color: #5c665f;
-}
-
-input,
-textarea {
-  background-color: #ffffff !important;
-  border: 1px solid #d7ddd8 !important;
-  color: #37423b !important;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #8a948d;
-}
-
-input[type="date"] {
-  background-color: #ffffff !important;
-}
-
-
-.expense-inline-row {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: start;
-}
-
-.expense-inline-row.expense-mode {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.expense-inline-row #expenseTypeField,
-.expense-inline-row #vendorField {
-  min-width: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.expense-inline-row:not(.expense-mode) #vendorField {
-  grid-column: 1 / -1;
-}
-
-.expense-inline-row #expenseTypeField select,
-.expense-inline-row #vendorField input {
-  width: 100%;
-}
-
-.vendor-chips-row {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 6px;
-  margin-top: 2px;
-}
-
-.vendor-chips-row.hidden,
-.vendor-chips-row:empty {
-  display: none !important;
-}
-
-#expenseAmountNoteRow {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  align-items: start;
-  margin-top: 16px;
-}
-
-#expenseAmountNoteRow > div {
-  width: auto !important;
-  min-width: 0 !important;
-  flex: initial !important;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-#expenseAmountNoteRow #noteField {
-  grid-column: 1 / -1;
-}
-
-#expenseTypeField select {
-  background: #ffffff !important;
-  border: 1px solid #d7ddd8 !important;
-  color: #37423b !important;
-}
-
-#amount {
-  text-align: right;
-  font-weight: 600;
-}
-
-@media (max-width: 768px) {
-      .app {
-        padding: calc(14px + env(safe-area-inset-top)) 14px 14px 14px;
-      }
-
-      .top-grid,
-      .form-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .summary-section {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      .stay-dates-grid {
+        grid-template-columns: 78px minmax(0, 1fr) 96px;
         gap: 10px;
       }
 
-      .filters-grid {
+      .side-label {
+        font-size: 14px;
+      }
+
+      .date-field-wrap input {
+        height: 52px;
+        padding: 0 14px;
+        border-radius: 16px;
+        font-size: 15px;
+      }
+
+      .nights-field {
+        height: 114px;
+        border-radius: 16px;
+      }
+
+      .nights-field-label {
+        top: 9px;
+        left: 8px;
+        right: 8px;
+        font-size: 12px;
+      }
+
+      #noOfNights {
+        font-size: 20px;
+      }
+
+      .expense-inline-row.expense-mode,
+      #revenueAmountRow,
+      #revenueInvoiceNoteRow,
+      #expenseAmountNoteRow:not(.hidden) {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
       }
 
-      .filters-grid > div,
-      .form-grid > div {
-        min-width: 0;
-        width: 100%;
+      .vendor-chips-row {
+        margin-top: 6px;
+      }
+    }
+
+    #typeUnitRow {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    #typeField,
+    #unitField,
+    #vendorField,
+    #platformField,
+    #declaredField,
+    #invoiceField,
+    #amountField,
+    #noteField {
+      min-width: 0;
+      width: 100%;
+    }
+
+    #vendorField {
+      grid-column: 1 / -1 !important;
+    }
+
+    #revenueAmountRow,
+    #revenueInvoiceNoteRow,
+    #expenseAmountNoteRow:not(.hidden) {
+      grid-column: 1 / -1 !important;
+    }
+
+    @media (max-width: 768px) {
+      #typeUnitRow {
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .form-grid .full,
-      .filters-grid .full {
+      #typeField,
+      #unitField {
+        flex: initial;
+      }
+
+      #vendorField {
         grid-column: 1 / -1 !important;
       }
-
-      .field-row,
-      .form-row {
-        display: flex !important;
-        gap: 10px;
-        flex-wrap: nowrap;
-      }
-
-      #revenueInvoiceNoteRow,
-      #expenseAmountNoteRow {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-      }
-
-      .panel {
-        padding: 18px;
-        border-radius: 18px;
-      }
-
-      .button-row {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .button-row button,
-      .btn-primary,
-      .btn-secondary,
-      .btn-danger {
-        width: auto;
-      }
-
-      .records-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-        gap: 12px;
-        flex-wrap: nowrap;
-        margin-bottom: 14px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #edf2ee;
-        min-width: 0;
-      }
-
-      .records-header-left {
-        min-width: 0;
-        flex: 1 1 auto;
-      }
-
-      .export-meta-inline {
-        margin-top: 6px;
-        font-size: 11px;
-        color: #7a877f;
-        line-height: 1.35;
-      }
-
-      .export-actions-side {
-        display: grid;
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-        gap: 5px;
-        flex: 0 0 112px;
-        align-self: stretch;
-      }
-
-      .export-actions-side .btn-export {
-        width: 100%;
-        min-width: 0;
-        padding: 4px 8px;
-        font-size: 9.5px;
-        line-height: 1.05;
-        white-space: nowrap;
-        height: 100%;
-        min-height: 0;
-      }
-
-      .btn-export {
-        background: #e9ecef;
-        color: #111827;
-        border: 1px solid #d6d9dd;
-        border-radius: 9px;
-        padding: 4px 6px;
-        font-size: 9.5px;
-        line-height: 1.05;
-        white-space: nowrap;
-        width: 100%;
-        min-width: 0;
-        cursor: pointer;
-      }
-
-      .btn-export:hover {
-        background: #dde2e7;
-        filter: none;
-      }
-
-      .btn-export:active {
-        background: #d8dde3;
-      }
-
-      .table-wrap {
-        margin: 0 -4px;
-      }
-
-      th,
-      td {
-        padding: 12px 12px;
-        font-size: 12px;
-        line-height: 1.4;
-      }
-
-      td {
-        vertical-align: middle;
-      }
-
-      .tag {
-        padding: 2px 6px;
-        font-size: 10px;
-      }
-
-      .action-group {
-        gap: 6px;
-        flex-wrap: nowrap !important;
-      }
-
-      .action-group button {
-        min-width: 48px;
-        padding: 5px 6px;
-        font-size: 10px;
-        flex: 0 0 auto;
-      }
-
-      table {
-        min-width: 980px;
-      }
-
-      input[type="date"],
-      select,
-      input[type="number"],
-      input[type="text"],
-      textarea {
-        min-height: 52px;
-      }
-
-      td:last-child {
-        min-width: 90px;
-      }
     }
 
-    #invoiceNumber, #invoice {
-      pointer-events: auto !important;
-      opacity: 1 !important;
+    #typeUnitRow {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px !important;
+      align-items: start !important;
     }
 
-
-    .vendor-chip {
-      font-size: 11px;
-      line-height: 1;
-      padding: 6px 8px;
-      background: #eef2f0;
-      border: 1px solid #d9dfdc;
-      border-radius: 999px;
-      cursor: pointer;
-      user-select: none;
+    #typeUnitRow > div {
+      min-width: 0 !important;
+      width: 100% !important;
     }
 
-    
-
-    
-
-    
-
-    .filters-panel {
-      background: linear-gradient(180deg, #dbe3ea 0%, #e7edf2 100%) !important;
-      border: 1px solid rgba(255,255,255,0.65) !important;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
-    }
-
-    .input-panel {
-      background: linear-gradient(180deg, #eef2f6 0%, #f7f9fb 100%) !important;
-      border: 1px solid rgba(255,255,255,0.7) !important;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08) !important;
-    }
-
-    .input-panel .form-grid > div > input,
-    .input-panel .form-grid > div > select,
-    .input-panel .form-grid > div > textarea {
+    #platformField select,
+    #declaredField select,
+    #amountField input,
+    #invoiceField input,
+    #vendorField input,
+    #typeField select,
+    #unitField select {
       background: #ffffff !important;
+      border: 1px solid #d7ddd8 !important;
+      color: #37423b !important;
     }
 
-    .filters-panel .filters-grid input,
-    .filters-panel .filters-grid select,
-    .filters-panel .filters-grid button {
-      background: rgba(255,255,255,0.88) !important;
+    #expenseTypeField.hidden,
+    #platformField.hidden,
+    #declaredField.hidden,
+    #revenueAmountRow.hidden,
+    #revenueInvoiceNoteRow.hidden,
+    #expenseAmountNoteRow.hidden {
+      display: none !important;
     }
 
-.panel.filters-panel {
-  background: linear-gradient(180deg, #cfd8e1 0%, #e2e8ef 100%) !important;
-}
-
-.filters-panel input,
-.filters-panel select {
-  background: rgba(255,255,255,0.75) !important;
-  border: 1px solid rgba(0,0,0,0.05) !important;
-}
-
-.filters-panel button {
-  background: rgba(255,255,255,0.6) !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-}
-
-.panel.filters-panel {
-  background: rgba(255,255,255,0.65) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.8) !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06) !important;
-}
-
-.panel.filters-panel input,
-.panel.filters-panel select {
-  background: #ffffff !important;
-}
-
-.panel.filters-panel button {
-  background: #f1f5f9 !important;
-}
-
-.top-grid {
-  margin-bottom: 18px !important;
-}
-
-.panel {
-  margin-bottom: 0 !important;
-}
-
-.panel.filters-panel {
-  margin-bottom: 18px !important;
-}
-
-.stay-block {
-  display: block !important;
-}
-
-.stay-dates-grid {
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr) 120px;
-  grid-template-rows: auto auto;
-  gap: 14px;
-  align-items: center;
-}
-
-.side-label {
-  font-size: 15px;
-  font-weight: 600;
-  color: #556158;
-}
-
-.date-field-wrap {
-  min-width: 0;
-}
-
-.date-field-wrap input {
-  width: 100%;
-  height: 64px;
-  border: 1px solid #d7ddd8;
-  border-radius: 18px;
-  padding: 0 18px;
-  font-size: 16px;
-  background: #ffffff;
-  box-sizing: border-box;
-}
-
-.nights-field {
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  height: 142px;
-  border: 1px solid #d7ddd8;
-  border-radius: 18px;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-}
-
-.nights-field-label {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: #6b756e;
-}
-
-#noOfNights {
-  font-size: 22px;
-  font-weight: 700;
-  color: #5c665f;
-}
-
-input,
-textarea {
-  background-color: #ffffff !important;
-  border: 1px solid #d7ddd8 !important;
-  color: #37423b !important;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #8a948d;
-}
-
-input[type="date"] {
-  background-color: #ffffff !important;
-}
-
-.expense-inline-row {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  align-items: start;
-}
-
-.expense-inline-row.expense-mode {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.expense-inline-row #expenseTypeField,
-.expense-inline-row #vendorField {
-  min-width: 0;
-  width: 100%;
-}
-
-.expense-inline-row #expenseTypeField select,
-.expense-inline-row #vendorField input {
-  width: 100%;
-}
-
-.vendor-chips-row {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 6px;
-  margin-top: 2px;
-}
-
-.vendor-chips-row.hidden,
-.vendor-chips-row:empty {
-  display: none !important;
-}
-
-@media (max-width: 768px) {
-  .stay-dates-grid {
-    grid-template-columns: 78px minmax(0, 1fr) 96px;
-    gap: 10px;
-  }
-
-  .side-label {
-    font-size: 14px;
-  }
-
-  .date-field-wrap input {
-    height: 52px;
-    padding: 0 14px;
-    border-radius: 16px;
-    font-size: 15px;
-  }
-
-  .nights-field {
-    height: 114px;
-    border-radius: 16px;
-  }
-
-  .nights-field-label {
-    top: 9px;
-    left: 8px;
-    right: 8px;
-    font-size: 12px;
-  }
-
-  #noOfNights {
-    font-size: 20px;
-  }
-
-  .expense-inline-row.expense-mode {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-
-
-/* Strong expense layout enforcement */
+/* EXPENSE FIX - clean 2 column layout */
 #expenseInlineRow {
-  grid-column: 1 / -1 !important;
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 14px;
 }
 
 #expenseInlineRow.expense-mode {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 16px !important;
-  align-items: start !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 #expenseInlineRow.expense-mode #expenseTypeField,
 #expenseInlineRow.expense-mode #vendorField {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 6px !important;
-  width: 100% !important;
-  min-width: 0 !important;
+  width: 100%;
+  min-width: 0;
 }
 
-#expenseInlineRow:not(.expense-mode) {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 16px !important;
+/* remove fake space issue */
+#vendorSuggestions {
+  grid-column: 1 / -1;
 }
 
+#expenseInlineRow.expense-mode #expenseTypeField,
+#expenseInlineRow.expense-mode #vendorField {
+  width: 100%;
+  min-width: 0;
+}
+
+/* remove fake space issue */
+#vendorSuggestions {
+  grid-column: 1 / -1;
+}
+
+/* hide vendor full width when not needed */
 #expenseInlineRow:not(.expense-mode) #vendorField {
-  grid-column: 1 / -1 !important;
+  grid-column: 1 / -1;
 }
 
-#expenseAmountNoteRow:not(.hidden) {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 16px !important;
-  align-items: start !important;
-  grid-column: 1 / -1 !important;
+/* === EXPENSE FINAL FIX === */
+#expenseInlineRow {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 14px;
 }
 
-#expenseAmountNoteRow:not(.hidden) > #invoiceField,
-#expenseAmountNoteRow:not(.hidden) > #amountField,
-#expenseAmountNoteRow:not(.hidden) > #noteField {
+#expenseInlineRow.expense-mode {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#expenseInlineRow.expense-mode #expenseTypeField,
+#expenseInlineRow.expense-mode #vendorField {
+  width: 100%;
+  min-width: 0;
+}
+
+#vendorSuggestions:empty {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#expenseInlineRow.expense-mode #vendorField {
+  grid-column: auto !important;
+}
+
+/* === FIX: Expense Type color === */
+#expenseTypeField select {
+  background: #ffffff !important;
+  border: 1px solid #d7ddd8 !important;
+  color: #37423b !important;
+  opacity: 1 !important;
+}
+
+/* also ensure vendor matches */
+#vendorField input {
+  background: #ffffff !important;
+  border: 1px solid #d7ddd8 !important;
+  color: #37423b !important;
+}
+
+/* Add Record header alignment */
+
+.panel-header .hero-status {
+  display: inline-flex;
+  align-items: center;
+  height: 36px; /* same height */
+  padding: 0 12px;
+}
+
+
+.panel.card.input-panel > .panel-header + .form-grid {
+  margin-top: 0 !important;
+}
+/* ensure no extra spacing from h2 */
+
+.panel-header {
   display: flex !important;
-  flex-direction: column !important;
-  gap: 6px !important;
-  width: 100% !important;
-  min-width: 0 !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 12px;
 }
 
-#expenseAmountNoteRow:not(.hidden) > #noteField {
-  grid-column: 1 / -1 !important;
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+
+.panel-header .hero-status {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.panel-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2f3e34;
+  line-height: 1;
+}
+
+.panel-header-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8ea498, #cfdcd2);
+  flex: 0 0 auto;
+}
+
+.panel-header .hero-status {
+  margin: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+.app,
+.panel,
+.form-grid,
+.top-grid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.app,
+.panel,
+.form-grid,
+.top-grid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
 }
 
 </style>
@@ -1684,19 +1433,25 @@ input[type="date"] {
 <body>
   <div class="app">
     <div class="app-hero">
-      <div class="hero-copy">
-        <div class="app-chip">Smart Ledger</div>
-        <h1>Booking Manager</h1>
-        <p class="app-subtitle">Fast entry, export-ready records</p>
-      </div>
-      <div class="hero-status">
-        <span class="status-dot"></span>Local autosave on
-      </div>
-    </div>
+  <div class="hero-copy">
+    <h1>HostTrack Go</h1>
+    <p class="app-subtitle">Track bookings without a laptop</p>
+  </div>
+
+  <div class="hero-right">
+    <div class="app-chip">Smart Ledger</div>
+  </div>
+</div>
 
     <div class="top-grid">
       <div class="panel card input-panel">
-        <h2 id="formTitle">Add Record</h2>
+        <div class="panel-header">
+  <div id="formTitle" class="panel-header-title">Add Record</div>
+  <div class="hero-status">
+    <span class="status-dot"></span>
+    <span>Local autosave on</span>
+  </div>
+</div>
         <div class="form-grid">
           <div id="nightsField" class="stay-block full">
             <div class="stay-dates-grid">
@@ -1717,24 +1472,26 @@ input[type="date"] {
             </div>
           </div>
 
-          <div>
-            <label>Type</label>
-            <select id="type">
-              <option value="Revenue">Revenue</option>
-              <option value="Expense">Expense</option>
-            </select>
+          <div id="typeUnitRow" class="field-row full">
+            <div id="typeField">
+              <label>Type</label>
+              <select id="type">
+                <option value="Revenue">Revenue</option>
+                <option value="Expense">Expense</option>
+              </select>
+            </div>
+
+            <div id="unitField">
+              <label id="unitLabel">Property</label>
+              <select id="unit">
+                <option value="Studio One-1123">Bachelor’s Crib 1</option>
+                <option value="Studio Two-1122">Bachelor’s Crib 2</option>
+                <option value="Casa Tres16">Casa Tres16</option>
+              </select>
+            </div>
           </div>
 
-          <div>
-            <label id="unitLabel">Property</label>
-            <select id="unit">
-              <option value="Studio One-1123">Bachelor’s Crib 1</option>
-              <option value="Studio Two-1122">Bachelor’s Crib 2</option>
-              <option value="Casa Tres16">Casa Tres16</option>
-            </select>
-          </div>
           <div class="expense-inline-row" id="expenseInlineRow">
-
             <div id="expenseTypeField">
               <label>Expense Type</label>
               <select id="category">
@@ -1759,14 +1516,12 @@ input[type="date"] {
             <div id="vendorField">
               <label id="vendorLabel">Vendor</label>
               <input type="text" id="vendor" placeholder="Enter vendor" />
+              <div id="vendorSuggestions" class="vendor-chips-row hidden"></div>
             </div>
-
-            <div id="vendorSuggestions" class="vendor-chips-row"></div>
           </div>
 
           <div id="revenueAmountRow" class="full"></div>
-
-          <div id="expenseAmountNoteRow" class="field-row full hidden"></div>
+          <div id="expenseAmountNoteRow" class="full hidden"></div>
 
           <div id="amountField">
             <label>Amount</label>
@@ -1804,7 +1559,7 @@ input[type="date"] {
             </select>
           </div>
 
-          <div id="revenueInvoiceNoteRow" class="field-row full"></div>
+          <div id="revenueInvoiceNoteRow" class="full"></div>
 
           <div class="full">
             <div class="button-row">
@@ -1954,12 +1709,24 @@ input[type="date"] {
       { value: "Casa Tres16", label: "Casa Tres16" }
     ];
 
+    const vendorMap = {
+      "Assoc. Dues / Water bill": ["Condo Corp.", "Admin"],
+      "Real Property Tax": ["Government", "BIR"],
+      "Services - Cleaner Fee": ["Arnold", "Albert", "Jarry"],
+      "Services - Laundry": ["D' Laundry Spot"],
+      "Supplies - Hardware": ["Wilcon", "Robinson's Appliance"],
+      "Utilities - Electricity": ["MERALCO"],
+      "Utilities - Internet": ["Smart", "Globe", "Dito", "PLDT"]
+    };
+
     let records = [];
     let editingId = null;
 
     const els = {
       date: document.getElementById("date"),
       checkOutDate: document.getElementById("checkOutDate"),
+typeField: document.getElementById("typeField"),
+unitField: document.getElementById("unitField"),
       type: document.getElementById("type"),
       unit: document.getElementById("unit"),
       unitLabel: document.getElementById("unitLabel"),
@@ -1986,6 +1753,7 @@ input[type="date"] {
       expenseTypeField: document.getElementById("expenseTypeField"),
       expenseInlineRow: document.getElementById("expenseInlineRow"),
       noteField: document.getElementById("noteField"),
+      vendorSuggestions: document.getElementById("vendorSuggestions"),
 
       saveBtn: document.getElementById("saveBtn"),
       clearBtn: document.getElementById("clearBtn"),
@@ -2093,16 +1861,6 @@ input[type="date"] {
       return UNIT_OPTIONS.find(u => u.value === value)?.label || value;
     }
 
-    function getQuarter(dateStr) {
-      if (!dateStr) return "";
-      const month = new Date(dateStr).getMonth() + 1;
-      if (month >= 1 && month <= 3) return "Q1";
-      if (month >= 4 && month <= 6) return "Q2";
-      if (month >= 7 && month <= 9) return "Q3";
-      if (month >= 10 && month <= 12) return "Q4";
-      return "";
-    }
-
     function calculateNights() {
       const checkIn = els.date?.value;
       const checkOut = els.checkOutDate?.value;
@@ -2126,65 +1884,88 @@ input[type="date"] {
       return nights;
     }
 
-    function updateTypeFields() {
+    function forceInvoiceActive() {
       const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
-      if (invoiceEl) {
-        invoiceEl.disabled = false;
-        invoiceEl.readOnly = false;
-        invoiceEl.removeAttribute("disabled");
-        invoiceEl.removeAttribute("readonly");
-        invoiceEl.style.pointerEvents = "auto";
-        invoiceEl.style.opacity = "1";
-      }
-
-      const isRevenue = els.type.value === "Revenue";
-
-      els.unitLabel.textContent = isRevenue ? "Property" : "Unit";
-      els.vendorLabel.textContent = isRevenue ? "Guest Name" : "Vendor";
-
-      els.nightsField.classList.toggle("hidden", !isRevenue);
-      els.platformField.classList.toggle("hidden", !isRevenue);
-      els.declaredField.classList.toggle("hidden", !isRevenue);
-      els.expenseTypeField.classList.toggle("hidden", isRevenue);
-      if (els.expenseInlineRow) {
-        els.expenseInlineRow.classList.toggle("expense-mode", !isRevenue);
-      }
-
-      if (isRevenue) {
-        els.vendor.placeholder = "Enter guest name";
-        els.category.value = "";
-
-        els.revenueAmountRow.classList.remove("hidden");
-        els.revenueInvoiceNoteRow.classList.remove("hidden");
-        els.expenseAmountNoteRow.classList.add("hidden");
-
-        els.revenueAmountRow.innerHTML = "";
-        els.revenueInvoiceNoteRow.innerHTML = "";
-        els.revenueAmountRow.appendChild(els.amountField);
-        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
-        els.revenueInvoiceNoteRow.appendChild(els.noteField);
-      } else {
-        els.vendor.placeholder = "Enter vendor";
-        if (els.noOfNights) els.noOfNights.textContent = "0";
-        els.platform.value = "";
-        els.declared.value = "";
-        els.invoiceNumber.value = "";
-
-        els.revenueAmountRow.classList.add("hidden");
-        els.revenueInvoiceNoteRow.classList.add("hidden");
-        els.expenseAmountNoteRow.classList.remove("hidden");
-
-        els.expenseAmountNoteRow.innerHTML = "";
-        els.expenseAmountNoteRow.appendChild(els.invoiceField);
-        els.expenseAmountNoteRow.appendChild(els.amountField);
-        els.expenseAmountNoteRow.appendChild(els.noteField);
-        els.revenueInvoiceNoteRow.innerHTML = "";
-      }
-
-      forceExpenseLayoutRefresh();
-      updateInvoiceState();
-      updateVendorSuggestions();
+      if (!invoiceEl) return;
+      invoiceEl.disabled = false;
+      invoiceEl.readOnly = false;
+      invoiceEl.removeAttribute("disabled");
+      invoiceEl.removeAttribute("readonly");
+      invoiceEl.style.pointerEvents = "auto";
+      invoiceEl.style.opacity = "1";
     }
+
+   function forceExpenseLayoutRefresh() {
+  updateTypeFields();
+}
+
+   function updateTypeFields() {
+  forceInvoiceActive();
+
+  const isRevenue = els.type.value === "Revenue";
+
+  els.unitLabel.textContent = "Property";
+  els.vendorLabel.textContent = isRevenue ? "Guest Name" : "Vendor";
+
+  els.nightsField.classList.toggle("hidden", !isRevenue);
+
+  els.platformField.classList.toggle("hidden", !isRevenue);
+  els.declaredField.classList.toggle("hidden", !isRevenue);
+
+  els.expenseTypeField.classList.toggle("hidden", isRevenue);
+  els.expenseTypeField.style.display = isRevenue ? "none" : "flex";
+  els.vendorField.style.display = "flex";
+
+  if (els.expenseInlineRow) {
+    els.expenseInlineRow.classList.toggle("expense-mode", !isRevenue);
+    els.expenseInlineRow.style.display = isRevenue ? "block" : "grid";
+  }
+
+  if (isRevenue) {
+    els.vendor.placeholder = "Enter guest name";
+    els.category.value = "";
+    els.expenseTypeField.classList.add("hidden");
+    els.expenseTypeField.style.display = "none";
+
+    els.revenueAmountRow.classList.remove("hidden");
+    els.revenueInvoiceNoteRow.classList.remove("hidden");
+    els.expenseAmountNoteRow.classList.add("hidden");
+
+    els.revenueAmountRow.innerHTML = "";
+    els.revenueInvoiceNoteRow.innerHTML = "";
+    els.expenseAmountNoteRow.innerHTML = "";
+
+    els.revenueAmountRow.appendChild(els.platformField);
+    els.revenueAmountRow.appendChild(els.amountField);
+
+    els.revenueInvoiceNoteRow.appendChild(els.declaredField);
+    els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
+    els.revenueInvoiceNoteRow.appendChild(els.noteField);
+  } else {
+    els.vendor.placeholder = "Enter vendor";
+    els.expenseTypeField.classList.remove("hidden");
+    els.expenseTypeField.style.display = "flex";
+    if (els.noOfNights) els.noOfNights.textContent = "0";
+    els.platform.value = "";
+    els.declared.value = "";
+    els.invoiceNumber.value = "";
+
+    els.revenueAmountRow.classList.add("hidden");
+    els.revenueInvoiceNoteRow.classList.add("hidden");
+    els.expenseAmountNoteRow.classList.remove("hidden");
+
+    els.revenueAmountRow.innerHTML = "";
+    els.revenueInvoiceNoteRow.innerHTML = "";
+    els.expenseAmountNoteRow.innerHTML = "";
+
+    els.expenseAmountNoteRow.appendChild(els.invoiceField);
+    els.expenseAmountNoteRow.appendChild(els.amountField);
+    els.expenseAmountNoteRow.appendChild(els.noteField);
+  }
+
+  updateInvoiceState();
+  updateVendorSuggestions();
+}
 
     function updateInvoiceState() {
       const isRevenue = els.type.value === "Revenue";
@@ -2258,7 +2039,6 @@ input[type="date"] {
       els.saveBtn.textContent = "Save Record";
       els.cancelEditBtn.style.display = "none";
       updateTypeFields();
-      forceExpenseLayoutRefresh();
       updateNightsDisplay();
     }
 
@@ -2268,6 +2048,7 @@ input[type="date"] {
 
       editingId = id;
       els.date.value = rec.date || "";
+
       if (els.checkOutDate) {
         if (rec.checkOutDate) {
           els.checkOutDate.value = rec.checkOutDate;
@@ -2279,6 +2060,7 @@ input[type="date"] {
           els.checkOutDate.value = "";
         }
       }
+
       els.type.value = rec.type || "Revenue";
       els.unit.value = rec.unit || "Studio One-1123";
       if (els.noOfNights) els.noOfNights.textContent = String(rec.nights || 0);
@@ -2295,7 +2077,6 @@ input[type="date"] {
       els.cancelEditBtn.style.display = "inline-block";
 
       updateTypeFields();
-      forceExpenseLayoutRefresh();
       updateNightsDisplay();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -2329,6 +2110,7 @@ input[type="date"] {
     async function handleSave() {
       const data = getFormData();
       const validationMessage = getValidationMessage(data);
+
       if (validationMessage) {
         await showAlert(validationMessage, "Missing Information");
         return;
@@ -2455,7 +2237,7 @@ input[type="date"] {
         <div class="summary-box ${card.cls}">
           <div class="summary-header">
             <h3>${card.title}</h3>
-            ${card.title !== "Overall Net" ? '<span class="summary-net">Net</span>' : ''}
+            ${card.title !== "Overall Net" ? '<span class="summary-net">Net</span>' : ""}
           </div>
           <div class="value">${card.value}</div>
         </div>
@@ -2543,7 +2325,8 @@ input[type="date"] {
       )].sort((a, b) => b - a);
 
       const current = els.filterYear.value;
-      els.filterYear.innerHTML = `<option value="">Year</option>` +
+      els.filterYear.innerHTML =
+        `<option value="">Year</option>` +
         years.map(y => `<option value="${y}">${y}</option>`).join("");
 
       if (years.includes(current)) {
@@ -2644,46 +2427,6 @@ input[type="date"] {
       showToast("Expense exported");
     }
 
-    els.date.addEventListener("change", updateNightsDisplay);
-    els.checkOutDate.addEventListener("change", updateNightsDisplay);
-    els.type.addEventListener("change", updateTypeFields);
-    els.declared.addEventListener("change", updateInvoiceState);
-
-    els.saveBtn.addEventListener("click", async (e) => { e.preventDefault(); e.stopPropagation(); await handleSave(); });
-    els.clearBtn.addEventListener("click", clearForm);
-    els.cancelEditBtn.addEventListener("click", clearForm);
-    els.exportRevenueBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.confirmExportRevenue(); });
-    els.exportExpenseBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.confirmExportExpense(); });
-
-    els.search.addEventListener("input", render);
-    els.filterType.addEventListener("change", render);
-    els.filterUnit.addEventListener("change", render);
-    els.filterYear.addEventListener("change", render);
-    els.filterMonth.addEventListener("change", render);
-
-    els.resetFiltersBtn.addEventListener("click", () => {
-      els.search.value = "";
-      els.filterType.value = "";
-      els.filterUnit.value = "";
-      els.filterYear.value = "";
-      els.filterMonth.value = "";
-      render();
-    });
-
-    window.confirmExportExpense = async function confirmExportExpense() {
-      const ok = await showConfirm(`Export Expense CSV now?
-
-Make sure all expense records are final.`, "Export Expense");
-      if (ok) exportExpenseCSV();
-    };
-
-    window.confirmExportRevenue = async function confirmExportRevenue() {
-      const ok = await showConfirm(`Export Revenue CSV now?
-
-Make sure all booking statuses are final.`, "Export Revenue");
-      if (ok) exportRevenueCSV();
-    };
-
     function formatExportTime(value) {
       if (!value) return "-";
 
@@ -2736,59 +2479,6 @@ Make sure all booking statuses are final.`, "Export Revenue");
         els.appModalMessage.classList.add("scrollable");
       }, 0);
     }
-
-    document.getElementById("importCSVBtn").addEventListener("click", () => {
-      document.getElementById("csvFileInput").click();
-    });
-
-    document.getElementById("csvFileInput").addEventListener("change", async (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-
-      const ok = await showConfirm("Import this CSV and add the records?", "Import CSV");
-      if (!ok) {
-        event.target.value = "";
-        return;
-      }
-
-      try {
-        const text = await file.text();
-        const rows = parseCSV(text);
-        if (!rows.length) {
-          await showAlert("The selected CSV is empty.", "Import CSV");
-          event.target.value = "";
-          return;
-        }
-
-        const headers = rows[0].map(h => h.trim());
-        const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
-        let importedCount = 0;
-
-        dataRows.forEach(row => {
-          const item = importRowToRecord(headers, row);
-          if (item) {
-            records.unshift(item);
-            importedCount += 1;
-          }
-        });
-
-        if (!importedCount) {
-          showAlert("No compatible rows were found in this CSV.", "Import CSV");
-          event.target.value = "";
-          return;
-        }
-
-        saveToStorage();
-        refreshYearFilter();
-        render();
-        showToast(`Imported ${importedCount}`);
-      } catch (error) {
-        console.error(error);
-        await showAlert("Unable to import this CSV.", "Import CSV");
-      } finally {
-        event.target.value = "";
-      }
-    });
 
     function parseCSV(text) {
       const rows = [];
@@ -2876,6 +2566,7 @@ Make sure all booking statuses are final.`, "Export Revenue");
         return {
           id: generateId(),
           date,
+          checkOutDate: "",
           type: "Revenue",
           unit,
           nights: Number(map["Nights"] || 0),
@@ -2894,6 +2585,7 @@ Make sure all booking statuses are final.`, "Export Revenue");
       return {
         id: generateId(),
         date,
+        checkOutDate: "",
         type: "Expense",
         unit,
         nights: "",
@@ -2909,18 +2601,180 @@ Make sure all booking statuses are final.`, "Export Revenue");
       };
     }
 
-    function forceExpenseLayoutRefresh() {
-      const isRevenue = els.type.value === "Revenue";
-      if (isRevenue) {
-        els.revenueAmountRow.appendChild(els.amountField);
-        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
-        els.revenueInvoiceNoteRow.appendChild(els.noteField);
-      } else {
-        els.expenseAmountNoteRow.appendChild(els.invoiceField);
-        els.expenseAmountNoteRow.appendChild(els.amountField);
-        els.expenseAmountNoteRow.appendChild(els.noteField);
-      }
+    function updateVendorSuggestionsVisibility() {
+      const typeEl = document.getElementById("type");
+      const vendorEl = document.getElementById("vendor");
+      const container = document.getElementById("vendorSuggestions");
+      if (!container || !vendorEl || !typeEl) return;
+
+      const shouldShow =
+        typeEl.value === "Expense" &&
+        !vendorEl.value.trim() &&
+        container.childElementCount > 0;
+
+      container.classList.toggle("hidden", !shouldShow);
     }
+
+    function updateVendorSuggestions() {
+      const typeEl = document.getElementById("type");
+      const categoryEl = document.getElementById("category");
+      const vendorEl = document.getElementById("vendor");
+      const container = document.getElementById("vendorSuggestions");
+
+      if (!container || !vendorEl || !typeEl || !categoryEl) return;
+
+      container.innerHTML = "";
+
+      if (typeEl.value !== "Expense") {
+        container.classList.add("hidden");
+        return;
+      }
+
+      const options = vendorMap[categoryEl.value] || [];
+
+      options.forEach(v => {
+        const chip = document.createElement("span");
+        chip.className = "vendor-chip";
+        chip.textContent = v;
+        chip.addEventListener("click", () => {
+          vendorEl.value = v;
+          vendorEl.dispatchEvent(new Event("input", { bubbles: true }));
+          updateVendorSuggestionsVisibility();
+          vendorEl.focus();
+        });
+        container.appendChild(chip);
+      });
+
+      updateVendorSuggestionsVisibility();
+    }
+
+    els.date.addEventListener("change", updateNightsDisplay);
+    els.checkOutDate.addEventListener("change", updateNightsDisplay);
+    els.type.addEventListener("change", updateTypeFields);
+    els.declared.addEventListener("change", updateInvoiceState);
+
+    els.saveBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      await handleSave();
+    });
+
+    els.clearBtn.addEventListener("click", clearForm);
+    els.cancelEditBtn.addEventListener("click", clearForm);
+
+    els.exportRevenueBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.confirmExportRevenue();
+    });
+
+    els.exportExpenseBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.confirmExportExpense();
+    });
+
+    els.search.addEventListener("input", render);
+    els.filterType.addEventListener("change", render);
+    els.filterUnit.addEventListener("change", render);
+    els.filterYear.addEventListener("change", render);
+    els.filterMonth.addEventListener("change", render);
+
+    els.resetFiltersBtn.addEventListener("click", () => {
+      els.search.value = "";
+      els.filterType.value = "";
+      els.filterUnit.value = "";
+      els.filterYear.value = "";
+      els.filterMonth.value = "";
+      render();
+    });
+
+    window.confirmExportExpense = async function confirmExportExpense() {
+      const ok = await showConfirm(`Export Expense CSV now?
+
+Make sure all expense records are final.`, "Export Expense");
+      if (ok) exportExpenseCSV();
+    };
+
+    window.confirmExportRevenue = async function confirmExportRevenue() {
+      const ok = await showConfirm(`Export Revenue CSV now?
+
+Make sure all booking statuses are final.`, "Export Revenue");
+      if (ok) exportRevenueCSV();
+    };
+
+    document.getElementById("importCSVBtn").addEventListener("click", () => {
+      document.getElementById("csvFileInput").click();
+    });
+
+    document.getElementById("csvFileInput").addEventListener("change", async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const ok = await showConfirm("Import this CSV and add the records?", "Import CSV");
+      if (!ok) {
+        event.target.value = "";
+        return;
+      }
+
+      try {
+        const text = await file.text();
+        const rows = parseCSV(text);
+        if (!rows.length) {
+          await showAlert("The selected CSV is empty.", "Import CSV");
+          event.target.value = "";
+          return;
+        }
+
+        const headers = rows[0].map(h => h.trim());
+        const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
+        let importedCount = 0;
+
+        dataRows.forEach(row => {
+          const item = importRowToRecord(headers, row);
+          if (item) {
+            records.unshift(item);
+            importedCount += 1;
+          }
+        });
+
+        if (!importedCount) {
+          showAlert("No compatible rows were found in this CSV.", "Import CSV");
+          event.target.value = "";
+          return;
+        }
+
+        saveToStorage();
+        refreshYearFilter();
+        render();
+        showToast(`Imported ${importedCount}`);
+      } catch (error) {
+        console.error(error);
+        await showAlert("Unable to import this CSV.", "Import CSV");
+      } finally {
+        event.target.value = "";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      forceInvoiceActive();
+
+      const typeEl = document.getElementById("type");
+      const categoryEl = document.getElementById("category");
+      const vendorEl = document.getElementById("vendor");
+
+      if (typeEl) {
+        typeEl.addEventListener("change", () => {
+          setTimeout(forceInvoiceActive, 0);
+          updateVendorSuggestions();
+        });
+      }
+
+      if (categoryEl) categoryEl.addEventListener("change", updateVendorSuggestions);
+      if (vendorEl) vendorEl.addEventListener("input", updateVendorSuggestionsVisibility);
+
+      updateVendorSuggestions();
+    });
 
     loadFromStorage();
     refreshYearFilter();
@@ -2938,95 +2792,6 @@ Make sure all booking statuses are final.`, "Export Revenue");
 
     window.startEdit = startEdit;
     window.deleteRecord = deleteRecord;
-
-    (function(){
-      function forceInvoiceActive(){
-        const invoiceEl = document.getElementById("invoiceNumber") || document.getElementById("invoice");
-        if (!invoiceEl) return;
-        invoiceEl.disabled = false;
-        invoiceEl.readOnly = false;
-        invoiceEl.removeAttribute("disabled");
-        invoiceEl.removeAttribute("readonly");
-        invoiceEl.style.pointerEvents = "auto";
-        invoiceEl.style.opacity = "1";
-      }
-
-      document.addEventListener("DOMContentLoaded", function(){
-        forceInvoiceActive();
-        const typeEl = document.getElementById("type");
-        if (typeEl) {
-          typeEl.addEventListener("change", function(){
-            setTimeout(forceInvoiceActive, 0);
-          });
-        }
-      });
-
-      window.forceInvoiceActive = forceInvoiceActive;
-    })();
-
-    const vendorMap = {
-      "Assoc. Dues / Water bill": ["Condo Corp.", "Admin"],
-      "Real Property Tax": ["Government", "BIR"],
-      "Services - Cleaner Fee": ["Arnold", "Albert", "Jarry"],
-      "Services - Laundry": ["D' Laundry Spot"],
-      "Supplies - Hardware": ["Wilcon", "Robinson's Appliance"],
-      "Utilities - Electricity": ["MERALCO"],
-      "Utilities - Internet": ["Smart", "Globe", "Dito", "PLDT"]
-    };
-
-    function updateVendorSuggestionsVisibility() {
-      const typeEl = document.getElementById("type");
-      const vendorEl = document.getElementById("vendor");
-      const container = document.getElementById("vendorSuggestions");
-      if (!container || !vendorEl || !typeEl) return;
-
-      const shouldShow = typeEl.value === "Expense" && !vendorEl.value.trim() && container.childElementCount > 0;
-      container.classList.toggle("hidden", !shouldShow);
-    }
-
-    function updateVendorSuggestions() {
-      const typeEl = document.getElementById("type");
-      const categoryEl = document.getElementById("category");
-      const vendorEl = document.getElementById("vendor");
-      const container = document.getElementById("vendorSuggestions");
-
-      if (!container || !vendorEl || !typeEl || !categoryEl) return;
-
-      container.innerHTML = "";
-
-      if (typeEl.value !== "Expense") {
-        updateVendorSuggestionsVisibility();
-        return;
-      }
-
-      const options = vendorMap[categoryEl.value] || [];
-      options.forEach(v => {
-        const chip = document.createElement("span");
-        chip.className = "vendor-chip";
-        chip.textContent = v;
-        chip.addEventListener("click", () => {
-          vendorEl.value = v;
-          vendorEl.dispatchEvent(new Event("input", { bubbles: true }));
-          vendorEl.focus();
-          updateVendorSuggestionsVisibility();
-        });
-        container.appendChild(chip);
-      });
-
-      updateVendorSuggestionsVisibility();
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const typeEl = document.getElementById("type");
-      const categoryEl = document.getElementById("category");
-      const vendorEl = document.getElementById("vendor");
-
-      if (typeEl) typeEl.addEventListener("change", updateVendorSuggestions);
-      if (categoryEl) categoryEl.addEventListener("change", updateVendorSuggestions);
-      if (vendorEl) vendorEl.addEventListener("input", updateVendorSuggestionsVisibility);
-
-      updateVendorSuggestions();
-    });
   </script>
 </body>
 </html>
