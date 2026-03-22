@@ -100,6 +100,7 @@
 
     .app-chip {
       display: inline-flex;
+      justify-content: center;
       align-items: center;
       gap: 8px;
       padding: 7px 11px;
@@ -110,7 +111,8 @@
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.02em;
-      margin-bottom: 10px;
+      margin-bottom: 0;
+      width: 176px;
     }
 
     .app-chip::before {
@@ -160,7 +162,7 @@
       grid-template-columns: 1.4fr 1fr;
       gap: 18px;
       margin-bottom: 18px !important;
-      align-items: start;
+      align-items: stretch;
       min-width: 0;
     }
 
@@ -386,6 +388,11 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       min-width: 0;
+    }
+
+    .summary-panel,
+    .guest-strip-panel {
+      min-height: 360px;
     }
 
     .summary-box {
@@ -655,6 +662,20 @@
     .tag-casa {
       background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
       color: #234263;
+    }
+
+    .tag-incomplete {
+      background: #fff4d6;
+      color: #8a5a00;
+      margin-left: 6px;
+    }
+
+    tr.row-incomplete td {
+      background: #fffaf0;
+    }
+
+    tr.row-incomplete:hover td {
+      background: #fff5e3;
     }
 
     .action-group {
@@ -1229,6 +1250,51 @@
       .vendor-chips-row {
         margin-top: 6px;
       }
+
+      .hero-right {
+        width: auto;
+        min-width: 0;
+        align-items: flex-end;
+        gap: 2px;
+      }
+
+      .hero-toggle-btn {
+        width: 176px;
+        min-width: 176px;
+        padding: 7px 11px;
+      }
+
+      .app-chip {
+        width: 176px;
+      }
+
+      .guest-strip-shell {
+        justify-content: stretch;
+      }
+
+      .guest-strip-panel {
+        width: 100%;
+        min-width: 0;
+        padding: 18px;
+      }
+
+      .guest-strip-grid {
+        gap: 8px;
+      }
+
+      .guest-day-name {
+        font-size: 13px;
+      }
+
+      .guest-day-date {
+        font-size: 12px;
+      }
+
+      .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+
+      .guest-entry-btn {
+        font-size: 11px;
+      }
     }
 
     #typeUnitRow {
@@ -1296,7 +1362,7 @@
     #unitField select {
       background: #ffffff !important;
       border: 1px solid #d7ddd8 !important;
-      color: inherit !important;
+      color: #37423b !important;
     }
 
     #expenseTypeField.hidden,
@@ -1345,14 +1411,14 @@
 #expenseTypeField select {
   background: #ffffff !important;
   border: 1px solid #d7ddd8 !important;
-  color: inherit !important;
+  color: #37423b !important;
   opacity: 1 !important;
 }
 
 #vendorField input {
   background: #ffffff !important;
   border: 1px solid #d7ddd8 !important;
-  color: inherit !important;
+  color: #37423b !important;
 }
 
 .panel-header .hero-status {
@@ -1425,18 +1491,1636 @@ textarea {
   color: #8a948d !important;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  color: #37423b !important;
+}
+
+input.has-value,
+select.has-value,
+textarea.has-value {
+  color: #37423b !important;
+}
+
+/* keep placeholder faint */
 input::placeholder,
 textarea::placeholder {
   color: #8a948d !important;
 }
 
+/* Faint by default */
+input,
+textarea,
+select {
+  color: #8a948d !important;
+}
+
+/* Dark when user has value */
 input.has-value,
-select.has-value,
 textarea.has-value,
-input:focus,
-select:focus,
-textarea:focus {
+select.has-value {
   color: #2f3e34 !important;
+}
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      flex: 0 0 auto;
+      width: auto;
+      min-width: fit-content;
+    }
+
+    .hero-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 176px;
+      min-width: 176px;
+      padding: 7px 11px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(223,229,223,0.95);
+      color: #54645b;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .hero-toggle-btn:hover {
+      background: rgba(255,255,255,0.92);
+    }
+
+    .hero-toggle-btn.is-active {
+      background: linear-gradient(135deg, #d6e4f2, #c4d9ee);
+      border-color: #bdd0e2;
+      color: #34516b;
+      box-shadow: 0 8px 18px rgba(59, 130, 246, 0.10);
+    }
+
+    .guest-strip-shell {
+      display: none;
+      justify-content: stretch;
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .guest-strip-shell.show {
+      display: flex;
+    }
+
+    .guest-strip-panel {
+      width: 100%;
+      min-width: 0;
+      border-radius: 22px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94));
+      border: 1px solid rgba(223,229,223,0.95);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94));
+      border-radius: 22px;
+      padding: 18px;
+      border: 1px solid rgba(223,229,223,0.95);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.07);
+    }
+
+    .guest-strip-title { margin-bottom: 2px !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #2f3e34;
+    }
+
+    .guest-strip-title::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8ea498, #cfdcd2);
+      flex: 0 0 auto;
+    }
+
+    .guest-strip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .guest-day-card { height: 100% !important; min-height: 0 !important; border-radius: 14px !important; overflow: hidden !important; }
+
+    .guest-day-card.current {
+      background: linear-gradient(180deg, #fdfefe 0%, #f3f8fd 100%);
+      border-color: #c8d8e9;
+      box-shadow: 0 0 0 2px rgba(173, 207, 244, 0.22), 0 12px 24px rgba(59, 130, 246, 0.10);
+    }
+
+    .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+
+    .guest-day-card.current .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+
+    .guest-day-name {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .guest-day-date {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+
+    .guest-entry-btn {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: none;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: inherit;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.25;
+      cursor: pointer;
+    }
+
+    .guest-entry-btn:hover {
+      opacity: 0.88;
+      transform: none;
+    }
+
+    .guest-entry-btn:active {
+      transform: scale(0.99);
+    }
+
+    .guest-entry-unit {
+      display: inline-block;
+      margin-right: 4px;
+      font-weight: 800;
+    }
+
+    .guest-entry-unit.s1,
+    .guest-entry-name.s1 {
+      color: #ff6b6b;
+    }
+
+    .guest-entry-unit.s2,
+    .guest-entry-name.s2 {
+      color: #1f3cff;
+    }
+
+    .guest-entry-unit.casa,
+    .guest-entry-name.casa {
+      color: #ff6b6b;
+    }
+
+    .guest-empty {
+      color: #94a09a;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    tr.record-flash td {
+      background: #fff8d8 !important;
+      transition: background 0.2s ease;
+    }
+
+
+    /* Guest strip final overrides */
+    .hero-right {
+      width: auto !important;
+      min-width: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
+      gap: 2px !important;
+    }
+
+    .app-chip,
+    .hero-toggle-btn {
+      width: auto !important;
+      min-width: 0 !important;
+      padding: 7px 11px !important;
+      align-self: flex-end !important;
+      margin-bottom: 0 !important;
+    }
+
+    .guest-strip-shell {
+      display: none;
+      justify-content: flex-end !important;
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .guest-strip-shell.show {
+      display: flex !important;
+    }
+
+    .guest-strip-panel {
+      width: min(100%, 420px) !important;
+      min-width: 320px !important;
+      min-height: 292px !important;
+      max-height: 292px !important;
+      overflow: hidden !important;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94)) !important;
+      border-radius: 22px !important;
+      padding: 18px !important;
+      border: 1px solid rgba(223,229,223,0.95) !important;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.07) !important;
+    }
+
+    .guest-strip-month {
+      text-align: center;
+      margin: 0 0 10px;
+      line-height: 1.05;
+    }
+
+    .guest-strip-month-name {
+      font-size: 24px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      color: #2f3e34;
+    }
+
+    .guest-strip-month-year {
+      margin-top: 2px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #607168;
+    }
+
+    .guest-strip-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px !important;
+      min-width: 0;
+    }
+
+    .guest-day-card { height: 100% !important; min-height: 0 !important; border-radius: 14px !important; overflow: hidden !important; }
+
+    .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+
+    .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+
+    @media (max-width: 768px) {
+      .hero-right {
+        gap: 2px !important;
+      }
+
+      .app-chip,
+      .hero-toggle-btn {
+        width: auto !important;
+        min-width: 0 !important;
+      }
+
+      .guest-strip-shell {
+        justify-content: flex-end !important;
+      }
+
+      .guest-strip-panel {
+        width: min(100%, 420px) !important;
+        min-width: 0 !important;
+        min-height: 292px !important;
+        max-height: 292px !important;
+        padding: 16px !important;
+      }
+
+      .guest-strip-month-name {
+        font-size: 22px;
+      }
+
+      .guest-strip-month-year {
+        font-size: 12px;
+      }
+    }
+
+
+    /* Final guest-strip fixes */
+    #smartLedgerChip,
+    #guestStripToggleBtn {
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      padding: 7px 11px !important;
+      margin: 0 !important;
+    }
+
+    .hero-right {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-end !important;
+      gap: 2px !important;
+      width: auto !important;
+      min-width: fit-content !important;
+    }
+
+    #guestStripToggleBtn {
+      justify-content: center !important;
+    }
+
+    #guestStripShell {
+      display: none;
+      width: 100%;
+      margin: 0 0 18px;
+    }
+
+    #guestStripShell.show {
+      display: block !important;
+    }
+
+    #guestStripPanel {
+      width: 100% !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 18px !important;
+      border-radius: 22px !important;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94)) !important;
+      border: 1px solid rgba(223,229,223,0.95) !important;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.07) !important;
+    }
+
+    #summaryPanel {
+      min-height: 0 !important;
+      max-height: none !important;
+      height: auto !important;
+    }
+
+    .summary-panel,
+    .guest-strip-panel {
+      min-height: 0 !important;
+    }
+
+    #guestStripMonth { margin: -6px 0 4px !important;
+      text-align: center !important;
+      margin: 2px 0 10px !important;
+      line-height: 1.05 !important;
+      flex: 0 0 auto !important;
+    }
+
+    .guest-strip-month-name {
+      font-size: 24px !important;
+      font-weight: 750 !important;
+      letter-spacing: -0.02em !important;
+      color: #2f3e34 !important;
+    }
+
+    .guest-strip-month-year {
+      margin-top: 2px !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      color: #607168 !important;
+    }
+
+    #guestStripGrid {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 10px !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+      align-items: stretch !important;
+    }
+
+    .guest-day-card { height: 100% !important; min-height: 0 !important; border-radius: 14px !important; overflow: hidden !important; }
+
+    .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+
+    .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+
+    @media (max-width: 768px) {
+      #smartLedgerChip,
+      #guestStripToggleBtn {
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+      }
+
+      #guestStripPanel {
+        width: 100% !important;
+        padding: 18px !important;
+      }
+
+      .hero-right {
+        gap: 2px !important;
+      }
+    }
+
+
+    /* Final micro-fixes */
+    .hero-right {
+      gap: 1px !important;
+    }
+
+    #guestStripToggleBtn {
+      position: relative;
+      top: 2px;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    #guestStripPanel {
+      justify-content: flex-start !important;
+      padding-top: 4px !important;
+    }
+
+    #guestStripMonth { margin: -6px 0 4px !important;
+      margin: 0 0 8px !important;
+    }
+
+    #guestStripGrid {
+      margin-top: 0 !important;
+      align-content: start !important;
+    }
+
+    .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+
+    .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+
+
+    /* Pull guest panel contents further upward */
+    #guestStripPanel {
+      padding-top: 10px !important;
+    }
+
+    .guest-strip-title { margin-bottom: 2px !important;
+      margin: 0 0 2px !important;
+    }
+
+    #guestStripMonth { margin: -6px 0 4px !important;
+      margin: -2px 0 6px !important;
+    }
+
+    .guest-strip-month-name {
+      font-size: 22px !important;
+      line-height: 1 !important;
+    }
+
+    .guest-strip-month-year {
+      margin-top: 0 !important;
+      line-height: 1 !important;
+    }
+
+    #guestStripGrid {
+      margin-top: 0 !important;
+      align-content: start !important;
+    }
+
+    .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+
+    .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+
+
+    /* Guest strip card height correction */
+    #guestStripPanel {
+      padding-top: 8px !important;
+    }
+
+    #guestStripGrid {
+      align-items: stretch !important;
+      min-height: 210px !important;
+    }
+
+    .guest-day-card {
+      min-height: 210px !important;
+      height: 210px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      border-radius: 18px !important;
+    }
+
+    .guest-day-head {
+      min-height: 76px !important;
+      padding: 12px 10px 8px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+    }
+
+    .guest-day-body {
+      height: auto !important;
+      flex: 1 1 auto !important;
+      min-height: 134px !important;
+      padding: 10px 8px !important;
+      overflow: hidden !important;
+    }
+
+    .guest-entry-btn,
+    .guest-empty {
+      min-height: 30px !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+
+    /* Guest strip final layout correction */
+    #guestStripPanel {
+      padding-top: 6px !important;
+    }
+
+    .guest-strip-title {
+      margin: 0 0 2px !important;
+    }
+
+    #guestStripMonth {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      margin: -2px 0 4px !important;
+      line-height: 1 !important;
+      text-align: center !important;
+    }
+
+    .guest-strip-month-name {
+      font-size: 22px !important;
+      font-weight: 750 !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+    }
+
+    .guest-strip-month-year {
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      display: inline !important;
+    }
+
+    #guestStripGrid {
+      margin-top: 0 !important;
+      min-height: 214px !important;
+      align-items: stretch !important;
+    }
+
+    .guest-day-card {
+      min-height: 214px !important;
+      height: 214px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+    }
+
+    .guest-day-head {
+      min-height: 56px !important;
+      padding: 8px 10px 4px !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+    }
+
+    .guest-day-name {
+      font-size: 13px !important;
+      line-height: 1.05 !important;
+      text-align: left !important;
+      flex: 1 1 auto !important;
+    }
+
+    .guest-day-date {
+      font-size: 12px !important;
+      line-height: 1 !important;
+      text-align: right !important;
+      flex: 0 0 auto !important;
+      margin-top: 1px !important;
+    }
+
+    .guest-day-body {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 6px 8px 8px !important;
+      overflow: hidden !important;
+    }
+
+    .guest-entry-btn,
+    .guest-empty {
+      min-height: 28px !important;
+      display: flex !important;
+      align-items: center !important;
+      margin-bottom: 2px !important;
+    }
+
+
+    /* Guest strip prompt-based layout fix */
+    #guestStripPanel {
+      padding-top: 4px !important;
+      padding-bottom: 12px !important;
+    }
+
+    .guest-strip-title {
+      margin: 0 0 0 !important;
+      line-height: 1.05 !important;
+    }
+
+    #guestStripMonth {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      margin: -2px 0 2px !important;
+      line-height: 1 !important;
+      text-align: center !important;
+    }
+
+    .guest-strip-month-name {
+      font-size: 22px !important;
+      font-weight: 750 !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+    }
+
+    .guest-strip-month-year {
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      display: inline !important;
+      vertical-align: baseline !important;
+    }
+
+    #guestStripGrid {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+      align-items: stretch !important;
+      min-height: 214px !important;
+      gap: 12px !important;
+    }
+
+    .guest-day-card {
+      min-height: 214px !important;
+      height: 214px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+    }
+
+    .guest-day-head {
+      min-height: 44px !important;
+      padding: 8px 10px 2px !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+    }
+
+    .guest-day-name {
+      font-size: 11px !important;
+      line-height: 1.05 !important;
+      text-align: left !important;
+      flex: 1 1 auto !important;
+      margin: 0 !important;
+    }
+
+    .guest-day-date {
+      font-size: 11px !important;
+      line-height: 1 !important;
+      text-align: right !important;
+      flex: 0 0 auto !important;
+      margin: 0 !important;
+    }
+
+    .guest-day-body {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 2px 8px 8px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      gap: 2px !important;
+    }
+
+    .guest-entry-btn,
+    .guest-empty {
+      min-height: 24px !important;
+      display: flex !important;
+      align-items: center !important;
+      margin: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      line-height: 1.1 !important;
+    }
+
+    .guest-entry-unit,
+    .guest-entry-name {
+      line-height: 1.1 !important;
+    }
+
+
+    /* Remove gap between card header and guest list */
+    .guest-day-head {
+      min-height: 40px !important;
+      padding: 6px 10px 0 !important;
+      margin: 0 !important;
+    }
+
+    .guest-day-name,
+    .guest-day-date {
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1 !important;
+    }
+
+    .guest-day-body {
+      padding: 0 8px 8px !important;
+      margin: 0 !important;
+      gap: 0 !important;
+    }
+
+    .guest-entry-btn,
+    .guest-empty {
+      margin: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      min-height: 22px !important;
+      line-height: 1 !important;
+    }
+
+    .guest-entry-btn:first-child,
+    .guest-empty:first-child {
+      margin-top: 0 !important;
+    }
+
+
+    /* FINAL authoritative guest-strip spacing fix */
+    #guestStripPanel {
+      padding-top: 4px !important;
+      padding-bottom: 10px !important;
+    }
+
+    #guestStripMonth {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      margin: 0 0 2px !important;
+      text-align: center !important;
+      line-height: 1 !important;
+    }
+
+    #guestStripMonth .guest-strip-month-name,
+    .guest-strip-month-name {
+      margin: 0 !important;
+      font-size: 22px !important;
+      line-height: 1 !important;
+    }
+
+    #guestStripMonth .guest-strip-month-year,
+    .guest-strip-month-year {
+      margin: 0 !important;
+      font-size: 12px !important;
+      line-height: 1 !important;
+      display: inline !important;
+      vertical-align: baseline !important;
+    }
+
+    #guestStripGrid {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+      gap: 10px !important;
+      align-items: stretch !important;
+      align-content: stretch !important;
+    }
+
+    #guestStripGrid .guest-day-card {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      min-height: 214px !important;
+      height: 214px !important;
+      overflow: hidden !important;
+    }
+
+    #guestStripGrid .guest-day-head {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: flex-start !important;
+      min-height: 30px !important;
+      height: 30px !important;
+      padding: 0 8px !important;
+      margin: 0 !important;
+      gap: 8px !important;
+    }
+
+    #guestStripGrid .guest-day-name,
+    #guestStripGrid .guest-day-date {
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1 !important;
+    }
+
+    #guestStripGrid .guest-day-name {
+      flex: 1 1 auto !important;
+      text-align: left !important;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+    }
+
+    #guestStripGrid .guest-day-date {
+      flex: 0 0 auto !important;
+      text-align: right !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+    }
+
+    #guestStripGrid .guest-day-body {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: stretch !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 0 8px 6px !important;
+      margin: 0 !important;
+      gap: 0 !important;
+      overflow: hidden !important;
+    }
+
+    #guestStripGrid .guest-entry-btn,
+    #guestStripGrid .guest-empty {
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-height: 22px !important;
+      height: 22px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1 !important;
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
+    #guestStripGrid .guest-entry-btn + .guest-entry-btn {
+      margin-top: 2px !important;
+    }
+
+#guestStripGrid {
+  margin-top: 10px !important;
+}
+
+#guestStripGrid .guest-day-head {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  padding-top: 10px !important;
+}
+
+#guestStripGrid .guest-day-name,
+#guestStripGrid .guest-day-date {
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+
+/* Base border for ALL cards */
+#guestStripGrid .guest-day-card {
+  border: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* Extra highlight for center card */
+#guestStripGrid .guest-day-card.current {
+  border: 1px solid #c8d8e9 !important;
+  box-shadow: 
+    0 0 0 2px rgba(173, 207, 244, 0.25),
+    0 10px 24px rgba(59, 130, 246, 0.12) !important;
+}
+
+#guestStripGrid .guest-day-card {
+  border: 1.5px solid #bfc7cf !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04) !important;
+}
+
+#guestStripGrid .guest-day-card.current {
+  border: 1.5px solid #9fc3ea !important;
+
+  background: linear-gradient(
+    180deg,
+    #f8fbff 0%,
+    #eef5fd 100%
+  ) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(173, 207, 244, 0.55),
+    0 10px 22px rgba(59, 130, 246, 0.22),
+    0 22px 44px rgba(59, 130, 246, 0.16);
+
+  transform: translateY(-2px);
+}
+
+#guestStripGrid .guest-day-card {
+  position: relative;
+  border: 1.5px solid #d3d9df !important;
+  background: #ffffff !important;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.03),
+    0 6px 14px rgba(0,0,0,0.05) !important;
+  overflow: hidden;
+}
+
+/* Fade bottom of each card */
+#guestStripGrid .guest-day-card {
+  position: relative;
+  overflow: hidden; /* important */
+}
+
+#guestStripGrid .guest-day-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px; /* adjust fade height */
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.85) 70%,
+    rgba(255,255,255,1) 100%
+  );
+}
+
+#guestStripGrid .guest-day-body {
+  position: relative !important;
+  overflow: hidden !important;
+  padding-bottom: 28px !important;
+}
+
+#guestStripGrid .guest-day-body::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.65) 45%,
+    rgba(255,255,255,0.92) 78%,
+    rgba(255,255,255,1) 100%
+  );
+  z-index: 5;
+}
+
+#guestStripGrid .guest-day-card.current .guest-day-body::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(248,251,255,0) 0%,
+    rgba(248,251,255,0.65) 45%,
+    rgba(248,251,255,0.92) 78%,
+    rgba(248,251,255,1) 100%
+  ) !important;
+}
+
+#guestStripGrid .guest-day-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1.5px solid #c7cfd7 !important;
+  background: #ffffff !important;
+}
+
+/* fade the LOWER LEFT + LOWER RIGHT border */
+#guestStripGrid .guest-day-card::before,
+#guestStripGrid .guest-day-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 84px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#guestStripGrid .guest-day-card::before {
+  left: -1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.65) 45%,
+    rgba(255,255,255,1) 100%
+  );
+}
+
+#guestStripGrid .guest-day-card::after {
+  right: -1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.65) 45%,
+    rgba(255,255,255,1) 100%
+  );
+}
+
+/* match the center card's bluish background */
+#guestStripGrid .guest-day-card.current::before,
+#guestStripGrid .guest-day-card.current::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(248,251,255,0) 0%,
+    rgba(248,251,255,0.65) 45%,
+    rgba(248,251,255,1) 100%
+  ) !important;
+}
+
+/* Month (March) → slightly smaller */
+.guest-strip-month-name {
+  font-size: 14px !important;   /* was ~22–24 */
+}
+
+/* Year (2026) → bigger + darker */
+.guest-strip-month-year {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #2f3e34 !important;
+}
+
+/* Day name (Sunday) → slightly larger */
+#guestStripGrid .guest-day-name {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+/* Date number (22) → slightly larger */
+#guestStripGrid .guest-day-date {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+#guestStripMonth .guest-strip-month-name {
+  font-size: 18px !important;
+}
+
+#guestStripMonth {
+  margin: -2px 0 2px !important;
+}
+
+#guestStripGrid .guest-day-head {
+  background: #eef3f8;
+}
+
+#guestStripGrid .guest-day-card.current .guest-day-head {
+  background: #dbeafe;
+}
+
+/* SIDE CARDS (left & right) */
+#guestStripGrid .guest-day-card:not(.current) {
+  border: 1.5px solid #aeb7c2 !important;   /* stronger border */
+  background: #ffffff !important;
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.06),
+    0 6px 16px rgba(0,0,0,0.05) !important;
+}
+
+/* Side cards → lighter (grey) */
+#guestStripGrid .guest-day-card:not(.current) .guest-day-name,
+#guestStripGrid .guest-day-card:not(.current) .guest-day-date {
+  color: #9aa6b2 !important;
+}
+
+/* Center card → strong (dark) */
+#guestStripGrid .guest-day-card.current .guest-day-name,
+#guestStripGrid .guest-day-card.current .guest-day-date {
+  color: #2f3e34 !important;
+}
+
+color: #8f99a5;
+
+#guestStripGrid .guest-day-card {
+  position: relative;
+  border: 1.5px solid #c7cfd7 !important;
+  background: #ffffff !important;
+
+  /* softer, flatter like calendar */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+
+  border-radius: 12px !important; /* slightly tighter */
+}
+
+#guestStripGrid .guest-day-card.current {
+  border: 1.5px solid #9fc3ea !important;
+
+  background: linear-gradient(
+    180deg,
+    #f8fbff 0%,
+    #eef5fd 100%
+  ) !important;
+
+  box-shadow:
+    0 0 0 2px rgba(173, 207, 244, 0.35),
+    0 6px 16px rgba(59, 130, 246, 0.12) !important;
+
+  transform: none; /* remove floating effect */
+}
+
+#guestStripPanel {
+  padding-top: 16px !important;
+}
+
+
+
+/* Final guest strip cleanup patch */
+#guestStripPanel {
+  padding-top: 14px !important;
+}
+
+#guestStripMonth {
+  margin: 0 0 6px !important;
+}
+
+#guestStripMonth .guest-strip-month-name {
+  font-size: 18px !important;
+  line-height: 1 !important;
+}
+
+#guestStripMonth .guest-strip-month-year {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #2f3e34 !important;
+  line-height: 1 !important;
+}
+
+#guestStripGrid {
+  margin-top: 6px !important;
+  gap: 10px !important;
+}
+
+#guestStripGrid .guest-day-card {
+  position: relative !important;
+  min-height: 214px !important;
+  height: 214px !important;
+  border: 1.5px solid #c7cfd7 !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+  transform: none !important;
+  overflow: hidden !important;
+}
+
+#guestStripGrid .guest-day-card.current {
+  border: 1.5px solid #9fc3ea !important;
+  background: linear-gradient(180deg, #f8fbff 0%, #eef5fd 100%) !important;
+  box-shadow:
+    0 0 0 2px rgba(173, 207, 244, 0.35),
+    0 6px 16px rgba(59, 130, 246, 0.12) !important;
+  transform: none !important;
+}
+
+#guestStripGrid .guest-day-card::before,
+#guestStripGrid .guest-day-card::after,
+#guestStripGrid .guest-day-body::after {
+  content: none !important;
+  display: none !important;
+}
+
+#guestStripGrid .guest-day-head {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 8px 8px 0 !important;
+  background: #eef3f8 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+}
+
+#guestStripGrid .guest-day-card.current .guest-day-head {
+  background: #dbeafe !important;
+}
+
+#guestStripGrid .guest-day-name,
+#guestStripGrid .guest-day-date {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  flex: 0 0 auto !important;
+}
+
+#guestStripGrid .guest-day-card:not(.current) .guest-day-name,
+#guestStripGrid .guest-day-card:not(.current) .guest-day-date {
+  color: #8a948d !important;
+}
+
+#guestStripGrid .guest-day-card.current .guest-day-name,
+#guestStripGrid .guest-day-card.current .guest-day-date {
+  color: #2f3e34 !important;
+}
+
+#guestStripGrid .guest-day-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 4px 8px 6px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  gap: 2px !important;
+  scrollbar-width: none;
+}
+
+#guestStripGrid .guest-day-body::-webkit-scrollbar {
+  display: none;
+}
+
+#guestStripGrid .guest-entry-btn,
+#guestStripGrid .guest-empty {
+  min-height: 22px !important;
+  height: auto !important;
+  line-height: 1.05 !important;
+}
+
+
+
+    /* Final guest cards override */
+    #guestStripGrid {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 10px !important;
+      align-items: stretch !important;
+    }
+
+    #guestStripGrid .guest-day-card {
+      aspect-ratio: auto !important;
+      height: 200px !important;
+      min-height: 200px !important;
+      max-height: 200px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      border: 1.5px solid #c7cfd7 !important;
+      border-radius: 16px !important;
+      background: #ffffff !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+      overflow: hidden !important;
+      transform: none !important;
+    }
+
+    #guestStripGrid .guest-day-card.current {
+      border: 1.5px solid #9fc3ea !important;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef5fd 100%) !important;
+      box-shadow:
+        0 0 0 2px rgba(173, 207, 244, 0.35),
+        0 6px 16px rgba(59, 130, 246, 0.12) !important;
+      transform: none !important;
+    }
+
+    #guestStripGrid .guest-day-head {
+      min-height: 58px !important;
+      height: 58px !important;
+      padding: 12px 12px 8px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      background: #eef3f8 !important;
+    }
+
+    #guestStripGrid .guest-day-card.current .guest-day-head {
+      background: #dbeafe !important;
+    }
+
+    #guestStripGrid .guest-day-name,
+    #guestStripGrid .guest-day-date {
+      flex: 0 0 auto !important;
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1 !important;
+    }
+
+    #guestStripGrid .guest-day-body {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 10px 12px 12px !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      gap: 6px !important;
+    }
+
+    #guestStripGrid .guest-day-body::after,
+    #guestStripGrid .guest-day-card::before,
+    #guestStripGrid .guest-day-card::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    #guestStripGrid .guest-entry-btn,
+    #guestStripGrid .guest-empty {
+      min-height: 24px !important;
+      height: auto !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      line-height: 1.1 !important;
+    }
+
+    #guestStripGrid .guest-day-body::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    #guestStripGrid .guest-day-body::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.14);
+      border-radius: 999px;
+    }
+
+
+
+/* Final auto-fit guest strip card sizing */
+#guestStripPanel {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  min-height: 0 !important;
+}
+
+.guest-strip-title {
+  margin: 0 0 8px !important;
+}
+
+#guestStripMonth {
+  margin: 0 0 10px !important;
+  flex: 0 0 auto !important;
+}
+
+#guestStripGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  align-items: stretch !important;
+  align-content: stretch !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+#guestStripGrid .guest-day-card {
+  aspect-ratio: auto !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  border: 1.5px solid #c7cfd7 !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+#guestStripGrid .guest-day-card::before,
+#guestStripGrid .guest-day-card::after,
+#guestStripGrid .guest-day-body::after {
+  content: none !important;
+  display: none !important;
+}
+
+#guestStripGrid .guest-day-card.current {
+  border: 1.5px solid #9fc3ea !important;
+  background: linear-gradient(180deg, #f8fbff 0%, #eef5fd 100%) !important;
+  box-shadow: 0 0 0 2px rgba(173, 207, 244, 0.35), 0 6px 16px rgba(59, 130, 246, 0.12) !important;
+  transform: none !important;
+}
+
+#guestStripGrid .guest-day-head {
+  min-height: 58px !important;
+  height: 58px !important;
+  padding: 12px 12px 8px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  background: #eef3f8 !important;
+}
+
+#guestStripGrid .guest-day-card.current .guest-day-head {
+  background: #dbeafe !important;
+}
+
+#guestStripGrid .guest-day-name,
+#guestStripGrid .guest-day-date {
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  font-size: 13px !important;
+}
+
+#guestStripGrid .guest-day-card:not(.current) .guest-day-name,
+#guestStripGrid .guest-day-card:not(.current) .guest-day-date {
+  color: #8f99a5 !important;
+}
+
+#guestStripGrid .guest-day-card.current .guest-day-name,
+#guestStripGrid .guest-day-card.current .guest-day-date {
+  color: #2f3e34 !important;
+}
+
+#guestStripGrid .guest-day-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 12px !important;
+  margin: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+#guestStripGrid .guest-entry-btn,
+#guestStripGrid .guest-empty {
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  line-height: 1.15 !important;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#guestStripGrid .guest-day-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+#guestStripGrid .guest-day-body::-webkit-scrollbar-thumb {
+  background: rgba(143,153,165,0.35);
+  border-radius: 999px;
+}
+
+#guestStripPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.guest-strip-header {
+  flex: 0 0 auto; /* header takes only what it needs */
+}
+
+#guestStripGrid {
+  flex: 1 1 auto; /* this fills remaining space */
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#guestStripGrid .guest-day-card {
+  height: 100%;
+  min-height: 0;
+
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+#guestStripPanel {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+}
+
+.guest-strip-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  flex: 0 0 auto !important;
+  margin-bottom: 8px !important;
+}
+
+.guest-strip-title {
+  margin: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+#guestStripMonth {
+  margin: 0 !important;
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+}
+
+#guestStripGrid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  align-items: stretch !important;
+}
+
+#guestStripGrid .guest-day-card {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+#guestStripMonth {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+
+  width: 100% !important;
+  text-align: center !important;
+
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px !important;
+}
+
+#guestStripMonth .guest-strip-month-name {
+  font-weight: 700 !important;
+}
+
+#guestStripMonth .guest-strip-month-year {
+  font-weight: 500 !important;
+  opacity: 0.7;
+}
+
+
+
+/* Final thin day header strip override */
+#guestStripGrid .guest-day-head {
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 4px 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+#guestStripGrid .guest-day-name {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+#guestStripGrid .guest-day-date {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+#guestStripPanel {
+  background: linear-gradient(180deg, #e6f4ee 0%, #cfe8dc 45%, #a8cbb7 100%) !important;
+
+  border: 1px solid rgba(72, 128, 104, 0.55) !important;
+
+  box-shadow:
+    0 10px 24px rgba(72, 128, 104, 0.22),
+    0 0 0 1px rgba(120, 160, 140, 0.25) inset !important;
 }
 
 </style>
@@ -1450,9 +3134,17 @@ textarea:focus {
   </div>
 
   <div class="hero-right">
-    <div class="app-chip">Smart Ledger</div>
+    <div class="app-chip" id="smartLedgerChip">Smart Ledger</div>
+    <button class="hero-toggle-btn" id="guestStripToggleBtn" type="button">Guests</button>
   </div>
 </div>
+
+    <div class="guest-strip-shell" id="guestStripShell">
+      <div class="guest-strip-panel" id="guestStripPanel">        
+        <div class="guest-strip-month" id="guestStripMonth"></div>
+        <div class="guest-strip-grid" id="guestStripGrid"></div>
+      </div>
+    </div>
 
     <div class="top-grid">
       <div class="panel card input-panel">
@@ -1583,7 +3275,7 @@ textarea:focus {
         <div class="footer-note">Autosaves immediately after add, edit, and delete.</div>
       </div>
 
-      <div class="panel">
+      <div class="panel" id="summaryPanel">
         <h2>Summary</h2>
         <div class="summary-section" id="summaryCards"></div>
       </div>
@@ -1737,6 +3429,7 @@ textarea:focus {
     let records = [];
     let editingId = null;
     let activeQuarter = "";
+    let isGuestStripOpen = false;
 
     const els = {
       date: document.getElementById("date"),
@@ -1782,6 +3475,13 @@ textarea:focus {
       filterYear: document.getElementById("filterYear"),
       filterMonth: document.getElementById("filterMonth"),
       resetFiltersBtn: document.getElementById("resetFiltersBtn"),
+      guestStripToggleBtn: document.getElementById("guestStripToggleBtn"),
+      smartLedgerChip: document.getElementById("smartLedgerChip"),
+      guestStripShell: document.getElementById("guestStripShell"),
+      guestStripPanel: document.getElementById("guestStripPanel"),
+      guestStripMonth: document.getElementById("guestStripMonth"),
+      guestStripGrid: document.getElementById("guestStripGrid"),
+      summaryPanel: document.getElementById("summaryPanel"),
 
       summaryCards: document.getElementById("summaryCards"),
       recordsTableBody: document.getElementById("recordsTableBody"),
@@ -1812,12 +3512,19 @@ textarea:focus {
       return String(value ?? "").trim().toLowerCase();
     }
 
+    function normalizeImportDateKey(value) {
+      const parsed = parseImportDate(value);
+      return parsed ? parsed : normalizeForKey(value);
+    }
+
     function getRecordImportKey(record) {
+      const normalizedDate = normalizeImportDateKey(record.date);
+
       if (record.type === "Revenue") {
         return [
           "revenue",
           normalizeForKey(record.unit),
-          normalizeForKey(record.date),
+          normalizedDate,
           normalizeForKey(record.nights),
           normalizeForKey(record.vendor),
           normalizeForKey(record.amount),
@@ -1831,13 +3538,18 @@ textarea:focus {
       return [
         "expense",
         normalizeForKey(record.unit),
-        normalizeForKey(record.date),
+        normalizedDate,
         normalizeForKey(record.category),
         normalizeForKey(record.vendor),
         normalizeForKey(record.amount),
         normalizeForKey(record.invoiceNumber),
         normalizeForKey(record.note)
       ].join("|");
+    }
+
+    function isDuplicateImportRecord(record, existingKeys) {
+      if (!record || !record.date) return false;
+      return existingKeys.has(getRecordImportKey(record));
     }
 
     function formatDateDDMmmYY(dateStr) {
@@ -2360,9 +4072,12 @@ textarea:focus {
       }
 
       els.recordsTableBody.innerHTML = data.map(r => `
-        <tr>
+        <tr id="record-row-${r.id}" class="${r.incomplete ? "row-incomplete" : ""}">
           <td>${escapeHtml(formatDateDDMmmYY(r.date))}</td>
-          <td><span class="tag ${r.type === "Revenue" ? "tag-revenue" : "tag-expense"}">${escapeHtml(r.type)}</span></td>
+          <td>
+            <span class="tag ${r.type === "Revenue" ? "tag-revenue" : "tag-expense"}">${escapeHtml(r.type)}</span>
+            ${r.incomplete ? `<span class="tag tag-incomplete">Incomplete</span>` : ""}
+          </td>
           <td><span class="tag ${getUnitTagClass(r.unit)}">${escapeHtml(getUnitLabel(r.unit))}</span></td>
           <td>${escapeHtml(r.nights || "")}</td>
           <td>
@@ -2387,10 +4102,163 @@ textarea:focus {
       els.recordCount.textContent = `${data.length} ${word} shown`;
     }
 
+
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    function startOfLocalDay(date = new Date()) {
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+
+    function formatGuestDayName(date) {
+      return date.toLocaleDateString("en-US", { weekday: "long" });
+    }
+
+    function formatGuestDayNumber(date) {
+      return String(date.getDate());
+    }
+
+    function getGuestUnitCode(unit) {
+      if (unit === "Studio One-1123") return { label: "[S1]", cls: "s1" };
+      if (unit === "Studio Two-1122") return { label: "[S2]", cls: "s2" };
+      return { label: "[CASA]", cls: "casa" };
+    }
+
+    function getBookingCheckOutDate(record) {
+      if (record.checkOutDate) return record.checkOutDate;
+      const nights = Number(record.nights || 0);
+      if (!record.date || nights <= 0) return "";
+      const checkout = new Date(record.date + "T00:00:00");
+      checkout.setDate(checkout.getDate() + nights);
+      return checkout.toISOString().slice(0, 10);
+    }
+
+    function getGuestStripRecordsForDay(targetDate) {
+      const dayStart = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
+      return records
+        .filter(r => r.type === "Revenue" && safeText(r.vendor) && r.date)
+        .filter(r => {
+          const checkIn = new Date(r.date + "T00:00:00");
+          const checkOutValue = getBookingCheckOutDate(r);
+          if (!checkOutValue) return false;
+          const checkOut = new Date(checkOutValue + "T00:00:00");
+          return dayStart >= checkIn && dayStart < checkOut;
+        })
+        .sort((a, b) => {
+          const unitOrder = { "Studio One-1123": 1, "Studio Two-1122": 2, "Casa Tres16": 3 };
+          return (unitOrder[a.unit] || 9) - (unitOrder[b.unit] || 9) || safeText(a.vendor).localeCompare(safeText(b.vendor));
+        });
+    }
+
+
+
+    function syncHeroPillWidths() {
+      if (!els.smartLedgerChip || !els.guestStripToggleBtn) return;
+      const width = Math.ceil(els.smartLedgerChip.getBoundingClientRect().width);
+      if (!width) return;
+      els.guestStripToggleBtn.style.width = `${width}px`;
+      els.guestStripToggleBtn.style.minWidth = `${width}px`;
+      els.guestStripToggleBtn.style.maxWidth = `${width}px`;
+    }
+
+    function syncGuestStripHeight() {
+      if (!els.summaryPanel || !els.guestStripPanel) return;
+      const summaryHeight = Math.ceil(els.summaryPanel.getBoundingClientRect().height);
+      if (!summaryHeight) return;
+      els.guestStripPanel.style.height = `${summaryHeight}px`;
+      els.guestStripPanel.style.minHeight = `${summaryHeight}px`;
+      els.guestStripPanel.style.maxHeight = `${summaryHeight}px`;
+    }
+
+    function renderGuestStripMonth(centerDate) {
+      if (!els.guestStripMonth || !centerDate) return;
+
+      els.guestStripMonth.innerHTML = `
+        <div class="guest-strip-month-name">${centerDate.toLocaleDateString("en-US", { month: "long" })}</div>
+        <div class="guest-strip-month-year">${centerDate.getFullYear()}</div>
+      `;
+    }
+
+    function renderGuestStrip() {
+      if (!els.guestStripGrid) return;
+      const today = startOfLocalDay();
+      renderGuestStripMonth(today);
+      const days = [addDays(today, -1), today, addDays(today, 1)];
+
+      els.guestStripGrid.innerHTML = days.map((day, index) => {
+        const guests = getGuestStripRecordsForDay(day);
+        const guestLines = guests.length
+          ? guests.map(guest => {
+              const unit = getGuestUnitCode(guest.unit);
+              return `
+                <button class="guest-entry-btn" type="button" onclick="jumpToRecord('${guest.id}')">
+                  <span class="guest-entry-unit ${unit.cls}">${unit.label}</span>
+                  <span class="guest-entry-name ${unit.cls}">${escapeHtml(guest.vendor || "")}</span>
+                </button>
+              `;
+            }).join("")
+          : `<div class="guest-empty">No guests</div>`;
+
+        return `
+          <div class="guest-day-card ${index === 1 ? "current" : ""}">
+            <div class="guest-day-head">
+              <span class="guest-day-name">${escapeHtml(formatGuestDayName(day))}</span>
+              <span class="guest-day-date">${escapeHtml(formatGuestDayNumber(day))}</span>
+            </div>
+            <div class="guest-day-body">${guestLines}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function setGuestStripOpen(nextState) {
+      isGuestStripOpen = !!nextState;
+      if (els.guestStripShell) {
+        els.guestStripShell.classList.toggle("show", isGuestStripOpen);
+      }
+      if (els.guestStripToggleBtn) {
+        els.guestStripToggleBtn.classList.toggle("is-active", isGuestStripOpen);
+      }
+      if (isGuestStripOpen) {
+        syncHeroPillWidths();
+        syncGuestStripHeight();
+        renderGuestStrip();
+      }
+    }
+
+    function jumpToRecord(id) {
+      const targetRecord = records.find(r => r.id === id);
+      if (!targetRecord) return;
+
+      els.search.value = "";
+      els.filterType.value = "";
+      els.filterUnit.value = "";
+      els.filterYear.value = "";
+      els.filterMonth.value = "";
+      activeQuarter = "";
+      updateQuarterButtons();
+      render();
+
+      const rowEl = document.getElementById(`record-row-${id}`);
+      if (!rowEl) return;
+
+      rowEl.classList.add("record-flash");
+      rowEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => rowEl.classList.remove("record-flash"), 2600);
+    }
+
     function render() {
       const filtered = getFilteredRecords();
       renderSummary(filtered);
       renderTable(filtered);
+      if (isGuestStripOpen) {
+        syncHeroPillWidths();
+        syncGuestStripHeight();
+        renderGuestStrip();
+      }
     }
 
     function refreshYearFilter() {
@@ -2583,8 +4451,62 @@ function getQuarterFromDate(dateStr) {
       return "";
     }
 
-    function importRowToRecord(headers, row) {
-      const h = headers.map(h => h.trim().toLowerCase().replace(/^\ufeff/, ""));
+    function normalizeHeaderCell(value) {
+      return String(value ?? "").trim().toLowerCase().replace(/^\ufeff/, "");
+    }
+
+    function detectImportHeader(rows) {
+      let bestIndex = -1;
+      let bestKind = "";
+      let bestScore = 0;
+
+      rows.forEach((row, index) => {
+        const normalized = row.map(normalizeHeaderCell);
+
+        const hasUnit = normalized.includes("unit") || normalized.includes("property");
+        const hasAmount = normalized.includes("amount");
+        const hasDate = normalized.includes("date") || normalized.includes("date of stay") || normalized.includes("date of expense");
+
+        if (!hasUnit || !hasAmount || !hasDate) return;
+
+        const revenueScore =
+          (normalized.includes("guest name") ? 2 : 0) +
+          (normalized.includes("platform") ? 2 : 0) +
+          ((normalized.includes("declared?") || normalized.includes("declared")) ? 2 : 0) +
+          ((normalized.includes("no. of night") || normalized.includes("no of night") || normalized.includes("number of nights") || normalized.includes("nights")) ? 2 : 0) +
+          ((normalized.includes("inv. no.") || normalized.includes("invoice no.") || normalized.includes("invoice number")) ? 1 : 0) +
+          (normalized.includes("note") || normalized.includes("notes") ? 1 : 0);
+
+        const expenseScore =
+          (normalized.includes("expense type") ? 3 : 0) +
+          (normalized.includes("vendor") ? 2 : 0) +
+          ((normalized.includes("inv. no.") || normalized.includes("invoice no.") || normalized.includes("invoice number")) ? 1 : 0) +
+          (normalized.includes("note") || normalized.includes("notes") ? 1 : 0);
+
+        let kind = "";
+        let score = 0;
+
+        if (revenueScore >= expenseScore && revenueScore >= 4) {
+          kind = "Revenue";
+          score = revenueScore;
+        } else if (expenseScore >= 4) {
+          kind = "Expense";
+          score = expenseScore;
+        }
+
+        if (score > bestScore) {
+          bestIndex = index;
+          bestKind = kind;
+          bestScore = score;
+        }
+      });
+
+      if (bestIndex === -1 || !bestKind) return null;
+      return { index: bestIndex, kind: bestKind };
+    }
+
+    function importRowToRecord(headers, row, forcedType = "") {
+      const h = headers.map(normalizeHeaderCell);
 
       const get = (...names) => {
         for (const name of names) {
@@ -2594,14 +4516,20 @@ function getQuarterFromDate(dateStr) {
         return "";
       };
 
-      const isRevenue =
-        h.includes("guest name") &&
-        h.includes("platform") &&
-        (h.includes("declared?") || h.includes("declared"));
+      const isRevenue = forcedType
+        ? forcedType === "Revenue"
+        : (
+            h.includes("guest name") &&
+            h.includes("platform") &&
+            (h.includes("declared?") || h.includes("declared"))
+          );
 
-      const isExpense =
-        h.includes("expense type") ||
-        (h.includes("vendor") && !isRevenue);
+      const isExpense = forcedType
+        ? forcedType === "Expense"
+        : (
+            h.includes("expense type") ||
+            (h.includes("vendor") && !isRevenue)
+          );
 
       if (!isRevenue && !isExpense) return null;
 
@@ -2611,25 +4539,26 @@ function getQuarterFromDate(dateStr) {
         unitLabel;
 
       const date = parseImportDate(get("date", "date of stay", "date of expense"));
+      const amount = Number(String(get("amount")).replace(/[₱,\s]/g, ""));
 
-      const amount = Number(
-        String(get("amount")).replace(/[₱,\s]/g, "")
-      );
-
-      if (!date || !amount) return null;
+      // Only truly unusable rows should be skipped
+      if (!date || !Number.isFinite(amount) || amount <= 0) return null;
 
       if (isRevenue) {
         let nightsValue = get("no. of night", "no of night", "no. of nights", "no of nights", "number of nights", "nights", "stay nights");
 
         if (!safeText(nightsValue)) {
-          const nightIndex = h.findIndex(name =>
-            name.includes("night") ||
-            name.includes("nights")
-          );
-          if (nightIndex >= 0) {
-            nightsValue = row[nightIndex] ?? "";
-          }
+          const nightIndex = h.findIndex(name => name.includes("night"));
+          if (nightIndex >= 0) nightsValue = row[nightIndex] ?? "";
         }
+
+        const guestName = safeText(get("guest name"));
+        const nights = Number(String(nightsValue).replace(/[^0-9.-]/g, "")) || 0;
+
+        const incompleteFields = [];
+        if (!unit) incompleteFields.push("property");
+        if (!guestName) incompleteFields.push("guest");
+        if (!nights) incompleteFields.push("nights");
 
         return {
           id: generateId(),
@@ -2638,16 +4567,26 @@ function getQuarterFromDate(dateStr) {
           checkOutDate: "",
           type: "Revenue",
           unit,
-          nights: Number(String(nightsValue).replace(/[^0-9.-]/g, "")) || 0,
-          vendor: safeText(get("guest name")),
+          nights,
+          vendor: guestName,
           platform: safeText(get("platform")),
           declared: safeText(get("declared?", "declared")),
           invoiceNumber: safeText(get("inv. no.", "invoice no.", "invoice number")),
           category: "",
           amount,
-          note: safeText(get("note", "notes"))
+          note: safeText(get("note", "notes")),
+          incomplete: incompleteFields.length > 0,
+          incompleteFields
         };
       }
+
+      const expenseType = safeText(get("expense type", "category"));
+      const vendor = safeText(get("vendor"));
+
+      const incompleteFields = [];
+      if (!unit) incompleteFields.push("property");
+      if (!expenseType) incompleteFields.push("expense type");
+      if (!vendor) incompleteFields.push("vendor");
 
       return {
         id: generateId(),
@@ -2657,14 +4596,77 @@ function getQuarterFromDate(dateStr) {
         type: "Expense",
         unit,
         nights: "",
-        vendor: safeText(get("vendor")),
+        vendor,
         platform: "",
         declared: "",
         invoiceNumber: safeText(get("inv. no.", "invoice no.", "invoice number")),
-        category: safeText(get("expense type", "category")),
+        category: expenseType,
         amount,
-        note: safeText(get("note", "notes"))
+        note: safeText(get("note", "notes")),
+        incomplete: incompleteFields.length > 0,
+        incompleteFields
       };
+    }
+
+    function describeImportRow(row) {
+      const cells = (row || []).map(cell => String(cell || "").trim()).filter(Boolean);
+      if (!cells.length) return "(blank row)";
+      return cells.slice(0, 5).join(" | ");
+    }
+
+    function isSpreadsheetGarbageCell(value) {
+      const cell = String(value || "").trim();
+      if (!cell) return true;
+      const upper = cell.toUpperCase();
+      return (
+        upper === "#REF!" ||
+        upper === "#DIV/0!" ||
+        upper === "#VALUE!" ||
+        upper === "#N/A" ||
+        upper === "N/A" ||
+        upper === "_" ||
+        upper === "-" ||
+        upper === "—" ||
+        upper === "|" ||
+        upper === "_ _" ||
+        upper === "_ |_ _ |" ||
+        /^_+(\s*\|\s*_+)*$/.test(cell)
+      );
+    }
+
+    function getImportCellValue(headers, row, ...names) {
+      const normalizedHeaders = headers.map(normalizeHeaderCell);
+      for (const name of names) {
+        const idx = normalizedHeaders.indexOf(name.toLowerCase());
+        if (idx >= 0) return safeText(row[idx]);
+      }
+      return "";
+    }
+
+    function buildSkippedImportEntry(headers, row, kind) {
+      const cells = (row || []).map(cell => safeText(cell));
+      const nonGarbageCells = cells.filter(cell => !isSpreadsheetGarbageCell(cell));
+      if (!nonGarbageCells.length) return null;
+
+      const dateRaw = getImportCellValue(headers, row, "date", "date of stay", "date of expense");
+      const parsedDate = parseImportDate(dateRaw);
+      const dateLabel = parsedDate ? formatDateDDMmmYY(parsedDate) : safeText(dateRaw);
+      const amountRaw = getImportCellValue(headers, row, "amount");
+      const amountNumber = Number(String(amountRaw).replace(/[₱,\s]/g, ""));
+      const amountLabel = Number.isFinite(amountNumber) && amountNumber > 0 ? peso(amountNumber) : "";
+
+      // Only report rows that look like real entries but are unusable due to missing date/amount
+      if (!dateLabel && !amountLabel) return null;
+
+      if (kind === "Revenue") {
+        const guest = getImportCellValue(headers, row, "guest name");
+        const preview = [dateLabel || "(no date)", guest || "(no guest)", amountLabel || "(no amount)"].join(" | ");
+        return { reason: "Unusable revenue row", preview };
+      }
+
+      const expenseType = getImportCellValue(headers, row, "expense type", "category");
+      const preview = [dateLabel || "(no date)", expenseType || "(no expense type)", amountLabel || "(no amount)"].join(" | ");
+      return { reason: "Unusable expense row", preview };
     }
 
     function updateVendorSuggestionsVisibility() {
@@ -2724,8 +4726,8 @@ function getQuarterFromDate(dateStr) {
 
         if (field.tagName === "SELECT") {
           hasValue = value !== "";
-        } else if (type === "number") {
-          hasValue = value !== "" && value !== "0" && value !== "0.00";
+        } else if (type === "date" || type === "number" || type === "text" || field.tagName === "TEXTAREA") {
+          hasValue = value !== "";
         } else {
           hasValue = value !== "";
         }
@@ -2796,6 +4798,10 @@ function getQuarterFromDate(dateStr) {
       render();
     });
 
+    els.guestStripToggleBtn.addEventListener("click", () => {
+      setGuestStripOpen(!isGuestStripOpen);
+    });
+
     window.confirmExportAllRevenue = async function confirmExportAllRevenue() {
       const ok = await showConfirm(`Export ALL revenue records for backup?\n\nThis includes all current revenue records.`, "Revenue Backup");
       if (ok) exportAllRevenueCSV();
@@ -2858,20 +4864,45 @@ function getQuarterFromDate(dateStr) {
           return;
         }
 
-        const headers = rows[0].map(h => h.trim());
-        const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
+        const detectedHeader = detectImportHeader(rows);
+
+        if (!detectedHeader) {
+          await showAlert("No compatible rows were found in this CSV.", "Import CSV");
+          event.target.value = "";
+          return;
+        }
+
+        const headers = rows[detectedHeader.index].map(h => h.trim());
+        const dataRows = rows
+          .slice(detectedHeader.index + 1)
+          .filter(row => row.some(cell => String(cell || "").trim() !== ""));
         let importedCount = 0;
         let skippedCount = 0;
+        const skippedRows = [];
         const existingKeys = new Set(records.map(getRecordImportKey));
 
         dataRows.forEach(row => {
-          const item = importRowToRecord(headers, row);
-          if (!item) return;
+          const item = importRowToRecord(headers, row, detectedHeader.kind);
+
+          if (!item) {
+            const skippedEntry = buildSkippedImportEntry(headers, row, detectedHeader.kind);
+            if (skippedEntry) {
+              skippedCount += 1;
+              skippedRows.push(skippedEntry);
+            }
+            return;
+          }
 
           const key = getRecordImportKey(item);
 
-          if (existingKeys.has(key)) {
+          if (isDuplicateImportRecord(item, existingKeys)) {
             skippedCount += 1;
+            skippedRows.push({
+              reason: "Duplicate",
+              preview: item.type === "Revenue"
+                ? `${formatDateDDMmmYY(item.date)} | ${item.vendor || "(no guest)"} | ${peso(item.amount)}`
+                : `${formatDateDDMmmYY(item.date)} | ${item.category || "(no expense type)"} | ${item.vendor || "(no vendor)"} | ${peso(item.amount)}`
+            });
             return;
           }
 
@@ -2881,7 +4912,19 @@ function getQuarterFromDate(dateStr) {
         });
 
         if (!importedCount && skippedCount > 0) {
-          await showAlert(`No new rows were imported.\n\nSkipped duplicates: ${skippedCount}`, "Import CSV");
+          const skippedPreview = skippedRows
+            .slice(0, 20)
+            .map((entry, index) => `${index + 1}. ${entry.reason}: ${entry.preview}`)
+            .join("\n");
+
+          const moreNote = skippedRows.length > 20
+            ? `\n\n...and ${skippedRows.length - 20} more skipped row(s).`
+            : "";
+
+          await showAlert(
+            `No new rows were imported.\n\nSkipped: ${skippedCount}\n\n${skippedPreview}${moreNote}`,
+            "Import CSV"
+          );
           event.target.value = "";
           return;
         }
@@ -2897,11 +4940,24 @@ function getQuarterFromDate(dateStr) {
         render();
         refreshFieldValueStates();
 
-        if (skippedCount > 0) {
-          showToast(`Imported ${importedCount}, skipped ${skippedCount}`);
-        } else {
-          showToast(`Imported ${importedCount}`);
+        showToast(skippedCount > 0 ? `Imported ${importedCount}, skipped ${skippedCount}` : `Imported ${importedCount}`);
+
+        if (skippedRows.length > 0) {
+          const skippedPreview = skippedRows
+            .slice(0, 20)
+            .map((entry, index) => `${index + 1}. ${entry.reason}: ${entry.preview}`)
+            .join("\n");
+
+          const moreNote = skippedRows.length > 20
+            ? `\n\n...and ${skippedRows.length - 20} more skipped row(s).`
+            : "";
+
+          await showAlert(
+            `Imported: ${importedCount}\nSkipped: ${skippedCount}\n\n${skippedPreview}${moreNote}`,
+            "Skipped Import Rows"
+          );
         }
+
       } catch (error) {
         console.error(error);
         await showAlert("Unable to import this CSV.", "Import CSV");
@@ -2932,10 +4988,33 @@ function getQuarterFromDate(dateStr) {
       refreshFieldValueStates();
     });
 
+function updateFieldState(el) {
+  if (!el) return;
+
+  const hasValue = el.value && el.value !== "";
+
+  if (hasValue) {
+    el.classList.add("has-value");
+  } else {
+    el.classList.remove("has-value");
+  }
+}
+
+// Apply to all fields
+document.querySelectorAll("input, textarea, select").forEach(el => {
+
+  const update = () => updateFieldState(el);
+
+  el.addEventListener("input", update);
+  el.addEventListener("change", update);
+
+  update(); // initial
+});
 
     loadFromStorage();
     refreshYearFilter();
     clearForm();
+    setGuestStripOpen(false);
     render();
     updateQuarterButtons();
     bindFieldValueStateListeners();
@@ -2951,6 +5030,7 @@ function getQuarterFromDate(dateStr) {
 
     window.startEdit = startEdit;
     window.deleteRecord = deleteRecord;
+    window.jumpToRecord = jumpToRecord;
   </script>
 </body>
 </html>
