@@ -461,6 +461,41 @@
       max-width: 100%;
     }
 
+    .quarter-wrap {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+    .quarter-btn {
+      flex: 0 0 auto;
+      width: auto !important;
+      min-width: 44px;
+      height: 52px;
+      padding: 0 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #ffffff !important;
+      color: #4b5a52;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: none;
+      transition: all 0.15s ease;
+    }
+
+    .quarter-btn:hover {
+      background: #f3f6f8 !important;
+    }
+
+    .quarter-btn.active {
+      background: #d6dee8 !important;
+      color: #2f3e34 !important;
+      border-color: #c3ceda !important;
+    }
+
     .records-header {
       display: flex;
       justify-content: space-between;
@@ -476,21 +511,16 @@
     .records-header-left {
       min-width: 0;
       flex: 1 1 auto;
-    }
-
-    .export-meta-inline {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #7a877f;
-      line-height: 1.35;
+      display: flex;
+      align-items: flex-start;
     }
 
     .export-actions-side {
       display: grid;
-      grid-template-rows: repeat(2, minmax(0, 1fr));
-      gap: 5px;
-      flex: 0 0 112px;
-      align-self: stretch;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: minmax(0, 1fr);
+      gap: 6px;
+      flex: 0 0 220px;
     }
 
     .btn-export {
@@ -516,6 +546,20 @@
 
     .btn-export:active {
       background: #d8dde3;
+    }
+
+    .btn-danger-soft {
+      background: #f4d6d8;
+      color: #7a2f36;
+      border: 1px solid #ddb2b7;
+    }
+
+    .btn-danger-soft:hover {
+      background: #ecc7cb;
+    }
+
+    .btn-danger-soft:active {
+      background: #e4bcc1;
     }
 
     .table-wrap {
@@ -581,8 +625,8 @@
       min-width: 148px;
     }
 
-    thead th:nth-child(10),
-    tbody td:nth-child(10) {
+    thead th:nth-child(9),
+    tbody td:nth-child(9) {
       min-width: 150px;
     }
 
@@ -612,9 +656,6 @@
       background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
       color: #234263;
     }
-
-    .tag-new { background: #fff4ea; color: #8a5a2e; }
-    .tag-exported { background: #eaf7ee; color: #356347; }
 
     .action-group {
       display: flex;
@@ -726,18 +767,6 @@
       margin: 0 !important;
     }
 
-    .import-link {
-      font-size: 12px;
-      color: #8a948e;
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    .import-link:hover {
-      color: #66726c;
-    }
-
     #csvFileInput {
       display: none;
     }
@@ -793,6 +822,22 @@
     .panel.filters-panel button {
       background: #f1f5f9 !important;
       border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+
+    .panel.filters-panel .quarter-btn {
+      background: #ffffff !important;
+      color: #4b5a52 !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+
+    .panel.filters-panel .quarter-btn:hover {
+      background: #f3f6f8 !important;
+    }
+
+    .panel.filters-panel .quarter-btn.active {
+      background: #d6dee8 !important;
+      color: #2f3e34 !important;
+      border-color: #c3ceda !important;
     }
 
     .input-panel .form-grid > div > input,
@@ -982,6 +1027,20 @@
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       }
 
+      .quarter-wrap {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 6px;
+      }
+
+      .quarter-btn {
+        min-width: 40px;
+        height: 52px;
+        padding: 0 8px;
+        border-radius: 12px;
+        font-size: 12px;
+      }
+
       .filters-grid > div,
       .form-grid > div {
         min-width: 0;
@@ -1032,20 +1091,16 @@
       .records-header-left {
         min-width: 0;
         flex: 1 1 auto;
-      }
-
-      .export-meta-inline {
-        margin-top: 6px;
-        font-size: 11px;
-        color: #7a877f;
-        line-height: 1.35;
+        display: flex;
+        align-items: flex-start;
       }
 
       .export-actions-side {
         display: grid;
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-        gap: 5px;
-        flex: 0 0 112px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, auto));
+        gap: 6px;
+        flex: 0 0 220px;
         align-self: stretch;
       }
 
@@ -1241,7 +1296,7 @@
     #unitField select {
       background: #ffffff !important;
       border: 1px solid #d7ddd8 !important;
-      color: #37423b !important;
+      color: inherit !important;
     }
 
     #expenseTypeField.hidden,
@@ -1253,7 +1308,6 @@
       display: none !important;
     }
 
-/* EXPENSE FIX - clean 2 column layout */
 #expenseInlineRow {
   grid-column: 1 / -1;
   display: grid;
@@ -1270,42 +1324,12 @@
   min-width: 0;
 }
 
-/* remove fake space issue */
 #vendorSuggestions {
   grid-column: 1 / -1;
 }
 
-#expenseInlineRow.expense-mode #expenseTypeField,
-#expenseInlineRow.expense-mode #vendorField {
-  width: 100%;
-  min-width: 0;
-}
-
-/* remove fake space issue */
-#vendorSuggestions {
-  grid-column: 1 / -1;
-}
-
-/* hide vendor full width when not needed */
 #expenseInlineRow:not(.expense-mode) #vendorField {
   grid-column: 1 / -1;
-}
-
-/* === EXPENSE FINAL FIX === */
-#expenseInlineRow {
-  grid-column: 1 / -1;
-  display: grid;
-  gap: 14px;
-}
-
-#expenseInlineRow.expense-mode {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-#expenseInlineRow.expense-mode #expenseTypeField,
-#expenseInlineRow.expense-mode #vendorField {
-  width: 100%;
-  min-width: 0;
 }
 
 #vendorSuggestions:empty {
@@ -1318,63 +1342,35 @@
   grid-column: auto !important;
 }
 
-/* === FIX: Expense Type color === */
 #expenseTypeField select {
   background: #ffffff !important;
   border: 1px solid #d7ddd8 !important;
-  color: #37423b !important;
+  color: inherit !important;
   opacity: 1 !important;
 }
 
-/* also ensure vendor matches */
 #vendorField input {
   background: #ffffff !important;
   border: 1px solid #d7ddd8 !important;
-  color: #37423b !important;
+  color: inherit !important;
 }
-
-/* Add Record header alignment */
 
 .panel-header .hero-status {
   display: inline-flex;
   align-items: center;
-  height: 36px; /* same height */
+  height: 36px;
   padding: 0 12px;
 }
-
 
 .panel.card.input-panel > .panel-header + .form-grid {
   margin-top: 0 !important;
 }
-/* ensure no extra spacing from h2 */
 
 .panel-header {
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
   align-items: center !important;
-  margin-bottom: 12px;
-}
-
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-
-.panel-header .hero-status {
-  display: inline-flex;
-  align-items: center;
-}
-
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 12px;
 }
 
@@ -1414,18 +1410,33 @@ html, body {
   overflow-x: hidden;
 }
 
-.app,
-.panel,
-.form-grid,
-.top-grid {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 input,
 select,
 textarea {
   font-size: 16px;
+}
+
+
+
+/* Uniform field tone: faint when empty, dark when filled */
+input,
+select,
+textarea {
+  color: #8a948d !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8a948d !important;
+}
+
+input.has-value,
+select.has-value,
+textarea.has-value,
+input:focus,
+select:focus,
+textarea:focus {
+  color: #2f3e34 !important;
 }
 
 </style>
@@ -1561,7 +1572,7 @@ textarea {
 
           <div id="revenueInvoiceNoteRow" class="full"></div>
 
-          <div class="full">
+          <div>
             <div class="button-row">
               <button class="btn-primary" id="saveBtn" type="button">Save Record</button>
               <button class="btn-secondary" id="clearBtn" type="button">Clear Form</button>
@@ -1569,7 +1580,7 @@ textarea {
             </div>
           </div>
         </div>
-        <div class="footer-note">Autosaves immediately after add, edit, delete, and export marking.</div>
+        <div class="footer-note">Autosaves immediately after add, edit, and delete.</div>
       </div>
 
       <div class="panel">
@@ -1580,56 +1591,64 @@ textarea {
 
     <div class="panel filters-panel">
       <h2>Filters</h2>
-      <div class="filters-grid">
-        <div class="full">
-          <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
-        </div>
+      
+<div class="filters-grid">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
+  </div>
 
-        <div>
-          <select id="filterType">
-            <option value="" selected>Type</option>
-            <option value="Revenue">Revenue</option>
-            <option value="Expense">Expense</option>
-          </select>
-        </div>
+  <div class="quarter-wrap" id="quarterFilterWrap">
+    <button type="button" class="quarter-btn" data-quarter="1">Q1</button>
+    <button type="button" class="quarter-btn" data-quarter="2">Q2</button>
+    <button type="button" class="quarter-btn" data-quarter="3">Q3</button>
+    <button type="button" class="quarter-btn" data-quarter="4">Q4</button>
+  </div>
 
-        <div>
-          <select id="filterUnit">
-            <option value="" selected>Property</option>
-            <option value="Studio One-1123">Bachelor’s Crib 1</option>
-            <option value="Studio Two-1122">Bachelor’s Crib 2</option>
-            <option value="Casa Tres16">Casa Tres16</option>
-          </select>
-        </div>
+  <div>
+    <select id="filterType">
+      <option value="" selected>Type</option>
+      <option value="Revenue">Revenue</option>
+      <option value="Expense">Expense</option>
+    </select>
+  </div>
 
-        <div>
-          <select id="filterYear">
-            <option value="" selected>Year</option>
-          </select>
-        </div>
+  <div>
+    <select id="filterUnit">
+      <option value="" selected>Property</option>
+      <option value="Studio One-1123">Bachelor’s Crib 1</option>
+      <option value="Studio Two-1122">Bachelor’s Crib 2</option>
+      <option value="Casa Tres16">Casa Tres16</option>
+    </select>
+  </div>
 
-        <div>
-          <select id="filterMonth">
-            <option value="" selected>Month</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-        </div>
+  <div>
+    <select id="filterYear">
+      <option value="" selected>Year</option>
+    </select>
+  </div>
 
-        <div class="full">
-          <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
-        </div>
-      </div>
+  <div>
+    <select id="filterMonth">
+      <option value="" selected>Month</option>
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+  </div>
+
+  <div class="full">
+    <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
+  </div>
+</div>
     </div>
 
     <div class="panel">
@@ -1637,18 +1656,15 @@ textarea {
         <div class="records-header-left">
           <div class="records-title-row">
             <h2 style="margin:0;">Records</h2>
-            <span id="importCSVBtn" class="import-link">Import</span>
             <input type="file" id="csvFileInput" accept=".csv" />
-          </div>
-          <div class="export-meta-inline">
-            <div id="revenueExportMeta">Rev. last exported: -</div>
-            <div id="expenseExportMeta">Exp. last exported: -</div>
           </div>
         </div>
 
         <div class="export-actions-side">
-          <button class="btn-export" id="exportRevenueBtn" type="button">Revenue CSV</button>
-          <button class="btn-export" id="exportExpenseBtn" type="button">Expense CSV</button>
+          <button class="btn-export" id="importCSVBtn" type="button">Import CSV</button>
+          <button class="btn-export" id="exportAllRevenueBtn" type="button">Revenue Backup</button>
+          <button class="btn-export btn-danger-soft" id="resetAllBtn" type="button">Reset List</button>
+          <button class="btn-export" id="exportAllExpenseBtn" type="button">Expense Backup</button>
         </div>
       </div>
 
@@ -1666,7 +1682,6 @@ textarea {
               <th>Declared?</th>
               <th>Inv. No.</th>
               <th>Note</th>
-              <th>Export Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -1721,12 +1736,13 @@ textarea {
 
     let records = [];
     let editingId = null;
+    let activeQuarter = "";
 
     const els = {
       date: document.getElementById("date"),
       checkOutDate: document.getElementById("checkOutDate"),
-typeField: document.getElementById("typeField"),
-unitField: document.getElementById("unitField"),
+      typeField: document.getElementById("typeField"),
+      unitField: document.getElementById("unitField"),
       type: document.getElementById("type"),
       unit: document.getElementById("unit"),
       unitLabel: document.getElementById("unitLabel"),
@@ -1771,8 +1787,9 @@ unitField: document.getElementById("unitField"),
       recordsTableBody: document.getElementById("recordsTableBody"),
       recordCount: document.getElementById("recordCount"),
 
-      exportRevenueBtn: document.getElementById("exportRevenueBtn"),
-      exportExpenseBtn: document.getElementById("exportExpenseBtn"),
+      exportAllRevenueBtn: document.getElementById("exportAllRevenueBtn"),
+      exportAllExpenseBtn: document.getElementById("exportAllExpenseBtn"),
+
       appModalBackdrop: document.getElementById("appModalBackdrop"),
       appModalTitle: document.getElementById("appModalTitle"),
       appModalMessage: document.getElementById("appModalMessage"),
@@ -1789,6 +1806,38 @@ unitField: document.getElementById("unitField"),
 
     function safeText(value) {
       return (value ?? "").toString().trim();
+    }
+
+    function normalizeForKey(value) {
+      return String(value ?? "").trim().toLowerCase();
+    }
+
+    function getRecordImportKey(record) {
+      if (record.type === "Revenue") {
+        return [
+          "revenue",
+          normalizeForKey(record.unit),
+          normalizeForKey(record.date),
+          normalizeForKey(record.nights),
+          normalizeForKey(record.vendor),
+          normalizeForKey(record.amount),
+          normalizeForKey(record.platform),
+          normalizeForKey(record.declared),
+          normalizeForKey(record.invoiceNumber),
+          normalizeForKey(record.note)
+        ].join("|");
+      }
+
+      return [
+        "expense",
+        normalizeForKey(record.unit),
+        normalizeForKey(record.date),
+        normalizeForKey(record.category),
+        normalizeForKey(record.vendor),
+        normalizeForKey(record.amount),
+        normalizeForKey(record.invoiceNumber),
+        normalizeForKey(record.note)
+      ].join("|");
     }
 
     function formatDateDDMmmYY(dateStr) {
@@ -1895,77 +1944,78 @@ unitField: document.getElementById("unitField"),
       invoiceEl.style.opacity = "1";
     }
 
-   function forceExpenseLayoutRefresh() {
-  updateTypeFields();
-}
+    function forceExpenseLayoutRefresh() {
+      updateTypeFields();
+    }
 
-   function updateTypeFields() {
-  forceInvoiceActive();
+    function updateTypeFields() {
+      forceInvoiceActive();
 
-  const isRevenue = els.type.value === "Revenue";
+      const isRevenue = els.type.value === "Revenue";
 
-  els.unitLabel.textContent = "Property";
-  els.vendorLabel.textContent = isRevenue ? "Guest Name" : "Vendor";
+      els.unitLabel.textContent = "Property";
+      els.vendorLabel.textContent = isRevenue ? "Guest Name" : "Vendor";
 
-  els.nightsField.classList.toggle("hidden", !isRevenue);
+      els.nightsField.classList.toggle("hidden", !isRevenue);
 
-  els.platformField.classList.toggle("hidden", !isRevenue);
-  els.declaredField.classList.toggle("hidden", !isRevenue);
+      els.platformField.classList.toggle("hidden", !isRevenue);
+      els.declaredField.classList.toggle("hidden", !isRevenue);
 
-  els.expenseTypeField.classList.toggle("hidden", isRevenue);
-  els.expenseTypeField.style.display = isRevenue ? "none" : "flex";
-  els.vendorField.style.display = "flex";
+      els.expenseTypeField.classList.toggle("hidden", isRevenue);
+      els.expenseTypeField.style.display = isRevenue ? "none" : "flex";
+      els.vendorField.style.display = "flex";
 
-  if (els.expenseInlineRow) {
-    els.expenseInlineRow.classList.toggle("expense-mode", !isRevenue);
-    els.expenseInlineRow.style.display = isRevenue ? "block" : "grid";
-  }
+      if (els.expenseInlineRow) {
+        els.expenseInlineRow.classList.toggle("expense-mode", !isRevenue);
+        els.expenseInlineRow.style.display = isRevenue ? "block" : "grid";
+      }
 
-  if (isRevenue) {
-    els.vendor.placeholder = "Enter guest name";
-    els.category.value = "";
-    els.expenseTypeField.classList.add("hidden");
-    els.expenseTypeField.style.display = "none";
+      if (isRevenue) {
+        els.vendor.placeholder = "Enter guest name";
+        els.category.value = "";
+        els.expenseTypeField.classList.add("hidden");
+        els.expenseTypeField.style.display = "none";
 
-    els.revenueAmountRow.classList.remove("hidden");
-    els.revenueInvoiceNoteRow.classList.remove("hidden");
-    els.expenseAmountNoteRow.classList.add("hidden");
+        els.revenueAmountRow.classList.remove("hidden");
+        els.revenueInvoiceNoteRow.classList.remove("hidden");
+        els.expenseAmountNoteRow.classList.add("hidden");
 
-    els.revenueAmountRow.innerHTML = "";
-    els.revenueInvoiceNoteRow.innerHTML = "";
-    els.expenseAmountNoteRow.innerHTML = "";
+        els.revenueAmountRow.innerHTML = "";
+        els.revenueInvoiceNoteRow.innerHTML = "";
+        els.expenseAmountNoteRow.innerHTML = "";
 
-    els.revenueAmountRow.appendChild(els.platformField);
-    els.revenueAmountRow.appendChild(els.amountField);
+        els.revenueAmountRow.appendChild(els.platformField);
+        els.revenueAmountRow.appendChild(els.amountField);
 
-    els.revenueInvoiceNoteRow.appendChild(els.declaredField);
-    els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
-    els.revenueInvoiceNoteRow.appendChild(els.noteField);
-  } else {
-    els.vendor.placeholder = "Enter vendor";
-    els.expenseTypeField.classList.remove("hidden");
-    els.expenseTypeField.style.display = "flex";
-    if (els.noOfNights) els.noOfNights.textContent = "0";
-    els.platform.value = "";
-    els.declared.value = "";
-    els.invoiceNumber.value = "";
+        els.revenueInvoiceNoteRow.appendChild(els.declaredField);
+        els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
+        els.revenueInvoiceNoteRow.appendChild(els.noteField);
+      } else {
+        els.vendor.placeholder = "Enter vendor";
+        els.expenseTypeField.classList.remove("hidden");
+        els.expenseTypeField.style.display = "flex";
+        if (els.noOfNights) els.noOfNights.textContent = "0";
+        els.platform.value = "";
+        els.declared.value = "";
+        els.invoiceNumber.value = "";
 
-    els.revenueAmountRow.classList.add("hidden");
-    els.revenueInvoiceNoteRow.classList.add("hidden");
-    els.expenseAmountNoteRow.classList.remove("hidden");
+        els.revenueAmountRow.classList.add("hidden");
+        els.revenueInvoiceNoteRow.classList.add("hidden");
+        els.expenseAmountNoteRow.classList.remove("hidden");
 
-    els.revenueAmountRow.innerHTML = "";
-    els.revenueInvoiceNoteRow.innerHTML = "";
-    els.expenseAmountNoteRow.innerHTML = "";
+        els.revenueAmountRow.innerHTML = "";
+        els.revenueInvoiceNoteRow.innerHTML = "";
+        els.expenseAmountNoteRow.innerHTML = "";
 
-    els.expenseAmountNoteRow.appendChild(els.invoiceField);
-    els.expenseAmountNoteRow.appendChild(els.amountField);
-    els.expenseAmountNoteRow.appendChild(els.noteField);
-  }
+        els.expenseAmountNoteRow.appendChild(els.invoiceField);
+        els.expenseAmountNoteRow.appendChild(els.amountField);
+        els.expenseAmountNoteRow.appendChild(els.noteField);
+      }
 
-  updateInvoiceState();
-  updateVendorSuggestions();
-}
+      updateInvoiceState();
+      updateVendorSuggestions();
+      refreshFieldValueStates();
+    }
 
     function updateInvoiceState() {
       const isRevenue = els.type.value === "Revenue";
@@ -1979,6 +2029,8 @@ unitField: document.getElementById("unitField"),
         els.invoiceNumber.disabled = false;
         els.invoiceNumber.classList.remove("disabled-look");
       }
+
+      refreshFieldValueStates();
     }
 
     function getFormData() {
@@ -1993,7 +2045,7 @@ unitField: document.getElementById("unitField"),
         vendor: safeText(els.vendor.value),
         platform: isRevenue ? safeText(els.platform.value) : "",
         declared: isRevenue ? safeText(els.declared.value) : "",
-        invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : "",
+        invoiceNumber: isRevenue && safeText(els.declared.value) === "Yes" ? safeText(els.invoiceNumber.value) : safeText(els.invoiceNumber.value),
         category: !isRevenue ? safeText(els.category.value) : "",
         amount: Number(els.amount.value),
         note: safeText(els.note.value)
@@ -2040,6 +2092,7 @@ unitField: document.getElementById("unitField"),
       els.cancelEditBtn.style.display = "none";
       updateTypeFields();
       updateNightsDisplay();
+      refreshFieldValueStates();
     }
 
     function startEdit(id) {
@@ -2078,6 +2131,7 @@ unitField: document.getElementById("unitField"),
 
       updateTypeFields();
       updateNightsDisplay();
+      refreshFieldValueStates();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -2090,15 +2144,10 @@ unitField: document.getElementById("unitField"),
 
       records = records.filter(r => r.id !== id);
 
-      if (record.type === "Revenue") {
-        markRevenueExportDirty();
-      } else {
-        markExpenseExportDirty();
-      }
-
       saveToStorage();
       refreshYearFilter();
       render();
+      refreshFieldValueStates();
 
       if (editingId === id) {
         clearForm();
@@ -2127,29 +2176,51 @@ unitField: document.getElementById("unitField"),
       } else {
         records.unshift({
           id: generateId(),
+          imported: false,
           ...data
         });
-      }
-
-      if (data.type === "Revenue") {
-        markRevenueExportDirty();
-      } else {
-        markExpenseExportDirty();
       }
 
       saveToStorage();
       clearForm();
       refreshYearFilter();
       render();
+      refreshFieldValueStates();
       showToast("Saved");
     }
 
+    function getQuarterNumber(dateStr) {
+      if (!dateStr) return "";
+
+      const d = new Date(dateStr);
+      if (isNaN(d)) return "";
+
+      const month = d.getMonth() + 1;
+
+      if (month <= 3) return "1";
+      if (month <= 6) return "2";
+      if (month <= 9) return "3";
+      return "4";
+    }
+
+    function updateQuarterButtons() {
+      document.querySelectorAll(".quarter-btn").forEach(btn => {
+        const isActive = btn.dataset.quarter === activeQuarter;
+        btn.classList.toggle("active", isActive);
+        btn.style.background = isActive ? "#d6dee8" : "#ffffff";
+        btn.style.color = isActive ? "#2f3e34" : "#4b5a52";
+        btn.style.borderColor = isActive ? "#c3ceda" : "rgba(0,0,0,0.06)";
+      });
+    }
+
     function getFilteredRecords() {
+
       const search = safeText(els.search.value).toLowerCase();
       const filterType = els.filterType.value;
       const filterUnit = els.filterUnit.value;
       const filterYear = els.filterYear.value;
       const filterMonth = els.filterMonth.value;
+      const filterQuarter = activeQuarter;
 
       return [...records]
         .filter(r => {
@@ -2166,9 +2237,7 @@ unitField: document.getElementById("unitField"),
             r.invoiceNumber,
             r.category,
             r.note,
-            String(r.amount),
-            r.exportedRevenue ? "revenue exported" : "revenue new",
-            r.exportedExpense ? "expense exported" : "expense new"
+            String(r.amount)
           ].join(" ").toLowerCase();
 
           const year = r.date ? new Date(r.date).getFullYear().toString() : "";
@@ -2179,7 +2248,8 @@ unitField: document.getElementById("unitField"),
             (!filterType || r.type === filterType) &&
             (!filterUnit || r.unit === filterUnit) &&
             (!filterYear || year === filterYear) &&
-            (!filterMonth || month === filterMonth)
+            (!filterMonth || month === filterMonth) &&
+            (!filterQuarter || getQuarterNumber(r.date) === filterQuarter)
           );
         })
         .sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -2225,19 +2295,38 @@ unitField: document.getElementById("unitField"),
 
     function renderSummary(data) {
       const s = computeSummary(data);
+      const filterType = els.filterType.value;
 
-      const cards = [
-        { title: "Overall Net", value: peso(s.net), cls: "gray" },
-        { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
-        { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
-        { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "blue" }
-      ];
+      let cards;
+
+      if (filterType === "Revenue") {
+        cards = [
+          { title: "Overall Revenue", value: peso(s.totalRevenue), cls: "gray" },
+          { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.revenue || 0), cls: "purple" },
+          { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.revenue || 0), cls: "orange" },
+          { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.revenue || 0), cls: "blue" }
+        ];
+      } else if (filterType === "Expense") {
+        cards = [
+          { title: "Overall Expense", value: peso(s.totalExpense), cls: "gray" },
+          { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.expense || 0), cls: "purple" },
+          { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.expense || 0), cls: "orange" },
+          { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.expense || 0), cls: "blue" }
+        ];
+      } else {
+        cards = [
+          { title: "Overall Net", value: peso(s.net), cls: "gray" },
+          { title: "Bachelor’s Crib 1", value: peso(s.byUnit["Studio One-1123"]?.net || 0), cls: "purple" },
+          { title: "Bachelor’s Crib 2", value: peso(s.byUnit["Studio Two-1122"]?.net || 0), cls: "orange" },
+          { title: "Casa Tres16", value: peso(s.byUnit["Casa Tres16"]?.net || 0), cls: "blue" }
+        ];
+      }
 
       els.summaryCards.innerHTML = cards.map(card => `
         <div class="summary-box ${card.cls}">
           <div class="summary-header">
             <h3>${card.title}</h3>
-            ${card.title !== "Overall Net" ? '<span class="summary-net">Net</span>' : ""}
+            ${card.title === "Overall Net" ? "" : ""}
           </div>
           <div class="value">${card.value}</div>
         </div>
@@ -2248,18 +2337,6 @@ unitField: document.getElementById("unitField"),
       if (unit === "Studio One-1123") return "tag-bc1";
       if (unit === "Studio Two-1122") return "tag-bc2";
       return "tag-casa";
-    }
-
-    function getExportStatusHtml(record) {
-      if (record.type === "Revenue") {
-        return record.exportedRevenue
-          ? `<span class="tag tag-exported">Revenue: Exported</span>`
-          : `<span class="tag tag-new">Revenue: New</span>`;
-      }
-
-      return record.exportedExpense
-        ? `<span class="tag tag-exported">Expense: Exported</span>`
-        : `<span class="tag tag-new">Expense: New</span>`;
     }
 
     function escapeHtml(str) {
@@ -2275,7 +2352,7 @@ unitField: document.getElementById("unitField"),
       if (!data.length) {
         els.recordsTableBody.innerHTML = `
           <tr>
-            <td colspan="12" style="text-align:center; padding:24px;">No records found.</td>
+            <td colspan="11" style="text-align:center; padding:24px;">No records found.</td>
           </tr>
         `;
         els.recordCount.textContent = "0 record shown";
@@ -2297,7 +2374,6 @@ unitField: document.getElementById("unitField"),
           <td>${escapeHtml(r.declared || "")}</td>
           <td>${escapeHtml(r.invoiceNumber || "")}</td>
           <td class="note-cell" data-note="${escapeHtml(r.note || "")}" onclick="showFullNote(this.dataset.note)">${escapeHtml(r.note || "")}</td>
-          <td>${getExportStatusHtml(r)}</td>
           <td>
             <div class="action-group">
               <button class="btn-secondary" onclick="startEdit('${r.id}')">Edit</button>
@@ -2345,7 +2421,7 @@ unitField: document.getElementById("unitField"),
 
     function exportToCSV(rows, filename) {
       if (!rows.length) {
-        showAlert("No new data to export.", "Nothing to Export");
+        showAlert("No data found.", "Nothing to Export");
         return false;
       }
 
@@ -2370,105 +2446,71 @@ unitField: document.getElementById("unitField"),
       return true;
     }
 
-    function exportRevenueCSV() {
-      const pendingRevenue = records.filter(r => r.type === "Revenue" && !r.exportedRevenue);
+function getQuarterFromDate(dateStr) {
+  if (!dateStr) return "";
 
-      const revenueRows = pendingRevenue.map(r => ({
-        Unit: getUnitLabel(r.unit),
-        "Date of Stay": formatDateDDMmmYY(r.date),
-        Nights: r.nights || "",
-        "Guest Name": r.vendor || "",
-        Amount: r.amount,
-        Platform: r.platform || "",
-        Declared: r.declared || "",
-        "Invoice No.": r.invoiceNumber || "",
-        Note: r.note || ""
-      }));
+  const d = new Date(dateStr);
+  if (isNaN(d)) return "";
 
-      const success = exportToCSV(revenueRows, "revenue.csv");
-      if (!success) return;
+  const month = d.getMonth() + 1;
 
-      const ids = new Set(pendingRevenue.map(r => r.id));
-      records = records.map(r => ids.has(r.id) ? { ...r, exportedRevenue: true } : r);
+  if (month <= 3) return "1st Qtr.";
+  if (month <= 6) return "2nd Qtr.";
+  if (month <= 9) return "3rd Qtr.";
+  return "4th Qtr.";
+}
 
-      localStorage.setItem("lastExportRevenue", new Date().toISOString());
-      localStorage.setItem("revenueExportDirty", "false");
+    function mapRevenueExportRow(r) {
+  return {
+    Property: r.unit || "",
+    Date: formatDateDDMmmYY(r.date),
+    "No. of Night": r.nights || "",
+    "Guest Name": r.vendor || "",
+    Amount: r.amount,
+    Platform: r.platform || "",
+    Declared: r.declared || "",
+    "Inv. No.": r.invoiceNumber || "",
+    Qtr: getQuarterFromDate(r.date),
+    Note: r.note || ""
+  };
+}
 
-      saveToStorage();
-      render();
-      updateExportMeta();
-      showToast("Revenue exported");
-    }
+    function mapExpenseExportRow(r) {
+  return {
+    Property: r.unit || "",
+    "Date of Expense": formatDateDDMmmYY(r.date),
+    "Expense Type": r.category || "",
+    Vendor: r.vendor || "",
+    Amount: r.amount,
+    "Inv. No.": r.invoiceNumber || "",
+    Note: r.note || ""
+  };
+}
 
-    function exportExpenseCSV() {
-      const pendingExpense = records.filter(r => r.type === "Expense" && !r.exportedExpense);
+    function exportAllRevenueCSV() {
+      const allRevenue = records.filter(r => r.type === "Revenue");
+      const revenueRows = allRevenue.map(r => mapRevenueExportRow(r));
 
-      const expenseRows = pendingExpense.map(r => ({
-        Unit: getUnitLabel(r.unit),
-        "Date of Expense": formatDateDDMmmYY(r.date),
-        "Expense Type": r.category || "",
-        Vendor: r.vendor || "",
-        Amount: r.amount,
-        Note: r.note || ""
-      }));
-
-      const success = exportToCSV(expenseRows, "expense.csv");
-      if (!success) return;
-
-      const ids = new Set(pendingExpense.map(r => r.id));
-      records = records.map(r => ids.has(r.id) ? { ...r, exportedExpense: true } : r);
-
-      localStorage.setItem("lastExportExpense", new Date().toISOString());
-      localStorage.setItem("expenseExportDirty", "false");
-
-      saveToStorage();
-      render();
-      updateExportMeta();
-      showToast("Expense exported");
-    }
-
-    function formatExportTime(value) {
-      if (!value) return "-";
-
-      const d = new Date(value);
-      return d.toLocaleString("en-PH", {
-        month: "short",
-        day: "2-digit",
-        hour: "numeric",
-        minute: "2-digit"
-      });
-    }
-
-    function updateExportMeta() {
-      const expense = localStorage.getItem("lastExportExpense");
-      const revenue = localStorage.getItem("lastExportRevenue");
-      const expenseDirty = localStorage.getItem("expenseExportDirty") === "true";
-      const revenueDirty = localStorage.getItem("revenueExportDirty") === "true";
-
-      const expenseEl = document.getElementById("expenseExportMeta");
-      const revenueEl = document.getElementById("revenueExportMeta");
-
-      if (expenseEl) {
-        expenseEl.textContent = expenseDirty
-          ? "Exp. last exported: Outdated"
-          : "Exp. last exported: " + formatExportTime(expense);
+      if (!revenueRows.length) {
+        showAlert("No revenue records found.", "Revenue Backup");
+        return;
       }
 
-      if (revenueEl) {
-        revenueEl.textContent = revenueDirty
-          ? "Rev. last exported: Outdated"
-          : "Rev. last exported: " + formatExportTime(revenue);
+      exportToCSV(revenueRows, "revenue-backup.csv");
+      showToast("Revenue backup exported");
+    }
+
+    function exportAllExpenseCSV() {
+      const allExpense = records.filter(r => r.type === "Expense");
+      const expenseRows = allExpense.map(r => mapExpenseExportRow(r));
+
+      if (!expenseRows.length) {
+        showAlert("No expense records found.", "Expense Backup");
+        return;
       }
-    }
 
-    function markExpenseExportDirty() {
-      localStorage.setItem("expenseExportDirty", "true");
-      updateExportMeta();
-    }
-
-    function markRevenueExportDirty() {
-      localStorage.setItem("revenueExportDirty", "true");
-      updateExportMeta();
+      exportToCSV(expenseRows, "expense-backup.csv");
+      showToast("Expense backup exported");
     }
 
     function showFullNote(noteText) {
@@ -2542,62 +2584,86 @@ unitField: document.getElementById("unitField"),
     }
 
     function importRowToRecord(headers, row) {
-      const map = {};
-      headers.forEach((header, index) => {
-        map[header] = row[index] ?? "";
-      });
+      const h = headers.map(h => h.trim().toLowerCase().replace(/^\ufeff/, ""));
 
-      const normalizedHeaders = headers.map(h => h.toLowerCase());
+      const get = (...names) => {
+        for (const name of names) {
+          const index = h.indexOf(name.toLowerCase());
+          if (index >= 0) return row[index] ?? "";
+        }
+        return "";
+      };
 
-      const isRevenue = normalizedHeaders.includes("date of stay");
-      const isExpense = normalizedHeaders.includes("date of expense");
+      const isRevenue =
+        h.includes("guest name") &&
+        h.includes("platform") &&
+        (h.includes("declared?") || h.includes("declared"));
+
+      const isExpense =
+        h.includes("expense type") ||
+        (h.includes("vendor") && !isRevenue);
 
       if (!isRevenue && !isExpense) return null;
 
-      const unitLabel = safeText(map["Unit"]);
-      const unit = UNIT_OPTIONS.find(option => option.label === unitLabel)?.value || unitLabel;
-      if (!unit) return null;
+      const unitLabel = safeText(get("property", "unit"));
+      const unit =
+        UNIT_OPTIONS.find(u => u.label === unitLabel || u.value === unitLabel)?.value ||
+        unitLabel;
 
-      const date = parseImportDate(isRevenue ? map["Date of Stay"] : map["Date of Expense"]);
-      const amount = Number((map["Amount"] || "").toString().replace(/,/g, ""));
+      const date = parseImportDate(get("date", "date of stay", "date of expense"));
+
+      const amount = Number(
+        String(get("amount")).replace(/[₱,\s]/g, "")
+      );
+
       if (!date || !amount) return null;
 
       if (isRevenue) {
+        let nightsValue = get("no. of night", "no of night", "no. of nights", "no of nights", "number of nights", "nights", "stay nights");
+
+        if (!safeText(nightsValue)) {
+          const nightIndex = h.findIndex(name =>
+            name.includes("night") ||
+            name.includes("nights")
+          );
+          if (nightIndex >= 0) {
+            nightsValue = row[nightIndex] ?? "";
+          }
+        }
+
         return {
           id: generateId(),
+          imported: true,
           date,
           checkOutDate: "",
           type: "Revenue",
           unit,
-          nights: Number(map["Nights"] || 0),
-          vendor: safeText(map["Guest Name"]),
-          platform: safeText(map["Platform"]),
-          declared: safeText(map["Declared"]),
-          invoiceNumber: safeText(map["Invoice No."]),
+          nights: Number(String(nightsValue).replace(/[^0-9.-]/g, "")) || 0,
+          vendor: safeText(get("guest name")),
+          platform: safeText(get("platform")),
+          declared: safeText(get("declared?", "declared")),
+          invoiceNumber: safeText(get("inv. no.", "invoice no.", "invoice number")),
           category: "",
           amount,
-          note: safeText(map["Note"]),
-          exportedRevenue: true,
-          exportedExpense: false
+          note: safeText(get("note", "notes"))
         };
       }
 
       return {
         id: generateId(),
+        imported: true,
         date,
         checkOutDate: "",
         type: "Expense",
         unit,
         nights: "",
-        vendor: safeText(map["Vendor"]),
+        vendor: safeText(get("vendor")),
         platform: "",
         declared: "",
-        invoiceNumber: "",
-        category: safeText(map["Expense Type"]),
+        invoiceNumber: safeText(get("inv. no.", "invoice no.", "invoice number")),
+        category: safeText(get("expense type", "category")),
         amount,
-        note: safeText(map["Note"]),
-        exportedRevenue: false,
-        exportedExpense: true
+        note: safeText(get("note", "notes"))
       };
     }
 
@@ -2648,6 +2714,36 @@ unitField: document.getElementById("unitField"),
       updateVendorSuggestionsVisibility();
     }
 
+
+    function refreshFieldValueStates() {
+      document.querySelectorAll("input, select, textarea").forEach(field => {
+        const type = (field.getAttribute("type") || "").toLowerCase();
+        const value = (field.value || "").trim();
+
+        let hasValue = false;
+
+        if (field.tagName === "SELECT") {
+          hasValue = value !== "";
+        } else if (type === "number") {
+          hasValue = value !== "" && value !== "0" && value !== "0.00";
+        } else {
+          hasValue = value !== "";
+        }
+
+        field.classList.toggle("has-value", hasValue);
+      });
+    }
+
+    function bindFieldValueStateListeners() {
+      document.querySelectorAll("input, select, textarea").forEach(field => {
+        if (field.dataset.valueStateBound === "true") return;
+        const update = () => refreshFieldValueStates();
+        field.addEventListener("input", update);
+        field.addEventListener("change", update);
+        field.dataset.valueStateBound = "true";
+      });
+    }
+
     els.date.addEventListener("change", updateNightsDisplay);
     els.checkOutDate.addEventListener("change", updateNightsDisplay);
     els.type.addEventListener("change", updateTypeFields);
@@ -2662,16 +2758,16 @@ unitField: document.getElementById("unitField"),
     els.clearBtn.addEventListener("click", clearForm);
     els.cancelEditBtn.addEventListener("click", clearForm);
 
-    els.exportRevenueBtn.addEventListener("click", (e) => {
+    els.exportAllRevenueBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      window.confirmExportRevenue();
+      window.confirmExportAllRevenue();
     });
 
-    els.exportExpenseBtn.addEventListener("click", (e) => {
+    els.exportAllExpenseBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      window.confirmExportExpense();
+      window.confirmExportAllExpense();
     });
 
     els.search.addEventListener("input", render);
@@ -2680,31 +2776,67 @@ unitField: document.getElementById("unitField"),
     els.filterYear.addEventListener("change", render);
     els.filterMonth.addEventListener("change", render);
 
+    document.querySelectorAll(".quarter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const selected = btn.dataset.quarter;
+        activeQuarter = activeQuarter === selected ? "" : selected;
+        updateQuarterButtons();
+        render();
+      });
+    });
+
     els.resetFiltersBtn.addEventListener("click", () => {
       els.search.value = "";
       els.filterType.value = "";
       els.filterUnit.value = "";
       els.filterYear.value = "";
       els.filterMonth.value = "";
+      activeQuarter = "";
+      updateQuarterButtons();
       render();
     });
 
-    window.confirmExportExpense = async function confirmExportExpense() {
-      const ok = await showConfirm(`Export Expense CSV now?
-
-Make sure all expense records are final.`, "Export Expense");
-      if (ok) exportExpenseCSV();
+    window.confirmExportAllRevenue = async function confirmExportAllRevenue() {
+      const ok = await showConfirm(`Export ALL revenue records for backup?\n\nThis includes all current revenue records.`, "Revenue Backup");
+      if (ok) exportAllRevenueCSV();
     };
 
-    window.confirmExportRevenue = async function confirmExportRevenue() {
-      const ok = await showConfirm(`Export Revenue CSV now?
-
-Make sure all booking statuses are final.`, "Export Revenue");
-      if (ok) exportRevenueCSV();
+    window.confirmExportAllExpense = async function confirmExportAllExpense() {
+      const ok = await showConfirm(`Export ALL expense records for backup?\n\nThis includes all current expense records.`, "Expense Backup");
+      if (ok) exportAllExpenseCSV();
     };
 
     document.getElementById("importCSVBtn").addEventListener("click", () => {
       document.getElementById("csvFileInput").click();
+    });
+
+    document.getElementById("resetAllBtn").addEventListener("click", async () => {
+      if (!records.length) {
+        await showAlert("No records to reset.", "Reset");
+        return;
+      }
+
+      const firstConfirm = await showConfirm(
+        "Reset ALL records?",
+        "Reset Records"
+      );
+      if (!firstConfirm) return;
+
+      const secondConfirm = await showConfirm(
+        "This will permanently delete all records.\n\nMake sure you exported backup.",
+        "Final Confirmation"
+      );
+      if (!secondConfirm) return;
+
+      records = [];
+
+      localStorage.removeItem(STORAGE_KEY);
+
+      clearForm();
+      refreshYearFilter();
+      render();
+
+      showToast("All records cleared");
     });
 
     document.getElementById("csvFileInput").addEventListener("change", async (event) => {
@@ -2729,17 +2861,33 @@ Make sure all booking statuses are final.`, "Export Revenue");
         const headers = rows[0].map(h => h.trim());
         const dataRows = rows.slice(1).filter(row => row.some(cell => String(cell || "").trim() !== ""));
         let importedCount = 0;
+        let skippedCount = 0;
+        const existingKeys = new Set(records.map(getRecordImportKey));
 
         dataRows.forEach(row => {
           const item = importRowToRecord(headers, row);
-          if (item) {
-            records.unshift(item);
-            importedCount += 1;
+          if (!item) return;
+
+          const key = getRecordImportKey(item);
+
+          if (existingKeys.has(key)) {
+            skippedCount += 1;
+            return;
           }
+
+          records.unshift(item);
+          existingKeys.add(key);
+          importedCount += 1;
         });
 
+        if (!importedCount && skippedCount > 0) {
+          await showAlert(`No new rows were imported.\n\nSkipped duplicates: ${skippedCount}`, "Import CSV");
+          event.target.value = "";
+          return;
+        }
+
         if (!importedCount) {
-          showAlert("No compatible rows were found in this CSV.", "Import CSV");
+          await showAlert("No compatible rows were found in this CSV.", "Import CSV");
           event.target.value = "";
           return;
         }
@@ -2747,7 +2895,13 @@ Make sure all booking statuses are final.`, "Export Revenue");
         saveToStorage();
         refreshYearFilter();
         render();
-        showToast(`Imported ${importedCount}`);
+        refreshFieldValueStates();
+
+        if (skippedCount > 0) {
+          showToast(`Imported ${importedCount}, skipped ${skippedCount}`);
+        } else {
+          showToast(`Imported ${importedCount}`);
+        }
       } catch (error) {
         console.error(error);
         await showAlert("Unable to import this CSV.", "Import CSV");
@@ -2774,13 +2928,18 @@ Make sure all booking statuses are final.`, "Export Revenue");
       if (vendorEl) vendorEl.addEventListener("input", updateVendorSuggestionsVisibility);
 
       updateVendorSuggestions();
+      bindFieldValueStateListeners();
+      refreshFieldValueStates();
     });
+
 
     loadFromStorage();
     refreshYearFilter();
     clearForm();
     render();
-    updateExportMeta();
+    updateQuarterButtons();
+    bindFieldValueStateListeners();
+    refreshFieldValueStates();
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
