@@ -1427,6 +1427,7 @@
   align-items: center;
   height: 36px;
   padding: 0 12px;
+  cursor: pointer;
 }
 
 .panel.card.input-panel > .panel-header + .form-grid {
@@ -2135,7 +2136,7 @@ select.has-value {
     }
 
     .guest-strip-month-year {
-      font-size: 12px !important;
+      font-size: inherit !important;
       font-weight: 700 !important;
       line-height: 1 !important;
       margin: 0 !important;
@@ -2330,11 +2331,12 @@ select.has-value {
 
     .guest-entry-btn,
     .guest-empty {
-      margin: 0 !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      min-height: 22px !important;
+      min-height: unset !important;
+      height: 20px !important;
+      padding: 0 10px !important;
       line-height: 1 !important;
+      display: flex !important;
+      align-items: center !important;
     }
 
     .guest-entry-btn:first-child,
@@ -2437,9 +2439,6 @@ select.has-value {
       gap: 8px !important;
     }
 
-    #guestStripGrid .guest-day-name,
-    
-
 /* Swipe transition: fade + slight directional slide */
 #guestStripGrid {
   transition: transform 0.22s ease, opacity 0.22s ease;
@@ -2490,20 +2489,7 @@ select.has-value {
       overflow: hidden !important;
     }
 
-    #guestStripGrid .guest-entry-btn,
-    #guestStripGrid .guest-empty {
-      display: flex !important;
-      align-items: center !important;
-      width: 100% !important;
-      min-height: 22px !important;
-      height: 22px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      line-height: 1 !important;
-      border: none !important;
-      box-shadow: none !important;
-      background: transparent !important;
-    }
+   
 
     #guestStripGrid .guest-entry-btn + .guest-entry-btn {
       margin-top: 2px !important;
@@ -2745,8 +2731,6 @@ select.has-value {
   color: #2f3e34 !important;
 }
 
-color: #8f99a5;
-
 #guestStripGrid .guest-day-card {
   position: relative;
   border: 1.5px solid #c7cfd7 !important;
@@ -2883,15 +2867,6 @@ color: #8f99a5;
   display: none;
 }
 
-#guestStripGrid .guest-entry-btn,
-#guestStripGrid .guest-empty {
-  min-height: 22px !important;
-  height: auto !important;
-  line-height: 1.05 !important;
-}
-
-
-
     /* Final guest cards override */
     #guestStripGrid {
       grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -2968,17 +2943,7 @@ color: #8f99a5;
       content: none !important;
     }
 
-    #guestStripGrid .guest-entry-btn,
-    #guestStripGrid .guest-empty {
-      min-height: 24px !important;
-      height: auto !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-      line-height: 1.1 !important;
-    }
+    
 
     #guestStripGrid .guest-day-body::-webkit-scrollbar {
       width: 4px;
@@ -3257,81 +3222,94 @@ color: #8f99a5;
 
 /* Guest calendar header refinements */
 .guest-calendar-top {
-  position: relative !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  margin-bottom: 12px !important;
-  min-height: 32px !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  margin-bottom: 8px !important;
+  min-height: 28px !important;
 }
 
 .guest-calendar-title {
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  width: 100% !important;
-  text-align: center !important;
-  font-size: 16px !important;
+  justify-content: flex-start !important;
+  gap: 2px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  font-size: 15px !important;
   font-weight: 800 !important;
   color: #2f3a33 !important;
   letter-spacing: -0.01em !important;
 }
 
+.guest-calendar-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 6px !important;
+  flex: 0 0 auto !important;
+}
+
 .guest-calendar-select {
   appearance: none !important;
   -webkit-appearance: none !important;
-  border: 1px solid rgba(214, 221, 228, 0.95) !important;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f8fb 100%) !important;
-  color: #2f3a33 !important;
-  border-radius: 10px !important;
-  height: 32px !important;
-  padding: 0 28px 0 10px !important;
-  font-size: 14px !important;
-  font-weight: 800 !important;
-  line-height: 1 !important;
-  text-align: center !important;
-  text-align-last: center !important;
-  cursor: pointer !important;
+  border: none !important;
+  background-color: transparent !important;
   background-image:
     linear-gradient(45deg, transparent 50%, #7d8a82 50%),
     linear-gradient(135deg, #7d8a82 50%, transparent 50%) !important;
   background-position:
-    calc(100% - 14px) 13px,
-    calc(100% - 9px) 13px !important;
+    calc(100% - 10px) 13px,
+    calc(100% - 5px) 13px !important;
   background-size: 5px 5px, 5px 5px !important;
   background-repeat: no-repeat !important;
+  color: #2f3a33 !important;
+  border-radius: 8px !important;
+  height: 28px !important;
+  padding: 0 18px 0 0 !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  text-align-last: left !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .guest-calendar-month-select {
-  min-width: 124px !important;
+  min-width: 86px !important;
 }
 
 .guest-calendar-year-select {
-  min-width: 88px !important;
+  min-width: 60px !important;
 }
 
+.guest-calendar-nav,
 .guest-calendar-close {
-  position: absolute !important;
-  right: 0 !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
   appearance: none !important;
   -webkit-appearance: none !important;
   border: none !important;
   background: rgba(229, 236, 242, 0.95) !important;
   color: #55635b !important;
-  width: 32px !important;
-  height: 32px !important;
+  width: 28px !important;
+  height: 28px !important;
   border-radius: 999px !important;
-  font-size: 18px !important;
+  font-size: 16px !important;
   line-height: 1 !important;
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 0 !important;
   cursor: pointer !important;
+  flex: 0 0 auto !important;
+}
+
+.guest-calendar-nav:hover,
+.guest-calendar-close:hover {
+  background: rgba(220, 229, 236, 0.98) !important;
 }
 
 
@@ -3363,8 +3341,8 @@ color: #8f99a5;
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 .guest-calendar-weekdays {
-  gap: 6px;
-  margin-bottom: 8px;
+  gap: 4px;
+  margin-bottom: 6px;
 }
 .guest-calendar-weekday {
   text-align: center;
@@ -3373,7 +3351,7 @@ color: #8f99a5;
   color: #7a877f;
 }
 .guest-calendar-grid {
-  gap: 6px;
+  gap: 4px;
   transition: opacity 0.16s ease, transform 0.16s ease;
 }
 .guest-calendar-grid.is-switching {
@@ -3386,8 +3364,8 @@ color: #8f99a5;
   border: 1px solid rgba(221, 228, 233, 0.95);
   background: #ffffff;
   color: #2f3a33;
-  border-radius: 12px;
-  height: 40px;
+  border-radius: 11px;
+  height: 36px;
   padding: 0;
   font-size: 14px;
   font-weight: 700;
@@ -3427,6 +3405,152 @@ color: #8f99a5;
   letter-spacing: 0.01em;
 }
 
+
+/* CLEAN final guest pill override */
+#guestStripGrid {
+  transform: translateY(4px) !important;
+}
+
+#guestStripGrid .guest-day-card:not(.current) {
+  opacity: 0.88 !important;
+  transform: scale(0.97) !important;
+  filter: none !important;
+}
+
+#guestStripGrid .guest-day-card.current {
+  transform: translateY(-2px) scale(1.01) !important;
+}
+
+#guestStripGrid .guest-day-body {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  gap: 2px !important;
+  overflow: hidden !important;
+  padding: 2px 8px 6px !important;
+}
+
+#guestStripGrid .guest-entry-btn {
+  all: unset;
+  display: block !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  flex: 0 0 auto !important;
+}
+
+#guestStripGrid .guest-entry-pill {
+  display: flex !important;
+  width: 100% !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  max-height: 20px !important;
+  padding: 0 8px !important;
+  border-radius: 10px !important;
+  align-items: center !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+}
+
+#guestStripGrid .guest-entry-pill.tag-bc1 {
+  background: linear-gradient(135deg, var(--purple-1), var(--purple-2)) !important;
+}
+
+#guestStripGrid .guest-entry-pill.tag-bc2 {
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-2)) !important;
+}
+
+#guestStripGrid .guest-entry-pill.tag-casa {
+  background: linear-gradient(135deg, var(--blue-1), var(--blue-2)) !important;
+}
+
+#guestStripGrid .guest-entry-unit {
+  flex: 0 0 auto !important;
+  font-weight: 800 !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+}
+
+#guestStripGrid .guest-entry-name {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+}
+
+#guestStripGrid .guest-empty {
+  display: flex !important;
+  width: 100% !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  max-height: 20px !important;
+  padding: 0 8px !important;
+  border-radius: 10px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  overflow: hidden !important;
+}
+
+#guestStripGrid .guest-day-body {
+  margin-top: 11px !important;
+}
+
+#guestStripGrid {
+  transform: translateY(2px) !important;
+}
+
+#guestStripGrid .guest-day-header {
+  padding-bottom: 2px !important;
+}
+
+#guestStripGrid .guest-day-card:nth-child(2) {
+  transform: scale(1.04) translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25) !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+  z-index: 2 !important;
+}
+
+
+.panel-header .hero-status.is-active {
+  background: linear-gradient(135deg, #d6e4f2, #c4d9ee);
+  border-color: #bdd0e2;
+  color: #34516b;
+  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.10);
+}
+
+
+
+
+
+/* Guests Today inline open animation */
+#guestStripShell {
+  transform-origin: top center;
+}
+
+#guestStripPanel {
+  opacity: 0;
+  transform: translateY(28px) scale(0.965);
+  transition:
+    opacity 0.28s ease,
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+#guestStripShell.show #guestStripPanel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 </style>
 </head>
 <body>
@@ -3439,8 +3563,7 @@ color: #8f99a5;
 
   <div class="hero-right">
     <div class="app-chip" id="smartLedgerChip">Smart Ledger</div>
-    <button class="hero-toggle-btn" id="guestStripToggleBtn" type="button">Guests</button>
-  </div>
+</div>
 </div>
 
     <div class="guest-strip-shell" id="guestStripShell">
@@ -3456,7 +3579,7 @@ color: #8f99a5;
   <div id="formTitle" class="panel-header-title">Add Record</div>
   <div class="hero-status">
     <span class="status-dot"></span>
-    <span>Local autosave on</span>
+    <span>Guests Today</span>
   </div>
 </div>
         <div class="form-grid">
@@ -3689,6 +3812,7 @@ color: #8f99a5;
     </div>
   </div>
 
+
   <div id="appModalBackdrop" class="app-modal-backdrop" aria-hidden="true">
     <div class="app-modal" role="dialog" aria-modal="true" aria-labelledby="appModalTitle">
       <div id="appModalTitle" class="app-modal-title">Notice</div>
@@ -3708,7 +3832,11 @@ color: #8f99a5;
     <div class="guest-calendar-dialog" role="dialog" aria-modal="true" aria-labelledby="guestCalendarTitle">
       <div class="guest-calendar-top">
         <div class="guest-calendar-title" id="guestCalendarTitle">Select date</div>
-        <button class="guest-calendar-close" id="guestCalendarCloseBtn" type="button" aria-label="Close calendar">×</button>
+        <div class="guest-calendar-actions">
+          <button class="guest-calendar-nav" id="guestCalendarPrevBtn" type="button" aria-label="Previous month">↑</button>
+          <button class="guest-calendar-nav" id="guestCalendarNextBtn" type="button" aria-label="Next month">↓</button>
+          <button class="guest-calendar-close" id="guestCalendarCloseBtn" type="button" aria-label="Close calendar">×</button>
+        </div>
       </div>
       <div class="guest-calendar-weekdays" id="guestCalendarWeekdays"></div>
       <div class="guest-calendar-grid" id="guestCalendarGrid"></div>
@@ -3807,6 +3935,8 @@ color: #8f99a5;
       guestStripGrid: document.getElementById("guestStripGrid"),
       guestCalendarModal: document.getElementById("guestCalendarModal"),
       guestCalendarCloseBtn: document.getElementById("guestCalendarCloseBtn"),
+      guestCalendarPrevBtn: document.getElementById("guestCalendarPrevBtn"),
+      guestCalendarNextBtn: document.getElementById("guestCalendarNextBtn"),
       guestCalendarTitle: document.getElementById("guestCalendarTitle"),
       guestCalendarWeekdays: document.getElementById("guestCalendarWeekdays"),
       guestCalendarGrid: document.getElementById("guestCalendarGrid"),
@@ -4723,10 +4853,13 @@ color: #8f99a5;
         const guestLines = guests.length
           ? guests.map(guest => {
               const unit = getGuestUnitCode(guest.unit);
+              const tagClass = getUnitTagClass(guest.unit);
               return `
                 <button class="guest-entry-btn" type="button" onclick="jumpToRecord('${guest.id}')">
-                  <span class="guest-entry-unit ${unit.cls}">${unit.label}</span>
-                  <span class="guest-entry-name ${unit.cls}">${escapeHtml(getGuestDisplayName(guest.vendor || ""))}</span>
+                  <span class="guest-entry-pill ${tagClass}">
+                    <span class="guest-entry-unit">${unit.label}</span>
+                    <span class="guest-entry-name">${escapeHtml(getGuestDisplayName(guest.vendor || ""))}</span>
+                  </span>
                 </button>
               `;
             }).join("")
@@ -4749,14 +4882,24 @@ color: #8f99a5;
       if (els.guestStripShell) {
         els.guestStripShell.classList.toggle("show", isGuestStripOpen);
       }
-      if (els.guestStripToggleBtn) {
-        els.guestStripToggleBtn.classList.toggle("is-active", isGuestStripOpen);
+      const guestsTodayTrigger = document.querySelector(".panel-header .hero-status");
+      if (guestsTodayTrigger) {
+        guestsTodayTrigger.classList.toggle("is-active", isGuestStripOpen);
       }
       if (isGuestStripOpen) {
         syncHeroPillWidths();
         syncGuestStripHeight();
         bindGuestStripSwipe();
         renderGuestStrip();
+        requestAnimationFrame(() => {
+          if (els.guestStripPanel) {
+            els.guestStripPanel.classList.add("is-open");
+          }
+        });
+      } else {
+        if (els.guestStripPanel) {
+          els.guestStripPanel.classList.remove("is-open");
+        }
       }
     }
 
@@ -5329,12 +5472,27 @@ function getQuarterFromDate(dateStr) {
       render();
     });
 
-    els.guestStripToggleBtn.addEventListener("click", () => {
-      setGuestStripOpen(!isGuestStripOpen);
-    });
+    const guestsTodayTrigger = document.querySelector(".panel-header .hero-status");
+    if (guestsTodayTrigger) {
+      guestsTodayTrigger.addEventListener("click", () => {
+        setGuestStripOpen(!isGuestStripOpen);
+      });
+    }
 
     if (els.guestCalendarCloseBtn) {
       els.guestCalendarCloseBtn.addEventListener("click", closeGuestCalendarModal);
+    }
+
+    if (els.guestCalendarPrevBtn) {
+      els.guestCalendarPrevBtn.addEventListener("click", () => {
+        updateGuestCalendarMonth(new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth() - 1, 1), { animate: true });
+      });
+    }
+
+    if (els.guestCalendarNextBtn) {
+      els.guestCalendarNextBtn.addEventListener("click", () => {
+        updateGuestCalendarMonth(new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth() + 1, 1), { animate: true });
+      });
     }
 
     if (els.guestCalendarTitle && !els.guestCalendarTitle.dataset.bound) {
@@ -5381,10 +5539,13 @@ function getQuarterFromDate(dateStr) {
         }
       });
     }
-
-    document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && els.guestCalendarModal?.classList.contains("show")) {
         closeGuestCalendarModal();
+        return;
+      }
+      if (event.key === "Escape" && isGuestStripOpen) {
+        setGuestStripOpen(false);
       }
     });
 
@@ -5620,3 +5781,6 @@ document.querySelectorAll("input, textarea, select").forEach(el => {
   </script>
 </body>
 </html>
+<style>
+#statusYearBtn { width: 70px; justify-content: center; }
+</style>
