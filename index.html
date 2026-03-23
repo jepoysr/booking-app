@@ -2295,6 +2295,33 @@ select.has-value {
       vertical-align: baseline !important;
     }
 
+    .guest-strip-month-trigger {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      border: 0 !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 auto !important;
+      display: inline-flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: baseline !important;
+      gap: 6px !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+      font: inherit !important;
+      color: inherit !important;
+      cursor: pointer !important;
+      touch-action: manipulation !important;
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    .guest-strip-month-trigger .guest-strip-month-name,
+    .guest-strip-month-trigger .guest-strip-month-year {
+      white-space: nowrap !important;
+    }
+
     #guestStripGrid {
       margin-top: 0 !important;
       padding-top: 0 !important;
@@ -2325,7 +2352,24 @@ select.has-value {
     }
 
     #guestStripGrid .guest-day-name,
-    #guestStripGrid .guest-day-date {
+    
+
+/* Swipe transition: fade + slight directional slide */
+#guestStripGrid {
+  transition: transform 0.22s ease, opacity 0.22s ease;
+  will-change: transform, opacity;
+}
+
+#guestStripGrid.guest-strip-animating-left {
+  transform: translateX(-14px);
+  opacity: 0.34;
+}
+
+#guestStripGrid.guest-strip-animating-right {
+  transform: translateX(14px);
+  opacity: 0.34;
+}
+#guestStripGrid .guest-day-date {
       display: block !important;
       margin: 0 !important;
       padding: 0 !important;
@@ -3123,7 +3167,120 @@ color: #8f99a5;
     0 0 0 1px rgba(120, 160, 140, 0.25) inset !important;
 }
 
-</style>
+
+
+    .guest-calendar-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(24, 30, 36, 0.38);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 3000;
+    }
+
+    .guest-calendar-modal.show {
+      display: flex;
+    }
+
+    .guest-calendar-dialog {
+      width: min(360px, calc(100vw - 24px));
+      border-radius: 22px;
+      padding: 16px 16px 14px;
+      background: rgba(255,255,255,0.98);
+      border: 1px solid rgba(212, 220, 228, 0.95);
+      box-shadow: 0 20px 56px rgba(23, 36, 52, 0.22);
+    }
+
+    .guest-calendar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .guest-calendar-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #2f3a33;
+      letter-spacing: -0.01em;
+    }
+
+    .guest-calendar-close {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background: rgba(229, 236, 242, 0.95);
+      color: #55635b;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .guest-calendar-weekdays,
+    .guest-calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .guest-calendar-weekdays {
+      margin-bottom: 8px;
+    }
+
+    .guest-calendar-weekday {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #7a877f;
+      padding: 2px 0;
+    }
+
+    .guest-calendar-date {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid rgba(214, 221, 228, 0.9);
+      background: #fff;
+      color: #2f3a33;
+      border-radius: 12px;
+      min-height: 40px;
+      padding: 0;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    }
+
+    .guest-calendar-date.is-muted {
+      color: #a2adb6;
+      background: #f6f8fa;
+    }
+
+    .guest-calendar-date.has-booking {
+      background: linear-gradient(180deg, #edf6ff 0%, #dcecff 100%);
+      border-color: #a9c7eb;
+      box-shadow: 0 0 0 1px rgba(159, 195, 234, 0.22);
+    }
+
+    .guest-calendar-date.is-selected {
+      background: linear-gradient(180deg, #d8eadc 0%, #c3dfca 100%);
+      border-color: #96c3a2;
+      color: #294131;
+      box-shadow: 0 0 0 2px rgba(145, 203, 160, 0.28);
+    }
+
+    .guest-calendar-date:active {
+      transform: scale(0.97);
+    }
+
+  </style>
 </head>
 <body>
   <div class="app">
@@ -3398,6 +3555,20 @@ color: #8f99a5;
 
   <div id="toast" class="toast">Saved</div>
 
+  
+
+  <div class="guest-calendar-modal" id="guestCalendarModal" aria-hidden="true">
+    <div class="guest-calendar-dialog" role="dialog" aria-modal="true" aria-labelledby="guestCalendarTitle">
+      <div class="guest-calendar-top">
+        <div class="guest-calendar-title" id="guestCalendarTitle">Select date</div>
+        <button class="guest-calendar-close" id="guestCalendarCloseBtn" type="button" aria-label="Close calendar">×</button>
+      </div>
+      <div class="guest-calendar-weekdays" id="guestCalendarWeekdays"></div>
+      <div class="guest-calendar-grid" id="guestCalendarGrid"></div>
+    </div>
+  </div>
+
+
   <script>
     function showToast(message = "Saved") {
       const t = document.getElementById("toast");
@@ -3430,9 +3601,12 @@ color: #8f99a5;
     let editingId = null;
     let activeQuarter = "";
     let isGuestStripOpen = false;
-    let guestStripCenterOffset = 0;
+    let guestStripCenterDate = startOfLocalDay();
+    let guestCalendarMonthDate = null;
+    let guestStripIsAnimating = false;
     let guestStripTouchStartX = 0;
     let guestStripTouchStartY = 0;
+    let guestStripTouchIgnoreSwipe = false;
 
     const els = {
       date: document.getElementById("date"),
@@ -3484,6 +3658,11 @@ color: #8f99a5;
       guestStripPanel: document.getElementById("guestStripPanel"),
       guestStripMonth: document.getElementById("guestStripMonth"),
       guestStripGrid: document.getElementById("guestStripGrid"),
+      guestCalendarModal: document.getElementById("guestCalendarModal"),
+      guestCalendarCloseBtn: document.getElementById("guestCalendarCloseBtn"),
+      guestCalendarTitle: document.getElementById("guestCalendarTitle"),
+      guestCalendarWeekdays: document.getElementById("guestCalendarWeekdays"),
+      guestCalendarGrid: document.getElementById("guestCalendarGrid"),
       summaryPanel: document.getElementById("summaryPanel"),
 
       summaryCards: document.getElementById("summaryCards"),
@@ -4176,18 +4355,128 @@ color: #8f99a5;
       els.guestStripPanel.style.maxHeight = `${summaryHeight}px`;
     }
 
+    function toDateKey(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function getFirstName(name) {
+      return safeText(name).split(/\s+/).filter(Boolean)[0] || "";
+    }
+
+    function getBookedDateKeys() {
+      const booked = new Set();
+      records
+        .filter(r => r.type === "Revenue" && r.date)
+        .forEach(record => {
+          const checkIn = new Date(record.date + "T00:00:00");
+          const checkOutValue = getBookingCheckOutDate(record);
+          if (Number.isNaN(checkIn.getTime()) || !checkOutValue) return;
+          const checkOut = new Date(checkOutValue + "T00:00:00");
+          for (let day = new Date(checkIn); day < checkOut; day = addDays(day, 1)) {
+            booked.add(toDateKey(day));
+          }
+        });
+      return booked;
+    }
+
     function renderGuestStripMonth(centerDate) {
       if (!els.guestStripMonth || !centerDate) return;
 
       els.guestStripMonth.innerHTML = `
-        <div class="guest-strip-month-name">${centerDate.toLocaleDateString("en-US", { month: "long" })}</div>
-        <div class="guest-strip-month-year">${centerDate.getFullYear()}</div>
+        <button class="guest-strip-month-trigger" id="guestStripMonthTrigger" type="button" aria-label="Open booking calendar" onclick="openGuestCalendarModal(); return false;">
+          <span class="guest-strip-month-name">${centerDate.toLocaleDateString("en-US", { month: "long" })}</span>
+          <span class="guest-strip-month-year">${centerDate.getFullYear()}</span>
+        </button>
       `;
     }
 
-    function shiftGuestStrip(dayStep) {
-      guestStripCenterOffset += Number(dayStep || 0);
-      renderGuestStrip();
+    function shiftGuestStrip(dayStep, options = {}) {
+      const step = Number(dayStep || 0);
+      const animate = Boolean(options.animate);
+
+      if (!step) return;
+
+      if (!animate || !els.guestStripGrid) {
+        guestStripCenterDate = addDays(guestStripCenterDate, step);
+        renderGuestStrip();
+        return;
+      }
+
+      if (guestStripIsAnimating) return;
+      guestStripIsAnimating = true;
+
+      const directionClass = step > 0 ? "guest-strip-animating-left" : "guest-strip-animating-right";
+      els.guestStripGrid.classList.add(directionClass);
+
+      setTimeout(() => {
+        guestStripCenterDate = addDays(guestStripCenterDate, step);
+        renderGuestStrip();
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            els.guestStripGrid.classList.remove(directionClass);
+
+            setTimeout(() => {
+              guestStripIsAnimating = false;
+            }, 220);
+          });
+        });
+      }, 110);
+    }
+
+    function openGuestCalendarModal() {
+      if (!els.guestCalendarModal) return;
+      guestCalendarMonthDate = new Date(guestStripCenterDate.getFullYear(), guestStripCenterDate.getMonth(), 1);
+      renderGuestCalendarModal();
+      els.guestCalendarModal.classList.add("show");
+      els.guestCalendarModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeGuestCalendarModal() {
+      if (!els.guestCalendarModal) return;
+      els.guestCalendarModal.classList.remove("show");
+      els.guestCalendarModal.setAttribute("aria-hidden", "true");
+    }
+
+    function renderGuestCalendarModal() {
+      if (!els.guestCalendarGrid || !els.guestCalendarTitle || !guestCalendarMonthDate) return;
+
+      const monthStart = new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth(), 1);
+      const gridStart = addDays(monthStart, -monthStart.getDay());
+      const selectedKey = toDateKey(guestStripCenterDate);
+      const bookedKeys = getBookedDateKeys();
+      const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+      els.guestCalendarTitle.textContent = monthStart.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      if (els.guestCalendarWeekdays) {
+        els.guestCalendarWeekdays.innerHTML = weekdayLabels.map(label => `<div class="guest-calendar-weekday">${label}</div>`).join("");
+      }
+
+      const cells = [];
+      for (let i = 0; i < 42; i += 1) {
+        const day = addDays(gridStart, i);
+        const dayKey = toDateKey(day);
+        const classes = ["guest-calendar-date"];
+        if (day.getMonth() !== monthStart.getMonth()) classes.push("is-muted");
+        if (bookedKeys.has(dayKey)) classes.push("has-booking");
+        if (dayKey === selectedKey) classes.push("is-selected");
+        cells.push(`
+          <button class="${classes.join(" ")}" type="button" data-date="${dayKey}">${day.getDate()}</button>
+        `);
+      }
+      els.guestCalendarGrid.innerHTML = cells.join("");
+
+      els.guestCalendarGrid.querySelectorAll("[data-date]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const [year, month, day] = btn.dataset.date.split("-").map(Number);
+          guestStripCenterDate = new Date(year, month - 1, day);
+          closeGuestCalendarModal();
+          renderGuestStrip();
+        });
+      });
     }
 
     function bindGuestStripSwipe() {
@@ -4200,9 +4489,15 @@ color: #8f99a5;
         if (!touch) return;
         guestStripTouchStartX = touch.clientX;
         guestStripTouchStartY = touch.clientY;
+        guestStripTouchIgnoreSwipe = Boolean(event.target && event.target.closest && event.target.closest("#guestStripMonthTrigger"));
       }, { passive: true });
 
       els.guestStripPanel.addEventListener("touchend", (event) => {
+        if (guestStripTouchIgnoreSwipe) {
+          guestStripTouchIgnoreSwipe = false;
+          return;
+        }
+
         const touch = event.changedTouches && event.changedTouches[0];
         if (!touch) return;
 
@@ -4213,16 +4508,17 @@ color: #8f99a5;
         if (Math.abs(deltaX) <= Math.abs(deltaY)) return;
 
         if (deltaX < 0) {
-          shiftGuestStrip(1);
+          shiftGuestStrip(1, { animate: true });
         } else {
-          shiftGuestStrip(-1);
+          shiftGuestStrip(-1, { animate: true });
         }
       }, { passive: true });
     }
 
     function renderGuestStrip() {
       if (!els.guestStripGrid) return;
-      const centerDate = addDays(startOfLocalDay(), guestStripCenterOffset);
+      const centerDate = startOfLocalDay(guestStripCenterDate);
+      guestStripCenterDate = centerDate;
       renderGuestStripMonth(centerDate);
       const days = [addDays(centerDate, -1), centerDate, addDays(centerDate, 1)];
 
@@ -4839,6 +5135,24 @@ function getQuarterFromDate(dateStr) {
 
     els.guestStripToggleBtn.addEventListener("click", () => {
       setGuestStripOpen(!isGuestStripOpen);
+    });
+
+    if (els.guestCalendarCloseBtn) {
+      els.guestCalendarCloseBtn.addEventListener("click", closeGuestCalendarModal);
+    }
+
+    if (els.guestCalendarModal) {
+      els.guestCalendarModal.addEventListener("click", (event) => {
+        if (event.target === els.guestCalendarModal) {
+          closeGuestCalendarModal();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && els.guestCalendarModal?.classList.contains("show")) {
+        closeGuestCalendarModal();
+      }
     });
 
     window.confirmExportAllRevenue = async function confirmExportAllRevenue() {
