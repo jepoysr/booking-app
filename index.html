@@ -1294,6 +1294,7 @@
 
       .guest-entry-btn {
         font-size: 11px;
+        padding: 5px 9px;
       }
     }
 
@@ -1643,54 +1644,100 @@ select.has-value {
     .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
 
     .guest-entry-btn {
-      display: block;
-      width: 100%;
-      padding: 0;
-      border: none;
-      background: transparent !important;
-      box-shadow: none !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: auto;
+      max-width: 100%;
+      padding: 5px 10px;
+      border: 1px solid rgba(223,229,223,0.85);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,247,249,0.96)) !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       color: inherit;
       text-align: left;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      line-height: 1.25;
+      line-height: 1;
       cursor: pointer;
+      border-radius: 999px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;
     }
 
     .guest-entry-btn:hover {
-      opacity: 0.88;
-      transform: none;
+      opacity: 0.96;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
     }
 
     .guest-entry-btn:active {
-      transform: scale(0.99);
+      transform: scale(0.97);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
     }
 
     .guest-entry-unit {
-      display: inline-block;
-      margin-right: 4px;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 0;
       font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.01em;
+      flex: 0 0 auto;
+    }
+
+    .guest-entry-name {
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .guest-entry-unit.s1,
     .guest-entry-name.s1 {
-      color: #ff6b6b;
+      color: #4a3a6d;
+    }
+
+    .guest-entry-btn:has(.guest-entry-name.s1) {
+      border-color: rgba(191, 169, 232, 0.95);
+      background: linear-gradient(135deg, rgba(221,210,244,0.72), rgba(191,169,232,0.42)) !important;
     }
 
     .guest-entry-unit.s2,
     .guest-entry-name.s2 {
-      color: #1f3cff;
+      color: #724621;
+    }
+
+    .guest-entry-btn:has(.guest-entry-name.s2) {
+      border-color: rgba(239, 190, 146, 0.95);
+      background: linear-gradient(135deg, rgba(247,220,194,0.76), rgba(239,190,146,0.42)) !important;
     }
 
     .guest-entry-unit.casa,
     .guest-entry-name.casa {
-      color: #ff6b6b;
+      color: #234263;
+    }
+
+    .guest-entry-btn:has(.guest-entry-name.casa) {
+      border-color: rgba(159, 192, 235, 0.95);
+      background: linear-gradient(135deg, rgba(201,221,247,0.76), rgba(159,192,235,0.42)) !important;
     }
 
     .guest-empty {
-      color: #94a09a;
-      font-size: 12px;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(223,229,223,0.82);
+      color: #8f9b95;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
 
     tr.record-flash td {
@@ -1765,15 +1812,49 @@ select.has-value {
     .guest-strip-grid {
       display: grid !important;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px !important;
+      gap: 12px !important;
       min-width: 0;
+      align-items: stretch;
     }
 
-    .guest-day-card { height: 100% !important; min-height: 0 !important; border-radius: 14px !important; overflow: hidden !important; }
+    .guest-day-card {
+      height: 100% !important;
+      min-height: 0 !important;
+      border-radius: 16px !important;
+      overflow: hidden !important;
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,250,248,0.92)) !important;
+      border: 1px solid rgba(223,229,223,0.92) !important;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.055) !important;
+      transform: scale(0.965);
+      opacity: 0.84;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
 
-    .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
+    .guest-day-card.current {
+      background: linear-gradient(180deg, rgba(255,255,255,0.99), rgba(242,247,244,0.98)) !important;
+      border-color: rgba(120,160,140,0.42) !important;
+      box-shadow:
+        0 14px 28px rgba(0,0,0,0.11),
+        0 0 0 1px rgba(120,160,140,0.12) inset !important;
+      transform: translateY(-4px) scale(1);
+      opacity: 1;
+    }
 
-    .guest-day-body { height: calc(100% - 48px) !important; padding: 6px 6px !important; overflow: hidden !important; }
+    .guest-day-head {
+      min-height: 50px !important;
+      padding: 8px 10px 5px !important;
+    }
+
+    .guest-day-body {
+      height: calc(100% - 50px) !important;
+      padding: 8px 8px 10px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 7px !important;
+      justify-content: flex-start !important;
+    }
 
     @media (max-width: 768px) {
       .hero-right {
@@ -2313,13 +2394,18 @@ select.has-value {
       color: inherit !important;
       cursor: pointer !important;
       touch-action: manipulation !important;
-      position: relative !important;
-      z-index: 2 !important;
     }
 
     .guest-strip-month-trigger .guest-strip-month-name,
     .guest-strip-month-trigger .guest-strip-month-year {
       white-space: nowrap !important;
+    }
+
+
+    #guestStripMonth,
+    #guestStripMonth .guest-strip-month-trigger {
+      pointer-events: auto !important;
+      -webkit-tap-highlight-color: transparent !important;
     }
 
     #guestStripGrid {
@@ -3169,118 +3255,179 @@ color: #8f99a5;
 
 
 
-    .guest-calendar-modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(24, 30, 36, 0.38);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 3000;
-    }
+/* Guest calendar header refinements */
+.guest-calendar-top {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+  min-height: 32px !important;
+}
 
-    .guest-calendar-modal.show {
-      display: flex;
-    }
+.guest-calendar-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  text-align: center !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #2f3a33 !important;
+  letter-spacing: -0.01em !important;
+}
 
-    .guest-calendar-dialog {
-      width: min(360px, calc(100vw - 24px));
-      border-radius: 22px;
-      padding: 16px 16px 14px;
-      background: rgba(255,255,255,0.98);
-      border: 1px solid rgba(212, 220, 228, 0.95);
-      box-shadow: 0 20px 56px rgba(23, 36, 52, 0.22);
-    }
+.guest-calendar-select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 1px solid rgba(214, 221, 228, 0.95) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f8fb 100%) !important;
+  color: #2f3a33 !important;
+  border-radius: 10px !important;
+  height: 32px !important;
+  padding: 0 28px 0 10px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-align-last: center !important;
+  cursor: pointer !important;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #7d8a82 50%),
+    linear-gradient(135deg, #7d8a82 50%, transparent 50%) !important;
+  background-position:
+    calc(100% - 14px) 13px,
+    calc(100% - 9px) 13px !important;
+  background-size: 5px 5px, 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
 
-    .guest-calendar-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+.guest-calendar-month-select {
+  min-width: 124px !important;
+}
 
-    .guest-calendar-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #2f3a33;
-      letter-spacing: -0.01em;
-    }
+.guest-calendar-year-select {
+  min-width: 88px !important;
+}
 
-    .guest-calendar-close {
-      appearance: none;
-      -webkit-appearance: none;
-      border: none;
-      background: rgba(229, 236, 242, 0.95);
-      color: #55635b;
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-    }
+.guest-calendar-close {
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: none !important;
+  background: rgba(229, 236, 242, 0.95) !important;
+  color: #55635b !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 999px !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+}
 
-    .guest-calendar-weekdays,
-    .guest-calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 6px;
-    }
 
-    .guest-calendar-weekdays {
-      margin-bottom: 8px;
-    }
+/* Guest calendar modal */
+.guest-calendar-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(32, 39, 34, 0.38);
+  z-index: 12000;
+}
+.guest-calendar-modal.show {
+  display: flex;
+}
+.guest-calendar-dialog {
+  width: min(100%, 360px);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+  border: 1px solid rgba(223,229,223,0.95);
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.18);
+  padding: 16px;
+}
+.guest-calendar-weekdays,
+.guest-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.guest-calendar-weekdays {
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.guest-calendar-weekday {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7a877f;
+}
+.guest-calendar-grid {
+  gap: 6px;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.guest-calendar-grid.is-switching {
+  opacity: 0.35;
+  transform: translateY(4px);
+}
+.guest-calendar-date {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(221, 228, 233, 0.95);
+  background: #ffffff;
+  color: #2f3a33;
+  border-radius: 12px;
+  height: 40px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+.guest-calendar-date.is-muted {
+  opacity: 0.42;
+}
+.guest-calendar-date.has-booking {
+  background: linear-gradient(180deg, #e7f3ec 0%, #d8ebdf 100%);
+  border-color: rgba(72, 128, 104, 0.34);
+}
+.guest-calendar-date.is-selected {
+  background: linear-gradient(180deg, #eef5fd 0%, #e2eefb 100%);
+  border-color: #9fc3ea;
+  box-shadow: 0 0 0 2px rgba(173, 207, 244, 0.28);
+}
+.guest-calendar-date.is-today {
+  border-color: #e46666;
+  box-shadow: inset 0 0 0 2px #e46666;
+}
+.guest-calendar-date:active {
+  transform: scale(0.97);
+}
+.guest-empty {
+  width: 100%;
+  justify-content: center !important;
+  text-align: center !important;
+  color: #8b9891 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+}
 
-    .guest-calendar-weekday {
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #7a877f;
-      padding: 2px 0;
-    }
-
-    .guest-calendar-date {
-      appearance: none;
-      -webkit-appearance: none;
-      border: 1px solid rgba(214, 221, 228, 0.9);
-      background: #fff;
-      color: #2f3a33;
-      border-radius: 12px;
-      min-height: 40px;
-      padding: 0;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
-    }
-
-    .guest-calendar-date.is-muted {
-      color: #a2adb6;
-      background: #f6f8fa;
-    }
-
-    .guest-calendar-date.has-booking {
-      background: linear-gradient(180deg, #edf6ff 0%, #dcecff 100%);
-      border-color: #a9c7eb;
-      box-shadow: 0 0 0 1px rgba(159, 195, 234, 0.22);
-    }
-
-    .guest-calendar-date.is-selected {
-      background: linear-gradient(180deg, #d8eadc 0%, #c3dfca 100%);
-      border-color: #96c3a2;
-      color: #294131;
-      box-shadow: 0 0 0 2px rgba(145, 203, 160, 0.28);
-    }
-
-    .guest-calendar-date:active {
-      transform: scale(0.97);
-    }
-
-  </style>
+</style>
 </head>
 <body>
   <div class="app">
@@ -4303,10 +4450,17 @@ color: #8f99a5;
       return String(date.getDate());
     }
 
+
+    function getGuestDisplayName(fullName) {
+      const clean = safeText(fullName);
+      if (!clean) return "";
+      return clean.split(/\s+/)[0] || clean;
+    }
+
     function getGuestUnitCode(unit) {
-      if (unit === "Studio One-1123") return { label: "[S1]", cls: "s1" };
-      if (unit === "Studio Two-1122") return { label: "[S2]", cls: "s2" };
-      return { label: "[CASA]", cls: "casa" };
+      if (unit === "Studio One-1123") return { label: "{S1}", cls: "s1" };
+      if (unit === "Studio Two-1122") return { label: "{S2}", cls: "s2" };
+      return { label: "{CASA}", cls: "casa" };
     }
 
     function getBookingCheckOutDate(record) {
@@ -4386,11 +4540,25 @@ color: #8f99a5;
       if (!els.guestStripMonth || !centerDate) return;
 
       els.guestStripMonth.innerHTML = `
-        <button class="guest-strip-month-trigger" id="guestStripMonthTrigger" type="button" aria-label="Open booking calendar" onclick="openGuestCalendarModal(); return false;">
+        <button class="guest-strip-month-trigger" id="guestStripMonthTrigger" type="button" aria-label="Open booking calendar">
           <span class="guest-strip-month-name">${centerDate.toLocaleDateString("en-US", { month: "long" })}</span>
           <span class="guest-strip-month-year">${centerDate.getFullYear()}</span>
         </button>
       `;
+
+      const trigger = document.getElementById("guestStripMonthTrigger");
+      if (trigger && trigger.dataset.bound !== "true") {
+        const openFromTrigger = (event) => {
+          if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          openGuestCalendarModal();
+        };
+        trigger.addEventListener("click", openFromTrigger);
+        trigger.addEventListener("touchend", openFromTrigger, { passive: false });
+        trigger.dataset.bound = "true";
+      }
     }
 
     function shiftGuestStrip(dayStep, options = {}) {
@@ -4427,10 +4595,30 @@ color: #8f99a5;
       }, 110);
     }
 
+    function updateGuestCalendarMonth(nextDate, options = {}) {
+      if (!nextDate) return;
+      guestCalendarMonthDate = new Date(nextDate.getFullYear(), nextDate.getMonth(), 1);
+
+      if (!els.guestCalendarGrid || !options.animate) {
+        renderGuestCalendarModal();
+        return;
+      }
+
+      els.guestCalendarGrid.classList.add("is-switching");
+      window.clearTimeout(updateGuestCalendarMonth._timer);
+      updateGuestCalendarMonth._timer = window.setTimeout(() => {
+        renderGuestCalendarModal();
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            els.guestCalendarGrid.classList.remove("is-switching");
+          });
+        });
+      }, 90);
+    }
+
     function openGuestCalendarModal() {
       if (!els.guestCalendarModal) return;
-      guestCalendarMonthDate = new Date(guestStripCenterDate.getFullYear(), guestStripCenterDate.getMonth(), 1);
-      renderGuestCalendarModal();
+      updateGuestCalendarMonth(new Date(guestStripCenterDate.getFullYear(), guestStripCenterDate.getMonth(), 1), { animate: false });
       els.guestCalendarModal.classList.add("show");
       els.guestCalendarModal.setAttribute("aria-hidden", "false");
     }
@@ -4447,10 +4635,27 @@ color: #8f99a5;
       const monthStart = new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth(), 1);
       const gridStart = addDays(monthStart, -monthStart.getDay());
       const selectedKey = toDateKey(guestStripCenterDate);
+      const todayKey = toDateKey(startOfLocalDay());
       const bookedKeys = getBookedDateKeys();
       const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-      els.guestCalendarTitle.textContent = monthStart.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      const yearStart = Math.max(2020, guestStripCenterDate.getFullYear() - 3);
+      const yearEnd = guestStripCenterDate.getFullYear() + 5;
+      const yearOptions = Array.from({ length: yearEnd - yearStart + 1 }, (_, index) => yearStart + index);
+
+      els.guestCalendarTitle.innerHTML = `
+        <select class="guest-calendar-select guest-calendar-month-select" id="guestCalendarMonthSelect" aria-label="Select month">
+          ${monthNames.map((name, index) => `<option value="${index}" ${index === monthStart.getMonth() ? "selected" : ""}>${name}</option>`).join("")}
+        </select>
+        <select class="guest-calendar-select guest-calendar-year-select" id="guestCalendarYearSelect" aria-label="Select year">
+          ${yearOptions.map((year) => `<option value="${year}" ${year === monthStart.getFullYear() ? "selected" : ""}>${year}</option>`).join("")}
+        </select>
+      `;
+
       if (els.guestCalendarWeekdays) {
         els.guestCalendarWeekdays.innerHTML = weekdayLabels.map(label => `<div class="guest-calendar-weekday">${label}</div>`).join("");
       }
@@ -4463,23 +4668,14 @@ color: #8f99a5;
         if (day.getMonth() !== monthStart.getMonth()) classes.push("is-muted");
         if (bookedKeys.has(dayKey)) classes.push("has-booking");
         if (dayKey === selectedKey) classes.push("is-selected");
-        cells.push(`
-          <button class="${classes.join(" ")}" type="button" data-date="${dayKey}">${day.getDate()}</button>
-        `);
+        if (dayKey === todayKey) classes.push("is-today");
+        cells.push(`<button class="${classes.join(" ")}" type="button" data-date="${dayKey}">${day.getDate()}</button>`);
       }
       els.guestCalendarGrid.innerHTML = cells.join("");
-
-      els.guestCalendarGrid.querySelectorAll("[data-date]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const [year, month, day] = btn.dataset.date.split("-").map(Number);
-          guestStripCenterDate = new Date(year, month - 1, day);
-          closeGuestCalendarModal();
-          renderGuestStrip();
-        });
-      });
     }
 
     function bindGuestStripSwipe() {
+
       if (!els.guestStripPanel || els.guestStripPanel.dataset.swipeBound === "true") return;
 
       els.guestStripPanel.dataset.swipeBound = "true";
@@ -4530,11 +4726,11 @@ color: #8f99a5;
               return `
                 <button class="guest-entry-btn" type="button" onclick="jumpToRecord('${guest.id}')">
                   <span class="guest-entry-unit ${unit.cls}">${unit.label}</span>
-                  <span class="guest-entry-name ${unit.cls}">${escapeHtml(guest.vendor || "")}</span>
+                  <span class="guest-entry-name ${unit.cls}">${escapeHtml(getGuestDisplayName(guest.vendor || ""))}</span>
                 </button>
               `;
             }).join("")
-          : `<div class="guest-empty">No guests</div>`;
+          : `<div class="guest-empty">Available</div>`;
 
         return `
           <div class="guest-day-card ${index === 1 ? "current" : ""}">
@@ -5140,6 +5336,43 @@ function getQuarterFromDate(dateStr) {
     if (els.guestCalendarCloseBtn) {
       els.guestCalendarCloseBtn.addEventListener("click", closeGuestCalendarModal);
     }
+
+    if (els.guestCalendarTitle && !els.guestCalendarTitle.dataset.bound) {
+      els.guestCalendarTitle.addEventListener("change", (event) => {
+        const monthSelect = event.target.closest ? event.target.closest("#guestCalendarMonthSelect") : null;
+        const yearSelect = event.target.closest ? event.target.closest("#guestCalendarYearSelect") : null;
+        if (monthSelect) {
+          const nextMonth = Number(monthSelect.value);
+          updateGuestCalendarMonth(new Date(guestCalendarMonthDate.getFullYear(), nextMonth, 1), { animate: true });
+          return;
+        }
+        if (yearSelect) {
+          const nextYear = Number(yearSelect.value);
+          updateGuestCalendarMonth(new Date(nextYear, guestCalendarMonthDate.getMonth(), 1), { animate: true });
+        }
+      });
+      els.guestCalendarTitle.dataset.bound = "true";
+    }
+
+    if (els.guestCalendarGrid && !els.guestCalendarGrid.dataset.bound) {
+      els.guestCalendarGrid.addEventListener("click", (event) => {
+        const btn = event.target && event.target.closest ? event.target.closest("[data-date]") : null;
+        if (!btn) return;
+        const [year, month, day] = btn.dataset.date.split("-").map(Number);
+        guestStripCenterDate = new Date(year, month - 1, day);
+        closeGuestCalendarModal();
+        renderGuestStrip();
+      });
+      els.guestCalendarGrid.dataset.bound = "true";
+    }
+
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target && event.target.closest ? event.target.closest("#guestStripMonthTrigger, .guest-strip-month-trigger") : null;
+      if (!trigger) return;
+      event.preventDefault();
+      openGuestCalendarModal();
+    });
 
     if (els.guestCalendarModal) {
       els.guestCalendarModal.addEventListener("click", (event) => {
