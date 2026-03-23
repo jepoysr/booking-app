@@ -3430,6 +3430,9 @@ color: #8f99a5;
     let editingId = null;
     let activeQuarter = "";
     let isGuestStripOpen = false;
+    let guestStripCenterOffset = 0;
+    let guestStripTouchStartX = 0;
+    let guestStripTouchStartY = 0;
 
     const els = {
       date: document.getElementById("date"),
@@ -4182,11 +4185,46 @@ color: #8f99a5;
       `;
     }
 
+    function shiftGuestStrip(dayStep) {
+      guestStripCenterOffset += Number(dayStep || 0);
+      renderGuestStrip();
+    }
+
+    function bindGuestStripSwipe() {
+      if (!els.guestStripPanel || els.guestStripPanel.dataset.swipeBound === "true") return;
+
+      els.guestStripPanel.dataset.swipeBound = "true";
+
+      els.guestStripPanel.addEventListener("touchstart", (event) => {
+        const touch = event.changedTouches && event.changedTouches[0];
+        if (!touch) return;
+        guestStripTouchStartX = touch.clientX;
+        guestStripTouchStartY = touch.clientY;
+      }, { passive: true });
+
+      els.guestStripPanel.addEventListener("touchend", (event) => {
+        const touch = event.changedTouches && event.changedTouches[0];
+        if (!touch) return;
+
+        const deltaX = touch.clientX - guestStripTouchStartX;
+        const deltaY = touch.clientY - guestStripTouchStartY;
+
+        if (Math.abs(deltaX) < 40) return;
+        if (Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+        if (deltaX < 0) {
+          shiftGuestStrip(1);
+        } else {
+          shiftGuestStrip(-1);
+        }
+      }, { passive: true });
+    }
+
     function renderGuestStrip() {
       if (!els.guestStripGrid) return;
-      const today = startOfLocalDay();
-      renderGuestStripMonth(today);
-      const days = [addDays(today, -1), today, addDays(today, 1)];
+      const centerDate = addDays(startOfLocalDay(), guestStripCenterOffset);
+      renderGuestStripMonth(centerDate);
+      const days = [addDays(centerDate, -1), centerDate, addDays(centerDate, 1)];
 
       els.guestStripGrid.innerHTML = days.map((day, index) => {
         const guests = getGuestStripRecordsForDay(day);
@@ -4225,6 +4263,7 @@ color: #8f99a5;
       if (isGuestStripOpen) {
         syncHeroPillWidths();
         syncGuestStripHeight();
+        bindGuestStripSwipe();
         renderGuestStrip();
       }
     }
