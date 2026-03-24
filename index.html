@@ -1029,6 +1029,63 @@
       opacity: 1 !important;
     }
 
+    
+    .table-wrap {
+      position: relative;
+    }
+
+    thead th {
+      top: 0;
+      box-shadow: 0 1px 0 #e9eeea;
+    }
+
+    .back-to-top-btn {
+      position: fixed;
+      right: 18px;
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.94);
+      color: #4b5a52;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      z-index: 9998;
+    }
+
+    .back-to-top-btn.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-to-top-btn:hover {
+      box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+    }
+
+    .back-to-top-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    @media (max-width: 768px) {
+      .back-to-top-btn {
+        right: 14px;
+        bottom: calc(14px + env(safe-area-inset-bottom));
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+
     @media (max-width: 768px) {
       .app {
         padding: calc(14px + env(safe-area-inset-top)) 14px 14px 14px;
@@ -3234,7 +3291,7 @@ select.has-value {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 2px !important;
+  gap: 0 !important;
   flex: 1 1 auto !important;
   min-width: 0 !important;
   text-align: left !important;
@@ -3283,11 +3340,21 @@ select.has-value {
 }
 
 .guest-calendar-month-select {
-  min-width: 74px !important;
+  min-width: 0 !important;
+  width: 78px !important;
+  padding-right: 10px !important;
+  background-position:
+    calc(100% - 7px) 13px,
+    calc(100% - 2px) 13px !important;
 }
 
 .guest-calendar-year-select {
-  min-width: 48px !important;
+  min-width: 0 !important;
+  width: auto !important;
+  padding-right: 10px !important;
+  background-position:
+    calc(100% - 7px) 13px,
+    calc(100% - 2px) 13px !important;
 }
 
 .guest-calendar-nav,
@@ -3948,6 +4015,8 @@ select.has-value {
       summaryCards: document.getElementById("summaryCards"),
       recordsTableBody: document.getElementById("recordsTableBody"),
       recordCount: document.getElementById("recordCount"),
+      tableWrap: document.querySelector(".table-wrap"),
+      backToTopBtn: document.getElementById("backToTopBtn"),
 
       exportAllRevenueBtn: document.getElementById("exportAllRevenueBtn"),
       exportAllExpenseBtn: document.getElementById("exportAllExpenseBtn"),
@@ -4922,9 +4991,21 @@ select.has-value {
       const rowEl = document.getElementById(`record-row-${id}`);
       if (!rowEl) return;
 
+      const wrap = els.tableWrap;
+      const guestCell = rowEl.children[4];
+      const contextCell = rowEl.children[2] || guestCell;
+
       rowEl.classList.add("record-flash");
       rowEl.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => rowEl.classList.remove("record-flash"), 2600);
+
+      setTimeout(() => {
+        if (wrap && guestCell) {
+          const targetLeft = Math.max(0, (contextCell ? contextCell.offsetLeft : guestCell.offsetLeft) - 16);
+          wrap.scrollTo({ left: targetLeft, behavior: "smooth" });
+        }
+      }, 260);
+
+      setTimeout(() => rowEl.classList.remove("record-flash"), 5200);
     }
 
     function render() {
@@ -5782,6 +5863,8 @@ document.querySelectorAll("input, textarea, select").forEach(el => {
     window.deleteRecord = deleteRecord;
     window.jumpToRecord = jumpToRecord;
   </script>
+
+  <button id="backToTopBtn" class="back-to-top-btn" type="button" aria-label="Back to top">↑</button>
 </body>
 </html>
 <style>
