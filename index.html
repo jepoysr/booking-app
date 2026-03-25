@@ -1028,14 +1028,30 @@
       pointer-events: auto !important;
       opacity: 1 !important;
     }
+    .records-panel {
+      overflow: visible !important;
+    }
 
-    
-    .table-wrap {
+    .records-panel .table-wrap {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 62vh;
+      -webkit-overflow-scrolling: touch;
+      min-width: 0;
+      overscroll-behavior: contain;
+    }
+
+    .records-panel table {
       position: relative;
     }
 
-    thead th {
+    .records-panel thead th {
+      position: sticky;
       top: 0;
+      z-index: 8;
+      background: #f8faf8;
       box-shadow: 0 1px 0 #e9eeea;
     }
 
@@ -1047,7 +1063,7 @@
       height: 42px;
       border-radius: 999px;
       border: 1px solid rgba(0,0,0,0.06);
-      background: rgba(255,255,255,0.94);
+      background: rgba(255,255,255,0.96);
       color: #4b5a52;
       box-shadow: 0 10px 24px rgba(0,0,0,0.12);
       display: inline-flex;
@@ -1056,14 +1072,16 @@
       font-size: 18px;
       font-weight: 700;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       transform: translateY(10px);
-      transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-      z-index: 9998;
+      transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease, visibility 0.18s ease;
+      z-index: 9999;
     }
 
     .back-to-top-btn.show {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
       transform: translateY(0);
     }
@@ -1076,6 +1094,7 @@
       transform: translateY(0) scale(0.97);
     }
 
+
     @media (max-width: 768px) {
       .back-to-top-btn {
         right: 14px;
@@ -1083,8 +1102,11 @@
         width: 40px;
         height: 40px;
       }
-    }
 
+      .records-panel .table-wrap {
+        max-height: 56vh;
+      }
+    }
 
     @media (max-width: 768px) {
       .app {
@@ -1799,7 +1821,7 @@ select.has-value {
     }
 
     tr.record-flash td {
-      background: #fff8d8 !important;
+      background: #fce7f3 !important;   /* soft magenta */
       transition: background 0.2s ease;
     }
 
@@ -3751,7 +3773,7 @@ select.has-value {
           </div>
 
           <div id="declaredField">
-            <label>Declared?</label>
+            <label>Invoice Issued</label>
             <select id="declared">
               <option value="">Select</option>
               <option value="Yes">Yes</option>
@@ -3769,7 +3791,7 @@ select.has-value {
             </div>
           </div>
         </div>
-        <div class="footer-note">Autosaves immediately after add, edit, and delete.</div>
+        <div class="footer-note">Clearing your device browser cache may delete records. Back up regularly.</div>
       </div>
 
       <div class="panel" id="summaryPanel">
@@ -3840,7 +3862,7 @@ select.has-value {
 </div>
     </div>
 
-    <div class="panel">
+    <div class="panel records-panel">
       <div class="records-header">
         <div class="records-header-left">
           <div class="records-title-row">
@@ -3868,7 +3890,7 @@ select.has-value {
               <th>Guest / Vendor</th>
               <th>Amount</th>
               <th>Platform</th>
-              <th>Declared?</th>
+              <th>Invoice Issued</th>
               <th>Inv. No.</th>
               <th>Note</th>
               <th>Actions</th>
@@ -4051,29 +4073,17 @@ select.has-value {
     function getRecordImportKey(record) {
       const normalizedDate = normalizeImportDateKey(record.date);
 
-      if (record.type === "Revenue") {
-        return [
-          "revenue",
-          normalizeForKey(record.unit),
-          normalizedDate,
-          normalizeForKey(record.nights),
-          normalizeForKey(record.vendor),
-          normalizeForKey(record.amount),
-          normalizeForKey(record.platform),
-          normalizeForKey(record.declared),
-          normalizeForKey(record.invoiceNumber),
-          normalizeForKey(record.note)
-        ].join("|");
-      }
-
       return [
-        "expense",
+        normalizeForKey(record.type),
         normalizeForKey(record.unit),
         normalizedDate,
-        normalizeForKey(record.category),
+        normalizeForKey(record.nights),
         normalizeForKey(record.vendor),
-        normalizeForKey(record.amount),
+        normalizeForKey(record.platform),
+        normalizeForKey(record.declared),
         normalizeForKey(record.invoiceNumber),
+        normalizeForKey(record.category),
+        normalizeForKey(record.amount),
         normalizeForKey(record.note)
       ].join("|");
     }
@@ -4083,15 +4093,44 @@ select.has-value {
       return existingKeys.has(getRecordImportKey(record));
     }
 
+    function splitYMD(dateStr) {
+      if (!dateStr || typeof dateStr !== "string") return null;
+      const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return null;
+      return {
+        year: parseInt(match[1], 10),
+        month: parseInt(match[2], 10),
+        day: parseInt(match[3], 10)
+      };
+    }
+
+    function getDateYear(dateStr) {
+      const parts = splitYMD(dateStr);
+      return parts ? parts.year : "";
+    }
+
+    function getDateMonth(dateStr) {
+      const parts = splitYMD(dateStr);
+      return parts ? parts.month : "";
+    }
+
+    function compareYMDDesc(a, b) {
+      const aa = a || "";
+      const bb = b || "";
+      if (aa === bb) return 0;
+      return aa < bb ? 1 : -1;
+    }
+
     function formatDateDDMmmYY(dateStr) {
       if (!dateStr) return "";
-      const d = new Date(dateStr);
-      if (isNaN(d)) return dateStr;
 
-      const day = String(d.getDate()).padStart(2, "0");
+      const parts = splitYMD(dateStr);
+      if (!parts) return dateStr;
+
       const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-      const mon = months[d.getMonth()];
-      const year = String(d.getFullYear()).slice(-2);
+      const day = String(parts.day).padStart(2, "0");
+      const mon = months[parts.month - 1];
+      const year = String(parts.year).slice(-2);
 
       return `${day}-${mon}-${year}`;
     }
@@ -4433,12 +4472,8 @@ select.has-value {
     }
 
     function getQuarterNumber(dateStr) {
-      if (!dateStr) return "";
-
-      const d = new Date(dateStr);
-      if (isNaN(d)) return "";
-
-      const month = d.getMonth() + 1;
+      const month = getDateMonth(dateStr);
+      if (!month) return "";
 
       if (month <= 3) return "1";
       if (month <= 6) return "2";
@@ -4483,8 +4518,8 @@ select.has-value {
             String(r.amount)
           ].join(" ").toLowerCase();
 
-          const year = r.date ? new Date(r.date).getFullYear().toString() : "";
-          const month = r.date ? (new Date(r.date).getMonth() + 1).toString() : "";
+          const year = r.date ? String(getDateYear(r.date)) : "";
+          const month = r.date ? String(getDateMonth(r.date)) : "";
 
           return (
             (!search || textBlob.includes(search)) &&
@@ -4495,7 +4530,7 @@ select.has-value {
             (!filterQuarter || getQuarterNumber(r.date) === filterQuarter)
           );
         })
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
+        .sort((a, b) => compareYMDDesc(a.date, b.date));
     }
 
     function computeSummary(data) {
@@ -4662,7 +4697,7 @@ select.has-value {
     function getGuestUnitCode(unit) {
       if (unit === "Studio One-1123") return { label: "{S1}", cls: "s1" };
       if (unit === "Studio Two-1122") return { label: "{S2}", cls: "s2" };
-      return { label: "{CASA}", cls: "casa" };
+      return { label: "{CT}", cls: "casa" };
     }
 
     function getBookingCheckOutDate(record) {
@@ -5022,7 +5057,7 @@ select.has-value {
     function refreshYearFilter() {
       const years = [...new Set(
         records
-          .map(r => r.date ? new Date(r.date).getFullYear().toString() : null)
+          .map(r => r.date ? String(getDateYear(r.date)) : null)
           .filter(Boolean)
       )].sort((a, b) => b - a);
 
@@ -5073,12 +5108,8 @@ select.has-value {
     }
 
 function getQuarterFromDate(dateStr) {
-  if (!dateStr) return "";
-
-  const d = new Date(dateStr);
-  if (isNaN(d)) return "";
-
-  const month = d.getMonth() + 1;
+  const month = getDateMonth(dateStr);
+  if (!month) return "";
 
   if (month <= 3) return "1st Qtr.";
   if (month <= 6) return "2nd Qtr.";
@@ -5193,24 +5224,49 @@ function getQuarterFromDate(dateStr) {
 
       if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
 
-      const short = raw.match(/^(\d{2})-([A-Za-z]{3})-(\d{2})$/);
-      if (short) {
-        const months = {jan:"01",feb:"02",mar:"03",apr:"04",may:"05",jun:"06",jul:"07",aug:"08",sep:"09",oct:"10",nov:"11",dec:"12"};
-        const dd = short[1];
-        const mm = months[short[2].toLowerCase()];
-        const yy = Number(short[3]);
-        const yyyy = yy >= 70 ? `19${short[3]}` : `20${short[3]}`;
+      const months = {jan:"01",feb:"02",mar:"03",apr:"04",may:"05",jun:"06",jul:"07",aug:"08",sep:"09",oct:"10",nov:"11",dec:"12"};
+
+      const shortDash = raw.match(/^(\d{1,2})-([A-Za-z]{3})-(\d{2})$/);
+      if (shortDash) {
+        const dd = shortDash[1].padStart(2, "0");
+        const mm = months[shortDash[2].toLowerCase()];
+        const yy = Number(shortDash[3]);
+        const yyyy = yy >= 70 ? `19${shortDash[3]}` : `20${shortDash[3]}`;
         if (mm) return `${yyyy}-${mm}-${dd}`;
       }
 
-      const parsed = new Date(raw);
-      if (!isNaN(parsed)) return parsed.toISOString().slice(0, 10);
+      const shortSpace = raw.match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})$/);
+      if (shortSpace) {
+        const dd = shortSpace[1].padStart(2, "0");
+        const mm = months[shortSpace[2].toLowerCase()];
+        const yy = Number(shortSpace[3]);
+        const yyyy = yy >= 70 ? `19${shortSpace[3]}` : `20${shortSpace[3]}`;
+        if (mm) return `${yyyy}-${mm}-${dd}`;
+      }
 
       return "";
     }
 
     function normalizeHeaderCell(value) {
       return String(value ?? "").trim().toLowerCase().replace(/^\ufeff/, "");
+    }
+
+    function getLastUsableHeaderIndex(headers) {
+      let last = -1;
+      headers.forEach((header, index) => {
+        if (normalizeHeaderCell(header) !== "") last = index;
+      });
+      return last;
+    }
+
+    function getHeaderLimitedRowKey(headers, row) {
+      const lastIndex = getLastUsableHeaderIndex(headers);
+      if (lastIndex < 0) return "";
+
+      return row
+        .slice(0, lastIndex + 1)
+        .map(value => safeText(value).toLowerCase())
+        .join("|");
     }
 
     function detectImportHeader(rows) {
@@ -5297,10 +5353,12 @@ function getQuarterFromDate(dateStr) {
         unitLabel;
 
       const date = parseImportDate(get("date", "date of stay", "date of expense"));
-      const amount = Number(String(get("amount")).replace(/[₱,\s]/g, ""));
+      const amountRaw = safeText(get("amount"));
+      const amount = amountRaw ? Number(String(amountRaw).replace(/[₱,\s]/g, "")) : 0;
 
       // Only truly unusable rows should be skipped
-      if (!date || !Number.isFinite(amount) || amount <= 0) return null;
+      if (!date) return null;
+      if (isExpense && (!Number.isFinite(amount) || amount <= 0)) return null;
 
       if (isRevenue) {
         let nightsValue = get("no. of night", "no of night", "no. of nights", "no of nights", "number of nights", "nights", "stay nights");
@@ -5413,14 +5471,16 @@ function getQuarterFromDate(dateStr) {
       const amountNumber = Number(String(amountRaw).replace(/[₱,\s]/g, ""));
       const amountLabel = Number.isFinite(amountNumber) && amountNumber > 0 ? peso(amountNumber) : "";
 
-      // Only report rows that look like real entries but are unusable due to missing date/amount
-      if (!dateLabel && !amountLabel) return null;
-
+      // For Revenue, missing amount is allowed. Only missing date should make it unusable.
       if (kind === "Revenue") {
+        if (!dateLabel) return null;
         const guest = getImportCellValue(headers, row, "guest name");
         const preview = [dateLabel || "(no date)", guest || "(no guest)", amountLabel || "(no amount)"].join(" | ");
         return { reason: "Unusable revenue row", preview };
       }
+
+      // For Expense, missing date and amount both indicate garbage; otherwise show unusable expense row.
+      if (!dateLabel && !amountLabel) return null;
 
       const expenseType = getImportCellValue(headers, row, "expense type", "category");
       const preview = [dateLabel || "(no date)", expenseType || "(no expense type)", amountLabel || "(no amount)"].join(" | ");
@@ -5711,8 +5771,25 @@ document.addEventListener("keydown", (event) => {
         let skippedCount = 0;
         const skippedRows = [];
         const existingKeys = new Set(records.map(getRecordImportKey));
+        const batchRowKeys = new Set();
 
         dataRows.forEach(row => {
+          const rowKey = getHeaderLimitedRowKey(headers, row);
+
+          if (rowKey && batchRowKeys.has(rowKey)) {
+            skippedCount += 1;
+            skippedRows.push({
+              reason: "Duplicate",
+              preview: row
+                .slice(0, Math.max(4, getLastUsableHeaderIndex(headers) + 1))
+                .map(value => safeText(value))
+                .filter(Boolean)
+                .slice(0, 4)
+                .join(" | ") || "(duplicate row)"
+            });
+            return;
+          }
+
           const item = importRowToRecord(headers, row, detectedHeader.kind);
 
           if (!item) {
@@ -5726,7 +5803,7 @@ document.addEventListener("keydown", (event) => {
 
           const key = getRecordImportKey(item);
 
-          if (isDuplicateImportRecord(item, existingKeys)) {
+          if (existingKeys.has(key)) {
             skippedCount += 1;
             skippedRows.push({
               reason: "Duplicate",
@@ -5739,6 +5816,7 @@ document.addEventListener("keydown", (event) => {
 
           records.unshift(item);
           existingKeys.add(key);
+          if (rowKey) batchRowKeys.add(rowKey);
           importedCount += 1;
         });
 
@@ -5841,6 +5919,40 @@ document.querySelectorAll("input, textarea, select").forEach(el => {
 
   update(); // initial
 });
+
+
+    function toggleBackToTopBtn() {
+      const backBtn = document.getElementById("backToTopBtn");
+      const wrap = document.querySelector(".records-panel .table-wrap");
+      if (!backBtn) return;
+
+      const pageScrolled = window.scrollY > 420;
+      const recordsScrolled = wrap ? wrap.scrollTop > 120 : false;
+      backBtn.classList.toggle("show", pageScrolled || recordsScrolled);
+    }
+
+    window.addEventListener("scroll", toggleBackToTopBtn, { passive: true });
+
+    window.addEventListener("load", () => {
+      const backBtn = document.getElementById("backToTopBtn");
+      const wrap = document.querySelector(".records-panel .table-wrap");
+
+      if (wrap) {
+        wrap.addEventListener("scroll", toggleBackToTopBtn, { passive: true });
+      }
+
+      if (backBtn) {
+        backBtn.addEventListener("click", () => {
+          if (wrap) {
+            wrap.scrollTo({ top: 0, behavior: "smooth" });
+          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      toggleBackToTopBtn();
+    });
+
 
     loadFromStorage();
     refreshYearFilter();
