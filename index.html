@@ -266,7 +266,7 @@
       font-weight: 600;
       color: #4b5a52;
       margin-bottom: 4px;
-      display: block;
+      
     }
 
     input,
@@ -306,12 +306,12 @@
       -webkit-appearance: none;
       min-height: 52px;
       line-height: normal;
-      text-align: left;
+      
       background-color: #ffffff !important;
     }
 
     input[type="date"]::-webkit-date-and-time-value {
-      text-align: left;
+      
     }
 
     input[type="date"]::-webkit-calendar-picker-indicator {
@@ -519,6 +519,7 @@
       min-width: 0;
       flex: 1 1 auto;
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
     }
 
@@ -587,10 +588,9 @@
     }
 
     th,
-    td {
-      padding: 14px 12px;
+    td { padding: 2px 12px;
       border-bottom: 1px solid #f1f5f2;
-      text-align: left;
+      
       vertical-align: top;
       font-size: 14px;
       color: var(--text);
@@ -787,6 +787,16 @@
     .records-title-row h2 {
       margin: 0 !important;
     }
+
+    /* records-count-duplicate cleaned */
+.records-count-duplicate {
+      
+      
+      
+      margin-top: 0;
+      white-space: nowrap;
+    }
+
 
     #csvFileInput {
       display: none;
@@ -1041,6 +1051,37 @@
       -webkit-overflow-scrolling: touch;
       min-width: 0;
       overscroll-behavior: contain;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .records-panel .table-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .record-vendor-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 1.0;
+    }
+
+    .record-vendor-main {
+      display: block;
+      line-height: 1.0;
+    }
+
+    .record-vendor-sub {
+      display: block;
+      min-height: 0;
+      margin-top: 0;
+      font-size: 11px;
+      line-height: 1.0;
+      color: #7a877f;
+    }
+
+    .record-vendor-sub.is-empty {
+      display: none;
     }
 
     .records-panel table {
@@ -1105,6 +1146,12 @@
 
       .records-panel .table-wrap {
         max-height: 56vh;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .records-panel .table-wrap::-webkit-scrollbar {
+        display: none;
       }
     }
 
@@ -1243,8 +1290,7 @@
       }
 
       th,
-      td {
-        padding: 12px 12px;
+      td { padding: 6px 12px;
         font-size: 12px;
         line-height: 1.4;
       }
@@ -1708,14 +1754,14 @@ select.has-value {
     .guest-day-card.current .guest-day-head { min-height: 48px !important; padding: 6px 8px 4px !important; }
 
     .guest-day-name {
-      display: block;
+      
       font-size: 15px;
       font-weight: 800;
       line-height: 1.1;
     }
 
     .guest-day-date {
-      display: block;
+      
       margin-top: 4px;
       font-size: 13px;
       font-weight: 700;
@@ -1734,7 +1780,7 @@ select.has-value {
       background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,247,249,0.96)) !important;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       color: inherit;
-      text-align: left;
+      
       font-size: 12px;
       font-weight: 700;
       line-height: 1;
@@ -3643,6 +3689,305 @@ select.has-value {
   transform: translateY(0) scale(1);
 }
 
+
+    /* Mobile reset button + add record action row fix */
+    #resetAllBtn,
+    .export-actions-side #resetAllBtn,
+    .btn-export.btn-danger-soft#resetAllBtn {
+      background: #f4d6d8 !important;
+      color: #7a2f36 !important;
+      border: 1px solid #ddb2b7 !important;
+    }
+
+    #resetAllBtn:hover {
+      background: #ecc7cb !important;
+    }
+
+    #resetAllBtn:active {
+      background: #e4bcc1 !important;
+    }
+
+    .input-panel .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+
+    .input-panel #clearBtn {
+      order: 1;
+    }
+
+    .input-panel #saveBtn {
+      order: 2;
+      margin-left: auto;
+    }
+
+    .input-panel #cancelEditBtn {
+      order: 3;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      #resetAllBtn,
+      .export-actions-side #resetAllBtn,
+      .btn-export.btn-danger-soft#resetAllBtn {
+        background: #f4d6d8 !important;
+        color: #7a2f36 !important;
+        border: 1px solid #ddb2b7 !important;
+      }
+
+      .input-panel .button-row {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        gap: 10px !important;
+        align-items: stretch !important;
+      }
+
+      .input-panel #clearBtn,
+      .input-panel #saveBtn {
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      .input-panel #clearBtn {
+        grid-column: 1;
+        order: 1;
+      }
+
+      .input-panel #saveBtn {
+        grid-column: 2;
+        order: 2;
+      }
+
+      .input-panel #cancelEditBtn {
+        grid-column: 1 / -1;
+        width: 100% !important;
+        order: 3;
+      }
+    }
+
+  
+    /* Records table sticky header */
+    .records-panel {
+      overflow: visible !important;
+    }
+
+    .records-panel .table-wrap {
+      position: relative !important;
+      overflow-x: auto !important;
+      overflow-y: visible !important;
+      max-height: none !important;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .records-panel table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .records-panel thead th {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 8 !important;
+      background: #f8faf8 !important;
+      box-shadow: 0 1px 0 #e9eeea;
+    }
+
+    /* Records list visibility polish */
+    .records-panel tbody td {
+      font-size: 15px !important;
+      line-height: 1.45 !important;
+    }
+
+    @media (max-width: 768px) {
+      .records-panel thead th {
+        top: 0 !important;
+        z-index: 8 !important;
+      }
+
+      .records-panel tbody td {
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+      }
+    }
+
+  
+    /* FINAL authoritative records scroll + sticky header */
+    .records-panel {
+      overflow: visible !important;
+    }
+
+    .records-panel .table-wrap {
+      position: relative !important;
+      width: 100% !important;
+      overflow-x: auto !important;
+      overflow-y: auto !important;
+      max-height: 60vh !important;
+      min-width: 0 !important;
+      -webkit-overflow-scrolling: touch !important;
+      overscroll-behavior: contain !important;
+    }
+
+    .records-panel table {
+      position: relative !important;
+      border-collapse: separate !important;
+      border-spacing: 0 !important;
+      overflow: visible !important;
+    }
+
+    .records-panel thead,
+    .records-panel thead tr {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 18 !important;
+    }
+
+    .records-panel thead th {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 20 !important;
+      background: #f8faf8 !important;
+      box-shadow: 0 1px 0 #e9eeea !important;
+    }
+
+    @media (max-width: 768px) {
+      .records-panel .table-wrap {
+        max-height: 56vh !important;
+      }
+
+      .records-panel thead,
+      .records-panel thead tr,
+      .records-panel thead th {
+        top: 0 !important;
+      }
+    }
+
+
+    /* Records row click highlight */
+    .records-panel #recordsTableBody tr.row-click-active td {
+      background: #fce7f3 !important;
+      transition: background 0.2s ease;
+    }
+
+
+    .reset-filters-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -4px;
+    }
+
+    .reset-filters-link {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      font-size: 11px;
+      line-height: 1.1;
+      color: #7a877f;
+      cursor: pointer;
+      text-align: right;
+    }
+
+    .reset-filters-link:hover {
+      text-decoration: underline;
+    }
+
+
+    .amount-label-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .add-note-inline-link,
+    .note-text-btn {
+      width: auto;
+      max-width: none;
+      min-width: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      font-size: 11px;
+      line-height: 1.1;
+      color: #7a877f;
+      cursor: pointer;
+      text-align: right;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .add-note-inline-link:hover,
+    .note-text-btn:hover {
+      text-decoration: underline;
+    }
+
+    .note-popup-wrap {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .note-popup-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .note-popup-input {
+      width: 100%;
+    }
+
+    .note-popup-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+
+
+/* Mobile fix for cropped guest calendar month picker */
+@media (max-width: 768px) {
+  .guest-calendar-top {
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .guest-calendar-title {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .guest-calendar-actions {
+    flex: 0 0 auto !important;
+  }
+
+  .guest-calendar-month-select {
+    width: 104px !important;
+    min-width: 104px !important;
+    padding-right: 14px !important;
+    background-position:
+      calc(100% - 8px) 13px,
+      calc(100% - 3px) 13px !important;
+  }
+
+  .guest-calendar-year-select {
+    min-width: 56px !important;
+    padding-right: 14px !important;
+    background-position:
+      calc(100% - 8px) 13px,
+      calc(100% - 3px) 13px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3746,18 +4091,25 @@ select.has-value {
           <div id="expenseAmountNoteRow" class="full hidden"></div>
 
           <div id="amountField">
-            <label>Amount</label>
+            <div class="amount-label-row">
+              <label>Amount</label>
+              <button type="button" class="add-note-inline-link" id="addNoteBtn">Add Note</button>
+            </div>
             <input type="number" id="amount" step="0.01" placeholder="0.00" />
+            <div id="noteField" class="note-popup-wrap hidden">
+              <div class="note-popup-card">
+                <input type="text" id="note" class="note-popup-input" placeholder="Add Note" />
+                <div class="note-popup-actions">
+                  <button type="button" class="note-text-btn" id="noteCancelBtn">Cancel</button>
+                  <button type="button" class="note-text-btn" id="noteSaveBtn">Save</button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div id="invoiceField">
             <label>Inv. No.</label>
             <input type="text" id="invoiceNumber" placeholder="Invoice number" />
-          </div>
-
-          <div id="noteField">
-            <label>Note</label>
-            <textarea id="note" class="note-field" placeholder="Optional note"></textarea>
           </div>
 
           <div id="platformField">
@@ -3856,8 +4208,8 @@ select.has-value {
     </select>
   </div>
 
-  <div class="full">
-    <button class="btn-secondary" id="resetFiltersBtn" type="button">Reset Filters</button>
+  <div class="full reset-filters-row">
+    <button class="reset-filters-link" id="resetFiltersBtn" type="button">Reset Filters</button>
   </div>
 </div>
     </div>
@@ -3869,6 +4221,7 @@ select.has-value {
             <h2 style="margin:0;">Records</h2>
             <input type="file" id="csvFileInput" accept=".csv" />
           </div>
+          <div class="footer-note records-count-duplicate" id="recordCountTop"></div>
         </div>
 
         <div class="export-actions-side">
@@ -3925,8 +4278,8 @@ select.has-value {
       <div class="guest-calendar-top">
         <div class="guest-calendar-title" id="guestCalendarTitle">Select date</div>
         <div class="guest-calendar-actions">
-          <button class="guest-calendar-nav" id="guestCalendarPrevBtn" type="button" aria-label="Previous month">↑</button>
-          <button class="guest-calendar-nav" id="guestCalendarNextBtn" type="button" aria-label="Next month">↓</button>
+          
+          
           <button class="guest-calendar-close" id="guestCalendarCloseBtn" type="button" aria-label="Close calendar">×</button>
         </div>
       </div>
@@ -3966,6 +4319,42 @@ select.has-value {
 
     let records = [];
     let editingId = null;
+
+    let noteDraftValue = "";
+
+    function syncAddNoteLabel() {
+      if (!els.addNoteBtn) return;
+      els.addNoteBtn.textContent = String(els.note.value || "").trim() ? "Edit Note" : "Add Note";
+    }
+
+    function openNotePopup() {
+      noteDraftValue = String(els.note.value || "");
+      els.noteField.classList.remove("hidden");
+      syncAddNoteLabel();
+      requestAnimationFrame(() => {
+        try {
+          els.note.focus();
+          const len = els.note.value.length;
+          els.note.setSelectionRange(len, len);
+        } catch (_) {}
+      });
+    }
+
+    function closeNotePopup(restorePrevious = false) {
+      if (restorePrevious) {
+        els.note.value = noteDraftValue;
+      }
+      els.noteField.classList.add("hidden");
+      syncAddNoteLabel();
+      refreshFieldValueStates();
+    }
+
+    function saveNotePopup() {
+      els.note.value = String(els.note.value || "").trim();
+      noteDraftValue = els.note.value;
+      closeNotePopup(false);
+    }
+
     let activeQuarter = "";
     let isGuestStripOpen = false;
     let guestStripCenterDate = startOfLocalDay();
@@ -3997,6 +4386,9 @@ select.has-value {
       revenueInvoiceNoteRow: document.getElementById("revenueInvoiceNoteRow"),
       expenseAmountNoteRow: document.getElementById("expenseAmountNoteRow"),
       amountField: document.getElementById("amountField"),
+      addNoteBtn: document.getElementById("addNoteBtn"),
+      noteCancelBtn: document.getElementById("noteCancelBtn"),
+      noteSaveBtn: document.getElementById("noteSaveBtn"),
 
       nightsField: document.getElementById("nightsField"),
       vendorField: document.getElementById("vendorField"),
@@ -4037,6 +4429,7 @@ select.has-value {
       summaryCards: document.getElementById("summaryCards"),
       recordsTableBody: document.getElementById("recordsTableBody"),
       recordCount: document.getElementById("recordCount"),
+      recordCountTop: document.getElementById("recordCountTop"),
       tableWrap: document.querySelector(".table-wrap"),
       backToTopBtn: document.getElementById("backToTopBtn"),
 
@@ -4228,6 +4621,8 @@ select.has-value {
 
     function forceExpenseLayoutRefresh() {
       updateTypeFields();
+    if (els.noteField) els.noteField.classList.add("hidden");
+    syncAddNoteLabel();
     }
 
     function updateTypeFields() {
@@ -4271,7 +4666,6 @@ select.has-value {
 
         els.revenueInvoiceNoteRow.appendChild(els.declaredField);
         els.revenueInvoiceNoteRow.appendChild(els.invoiceField);
-        els.revenueInvoiceNoteRow.appendChild(els.noteField);
       } else {
         els.vendor.placeholder = "Enter vendor";
         els.expenseTypeField.classList.remove("hidden");
@@ -4291,7 +4685,6 @@ select.has-value {
 
         els.expenseAmountNoteRow.appendChild(els.invoiceField);
         els.expenseAmountNoteRow.appendChild(els.amountField);
-        els.expenseAmountNoteRow.appendChild(els.noteField);
       }
 
       updateInvoiceState();
@@ -4368,6 +4761,9 @@ select.has-value {
       els.category.value = "";
       els.amount.value = "";
       els.note.value = "";
+      noteDraftValue = "";
+      if (els.noteField) els.noteField.classList.add("hidden");
+      syncAddNoteLabel();
       editingId = null;
       els.formTitle.textContent = "Add Record";
       els.saveBtn.textContent = "Save Record";
@@ -4634,6 +5030,7 @@ select.has-value {
           </tr>
         `;
         els.recordCount.textContent = "0 record shown";
+        if (els.recordCountTop) els.recordCountTop.textContent = els.recordCount.textContent;
         return;
       }
 
@@ -4647,8 +5044,10 @@ select.has-value {
           <td><span class="tag ${getUnitTagClass(r.unit)}">${escapeHtml(getUnitLabel(r.unit))}</span></td>
           <td>${escapeHtml(r.nights || "")}</td>
           <td>
-            ${escapeHtml(r.vendor || "")}
-            ${r.type === "Expense" && r.category ? `<div style="font-size:11px; color:#7a877f; margin-top:2px;">${escapeHtml(r.category)}</div>` : ""}
+            <div class="record-vendor-cell">
+              <span class="record-vendor-main">${escapeHtml(r.vendor || "")}</span>
+              <span class="record-vendor-sub ${r.type === "Expense" && r.category ? "" : "is-empty"}">${r.type === "Expense" && r.category ? escapeHtml(r.category) : "&nbsp;"}</span>
+            </div>
           </td>
           <td><strong>${peso(r.amount)}</strong></td>
           <td>${escapeHtml(r.platform || "")}</td>
@@ -4666,6 +5065,7 @@ select.has-value {
 
       const word = data.length === 1 ? "record" : "records";
       els.recordCount.textContent = `${data.length} ${word} shown`;
+      if (els.recordCountTop) els.recordCountTop.textContent = els.recordCount.textContent;
     }
 
 
@@ -4697,7 +5097,7 @@ select.has-value {
     function getGuestUnitCode(unit) {
       if (unit === "Studio One-1123") return { label: "{S1}", cls: "s1" };
       if (unit === "Studio Two-1122") return { label: "{S2}", cls: "s2" };
-      return { label: "{CT}", cls: "casa" };
+      return { label: "{CASA}", cls: "casa" };
     }
 
     function getBookingCheckOutDate(record) {
@@ -5576,6 +5976,18 @@ function getQuarterFromDate(dateStr) {
     });
 
     els.clearBtn.addEventListener("click", clearForm);
+    if (els.addNoteBtn) els.addNoteBtn.addEventListener("click", openNotePopup);
+    if (els.noteCancelBtn) els.noteCancelBtn.addEventListener("click", () => closeNotePopup(true));
+    if (els.noteSaveBtn) els.noteSaveBtn.addEventListener("click", saveNotePopup);
+    if (els.note) {
+      els.note.addEventListener("input", syncAddNoteLabel);
+      els.note.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          saveNotePopup();
+        }
+      });
+    }
     els.cancelEditBtn.addEventListener("click", clearForm);
 
     els.exportAllRevenueBtn.addEventListener("click", (e) => {
@@ -5875,6 +6287,21 @@ document.addEventListener("keydown", (event) => {
       }
     });
 
+
+    document.addEventListener("click", (event) => {
+      const row = event.target.closest("#recordsTableBody tr");
+      if (!row) return;
+
+      const clickedControl = event.target.closest("button, input, select, textarea, a, label");
+      if (clickedControl) return;
+
+      document.querySelectorAll("#recordsTableBody tr.row-click-active").forEach(r => {
+        r.classList.remove("row-click-active");
+      });
+
+      row.classList.add("row-click-active");
+    });
+
     document.addEventListener("DOMContentLoaded", () => {
       forceInvoiceActive();
 
@@ -5974,9 +6401,38 @@ document.querySelectorAll("input, textarea, select").forEach(el => {
     window.startEdit = startEdit;
     window.deleteRecord = deleteRecord;
     window.jumpToRecord = jumpToRecord;
-  </script>
+  
+// vertical swipe for calendar
+(function(){
+  const cal = document.querySelector('.calendar-grid, .calendar, .calendar-container');
+  if(!cal) return;
 
-  <button id="backToTopBtn" class="back-to-top-btn" type="button" aria-label="Back to top">↑</button>
+  let startY = 0;
+  let endY = 0;
+
+  cal.addEventListener('touchstart', (e)=>{
+    startY = e.touches[0].clientY;
+  });
+
+  cal.addEventListener('touchend', (e)=>{
+    endY = e.changedTouches[0].clientY;
+    const diff = startY - endY;
+
+    if(Math.abs(diff) < 40) return;
+
+    if(diff > 0){
+      // swipe up → next month
+      if(window.nextMonth) nextMonth();
+    } else {
+      // swipe down → prev month
+      if(window.prevMonth) prevMonth();
+    }
+  });
+})();
+
+</script>
+
+  
 </body>
 </html>
 <style>
