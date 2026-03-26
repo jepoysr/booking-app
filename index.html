@@ -831,10 +831,10 @@
     }
 
     .filters-panel {
-      background: rgba(255,255,255,0.65) !important;
+      background: linear-gradient(180deg, #eef3f7 0%, #f6f9fc 100%) !important;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.8) !important;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.06) !important;
+      border: 1px solid rgba(255,255,255,0.9) !important;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.08) !important;
       margin-bottom: 18px !important;
     }
 
@@ -3995,12 +3995,35 @@ select.has-value {
 }
 
 
-/* Picker calendar: vertical swipe month navigation */
-.guest-calendar-grid {
-  touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
+    .filters-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      min-width: 0;
+    }
+
+    .filters-title-row h2 {
+      margin: 0 !important;
+      flex: 0 0 auto;
+    }
+
+    .active-filter-chips {
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 0;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .active-filter-chips .vendor-chip {
+      flex: 0 0 auto;
+    }
+
+    .active-filter-chips:empty {
+      display: none !important;
+    }
 
 </style>
 </head>
@@ -4167,8 +4190,11 @@ select.has-value {
     </div>
 
     <div class="panel filters-panel">
-      <h2>Filters</h2>
-      
+      <div class="filters-title-row">
+        <h2>Filters</h2>
+        <div id="activeFilterChips" class="vendor-chips-row active-filter-chips"></div>
+      </div>
+
 <div class="filters-grid">
   <div class="search-wrap">
     <input type="text" id="search" placeholder="Search guest, vendor, platform, expense type, unit" />
@@ -5270,7 +5296,6 @@ select.has-value {
     function openGuestCalendarModal() {
       if (!els.guestCalendarModal) return;
       updateGuestCalendarMonth(new Date(guestStripCenterDate.getFullYear(), guestStripCenterDate.getMonth(), 1), { animate: false });
-      bindGuestCalendarSwipe();
       els.guestCalendarModal.classList.add("show");
       els.guestCalendarModal.setAttribute("aria-hidden", "false");
     }
@@ -5279,51 +5304,6 @@ select.has-value {
       if (!els.guestCalendarModal) return;
       els.guestCalendarModal.classList.remove("show");
       els.guestCalendarModal.setAttribute("aria-hidden", "true");
-    }
-
-
-    function bindGuestCalendarSwipe() {
-      if (!els.guestCalendarGrid || els.guestCalendarGrid.dataset.swipeBound === "true") return;
-
-      let startY = 0;
-      let startX = 0;
-      let tracking = false;
-
-      els.guestCalendarGrid.dataset.swipeBound = "true";
-
-      els.guestCalendarGrid.addEventListener("touchstart", (event) => {
-        const touch = event.changedTouches && event.changedTouches[0];
-        if (!touch) return;
-        startY = touch.clientY;
-        startX = touch.clientX;
-        tracking = true;
-      }, { passive: true });
-
-      els.guestCalendarGrid.addEventListener("touchend", (event) => {
-        if (!tracking || !guestCalendarMonthDate) return;
-        tracking = false;
-
-        const touch = event.changedTouches && event.changedTouches[0];
-        if (!touch) return;
-
-        const deltaY = touch.clientY - startY;
-        const deltaX = touch.clientX - startX;
-
-        if (Math.abs(deltaY) < 34) return;
-        if (Math.abs(deltaY) <= Math.abs(deltaX)) return;
-
-        if (deltaY < 0) {
-          updateGuestCalendarMonth(
-            new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth() + 1, 1),
-            { animate: true }
-          );
-        } else {
-          updateGuestCalendarMonth(
-            new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth() - 1, 1),
-            { animate: true }
-          );
-        }
-      }, { passive: true });
     }
 
     function renderGuestCalendarModal() {
@@ -5503,10 +5483,46 @@ select.has-value {
       setTimeout(() => rowEl.classList.remove("record-flash"), 5200);
     }
 
+
+    function renderActiveFilterChips() {
+      const container = document.getElementById("activeFilterChips");
+      if (!container) return;
+
+      const chips = [];
+
+      if (els.filterType.value) {
+        chips.push(els.filterType.options[els.filterType.selectedIndex]?.text || els.filterType.value);
+      }
+
+      if (els.filterUnit.value) {
+        chips.push(getUnitLabel(els.filterUnit.value));
+      }
+
+      if (els.filterYear.value) {
+        chips.push(els.filterYear.value);
+      }
+
+      if (els.filterMonth.value) {
+        const monthText = els.filterMonth.options[els.filterMonth.selectedIndex]?.text || els.filterMonth.value;
+        chips.push(monthText);
+      }
+
+      if (activeQuarter) {
+        chips.push("Q" + activeQuarter);
+      }
+
+      if (safeText(els.search.value)) {
+        chips.push(safeText(els.search.value));
+      }
+
+      container.innerHTML = chips.reverse().map(text => `<span class="vendor-chip">${escapeHtml(text)}</span>`).join("");
+    }
+
     function render() {
       const filtered = getFilteredRecords();
       renderSummary(filtered);
       renderTable(filtered);
+      renderActiveFilterChips();
       if (isGuestStripOpen) {
         syncHeroPillWidths();
         syncGuestStripHeight();
@@ -6127,8 +6143,6 @@ function getQuarterFromDate(dateStr) {
       });
       els.guestCalendarTitle.dataset.bound = "true";
     }
-
-    bindGuestCalendarSwipe();
 
     if (els.guestCalendarGrid && !els.guestCalendarGrid.dataset.bound) {
       els.guestCalendarGrid.addEventListener("click", (event) => {
