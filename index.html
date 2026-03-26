@@ -3427,20 +3427,19 @@ select.has-value {
   appearance: none !important;
   -webkit-appearance: none !important;
   border: none !important;
-  background: rgba(229, 236, 242, 0.95) !important;
+  background: transparent !important;
   color: #55635b !important;
-  width: 28px !important;
-  height: 28px !important;
-  border-radius: 999px !important;
-  font-size: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 18px !important;
   line-height: 1 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 0 !important;
   cursor: pointer !important;
-  flex: 0 0 auto !important;
 }
+
+
 
 .guest-calendar-nav:hover,
 .guest-calendar-close:hover {
@@ -3488,6 +3487,9 @@ select.has-value {
 .guest-calendar-grid {
   gap: 4px;
   transition: opacity 0.16s ease, transform 0.16s ease;
+  touch-action: pan-y !important;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .guest-calendar-grid.is-switching {
   opacity: 0.35;
@@ -4245,6 +4247,22 @@ select.has-value {
 
 .panel.card.input-panel .panel-header {
   margin-top: 0 !important;
+}
+
+
+
+
+.guest-calendar-close::before,
+.guest-calendar-close::after {
+  line-height: 1 !important;
+}
+
+
+/* Picker calendar vertical swipe support */
+.guest-calendar-grid {
+  touch-action: pan-y !important;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 </style>
@@ -5522,9 +5540,55 @@ select.has-value {
     function openGuestCalendarModal() {
       if (!els.guestCalendarModal) return;
       updateGuestCalendarMonth(new Date(guestStripCenterDate.getFullYear(), guestStripCenterDate.getMonth(), 1), { animate: false });
+      bindGuestCalendarSwipe();
       els.guestCalendarModal.classList.add("show");
       els.guestCalendarModal.setAttribute("aria-hidden", "false");
     }
+
+    function bindGuestCalendarSwipe() {
+      if (!els.guestCalendarGrid || els.guestCalendarGrid.dataset.swipeBound === "true") return;
+
+      let startX = 0;
+      let startY = 0;
+      let tracking = false;
+
+      els.guestCalendarGrid.dataset.swipeBound = "true";
+
+      els.guestCalendarGrid.addEventListener("touchstart", (event) => {
+        const touch = event.changedTouches && event.changedTouches[0];
+        if (!touch) return;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        tracking = true;
+      }, { passive: true });
+
+      els.guestCalendarGrid.addEventListener("touchend", (event) => {
+        if (!tracking || !guestCalendarMonthDate) return;
+        tracking = false;
+
+        const touch = event.changedTouches && event.changedTouches[0];
+        if (!touch) return;
+
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+
+        if (Math.abs(deltaY) < 36) return;
+        if (Math.abs(deltaY) <= Math.abs(deltaX)) return;
+
+        if (deltaY < 0) {
+          updateGuestCalendarMonth(
+            new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth() + 1, 1),
+            { animate: true }
+          );
+        } else {
+          updateGuestCalendarMonth(
+            new Date(guestCalendarMonthDate.getFullYear(), guestCalendarMonthDate.getMonth() - 1, 1),
+            { animate: true }
+          );
+        }
+      }, { passive: true });
+    }
+
 
     function closeGuestCalendarModal() {
       if (!els.guestCalendarModal) return;
@@ -6927,6 +6991,14 @@ if (backToTopBtn && tableWrap) {
 
 .panel.card.input-panel .panel-header {
   margin-top: 0 !important;
+}
+
+
+
+
+.guest-calendar-close::before,
+.guest-calendar-close::after {
+  line-height: 1 !important;
 }
 
 </style>
