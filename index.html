@@ -1028,11 +1028,6 @@
       width: 100% !important;
     }
 
-    #amount {
-      text-align: right;
-      font-weight: 600;
-    }
-
     #invoiceNumber,
     #invoice {
       pointer-events: auto !important;
@@ -1100,7 +1095,7 @@
       position: fixed;
       bottom: calc(18px + env(safe-area-inset-bottom));
       left: 50%;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(calc(-50% + 6px)) translateY(10px);
       width: 42px;
       height: 42px;
       border-radius: 999px;
@@ -1124,7 +1119,7 @@
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      transform: translateY(0);
+      transform: translateX(calc(-50% + 6px)) translateY(0);
     }
 
     .back-to-top-btn:hover {
@@ -1132,14 +1127,16 @@
     }
 
     .back-to-top-btn:active {
-      transform: translateY(0) scale(0.97);
+      transform: translateX(calc(-50% + 6px)) translateY(0) scale(0.97);
     }
 
 
     @media (max-width: 768px) {
       .back-to-top-btn {
-        right: 14px;
+        left: 50%;
+        right: auto;
         bottom: calc(14px + env(safe-area-inset-bottom));
+        transform: translateX(calc(-50% + 6px)) translateY(10px);
         width: 40px;
         height: 40px;
       }
@@ -1762,7 +1759,7 @@ select.has-value {
 
     .guest-day-date {
       
-      margin-top: 4px;
+      margin-top: 5px;
       font-size: 13px;
       font-weight: 700;
     }
@@ -4025,6 +4022,231 @@ select.has-value {
       display: none !important;
     }
 
+
+    .field-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .field-label-row label {
+      margin-bottom: 0 !important;
+      line-height: 1.2 !important;
+      flex: 0 1 auto;
+    }
+
+    .field-label-action {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      font-size: 11px;
+      line-height: 1.1;
+      color: #7a877f;
+      cursor: pointer;
+      text-align: right;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .field-label-action:hover {
+      text-decoration: underline;
+    }
+
+
+
+/* Add Bookings: normalize vertical rhythm to match Amount row */
+#typeField,
+#unitField,
+#platformField,
+#declaredField,
+#invoiceField,
+#amountField {
+  gap: 4px !important;
+}
+
+#vendorField {
+  gap: 4px !important;
+}
+
+#vendorField .field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 !important;
+  min-width: 0;
+}
+
+#vendorField .field-label-row label,
+#platformField label,
+#declaredField label,
+#invoiceField label,
+#amountField label {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+#typeField label,
+#unitField label {
+  margin: 0 0 6px 0 !important;
+  line-height: 1.2 !important;
+}
+
+#typeUnitRow,
+#revenueAmountRow,
+#revenueInvoiceNoteRow,
+#expenseAmountNoteRow:not(.hidden) {
+  margin-bottom: 0 !important;
+}
+
+
+
+
+/* Fine-tune "No. of nights" label vertical position */
+.nights-field-label {
+  top: 14px !important;
+}
+
+
+
+/* Clean Amount + Add Note alignment */
+#amountField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px !important;
+}
+
+#amountField .amount-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  top: 5px;
+}
+
+#amountField .amount-label-row label {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+  position: static !important;
+  top: auto !important;
+}
+
+#amountField > input#amount {
+  position: relative;
+  top: 2px;
+}
+
+
+
+/* Actual visible Vendor move in Expense mode */
+#expenseInlineRow.expense-mode > #vendorField {
+  position: relative !important;
+  top: 3px !important;
+}
+
+#expenseInlineRow.expense-mode > #vendorField .field-label-row {
+  margin-bottom: 4px !important;
+}
+
+
+/* Align Expense Type + Vendor row to match Amount row */
+
+/* Move Vendor input down */
+#vendorField input {
+  position: relative;
+  top: 2px;
+}
+
+/* Move Expense Type and Vendor labels down */
+#expenseTypeField label,
+#vendorField label {
+  position: relative;
+  top: 5px;
+}
+
+
+/* Fix Type + Property label spacing (both Revenue & Expense) */
+#typeField label,
+#unitField label {
+  margin-bottom: 6px !important;
+}
+
+
+/* Tighten Add Bookings vertical row spacing */
+.panel.card.input-panel > .panel-header {
+  margin-bottom: 8px !important;
+}
+
+.panel.card.input-panel > .form-grid {
+  row-gap: 10px !important;
+}
+
+.stay-dates-grid {
+  row-gap: 8px !important;
+}
+
+#typeUnitRow,
+#expenseInlineRow,
+#revenueAmountRow,
+#revenueInvoiceNoteRow,
+#expenseAmountNoteRow:not(.hidden) {
+  margin-bottom: 0 !important;
+}
+
+
+/* Fix Expense Type + Vendor row alignment */
+#expenseInlineRow {
+  align-items: flex-start !important;
+}
+
+/* Proper label spacing */
+#expenseTypeField label,
+#vendorField label {
+  margin-bottom: 4px !important;
+}
+
+
+/* Final vendor row balance */
+
+/* Move Expense Type + Vendor labels DOWN more */
+#expenseTypeField label,
+#vendorField label {
+  position: relative;
+  top: 2px;
+}
+
+
+/* Match Vendor input box with Expense Type */
+#vendorField input {
+  position: relative;
+  top: 1px;
+}
+
+
+/* Final label drop for Expense Type and Vendor */
+#expenseTypeField label,
+#vendorField label {
+  position: relative;
+  top: 5px;
+}
+
+
+/* Reduce top spacing inside Add Booking panel */
+.panel.card.input-panel {
+  padding-top: 10px !important;
+}
+
+.panel.card.input-panel .panel-header {
+  margin-top: 0 !important;
+}
+
 </style>
 </head>
 <body>
@@ -4050,7 +4272,7 @@ select.has-value {
     <div class="top-grid">
       <div class="panel card input-panel">
         <div class="panel-header">
-  <div id="formTitle" class="panel-header-title">Add Record</div>
+  <div id="formTitle" class="panel-header-title">Add Booking</div>
   <div class="hero-status">
     <span class="status-dot"></span>
     <span>Guests Today</span>
@@ -4078,7 +4300,7 @@ select.has-value {
 
           <div id="typeUnitRow" class="field-row full">
             <div id="typeField">
-              <label>Type</label>
+              <label>Input Type</label>
               <select id="type">
                 <option value="Revenue">Revenue</option>
                 <option value="Expense">Expense</option>
@@ -4086,7 +4308,7 @@ select.has-value {
             </div>
 
             <div id="unitField">
-              <label id="unitLabel">Property</label>
+              <label id="unitLabel">Property Selection</label>
               <select id="unit">
                 <option value="Studio One-1123">Bachelor’s Crib 1</option>
                 <option value="Studio Two-1122">Bachelor’s Crib 2</option>
@@ -4118,8 +4340,11 @@ select.has-value {
             </div>
 
             <div id="vendorField">
+              <div class="field-label-row">
               <label id="vendorLabel">Vendor</label>
-              <input type="text" id="vendor" placeholder="Enter vendor" />
+              
+            </div>
+            <input type="text" id="vendor" placeholder="Enter vendor" />
               <div id="vendorSuggestions" class="vendor-chips-row hidden"></div>
             </div>
           </div>
@@ -4150,7 +4375,7 @@ select.has-value {
           </div>
 
           <div id="platformField">
-            <label>Platform</label>
+            <label>Booking Platform</label>
             <select id="platform">
               <option value="">Select platform</option>
               <option value="Airbnb">Airbnb</option>
@@ -4180,18 +4405,18 @@ select.has-value {
             </div>
           </div>
         </div>
-        <div class="footer-note">Clearing your device browser cache may delete records. Back up regularly.</div>
+        <div class="footer-note">Clearing browser cache may delete records. Back up regularly.</div>
       </div>
 
       <div class="panel" id="summaryPanel">
-        <h2>Summary</h2>
+        <h2>Financial Summary</h2>
         <div class="summary-section" id="summaryCards"></div>
       </div>
     </div>
 
     <div class="panel filters-panel">
       <div class="filters-title-row">
-        <h2>Filters</h2>
+        <h2>Record Filters</h2>
         <div id="activeFilterChips" class="vendor-chips-row active-filter-chips"></div>
       </div>
 
@@ -4209,7 +4434,7 @@ select.has-value {
 
   <div>
     <select id="filterType">
-      <option value="" selected>Type</option>
+      <option value="" selected>Input Type</option>
       <option value="Revenue">Revenue</option>
       <option value="Expense">Expense</option>
     </select>
@@ -4217,7 +4442,7 @@ select.has-value {
 
   <div>
     <select id="filterUnit">
-      <option value="" selected>Property</option>
+      <option value="" selected>Property Selection</option>
       <option value="Studio One-1123">Bachelor’s Crib 1</option>
       <option value="Studio Two-1122">Bachelor’s Crib 2</option>
       <option value="Casa Tres16">Casa Tres16</option>
@@ -4258,7 +4483,7 @@ select.has-value {
       <div class="records-header">
         <div class="records-header-left">
           <div class="records-title-row">
-            <h2 style="margin:0;">Records</h2>
+            <h2 style="margin:0;">Booking Records</h2>
             <input type="file" id="csvFileInput" accept=".csv" />
           </div>
           <div class="footer-note records-count-duplicate" id="recordCountTop"></div>
@@ -4277,12 +4502,12 @@ select.has-value {
           <thead>
             <tr>
               <th>Date</th>
-              <th>Type</th>
+              <th>Input Type</th>
               <th>Unit</th>
               <th>Nights</th>
               <th>Guest / Vendor</th>
               <th>Amount</th>
-              <th>Platform</th>
+              <th>Booking Platform</th>
               <th>Invoice Issued</th>
               <th>Inv. No.</th>
               <th>Note</th>
@@ -4439,6 +4664,7 @@ select.has-value {
       expenseInlineRow: document.getElementById("expenseInlineRow"),
       noteField: document.getElementById("noteField"),
       vendorSuggestions: document.getElementById("vendorSuggestions"),
+      
 
       saveBtn: document.getElementById("saveBtn"),
       clearBtn: document.getElementById("clearBtn"),
@@ -4670,7 +4896,7 @@ select.has-value {
 
       const isRevenue = els.type.value === "Revenue";
 
-      els.unitLabel.textContent = "Property";
+      els.unitLabel.textContent = "Property Selection";
       els.vendorLabel.textContent = isRevenue ? "Guest Name" : "Vendor";
 
       els.nightsField.classList.toggle("hidden", !isRevenue);
@@ -4805,7 +5031,7 @@ select.has-value {
       if (els.noteField) els.noteField.classList.add("hidden");
       syncAddNoteLabel();
       editingId = null;
-      els.formTitle.textContent = "Add Record";
+      els.formTitle.textContent = "Add Booking";
       els.saveBtn.textContent = "Save Record";
       els.cancelEditBtn.style.display = "none";
       updateTypeFields();
@@ -5484,6 +5710,53 @@ select.has-value {
     }
 
 
+
+    const FILTER_UNIT_STORAGE_KEY = "booking_manager_filter_unit";
+
+    function getDefaultFilterYear() {
+      return String(new Date().getFullYear());
+    }
+
+    function getDefaultFilterMonth() {
+      return String(new Date().getMonth() + 1);
+    }
+
+    function savePreferredFilterUnit() {
+      try {
+        localStorage.setItem(FILTER_UNIT_STORAGE_KEY, els.filterUnit ? els.filterUnit.value : "");
+      } catch (_) {}
+    }
+
+    function applyFilterDefaults() {
+      if (els.filterType) els.filterType.value = "Revenue";
+      if (els.filterYear) els.filterYear.value = getDefaultFilterYear();
+      if (els.filterMonth) els.filterMonth.value = getDefaultFilterMonth();
+      if (els.search) els.search.value = "";
+      activeQuarter = "";
+
+      try {
+        const savedUnit = localStorage.getItem(FILTER_UNIT_STORAGE_KEY) || "";
+        if (els.filterUnit) els.filterUnit.value = savedUnit;
+      } catch (_) {
+        if (els.filterUnit) els.filterUnit.value = "";
+      }
+    }
+
+    function clearFilterChip(kind) {
+      if (kind === "type" && els.filterType) els.filterType.value = "";
+      if (kind === "unit" && els.filterUnit) {
+        els.filterUnit.value = "";
+        savePreferredFilterUnit();
+      }
+      if (kind === "year" && els.filterYear) els.filterYear.value = getDefaultFilterYear();
+      if (kind === "month" && els.filterMonth) els.filterMonth.value = getDefaultFilterMonth();
+      if (kind === "quarter") activeQuarter = "";
+      if (kind === "search" && els.search) els.search.value = "";
+
+      updateQuarterButtons();
+      render();
+    }
+
     function renderActiveFilterChips() {
       const container = document.getElementById("activeFilterChips");
       if (!container) return;
@@ -5491,31 +5764,50 @@ select.has-value {
       const chips = [];
 
       if (els.filterType.value) {
-        chips.push(els.filterType.options[els.filterType.selectedIndex]?.text || els.filterType.value);
+        chips.push({
+          kind: "type",
+          text: els.filterType.options[els.filterType.selectedIndex]?.text || els.filterType.value
+        });
       }
 
       if (els.filterUnit.value) {
-        chips.push(getUnitLabel(els.filterUnit.value));
+        chips.push({
+          kind: "unit",
+          text: getUnitLabel(els.filterUnit.value)
+        });
       }
 
-      if (els.filterYear.value) {
-        chips.push(els.filterYear.value);
+      if (els.filterYear.value && els.filterYear.value !== getDefaultFilterYear()) {
+        chips.push({
+          kind: "year",
+          text: els.filterYear.value
+        });
       }
 
-      if (els.filterMonth.value) {
-        const monthText = els.filterMonth.options[els.filterMonth.selectedIndex]?.text || els.filterMonth.value;
-        chips.push(monthText);
+      if (els.filterMonth.value && els.filterMonth.value !== getDefaultFilterMonth()) {
+        chips.push({
+          kind: "month",
+          text: els.filterMonth.options[els.filterMonth.selectedIndex]?.text || els.filterMonth.value
+        });
       }
 
       if (activeQuarter) {
-        chips.push("Q" + activeQuarter);
+        chips.push({
+          kind: "quarter",
+          text: "Q" + activeQuarter
+        });
       }
 
       if (safeText(els.search.value)) {
-        chips.push(safeText(els.search.value));
+        chips.push({
+          kind: "search",
+          text: safeText(els.search.value)
+        });
       }
 
-      container.innerHTML = chips.reverse().map(text => `<span class="vendor-chip">${escapeHtml(text)}</span>`).join("");
+      container.innerHTML = chips.reverse().map(chip =>
+        `<span class="vendor-chip" data-filter-chip="${escapeHtml(chip.kind)}">${escapeHtml(chip.text)}</span>`
+      ).join("");
     }
 
     function render() {
@@ -6011,6 +6303,20 @@ function getQuarterFromDate(dateStr) {
     }
 
 
+
+    async function pasteGuestNameFromClipboard() {
+      if (!els.vendor) return;
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.readText) return;
+        const clipText = await navigator.clipboard.readText();
+        if (!clipText) return;
+        els.vendor.value = clipText.trim();
+        els.vendor.classList.toggle("has-value", !!els.vendor.value.trim());
+        els.vendor.focus();
+        refreshFieldValueStates();
+      } catch (_) {}
+    }
+
     function refreshFieldValueStates() {
       document.querySelectorAll("input, select, textarea").forEach(field => {
         const type = (field.getAttribute("type") || "").toLowerCase();
@@ -6052,6 +6358,7 @@ function getQuarterFromDate(dateStr) {
     });
 
     els.clearBtn.addEventListener("click", clearForm);
+    
     if (els.addNoteBtn) els.addNoteBtn.addEventListener("click", openNotePopup);
     if (els.noteCancelBtn) els.noteCancelBtn.addEventListener("click", () => closeNotePopup(true));
     if (els.noteSaveBtn) els.noteSaveBtn.addEventListener("click", saveNotePopup);
@@ -6080,9 +6387,18 @@ function getQuarterFromDate(dateStr) {
 
     els.search.addEventListener("input", render);
     els.filterType.addEventListener("change", render);
-    els.filterUnit.addEventListener("change", render);
+    els.filterUnit.addEventListener("change", () => {
+      savePreferredFilterUnit();
+      render();
+    });
     els.filterYear.addEventListener("change", render);
     els.filterMonth.addEventListener("change", render);
+
+    document.addEventListener("click", (event) => {
+      const chip = event.target.closest("[data-filter-chip]");
+      if (!chip) return;
+      clearFilterChip(chip.dataset.filterChip || "");
+    });
 
     document.querySelectorAll(".quarter-btn").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -6094,12 +6410,8 @@ function getQuarterFromDate(dateStr) {
     });
 
     els.resetFiltersBtn.addEventListener("click", () => {
-      els.search.value = "";
-      els.filterType.value = "";
-      els.filterUnit.value = "";
-      els.filterYear.value = "";
-      els.filterMonth.value = "";
-      activeQuarter = "";
+      applyFilterDefaults();
+      savePreferredFilterUnit();
       updateQuarterButtons();
       render();
     });
@@ -6459,6 +6771,7 @@ document.querySelectorAll("input, textarea, select").forEach(el => {
 
     loadFromStorage();
     refreshYearFilter();
+    applyFilterDefaults();
     clearForm();
     setGuestStripOpen(false);
     render();
@@ -6532,4 +6845,88 @@ if (backToTopBtn && tableWrap) {
 </html>
 <style>
 #statusYearBtn { width: 70px; justify-content: center; }
+
+
+/* FINAL: Force Amount field to match Platform structure */
+#amountField {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#amountField label {
+  margin-bottom: 6px !important;
+}
+
+
+
+/* Align Expense Type + Vendor row to match Amount row */
+
+/* Move Vendor input down */
+#vendorField input {
+  position: relative;
+  top: 2px;
+}
+
+/* Move Expense Type and Vendor labels down */
+#expenseTypeField label,
+#vendorField label {
+  position: relative;
+  top: 5px;
+}
+
+
+/* Fix Type + Property label spacing (both Revenue & Expense) */
+#typeField label,
+#unitField label {
+  margin-bottom: 6px !important;
+}
+
+
+/* Fix Expense Type + Vendor row alignment */
+#expenseInlineRow {
+  align-items: flex-start !important;
+}
+
+/* Proper label spacing */
+#expenseTypeField label,
+#vendorField label {
+  margin-bottom: 4px !important;
+}
+
+
+/* Final vendor row balance */
+
+/* Move Expense Type + Vendor labels DOWN more */
+#expenseTypeField label,
+#vendorField label {
+  position: relative;
+  top: 2px;
+}
+
+
+/* Match Vendor input box with Expense Type */
+#vendorField input {
+  position: relative;
+  top: 1px;
+}
+
+
+/* Final label drop for Expense Type and Vendor */
+#expenseTypeField label,
+#vendorField label {
+  position: relative;
+  top: 5px;
+}
+
+
+/* Reduce top spacing inside Add Booking panel */
+.panel.card.input-panel {
+  padding-top: 10px !important;
+}
+
+.panel.card.input-panel .panel-header {
+  margin-top: 0 !important;
+}
+
 </style>
