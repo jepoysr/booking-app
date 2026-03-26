@@ -4307,6 +4307,27 @@ select.has-value {
   }
 }
 
+
+/* Lock background scroll while picker calendar is open */
+body.calendar-modal-open {
+  overflow: hidden !important;
+  touch-action: none !important;
+}
+
+
+/* Mobile: normalize input heights */
+@media (max-width: 768px) {
+  #vendorField input,
+  #invoiceField input,
+  #invoiceNumber,
+  #expenseTypeField select,
+  #platformField select {
+    height: 44px !important;
+    padding: 0 14px !important;
+    line-height: 44px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5583,6 +5604,7 @@ select.has-value {
       if (!els.guestCalendarModal) return;
       updateGuestCalendarMonth(new Date(guestStripCenterDate.getFullYear(), guestStripCenterDate.getMonth(), 1), { animate: false });
       bindGuestCalendarSwipe();
+      document.body.classList.add("calendar-modal-open");
       els.guestCalendarModal.classList.add("show");
       els.guestCalendarModal.setAttribute("aria-hidden", "false");
     }
@@ -5634,6 +5656,7 @@ select.has-value {
 
     function closeGuestCalendarModal() {
       if (!els.guestCalendarModal) return;
+      document.body.classList.remove("calendar-modal-open");
       els.guestCalendarModal.classList.remove("show");
       els.guestCalendarModal.setAttribute("aria-hidden", "true");
     }
@@ -6943,6 +6966,11 @@ if (backToTopBtn && tableWrap) {
   });
 }
 
+
+window.addEventListener("beforeunload", () => {
+  document.body.classList.remove("calendar-modal-open");
+});
+
 </script>
 
   
@@ -7041,6 +7069,20 @@ if (backToTopBtn && tableWrap) {
 .guest-calendar-close::before,
 .guest-calendar-close::after {
   line-height: 1 !important;
+}
+
+
+/* Mobile: normalize input heights */
+@media (max-width: 768px) {
+  #vendorField input,
+  #invoiceField input,
+  #invoiceNumber,
+  #expenseTypeField select,
+  #platformField select {
+    height: 44px !important;
+    padding: 0 14px !important;
+    line-height: 44px !important;
+  }
 }
 
 </style>
