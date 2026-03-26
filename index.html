@@ -4265,6 +4265,48 @@ select.has-value {
   user-select: none;
 }
 
+
+/* Mobile: make paired field boxes exactly equal width */
+@media (max-width: 768px) {
+  #typeUnitRow,
+  #expenseInlineRow.expense-mode,
+  #revenueAmountRow,
+  #revenueInvoiceNoteRow,
+  #expenseAmountNoteRow:not(.hidden) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 10px !important;
+    align-items: start !important;
+  }
+
+  #typeUnitRow > div,
+  #expenseInlineRow.expense-mode > div,
+  #revenueAmountRow > div,
+  #revenueInvoiceNoteRow > div,
+  #expenseAmountNoteRow:not(.hidden) > div {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #typeUnitRow > div > input,
+  #typeUnitRow > div > select,
+  #expenseInlineRow.expense-mode > div > input,
+  #expenseInlineRow.expense-mode > div > select,
+  #revenueAmountRow > div > input,
+  #revenueAmountRow > div > select,
+  #revenueInvoiceNoteRow > div > input,
+  #revenueInvoiceNoteRow > div > select,
+  #expenseAmountNoteRow:not(.hidden) > div > input,
+  #expenseAmountNoteRow:not(.hidden) > div > select {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
 </style>
 </head>
 <body>
