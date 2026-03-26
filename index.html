@@ -4328,6 +4328,26 @@ body.calendar-modal-open {
   }
 }
 
+
+/* Mobile: force matching box heights in paired rows */
+@media (max-width: 768px) {
+  #expenseInlineRow.expense-mode > #expenseTypeField > select,
+  #expenseInlineRow.expense-mode > #vendorField > input,
+  #revenueInvoiceNoteRow > #invoiceField > input,
+  #expenseAmountNoteRow:not(.hidden) > #invoiceField > input,
+  #revenueAmountRow > #platformField > select,
+  #revenueAmountRow > #amountField > input,
+  #expenseAmountNoteRow:not(.hidden) > #amountField > input {
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 52px !important;
+    box-sizing: border-box !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -7082,6 +7102,26 @@ window.addEventListener("beforeunload", () => {
     height: 44px !important;
     padding: 0 14px !important;
     line-height: 44px !important;
+  }
+}
+
+
+/* Mobile: force matching box heights in paired rows */
+@media (max-width: 768px) {
+  #expenseInlineRow.expense-mode > #expenseTypeField > select,
+  #expenseInlineRow.expense-mode > #vendorField > input,
+  #revenueInvoiceNoteRow > #invoiceField > input,
+  #expenseAmountNoteRow:not(.hidden) > #invoiceField > input,
+  #revenueAmountRow > #platformField > select,
+  #revenueAmountRow > #amountField > input,
+  #expenseAmountNoteRow:not(.hidden) > #amountField > input {
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 52px !important;
+    box-sizing: border-box !important;
   }
 }
 
